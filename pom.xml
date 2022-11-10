@@ -14,7 +14,7 @@
         <module>example</module>
         <module>core</module>
         <module>compress</module>
-        <module>captor</module>
+        <module>extension</module>
     </modules>
 
     <properties>

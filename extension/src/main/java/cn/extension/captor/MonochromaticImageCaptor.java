@@ -1,8 +1,9 @@
-package cn.captor.impl;
+package cn.extension.captor;
 
-import cn.core.context.Range;
-import cn.core.exc.ParameterException;
-import cn.core.utils.ColorUtils;
+import cn.extension.Range;
+import cn.extension.exec.ParameterException;
+import cn.extension.tool.AbstractBuilder;
+import cn.extension.utils.ColorUtils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -19,13 +20,13 @@ public class MonochromaticImageCaptor extends TransparentImageCaptor {
 
     public MonochromaticImageCaptor(Builder b) {
         super(b);
-        this.color = b.color;
+        this.color = b.color == null ? ColorUtils.random() : b.color;
         this.alpha = b.alpha;
     }
 
     @Override
-    public BufferedImage obtain() {
-        BufferedImage bi = super.obtain();
+    public BufferedImage capture() {
+        BufferedImage bi = super.capture();
         // need to add a foreground color
         Graphics2D g2d = bi.createGraphics();
         g2d.setColor(color);
@@ -38,30 +39,28 @@ public class MonochromaticImageCaptor extends TransparentImageCaptor {
     }
 
     public static class Builder extends TransparentImageCaptor.Builder {
-        private final Color color;
-        private final float alpha;
+        private Color color;
+        private float alpha = 0f;
 
-        public Builder() {
-            this(ColorUtils.random(), 0f);
+        @Override
+        public Builder set(String property, Object val) {
+            if ("color".equals(property)) {
+                color = (Color) val;
+            } else if ("alpha".equals(property)) {
+                alpha = (float) val;
+            } else {
+                super.set(property, val);
+            }
+            return this;
         }
-        public Builder(Color color) {
-            this(color, 0f);
-        }
-        public Builder(float alpha) {
-            this(ColorUtils.random(), alpha);
-        }
-        public Builder(Color color, float alpha) {
-            this.alpha = alpha;
-            this.color = color;
-        }
+
         @Override
         public MonochromaticImageCaptor build() {
-            if (color == null) {
+            if (color == null)
                 throw new ParameterException("no color specified");
-            }
-            if (Range.ofFloat(0f, 1f).notWithin(alpha)) {
+            if (Range.ofFloat(0f, 1f).notWithin(alpha))
                 throw new ParameterException("alpha out of bound:[0.0, 1.0]");
-            }
+
             return new MonochromaticImageCaptor(this);
         }
     }

@@ -1,7 +1,7 @@
-package cn.core.utils;
+package cn.extension.utils;
 
-import cn.core.context.Range;
-import cn.core.exc.ParameterException;
+import cn.extension.Range;
+import cn.extension.exec.ParameterException;
 import java.awt.*;
 
 /**

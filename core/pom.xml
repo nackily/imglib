@@ -15,10 +15,10 @@
     <packaging>jar</packaging>
 
     <dependencies>
-
         <dependency>
-            <groupId>net.coobird</groupId>
-            <artifactId>thumbnailator</artifactId>
+            <groupId>cn.imglib</groupId>
+            <artifactId>extension</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
 
     </dependencies>

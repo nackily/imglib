@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.imglib</groupId>
-            <artifactId>captor</artifactId>
+            <artifactId>core</artifactId>
             <version>${parent.version}</version>
         </dependency>
     </dependencies>

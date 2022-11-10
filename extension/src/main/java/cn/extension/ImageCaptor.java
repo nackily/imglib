@@ -1,4 +1,4 @@
-package cn.captor;
+package cn.extension;
 
 import java.awt.image.BufferedImage;
 
@@ -14,5 +14,5 @@ public interface ImageCaptor {
      * 构建图片
      * @return 图像
      */
-    BufferedImage obtain();
+    BufferedImage capture();
 }

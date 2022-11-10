@@ -1,9 +1,10 @@
-package cn.captor.impl;
+package cn.extension.captor;
 
-import cn.captor.ImageCaptor;
-import cn.core.context.Range;
-import cn.core.exc.ParameterException;
-import cn.core.utils.ColorUtils;
+import cn.extension.ImageCaptor;
+import cn.extension.Range;
+import cn.extension.exec.ParameterException;
+import cn.extension.tool.AbstractBuilder;
+import cn.extension.utils.ColorUtils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.nio.charset.StandardCharsets;
@@ -26,12 +27,12 @@ public class HashImageCaptor implements ImageCaptor {
     public HashImageCaptor(Builder b) {
         this.digest = b.digest;
         this.gridVerticalNum = b.gridVerticalNum;
-        this.bgColor = b.bgColor == null ? ColorUtils.of(220, 220, 220) : b.bgColor;
-        this.fgColor = b.fgColor == null ? ColorUtils.random() : b.fgColor;
+        this.bgColor = b.bgColor;
+        this.fgColor = b.fgColor;
     }
 
     @Override
-    public BufferedImage obtain() {
+    public BufferedImage capture() {
         int gridHorizontalNum = (gridVerticalNum + 1) >> 1;
         BufferedImage bi = new BufferedImage(gridVerticalNum, gridVerticalNum, BufferedImage.TYPE_INT_RGB);
         for (int h = 0; h < gridHorizontalNum; h++) {
@@ -47,8 +48,8 @@ public class HashImageCaptor implements ImageCaptor {
         return bi;
     }
 
-    public static class Builder {
-        private final byte[] digest;
+    public static class Builder extends AbstractBuilder<Builder> {
+        private byte[] digest;
         private int gridVerticalNum = 8;
         private Color bgColor;
         private Color fgColor;
@@ -70,29 +71,36 @@ public class HashImageCaptor implements ImageCaptor {
             }
             digest = md.digest();
         }
-        public Builder(byte[] digest) {
+
+        @Override
+        public Builder set(String property, Object val) {
+            if ("digest".equals(property)) {
+                digest = (byte[]) val;
+            } else if ("gridVerticalNum".equals(property)) {
+                gridVerticalNum = (int) val;
+            } else if ("bgColor".equals(property)) {
+                bgColor = (Color) val;
+            } else if ("fgColor".equals(property)) {
+                fgColor = (Color) val;
+            } else {
+                super.set(property, val);
+            }
+            return this;
+        }
+
+        public HashImageCaptor build() {
             if (digest == null)
                 throw new NullPointerException("empty digest");
-            if (digest.length < 32) {
+            if (digest.length < 32)
                 throw new ParameterException("not a valid digest");
-            }
-            this.digest = digest;
-        }
-        public Builder gridVerticalNum(int gridVerticalNum) {
             if (Range.ofInt(1, 8).notWithin(gridVerticalNum))
                 throw new ParameterException("vertical number of grid out of bound:[1, 8]");
-            this.gridVerticalNum = gridVerticalNum;
-            return this;
-        }
-        public Builder bgColor(Color bgColor) {
-            this.bgColor = bgColor;
-            return this;
-        }
-        public Builder fgColor(Color fgColor) {
-            this.fgColor = fgColor;
-            return this;
-        }
-        public HashImageCaptor build() {
+
+            if (bgColor == null)
+                bgColor = ColorUtils.of(220, 220, 220);
+            if (fgColor == null)
+                fgColor = ColorUtils.random();
+
             return new HashImageCaptor(this);
         }
     }

@@ -1,6 +1,6 @@
-package cn.captor.impl;
+package cn.extension.captor;
 
-import cn.captor.ImageCaptor;
+import cn.extension.ImageCaptor;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -20,7 +20,7 @@ public class ScreenImageCaptor extends Robot implements ImageCaptor {
     }
 
     @Override
-    public BufferedImage obtain() {
+    public BufferedImage capture() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         return createScreenCapture(new Rectangle(screenSize));
     }

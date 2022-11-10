@@ -11,14 +11,14 @@
         <version>1.0.1</version>
     </parent>
 
-    <artifactId>captor</artifactId>
+    <artifactId>extension</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
+
         <dependency>
-            <groupId>cn.imglib</groupId>
-            <artifactId>core</artifactId>
-            <version>${project.parent.version}</version>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
         </dependency>
 
     </dependencies>

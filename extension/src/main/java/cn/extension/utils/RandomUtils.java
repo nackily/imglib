@@ -1,4 +1,4 @@
-package cn.core.utils;
+package cn.extension.utils;
 
 import java.util.Random;
 
