@@ -16,8 +16,15 @@ import java.text.MessageFormat;
  */
 public class TransparentImageCaptor implements ImageCaptor {
 
-    protected final int width;                                // 图像宽度
-    protected final int height;                               // 图像高度
+    /**
+     * 图像宽度
+     */
+    protected final int width;
+
+    /**
+     * 图像高度
+     */
+    protected final int height;
 
     public TransparentImageCaptor(Builder b) {
         this.width = b.width;
@@ -34,14 +41,16 @@ public class TransparentImageCaptor implements ImageCaptor {
         return bi;
     }
 
-    public static class Builder extends AbstractBuilder<Builder> {
+    public static class Builder extends AbstractBuilder<Builder, TransparentImageCaptor> {
         private int width;
         private int height;
 
+        @Override
         public TransparentImageCaptor build() {
-            if (width <= 0 || height <= 0)
+            if (width <= 0 || height <= 0) {
                 throw new ParameterException(MessageFormat.format(
                         "size[{0}, {1}] out of bound", width, height));
+            }
             return new TransparentImageCaptor(this);
         }
 

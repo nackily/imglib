@@ -15,8 +15,15 @@ import java.awt.image.BufferedImage;
  */
 public class MonochromaticImageCaptor extends TransparentImageCaptor {
 
-    private final Color color;                              // 颜色
-    private final float alpha;                              // 透明度，0-不透明，1-全透明
+    /**
+     * 颜色
+     */
+    private final Color color;
+
+    /**
+     * 透明度，0-不透明，1-全透明
+     */
+    private final float alpha;
 
     public MonochromaticImageCaptor(Builder b) {
         super(b);
@@ -56,10 +63,12 @@ public class MonochromaticImageCaptor extends TransparentImageCaptor {
 
         @Override
         public MonochromaticImageCaptor build() {
-            if (color == null)
+            if (color == null) {
                 throw new ParameterException("no color specified");
-            if (Range.ofFloat(0f, 1f).notWithin(alpha))
+            }
+            if (Range.ofFloat(0f, 1f).notWithin(alpha)) {
                 throw new ParameterException("alpha out of bound:[0.0, 1.0]");
+            }
 
             return new MonochromaticImageCaptor(this);
         }

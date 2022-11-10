@@ -19,10 +19,25 @@ import java.security.NoSuchAlgorithmException;
  */
 public class HashImageCaptor implements ImageCaptor {
 
-    private final byte[] digest;                          // 摘要
-    private final int gridVerticalNum;                    // 格子竖向的数量
-    private final Color bgColor;                          // 背景色
-    private final Color fgColor;                          // 前景色
+    /**
+     * 摘要
+     */
+    private final byte[] digest;
+
+    /**
+     * 格子竖向的数量
+     */
+    private final int gridVerticalNum;
+
+    /**
+     * 背景色
+     */
+    private final Color bgColor;
+
+    /**
+     * 前景色
+     */
+    private final Color fgColor;
 
     public HashImageCaptor(Builder b) {
         this.digest = b.digest;
@@ -48,7 +63,7 @@ public class HashImageCaptor implements ImageCaptor {
         return bi;
     }
 
-    public static class Builder extends AbstractBuilder<Builder> {
+    public static class Builder extends AbstractBuilder<Builder, HashImageCaptor> {
         private byte[] digest;
         private int gridVerticalNum = 8;
         private Color bgColor;
@@ -88,18 +103,24 @@ public class HashImageCaptor implements ImageCaptor {
             return this;
         }
 
+        @Override
         public HashImageCaptor build() {
-            if (digest == null)
+            if (digest == null) {
                 throw new NullPointerException("empty digest");
-            if (digest.length < 32)
+            }
+            if (digest.length < 32) {
                 throw new ParameterException("not a valid digest");
-            if (Range.ofInt(1, 8).notWithin(gridVerticalNum))
+            }
+            if (Range.ofInt(1, 8).notWithin(gridVerticalNum)) {
                 throw new ParameterException("vertical number of grid out of bound:[1, 8]");
+            }
 
-            if (bgColor == null)
+            if (bgColor == null) {
                 bgColor = ColorUtils.of(220, 220, 220);
-            if (fgColor == null)
+            }
+            if (fgColor == null) {
                 fgColor = ColorUtils.random();
+            }
 
             return new HashImageCaptor(this);
         }

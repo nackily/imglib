@@ -44,8 +44,9 @@ public class BorderHandler implements ImageFilter {
             this.fillColor = null;
         } else {
             this.fillColor = bu.fillColor;
-            if (bu.fillColor == null)
+            if (bu.fillColor == null) {
                 this.fillColor = ColorUtils.random();
+            }
         }
     }
 
@@ -78,7 +79,7 @@ public class BorderHandler implements ImageFilter {
     }
 
 
-    public static class Builder extends AbstractBuilder<Builder> {
+    public static class Builder extends AbstractBuilder<Builder, BorderHandler> {
         private int vMargins;
         private int hMargins;
         private float alpha = 0f;
@@ -100,6 +101,7 @@ public class BorderHandler implements ImageFilter {
             return this;
         }
 
+        @Override
         public BorderHandler build() {
             return new BorderHandler(this);
         }

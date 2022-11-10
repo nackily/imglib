@@ -28,8 +28,9 @@ public class Range<T extends Comparable<T>> {
     public boolean notWithin(T val) {
         boolean lessOfMin = val.compareTo(min) < 0;
         boolean greatOfMax = val.compareTo(max) > 0;
-        if (lessOfMin || greatOfMax)
+        if (lessOfMin || greatOfMax) {
             return true;
+        }
         return false;
     }
 

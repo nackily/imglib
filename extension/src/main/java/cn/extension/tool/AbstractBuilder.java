@@ -10,7 +10,7 @@ import java.util.Set;
  * @author tracy
  * @since 1.0.0
  */
-public abstract class AbstractBuilder<Children extends AbstractBuilder<Children>>
+public abstract class AbstractBuilder<Children extends AbstractBuilder<Children, T>, T>
         extends AbstractMap<String, Object> {
 
     /**
@@ -46,4 +46,10 @@ public abstract class AbstractBuilder<Children extends AbstractBuilder<Children>
         // cannot access
         throw new UnsupportedOperationException();
     }
+
+    /**
+     * 构建对象
+     * @return T
+     */
+    public abstract T build();
 }
