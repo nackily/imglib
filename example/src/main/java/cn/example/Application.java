@@ -1,10 +1,8 @@
 package cn.example;
 
-import cn.core.wrapper.ThumbnailsImageWrapper;
-import cn.extension.captor.HashImageCaptor;
-import cn.extension.filter.BorderHandler;
-import cn.extension.filter.HighQualityExpandHandler;
-import cn.extension.utils.ColorUtils;
+import cn.core.wrapper.DefaultWrapper;
+import cn.extension.ext.merge.GridMergeStrategy;
+import net.coobird.thumbnailator.Thumbnails;
 
 import java.awt.*;
 import java.io.IOException;
@@ -17,29 +15,51 @@ import java.security.NoSuchAlgorithmException;
  * @since 1.0.0
  */
 public class Application {
-    public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException, AWTException {
         long l1 = System.currentTimeMillis();
 
-        ThumbnailsImageWrapper
-                .from(new HashImageCaptor
-                        .Builder("my name is jack")
-                        .set("fgColor", ColorUtils.of(155, 155, 155))
-                        .build())
-                .expand(new HighQualityExpandHandler.Builder()
-                                .set("keepAspectRatio", false)
-                                .set("finalWidth", 200)
-                                .set("finalHeight", 9)
-                                .build())
-                .border(new BorderHandler.Builder()
-                        .set("vMargins", 20)
-                        .set("hMargins", 20)
-                        .set("alpha", 0f)
-                        .set("fillColor", ColorUtils.of(255,0,255))
-                        .build()
-                )
+//        DefaultWrapper
+//                .from(new HashImageCaptor.Builder("my name")
+//                        .gridVerticalNum(8)
+//                        .fgColor(ColorUtils.of(200, 0, 200))
+//                        .build())
+//                .expand(new HighQualityExpandHandler.Builder()
+//                        .keepAspectRatio(true)
+//                        .finalHeight(240)
+//                        .build())
+//                .border(new BorderHandler.Builder()
+//                        .vMargins(20)
+//                        .fillColor(ColorUtils.of(200, 200, 0))
+//                        .build())
+//                .roundRect(new RoundRectHandler.Builder()
+//                        .arcWidth(20)
+//                        .build())
+//                .getWrapper()
+//                .scale(1.0)
+//                .toFile("F:/4test/imglib/test-out/hash.png");
+
+        Thumbnails.Builder<?> builder = DefaultWrapper
+                .from("F:\\4test\\imglib\\test-out\\test\\1.png",
+                        "F:\\4test\\imglib\\test-out\\test\\2.png",
+                        "F:\\4test\\imglib\\test-out\\test\\3.png",
+                        "F:\\4test\\imglib\\test-out\\test\\4.png",
+                        "F:\\4test\\imglib\\test-out\\test\\5.png",
+                        "F:\\4test\\imglib\\test-out\\test\\6.png",
+                        "F:\\4test\\imglib\\test-out\\test\\7.png")
                 .getWrapper()
-                .scale(1.0)
-                .toFile("F:/4test/imglib/test-out/hash.png");
+                .scale(1.0);
+
+        DefaultWrapper
+                .from(builder)
+                .merge(new GridMergeStrategy.Builder()
+                        .autoAdapts(true)
+                        .alpha(1f)
+                        .horizontalNum(3)
+                        .alignCenter(true)
+                        .build())
+                .getWrapper()
+                .scale(1f)
+                .toFile("F:\\4test\\imglib\\test-out\\merge.png");
 
         System.out.println(System.currentTimeMillis() - l1);
     }

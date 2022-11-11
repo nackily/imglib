@@ -1,8 +1,7 @@
 package cn.extension.captor;
 
-import cn.extension.Range;
+import cn.extension.tool.Range;
 import cn.extension.exec.ParameterException;
-import cn.extension.tool.AbstractBuilder;
 import cn.extension.utils.ColorUtils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -50,14 +49,40 @@ public class MonochromaticImageCaptor extends TransparentImageCaptor {
         private float alpha = 0f;
 
         @Override
-        public Builder set(String property, Object val) {
+        public Builder setup(String property, Object val) {
             if ("color".equals(property)) {
                 color = (Color) val;
             } else if ("alpha".equals(property)) {
                 alpha = (float) val;
+            } else if ("width".equals(property)) {
+                width = (int) val;
+            } else if ("height".equals(property)) {
+                height = (int) val;
             } else {
-                super.set(property, val);
+                unknownProperty(property, val);
             }
+            return this;
+        }
+
+        @Override
+        public Builder width(int width) {
+            super.width = width;
+            return this;
+        }
+
+        @Override
+        public Builder height(int height) {
+            super.height = height;
+            return this;
+        }
+
+        public Builder color(Color color) {
+            this.color = color;
+            return this;
+        }
+
+        public Builder alpha(float alpha) {
+            this.alpha = alpha;
             return this;
         }
 

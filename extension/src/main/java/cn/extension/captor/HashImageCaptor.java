@@ -1,7 +1,7 @@
 package cn.extension.captor;
 
 import cn.extension.ImageCaptor;
-import cn.extension.Range;
+import cn.extension.tool.Range;
 import cn.extension.exec.ParameterException;
 import cn.extension.tool.AbstractBuilder;
 import cn.extension.utils.ColorUtils;
@@ -64,7 +64,7 @@ public class HashImageCaptor implements ImageCaptor {
     }
 
     public static class Builder extends AbstractBuilder<Builder, HashImageCaptor> {
-        private byte[] digest;
+        private final byte[] digest;
         private int gridVerticalNum = 8;
         private Color bgColor;
         private Color fgColor;
@@ -88,18 +88,31 @@ public class HashImageCaptor implements ImageCaptor {
         }
 
         @Override
-        public Builder set(String property, Object val) {
-            if ("digest".equals(property)) {
-                digest = (byte[]) val;
-            } else if ("gridVerticalNum".equals(property)) {
-                gridVerticalNum = (int) val;
+        public Builder setup(String property, Object val) {
+            if ("gridVerticalNum".equals(property)) {
+                return gridVerticalNum((int) val);
             } else if ("bgColor".equals(property)) {
-                bgColor = (Color) val;
+                return bgColor((Color) val);
             } else if ("fgColor".equals(property)) {
-                fgColor = (Color) val;
+                return fgColor((Color) val);
             } else {
-                super.set(property, val);
+                super.unknownProperty(property, val);
             }
+            return this;
+        }
+
+        public Builder gridVerticalNum(int gridVerticalNum) {
+            this.gridVerticalNum = gridVerticalNum;
+            return this;
+        }
+
+        public Builder bgColor(Color bgColor) {
+            this.bgColor = bgColor;
+            return this;
+        }
+
+        public Builder fgColor(Color fgColor) {
+            this.fgColor = fgColor;
             return this;
         }
 

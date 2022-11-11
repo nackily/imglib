@@ -42,8 +42,30 @@ public class TransparentImageCaptor implements ImageCaptor {
     }
 
     public static class Builder extends AbstractBuilder<Builder, TransparentImageCaptor> {
-        private int width;
-        private int height;
+        protected int width;
+        protected int height;
+
+        @Override
+        public Builder setup(String property, Object val) {
+            if ("width".equals(property)) {
+                return width((int) val);
+            } else if ("height".equals(property)) {
+                return height((int) val);
+            } else {
+                super.unknownProperty(property, val);
+            }
+            return this;
+        }
+
+        public Builder width(int width) {
+            this.width = width;
+            return this;
+        }
+
+        public Builder height(int height) {
+            this.height = height;
+            return this;
+        }
 
         @Override
         public TransparentImageCaptor build() {
@@ -52,18 +74,6 @@ public class TransparentImageCaptor implements ImageCaptor {
                         "size[{0}, {1}] out of bound", width, height));
             }
             return new TransparentImageCaptor(this);
-        }
-
-        @Override
-        public Builder set(String property, Object val) {
-            if ("width".equals(property)) {
-                width = (int) val;
-            } else if ("height".equals(property)) {
-                height = (int) val;
-            } else {
-                super.set(property, val);
-            }
-            return this;
         }
     }
 }

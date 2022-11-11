@@ -1,8 +1,9 @@
 package cn.extension.utils;
 
-import cn.extension.Range;
+import cn.extension.tool.Range;
 import cn.extension.exec.ParameterException;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * 颜色工具类
@@ -21,6 +22,15 @@ public final class ColorUtils {
      */
     public static Color of(int r, int g, int b) {
         return new Color(r, g, b);
+    }
+
+    /**
+     * 颜色
+     * @param rgb RGB
+     * @return 颜色
+     */
+    public static Color ofRGB(int rgb) {
+        return new Color(rgb);
     }
 
     /**
@@ -64,6 +74,21 @@ public final class ColorUtils {
     public static Color anyOf(Color... options) {
         int index = RandomUtils.randomInt(0, options.length);
         return options[index];
+    }
+
+    /**
+     * 获取区域正中心的颜色
+     * @param img 图像
+     * @param x 区域左上角坐标-X
+     * @param y 区域左上角坐标-Y
+     * @param w 区域宽度
+     * @param h 区域高度
+     * @return 颜色
+     */
+    public static int obtainRectCenterRGB(BufferedImage img, int x, int y, int w, int h) {
+        int centerX = x + w / 2;
+        int centerY = y + h / 2;
+        return img.getRGB(centerX, centerY);
     }
 
 }

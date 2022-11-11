@@ -13,14 +13,28 @@ import java.util.Set;
 public abstract class AbstractBuilder<Children extends AbstractBuilder<Children, T>, T>
         extends AbstractMap<String, Object> {
 
+
     /**
      * 设置属性
      * @param property 属性名称
      * @param val 值
      * @return Children
      */
-    public Children set(String property, Object val) {
-        throw new NoSuchElementException(property);
+    public abstract Children setup(String property, Object val);
+
+    /**
+     * 构建对象
+     * @return T
+     */
+    public abstract T build();
+
+    /**
+     * 未知属性
+     * @param property 属性名
+     * @param val 值
+     */
+    protected void unknownProperty(String property, Object val) {
+        throw new NoSuchElementException("unknown property: [" + property  + "]");
     }
 
     @Override
@@ -46,10 +60,4 @@ public abstract class AbstractBuilder<Children extends AbstractBuilder<Children,
         // cannot access
         throw new UnsupportedOperationException();
     }
-
-    /**
-     * 构建对象
-     * @return T
-     */
-    public abstract T build();
 }
