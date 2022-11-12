@@ -1,8 +1,9 @@
 package cn.extension.ext.merge;
 
-import cn.extension.MergeStrategy;
+import cn.extension.ext.MergeStrategy;
+import cn.extension.exec.HandlingException;
 import cn.extension.exec.ParameterException;
-import cn.extension.tool.AbstractBuilder;
+import cn.extension.tool.GenericBuilder;
 import cn.extension.utils.BufferedImageUtils;
 import cn.extension.utils.ColorUtils;
 
@@ -73,7 +74,7 @@ public class GridMergeStrategy implements MergeStrategy {
     @Override
     public BufferedImage execute(List<BufferedImage> images) {
         if (images == null || images.size() == 0) {
-            throw new NullPointerException("no images to merge");
+            throw new HandlingException("no images to merge");
         }
         // adjust the parameters
         adjustHorizontalNumIfNecessary(images.size());
@@ -149,7 +150,7 @@ public class GridMergeStrategy implements MergeStrategy {
         return (imageNum + horizontalNum - 1) / horizontalNum;
     }
 
-    public static class Builder extends AbstractBuilder<Builder, GridMergeStrategy> {
+    public static class Builder implements GenericBuilder<GridMergeStrategy> {
         private boolean autoAdapts = true;
         private int gridWidth;
         private int gridHeight;
@@ -157,28 +158,6 @@ public class GridMergeStrategy implements MergeStrategy {
         private boolean alignCenter = false;
         private float alpha;
         private Color fillColor;
-
-        @Override
-        public Builder setup(String property, Object val) {
-            if ("autoAdapts".equals(property)) {
-                return autoAdapts((boolean) val);
-            } else if ("gridWidth".equals(property)) {
-                return gridWidth((int) val);
-            } else if ("gridHeight".equals(property)) {
-                return gridHeight((int) val);
-            } else if ("horizontalNum".equals(property)) {
-                return horizontalNum((int) val);
-            } else if ("alignCenter".equals(property)) {
-                return alignCenter((boolean) val);
-            } else if ("alpha".equals(property)) {
-                return alpha((float) val);
-            } else if ("fillColor".equals(property)) {
-                return fillColor((Color) val);
-            } else {
-                super.unknownProperty(property, val);
-            }
-            return this;
-        }
 
         public Builder autoAdapts(boolean autoAdapts) {
             this.autoAdapts = autoAdapts;
