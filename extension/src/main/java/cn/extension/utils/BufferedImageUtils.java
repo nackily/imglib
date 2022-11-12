@@ -36,16 +36,16 @@ public final class BufferedImageUtils {
         BufferedImage tar;
         if (alpha == 1.0) {
             tar = new TransparentImageCaptor.Builder()
-                    .setup("width", width)
-                    .setup("height", height)
+                    .width(width)
+                    .height(height)
                     .build()
                     .capture();
         } else {
             tar = new MonochromaticImageCaptor.Builder()
-                    .setup("width", width)
-                    .setup("height", height)
-                    .setup("color", fillColor)
-                    .setup("alpha", alpha)
+                    .width(width)
+                    .height(height)
+                    .color(fillColor)
+                    .alpha(alpha)
                     .build()
                     .capture();
         }

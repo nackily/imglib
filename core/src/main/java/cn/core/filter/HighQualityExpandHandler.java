@@ -1,7 +1,7 @@
 package cn.core.filter;
 
 import cn.extension.exec.ParameterException;
-import cn.extension.tool.AbstractBuilder;
+import cn.extension.tool.GenericBuilder;
 import net.coobird.thumbnailator.filters.ImageFilter;
 
 import java.awt.*;
@@ -70,24 +70,10 @@ public class HighQualityExpandHandler implements ImageFilter {
         }
     }
 
-    public static class Builder extends AbstractBuilder<Builder, HighQualityExpandHandler> {
+    public static class Builder implements GenericBuilder<HighQualityExpandHandler> {
         private boolean keepAspectRatio = true;
         private int finalWidth = -1;
         private int finalHeight = -1;
-
-        @Override
-        public Builder setup(String property, Object val) {
-            if ("keepAspectRatio".equals(property)) {
-                return keepAspectRatio((boolean) val);
-            } else if ("finalWidth".equals(property)) {
-                return finalWidth((int) val);
-            } else if ("finalHeight".equals(property)) {
-                return finalHeight((int) val);
-            } else {
-                super.unknownProperty(property, val);
-            }
-            return this;
-        }
 
         public Builder keepAspectRatio(boolean keepAspectRatio) {
             this.keepAspectRatio = keepAspectRatio;

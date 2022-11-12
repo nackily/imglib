@@ -1,8 +1,6 @@
 package cn.core.filter;
 
-import cn.extension.captor.MonochromaticImageCaptor;
-import cn.extension.captor.TransparentImageCaptor;
-import cn.extension.tool.AbstractBuilder;
+import cn.extension.tool.GenericBuilder;
 import cn.extension.utils.BufferedImageUtils;
 import cn.extension.utils.ColorUtils;
 import net.coobird.thumbnailator.filters.ImageFilter;
@@ -65,27 +63,11 @@ public class BorderHandler implements ImageFilter {
     }
 
 
-    public static class Builder extends AbstractBuilder<Builder, BorderHandler> {
+    public static class Builder implements GenericBuilder<BorderHandler> {
         private int vMargins;
         private int hMargins;
         private float alpha = 0f;
         private Color fillColor;
-
-        @Override
-        public Builder setup(String property, Object val) {
-            if ("vMargins".equals(property)) {
-                return vMargins((int) val);
-            } else if ("hMargins".equals(property)) {
-                return hMargins((int) val);
-            } else if ("alpha".equals(property)) {
-                return alpha((float) val);
-            } else if ("fillColor".equals(property)) {
-                return fillColor((Color) val);
-            } else {
-                super.unknownProperty(property, val);
-            }
-            return this;
-        }
 
         public Builder vMargins(int vMargins) {
             this.vMargins = vMargins;

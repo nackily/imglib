@@ -2,7 +2,7 @@ package cn.extension.captor;
 
 import cn.extension.ImageCaptor;
 import cn.extension.exec.ParameterException;
-import cn.extension.tool.AbstractBuilder;
+import cn.extension.tool.GenericBuilder;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -41,21 +41,9 @@ public class TransparentImageCaptor implements ImageCaptor {
         return bi;
     }
 
-    public static class Builder extends AbstractBuilder<Builder, TransparentImageCaptor> {
+    public static class Builder implements GenericBuilder<TransparentImageCaptor> {
         protected int width;
         protected int height;
-
-        @Override
-        public Builder setup(String property, Object val) {
-            if ("width".equals(property)) {
-                return width((int) val);
-            } else if ("height".equals(property)) {
-                return height((int) val);
-            } else {
-                super.unknownProperty(property, val);
-            }
-            return this;
-        }
 
         public Builder width(int width) {
             this.width = width;

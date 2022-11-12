@@ -1,9 +1,9 @@
 package cn.extension.captor;
 
 import cn.extension.ImageCaptor;
+import cn.extension.tool.GenericBuilder;
 import cn.extension.tool.Range;
 import cn.extension.exec.ParameterException;
-import cn.extension.tool.AbstractBuilder;
 import cn.extension.utils.ColorUtils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -63,7 +63,7 @@ public class HashImageCaptor implements ImageCaptor {
         return bi;
     }
 
-    public static class Builder extends AbstractBuilder<Builder, HashImageCaptor> {
+    public static class Builder implements GenericBuilder<HashImageCaptor> {
         private final byte[] digest;
         private int gridVerticalNum = 8;
         private Color bgColor;
@@ -85,20 +85,6 @@ public class HashImageCaptor implements ImageCaptor {
                 md.update(content.getBytes(StandardCharsets.UTF_8));
             }
             digest = md.digest();
-        }
-
-        @Override
-        public Builder setup(String property, Object val) {
-            if ("gridVerticalNum".equals(property)) {
-                return gridVerticalNum((int) val);
-            } else if ("bgColor".equals(property)) {
-                return bgColor((Color) val);
-            } else if ("fgColor".equals(property)) {
-                return fgColor((Color) val);
-            } else {
-                super.unknownProperty(property, val);
-            }
-            return this;
         }
 
         public Builder gridVerticalNum(int gridVerticalNum) {

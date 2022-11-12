@@ -1,8 +1,8 @@
 package cn.core.support;
 
 
-import cn.extension.MergeStrategy;
-import cn.extension.SplitStrategy;
+import cn.extension.ext.MergeStrategy;
+import cn.extension.ext.SplitStrategy;
 
 import java.io.IOException;
 

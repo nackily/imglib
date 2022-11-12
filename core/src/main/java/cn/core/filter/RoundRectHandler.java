@@ -2,7 +2,7 @@ package cn.core.filter;
 
 import cn.extension.captor.TransparentImageCaptor;
 import cn.extension.exec.ParameterException;
-import cn.extension.tool.AbstractBuilder;
+import cn.extension.tool.GenericBuilder;
 import net.coobird.thumbnailator.filters.ImageFilter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -53,21 +53,9 @@ public class RoundRectHandler implements ImageFilter {
         return tar;
     }
 
-    public static class Builder extends AbstractBuilder<Builder, RoundRectHandler> {
+    public static class Builder implements GenericBuilder<RoundRectHandler> {
         private int arcWidth = -1;
         private int arcHeight = -1;
-
-        @Override
-        public Builder setup(String property, Object val) {
-            if ("arcWidth".equals(property)) {
-                return arcWidth((int) val);
-            } else if ("arcHeight".equals(property)) {
-                return arcHeight((int) val);
-            } else {
-                super.unknownProperty(property, val);
-            }
-            return this;
-        }
 
         public Builder arcWidth(int arcWidth) {
             this.arcWidth = arcWidth;

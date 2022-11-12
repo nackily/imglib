@@ -1,12 +1,16 @@
 package cn.example;
 
 import cn.core.wrapper.DefaultWrapper;
-import cn.extension.ext.merge.GridMergeStrategy;
+import cn.extension.ext.split.GridSplitStrategy;
 import net.coobird.thumbnailator.Thumbnails;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * Application
@@ -38,30 +42,26 @@ public class Application {
 //                .scale(1.0)
 //                .toFile("F:/4test/imglib/test-out/hash.png");
 
+
         Thumbnails.Builder<?> builder = DefaultWrapper
-                .from("F:\\4test\\imglib\\test-out\\test\\1.png",
-                        "F:\\4test\\imglib\\test-out\\test\\2.png",
-                        "F:\\4test\\imglib\\test-out\\test\\3.png",
-                        "F:\\4test\\imglib\\test-out\\test\\4.png",
-                        "F:\\4test\\imglib\\test-out\\test\\5.png",
-                        "F:\\4test\\imglib\\test-out\\test\\6.png",
-                        "F:\\4test\\imglib\\test-out\\test\\7.png")
+                .from("F:\\4test\\imglib\\test-out\\before_mosaic.jpeg")
                 .getWrapper()
                 .scale(1.0);
 
-        DefaultWrapper
-                .from(builder)
-                .merge(new GridMergeStrategy.Builder()
-                        .autoAdapts(true)
-                        .alpha(1f)
-                        .horizontalNum(3)
-                        .alignCenter(true)
+        List<BufferedImage> images = DefaultWrapper.from(builder)
+                .split(new GridSplitStrategy.Builder()
+                        .gridWidth(300)
+                        .gridHeight(100)
                         .build())
                 .getWrapper()
-                .scale(1f)
-                .toFile("F:\\4test\\imglib\\test-out\\merge.png");
+                .scale(1.0)
+                .asBufferedImages();
 
+        for (int i = 0; i < images.size(); i++) {
+            ImageIO.write(images.get(i), "PNG", new File("F:\\4test\\imglib\\test-out\\test2\\" + i + ".png"));
+        }
         System.out.println(System.currentTimeMillis() - l1);
+
     }
 
 }

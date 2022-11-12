@@ -49,22 +49,6 @@ public class MonochromaticImageCaptor extends TransparentImageCaptor {
         private float alpha = 0f;
 
         @Override
-        public Builder setup(String property, Object val) {
-            if ("color".equals(property)) {
-                color = (Color) val;
-            } else if ("alpha".equals(property)) {
-                alpha = (float) val;
-            } else if ("width".equals(property)) {
-                width = (int) val;
-            } else if ("height".equals(property)) {
-                height = (int) val;
-            } else {
-                unknownProperty(property, val);
-            }
-            return this;
-        }
-
-        @Override
         public Builder width(int width) {
             super.width = width;
             return this;

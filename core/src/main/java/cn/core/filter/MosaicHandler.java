@@ -1,7 +1,7 @@
 package cn.core.filter;
 
 import cn.extension.exec.ParameterException;
-import cn.extension.tool.AbstractBuilder;
+import cn.extension.tool.GenericBuilder;
 import cn.extension.utils.ColorUtils;
 import net.coobird.thumbnailator.filters.ImageFilter;
 import net.coobird.thumbnailator.util.BufferedImages;
@@ -94,31 +94,13 @@ public class MosaicHandler implements ImageFilter {
     }
 
 
-    public static class Builder extends AbstractBuilder<Builder, MosaicHandler> {
+    public static class Builder implements GenericBuilder<MosaicHandler> {
 
         private int sideLength = -1;
         private int startX;
         private int startY;
         private int width = -1;
         private int height = -1;
-
-        @Override
-        public Builder setup(String property, Object val) {
-            if ("sideLength".equals(property)) {
-                return sideLength((int) val);
-            } else if ("startX".equals(property)) {
-                return startX((int) val);
-            } else if ("startY".equals(property)) {
-                return startY((int) val);
-            } else if ("width".equals(property)) {
-                return width((int) val);
-            } else if ("height".equals(property)) {
-                return height((int) val);
-            } else {
-                super.unknownProperty(property, val);
-            }
-            return this;
-        }
 
         public Builder sideLength(int sideLength) {
             this.sideLength = sideLength;
