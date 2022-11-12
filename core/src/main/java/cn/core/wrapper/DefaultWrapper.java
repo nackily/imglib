@@ -1,14 +1,13 @@
 package cn.core.wrapper;
 
+import cn.core.filter.*;
+import cn.core.support.OverlayingSupport;
 import cn.core.support.TransitioningSupport;
 import cn.extension.ImageCaptor;
 import cn.extension.ImageWrapper;
 import cn.core.support.EditingSupport;
-import cn.core.filter.BorderHandler;
-import cn.core.filter.HighQualityExpandHandler;
-import cn.core.filter.MosaicHandler;
-import cn.core.filter.RoundRectHandler;
 import cn.extension.ext.MergeStrategy;
+import cn.extension.ext.OverlayShape;
 import cn.extension.ext.SplitStrategy;
 import cn.extension.exec.HandlingException;
 import net.coobird.thumbnailator.Thumbnails;
@@ -27,7 +26,7 @@ import java.util.List;
  * @since 1.0.0
  */
 public class DefaultWrapper implements ImageWrapper<Thumbnails.Builder<?>, DefaultWrapper>,
-        EditingSupport<DefaultWrapper>, TransitioningSupport<DefaultWrapper> {
+        EditingSupport<DefaultWrapper>, TransitioningSupport<DefaultWrapper>, OverlayingSupport<DefaultWrapper> {
 
     protected Thumbnails.Builder<?> object;
 
@@ -90,6 +89,12 @@ public class DefaultWrapper implements ImageWrapper<Thumbnails.Builder<?>, Defau
     @Override
     public DefaultWrapper roundRect(RoundRectHandler handler) {
         object.addFilter(handler);
+        return this;
+    }
+
+    @Override
+    public DefaultWrapper shape(ShapeOverlayAdaptor shapeAdaptor) {
+        object.addFilter(shapeAdaptor);
         return this;
     }
 

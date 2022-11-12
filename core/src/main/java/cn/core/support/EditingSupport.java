@@ -17,28 +17,28 @@ public interface EditingSupport<W> {
     /**
      * 添加边框
      * @param handler 处理器
-     * @return 包装器
+     * @return 泛型
      */
     W border(BorderHandler handler);
 
     /**
      * 图像扩张
      * @param handler 处理器
-     * @return 包装器
+     * @return 泛型
      */
     W expand(HighQualityExpandHandler handler);
 
     /**
      * 马赛克
      * @param handler 处理器
-     * @return 包装器
+     * @return 泛型
      */
     W mosaic(MosaicHandler handler);
 
     /**
      * 圆角
      * @param handler 处理器
-     * @return 包装器
+     * @return 泛型
      */
     W roundRect(RoundRectHandler handler);
 }

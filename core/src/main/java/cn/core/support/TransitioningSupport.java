@@ -18,7 +18,7 @@ public interface TransitioningSupport<W> {
      * 图像合并
      *
      * @param strategy 策略
-     * @return 包装器
+     * @return 泛型
      * @throws IOException IO异常
      */
     W merge(MergeStrategy strategy) throws IOException;
@@ -27,7 +27,7 @@ public interface TransitioningSupport<W> {
      * 图像拆分
      *
      * @param strategy 处理器
-     * @return 包装器
+     * @return 泛型
      * @throws IOException IO异常
      */
     W split(SplitStrategy strategy) throws IOException;
