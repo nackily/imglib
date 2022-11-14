@@ -121,6 +121,11 @@ public class DefaultWrapper implements ImageWrapper<Thumbnails.Builder<?>, Defau
         return this;
     }
 
+    public DefaultWrapper mode(ModeAdaptor adaptor) {
+        object.addFilter(adaptor);
+        return this;
+    }
+
     @Override
     public Thumbnails.Builder<?> getWrapper() {
         return object;
