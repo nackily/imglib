@@ -1,6 +1,6 @@
 package cn.extension.ext.shape.closed;
 
-import cn.extension.exec.ParameterException;
+import cn.extension.exec.InvalidSettingException;
 import cn.extension.ext.shape.AbstractClosedShape;
 
 import java.awt.*;
@@ -53,7 +53,7 @@ public class Rect extends AbstractClosedShape {
         @Override
         public Rect build() {
             if (rect == null) {
-                throw new ParameterException("not specified any rect for this shape");
+                throw new InvalidSettingException("not specified any rect for this shape");
             }
             return new Rect(this);
         }

@@ -1,7 +1,7 @@
 package cn.extension.captor;
 
 import cn.extension.ImageCaptor;
-import cn.extension.exec.ParameterException;
+import cn.extension.exec.InvalidSettingException;
 import cn.extension.tool.GenericBuilder;
 
 import java.awt.*;
@@ -58,7 +58,7 @@ public class TransparentImageCaptor implements ImageCaptor {
         @Override
         public TransparentImageCaptor build() {
             if (width <= 0 || height <= 0) {
-                throw new ParameterException(MessageFormat.format(
+                throw new InvalidSettingException(MessageFormat.format(
                         "size[{0}, {1}] out of bound", width, height));
             }
             return new TransparentImageCaptor(this);

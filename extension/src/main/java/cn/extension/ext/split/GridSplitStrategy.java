@@ -1,7 +1,7 @@
 package cn.extension.ext.split;
 
 import cn.extension.exec.HandlingException;
-import cn.extension.exec.ParameterException;
+import cn.extension.exec.InvalidSettingException;
 import cn.extension.ext.SplitStrategy;
 import cn.extension.tool.GenericBuilder;
 
@@ -87,7 +87,7 @@ public class GridSplitStrategy implements SplitStrategy {
         public Builder gridWidth(int gridWidth) {
             this.gridWidth = gridWidth;
             if (gridWidth <= 0) {
-                throw new ParameterException("the width of the grid must be greater than 0");
+                throw new InvalidSettingException("the width of the grid must be greater than 0");
             }
             return this;
         }
@@ -95,7 +95,7 @@ public class GridSplitStrategy implements SplitStrategy {
         public Builder gridHeight(int gridHeight) {
             this.gridHeight = gridHeight;
             if (gridHeight <= 0) {
-                throw new ParameterException("the height of the grid must be greater than 0");
+                throw new InvalidSettingException("the height of the grid must be greater than 0");
             }
             return this;
         }
@@ -103,7 +103,7 @@ public class GridSplitStrategy implements SplitStrategy {
         @Override
         public GridSplitStrategy build() {
             if (gridWidth <= 0 && gridHeight <= 0) {
-                throw new ParameterException("both of the width and height of the grid not set");
+                throw new InvalidSettingException("both of the width and height of the grid not set");
             }
             return new GridSplitStrategy(this);
         }

@@ -1,7 +1,7 @@
 package cn.core.filter;
 
 import cn.extension.captor.TransparentImageCaptor;
-import cn.extension.exec.ParameterException;
+import cn.extension.exec.InvalidSettingException;
 import cn.extension.tool.GenericBuilder;
 import net.coobird.thumbnailator.filters.ImageFilter;
 import java.awt.*;
@@ -60,7 +60,7 @@ public class RoundRectHandler implements ImageFilter {
         public Builder arcWidth(int arcWidth) {
             this.arcWidth = arcWidth;
             if (arcWidth <= 0) {
-                throw new ParameterException("the horizontal diameter of the arc must be greater than 0");
+                throw new InvalidSettingException("the horizontal diameter of the arc must be greater than 0");
             }
             return this;
         }
@@ -68,7 +68,7 @@ public class RoundRectHandler implements ImageFilter {
         public Builder arcHeight(int arcHeight) {
             this.arcHeight = arcHeight;
             if (arcHeight <= 0) {
-                throw new ParameterException("the vertical diameter of the arc must be greater than 0");
+                throw new InvalidSettingException("the vertical diameter of the arc must be greater than 0");
             }
             return this;
         }
@@ -76,7 +76,7 @@ public class RoundRectHandler implements ImageFilter {
         @Override
         public RoundRectHandler build() {
             if (arcWidth == -1 && arcHeight == -1) {
-                throw new ParameterException("both of the horizontal(vertical) diameter of the arc not set");
+                throw new InvalidSettingException("both of the horizontal(vertical) diameter of the arc not set");
             }
             if (arcWidth == -1 || arcHeight == -1) {
                 arcWidth = arcHeight = Math.max(arcHeight, arcWidth);

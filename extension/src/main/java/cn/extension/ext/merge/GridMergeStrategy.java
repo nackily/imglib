@@ -2,7 +2,7 @@ package cn.extension.ext.merge;
 
 import cn.extension.ext.MergeStrategy;
 import cn.extension.exec.HandlingException;
-import cn.extension.exec.ParameterException;
+import cn.extension.exec.InvalidSettingException;
 import cn.extension.tool.GenericBuilder;
 import cn.extension.utils.BufferedImageUtils;
 import cn.extension.utils.ColorUtils;
@@ -167,7 +167,7 @@ public class GridMergeStrategy implements MergeStrategy {
         public Builder gridWidth(int gridWidth) {
             this.gridWidth = gridWidth;
             if (gridWidth <= 0) {
-                throw new ParameterException("the width of the grid must be greater than 0");
+                throw new InvalidSettingException("the width of the grid must be greater than 0");
             }
             return this;
         }
@@ -175,7 +175,7 @@ public class GridMergeStrategy implements MergeStrategy {
         public Builder gridHeight(int gridHeight) {
             this.gridHeight = gridHeight;
             if (gridHeight <= 0) {
-                throw new ParameterException("the height of the grid must be greater than 0");
+                throw new InvalidSettingException("the height of the grid must be greater than 0");
             }
             return this;
         }
@@ -183,7 +183,7 @@ public class GridMergeStrategy implements MergeStrategy {
         public Builder horizontalNum(int horizontalNum) {
             this.horizontalNum = horizontalNum;
             if (horizontalNum <= 0) {
-                throw new ParameterException("the number placed in horizontal must be greater than 0");
+                throw new InvalidSettingException("the number placed in horizontal must be greater than 0");
             }
             return this;
         }
@@ -201,7 +201,7 @@ public class GridMergeStrategy implements MergeStrategy {
         public Builder fillColor(Color fillColor) {
             this.fillColor = fillColor;
             if (fillColor == null) {
-                throw new ParameterException("empty fill color");
+                throw new InvalidSettingException("empty fill color");
             }
             return this;
         }
@@ -210,7 +210,7 @@ public class GridMergeStrategy implements MergeStrategy {
         public GridMergeStrategy build() {
             if (!autoAdapts) {
                 if (gridWidth <= 0 || gridHeight <= 0) {
-                    throw new ParameterException("the width or height of the grid not set");
+                    throw new InvalidSettingException("the width or height of the grid not set");
                 }
             }
             return new GridMergeStrategy(this);

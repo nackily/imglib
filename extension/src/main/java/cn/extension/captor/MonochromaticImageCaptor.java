@@ -1,7 +1,7 @@
 package cn.extension.captor;
 
 import cn.extension.tool.Range;
-import cn.extension.exec.ParameterException;
+import cn.extension.exec.InvalidSettingException;
 import cn.extension.utils.ColorUtils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -73,10 +73,10 @@ public class MonochromaticImageCaptor extends TransparentImageCaptor {
         @Override
         public MonochromaticImageCaptor build() {
             if (color == null) {
-                throw new ParameterException("no color specified");
+                throw new InvalidSettingException("no color specified");
             }
             if (Range.ofFloat(0f, 1f).notWithin(alpha)) {
-                throw new ParameterException("alpha out of bound:[0.0, 1.0]");
+                throw new InvalidSettingException("alpha out of bound:[0.0, 1.0]");
             }
 
             return new MonochromaticImageCaptor(this);

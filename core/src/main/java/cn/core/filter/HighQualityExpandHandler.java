@@ -1,6 +1,6 @@
 package cn.core.filter;
 
-import cn.extension.exec.ParameterException;
+import cn.extension.exec.InvalidSettingException;
 import cn.extension.tool.GenericBuilder;
 import net.coobird.thumbnailator.filters.ImageFilter;
 
@@ -55,10 +55,10 @@ public class HighQualityExpandHandler implements ImageFilter {
         // check setting validity
         float max = Math.max(radioW, radioH);
         if (max < 1) {
-            throw new ParameterException("width and height are less than the original value");
+            throw new InvalidSettingException("width and height are less than the original value");
         }
         if (Math.min(radioW, radioH) < 1 && !keepAspectRatio) {
-            throw new ParameterException("width or height are less than the original value");
+            throw new InvalidSettingException("width or height are less than the original value");
         }
         // reset the setting
         if (keepAspectRatio) {
@@ -83,7 +83,7 @@ public class HighQualityExpandHandler implements ImageFilter {
         public Builder finalWidth(int finalWidth) {
             this.finalWidth = finalWidth;
             if (finalWidth <= 0) {
-                throw new ParameterException("the final width must greater than 0 after expanded");
+                throw new InvalidSettingException("the final width must greater than 0 after expanded");
             }
             return this;
         }
@@ -91,7 +91,7 @@ public class HighQualityExpandHandler implements ImageFilter {
         public Builder finalHeight(int finalHeight) {
             this.finalHeight = finalHeight;
             if (finalHeight <= 0) {
-                throw new ParameterException("the final height must greater than 0 after expanded");
+                throw new InvalidSettingException("the final height must greater than 0 after expanded");
             }
             return this;
         }
@@ -101,11 +101,11 @@ public class HighQualityExpandHandler implements ImageFilter {
             boolean nonValidWidth = finalWidth <= 0;
             boolean nonValidHeight = finalHeight <= 0;
             if (nonValidWidth && nonValidHeight) {
-                throw new ParameterException("at least one dimension should be set");
+                throw new InvalidSettingException("at least one dimension should be set");
             }
             if (!keepAspectRatio) {
                 if (nonValidWidth || nonValidHeight) {
-                    throw new ParameterException("both of dimensions should be set when expected to keep the aspect ratio");
+                    throw new InvalidSettingException("both of dimensions should be set when expected to keep the aspect ratio");
                 }
             }
             return new HighQualityExpandHandler(this);

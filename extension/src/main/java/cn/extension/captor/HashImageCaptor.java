@@ -3,7 +3,7 @@ package cn.extension.captor;
 import cn.extension.ImageCaptor;
 import cn.extension.tool.GenericBuilder;
 import cn.extension.tool.Range;
-import cn.extension.exec.ParameterException;
+import cn.extension.exec.InvalidSettingException;
 import cn.extension.utils.ColorUtils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -108,10 +108,10 @@ public class HashImageCaptor implements ImageCaptor {
                 throw new NullPointerException("empty digest");
             }
             if (digest.length < 32) {
-                throw new ParameterException("not a valid digest");
+                throw new InvalidSettingException("not a valid digest");
             }
             if (Range.ofInt(1, 8).notWithin(gridVerticalNum)) {
-                throw new ParameterException("vertical number of grid out of bound:[1, 8]");
+                throw new InvalidSettingException("vertical number of grid out of bound:[1, 8]");
             }
 
             if (bgColor == null) {

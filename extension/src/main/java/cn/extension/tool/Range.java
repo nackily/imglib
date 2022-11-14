@@ -42,4 +42,6 @@ public class Range<T extends Comparable<T>> {
         return new Range<>(min, max);
     }
 
+    public static Range<Double> ofDouble(double min, double max) {return new Range<>(min, max); }
+
 }

@@ -1,6 +1,6 @@
 package cn.extension.ext.shape;
 
-import cn.extension.exec.ParameterException;
+import cn.extension.exec.InvalidSettingException;
 import cn.extension.ext.OverlayShape;
 import cn.extension.tool.GenericBuilder;
 
@@ -46,12 +46,12 @@ public abstract class AbstractClosedShape implements OverlayShape {
     public void paint(int canvasWidth, int canvasHeight, Graphics2D g2d) {
         // check for rect is out of bounds
         if (rect == null) {
-            throw new ParameterException("not specified any rect for this shape");
+            throw new InvalidSettingException("not specified any rect for this shape");
         } else {
             int maxX = rect.x + rect.width;
             int maxY = rect.y + rect.height;
             if (maxX > canvasWidth || maxY > canvasHeight) {
-                throw new ParameterException("the rect is out of image");
+                throw new InvalidSettingException("the rect is out of image");
             }
         }
 

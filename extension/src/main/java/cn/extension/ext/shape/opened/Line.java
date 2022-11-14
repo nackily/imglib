@@ -1,7 +1,7 @@
 package cn.extension.ext.shape.opened;
 
 import cn.extension.exec.HandlingException;
-import cn.extension.exec.ParameterException;
+import cn.extension.exec.InvalidSettingException;
 import cn.extension.ext.shape.AbstractOpenedShape;
 
 import java.awt.*;
@@ -57,7 +57,7 @@ public class Line extends AbstractOpenedShape {
 
         public Builder start(Point start) {
             if (start == null) {
-                throw new ParameterException("the starting point cannot be null");
+                throw new InvalidSettingException("the starting point cannot be null");
             }
             this.start = start;
             return this;
@@ -65,7 +65,7 @@ public class Line extends AbstractOpenedShape {
 
         public Builder end(Point end) {
             if (end == null) {
-                throw new ParameterException("the ending point cannot be null");
+                throw new InvalidSettingException("the ending point cannot be null");
             }
             this.end = end;
             return this;
@@ -74,7 +74,7 @@ public class Line extends AbstractOpenedShape {
         @Override
         public AbstractOpenedShape build() {
             if (start == null || end == null) {
-                throw new ParameterException("both start and end points are not specified");
+                throw new InvalidSettingException("both start and end points are not specified");
             }
             return new Line(this);
         }
