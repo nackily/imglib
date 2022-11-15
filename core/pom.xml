@@ -15,18 +15,6 @@
     <packaging>jar</packaging>
 
     <dependencies>
-
-        <dependency>
-            <groupId>cn.imglib</groupId>
-            <artifactId>extension</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>net.coobird</groupId>
-            <artifactId>thumbnailator</artifactId>
-        </dependency>
-
     </dependencies>
 
 
