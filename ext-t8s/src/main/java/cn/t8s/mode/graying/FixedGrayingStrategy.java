@@ -1,6 +1,6 @@
 package cn.t8s.mode.graying;
 
-import cn.core.impl.mode.AbstractGrayingStrategy;
+import cn.core.strategy.mode.AbstractGrayingStrategy;
 
 /**
  * 固定分量的灰度化策略

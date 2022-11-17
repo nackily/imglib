@@ -1,7 +1,7 @@
 package cn.t8s.overlay.shape.closed;
 
 import cn.core.exec.InvalidSettingException;
-import cn.core.impl.overlay.shape.AbstractClosedShapeStrategy;
+import cn.core.strategy.overlay.AbstractClosedShapeStrategy;
 
 import java.awt.*;
 

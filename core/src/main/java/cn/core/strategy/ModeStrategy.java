@@ -1,4 +1,4 @@
-package cn.core;
+package cn.core.strategy;
 
 import java.awt.image.BufferedImage;
 

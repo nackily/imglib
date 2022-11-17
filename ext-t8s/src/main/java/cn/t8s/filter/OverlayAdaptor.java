@@ -1,6 +1,6 @@
 package cn.t8s.filter;
 
-import cn.core.OverlayStrategy;
+import cn.core.strategy.OverlayStrategy;
 import net.coobird.thumbnailator.filters.ImageFilter;
 import net.coobird.thumbnailator.util.BufferedImages;
 import java.awt.*;

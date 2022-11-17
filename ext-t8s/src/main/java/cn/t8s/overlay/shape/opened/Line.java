@@ -2,7 +2,7 @@ package cn.t8s.overlay.shape.opened;
 
 import cn.core.exec.HandlingException;
 import cn.core.exec.InvalidSettingException;
-import cn.core.impl.overlay.shape.AbstractOpenedShapeStrategy;
+import cn.core.strategy.overlay.AbstractOpenedShapeStrategy;
 import java.awt.*;
 
 /**

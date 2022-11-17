@@ -1,9 +1,9 @@
 package cn.t8s.mode.binarization;
 
 import cn.core.exec.InvalidSettingException;
-import cn.core.impl.mode.AbstractBinarizationStrategy;
+import cn.core.strategy.mode.AbstractBinarizationStrategy;
 import cn.t8s.mode.graying.AvgGrayingStrategy;
-import cn.core.impl.mode.AbstractGrayingStrategy;
+import cn.core.strategy.mode.AbstractGrayingStrategy;
 import cn.core.GenericBuilder;
 import cn.core.tool.Range;
 

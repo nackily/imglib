@@ -1,6 +1,6 @@
 package cn.t8s.filter;
 
-import cn.core.ModeStrategy;
+import cn.core.strategy.ModeStrategy;
 import net.coobird.thumbnailator.filters.ImageFilter;
 import java.awt.image.BufferedImage;
 

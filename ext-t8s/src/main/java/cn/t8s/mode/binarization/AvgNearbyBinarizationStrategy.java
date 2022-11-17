@@ -1,6 +1,6 @@
 package cn.t8s.mode.binarization;
 
-import cn.core.impl.mode.AbstractGrayingStrategy;
+import cn.core.strategy.mode.AbstractGrayingStrategy;
 import cn.t8s.mode.graying.AvgGrayingStrategy;
 import java.awt.image.BufferedImage;
 

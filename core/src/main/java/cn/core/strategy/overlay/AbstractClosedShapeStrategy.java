@@ -1,7 +1,7 @@
-package cn.core.impl.overlay.shape;
+package cn.core.strategy.overlay;
 
 import cn.core.exec.InvalidSettingException;
-import cn.core.OverlayStrategy;
+import cn.core.strategy.OverlayStrategy;
 import cn.core.GenericBuilder;
 import java.awt.*;
 

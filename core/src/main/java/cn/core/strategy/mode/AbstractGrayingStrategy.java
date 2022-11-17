@@ -1,6 +1,6 @@
-package cn.core.impl.mode;
+package cn.core.strategy.mode;
 
-import cn.core.ModeStrategy;
+import cn.core.strategy.ModeStrategy;
 import java.awt.image.BufferedImage;
 
 /**
