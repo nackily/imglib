@@ -1,7 +1,18 @@
 package cn.core.utils;
 
+import cn.core.exec.UnsupportedFormatException;
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.MessageFormat;
+import java.util.Iterator;
 
 /**
  * BufferedImageUtils
@@ -20,7 +31,6 @@ public final class BufferedImageUtils {
     public static BufferedImage newBackgroundImage(int width, int height, Color fillColor) {
         return newBackgroundImage(0f, width, height, fillColor);
     }
-
 
     /**
      * 创建底图
@@ -72,5 +82,90 @@ public final class BufferedImageUtils {
         return image;
     }
 
+    /**
+     * Returns a {@link BufferedImage} with the specified image type, where the
+     * graphical content is a copy of the specified image.
+     *
+     * @param source the image to copy
+     * @param imageType	the image type for the image to return
+     * @return target image
+     */
+    public static BufferedImage copy(BufferedImage source, int imageType) {
+        BufferedImage target = new BufferedImage(source.getWidth(), source.getHeight(), imageType);
+        Graphics g = target.createGraphics();
+
+        g.drawImage(source, 0, 0, null);
+
+        g.dispose();
+        return target;
+    }
+
+    public static void write(BufferedImage img, String formatName, String filename) throws IOException {
+        if (StringUtils.isEmpty(filename)) {
+            throw new NullPointerException("output file name is null");
+        }
+        write(img, formatName, new File(filename));
+    }
+
+    public static void write(BufferedImage img, String filename) throws IOException {
+        if (StringUtils.isEmpty(filename)) {
+            throw new NullPointerException("output file name is null");
+        }
+        // get the file's extension
+        String formatName = StringUtils.getExtensionName(filename);
+        write(img, formatName, new File(filename));
+    }
+
+    public static void write(BufferedImage img, File f) throws IOException {
+        if (f == null) {
+            throw new NullPointerException("output file is null");
+        }
+        // get the file's extension
+        String formatName = StringUtils.getExtensionName(f);
+        write(img, formatName, f);
+    }
+
+    public static void write(BufferedImage img, String formatName, File f) throws IOException {
+        if (img == null) {
+            throw new NullPointerException("buffered image is null");
+        }
+        if (StringUtils.isEmpty(formatName)) {
+            throw new NullPointerException("output format name is null");
+        }
+        if (f == null) {
+            throw new NullPointerException("output file is null");
+        }
+
+        // check for available writers for the current output format name
+        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(formatName);
+        if (!writers.hasNext()) {
+            throw new UnsupportedFormatException(MessageFormat.format(
+                    "no suitable ImageWriter found for ", formatName));
+        }
+        ImageWriter writer = writers.next();
+        ImageWriteParam iwp = writer.getDefaultWriteParam();
+        FileOutputStream fos = new FileOutputStream(f);
+        ImageOutputStream ios = ImageIO.createImageOutputStream(fos);
+        if (ios == null) {
+            throw new IOException("unable to get image output stream");
+        }
+
+        // fix the pink background for jpeg/bmp format
+        boolean jpg = "JPG".equalsIgnoreCase(formatName);
+        boolean jpeg = "JPEG".equalsIgnoreCase(formatName);
+        boolean bmp = "BMP".equalsIgnoreCase(formatName);
+        if (jpg || jpeg || bmp) {
+            img = copy(img, BufferedImage.TYPE_INT_RGB);
+        }
+
+        // do write file
+        writer.setOutput(ios);
+        writer.write(null, new IIOImage(img, null, null), iwp);
+
+        // release resources
+        writer.dispose();
+        ios.close();
+        fos.close();
+    }
 
 }
