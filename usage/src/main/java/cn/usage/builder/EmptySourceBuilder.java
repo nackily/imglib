@@ -2,9 +2,11 @@ package cn.usage.builder;
 
 import cn.core.ImageGenerator;
 import cn.core.exec.HandlingException;
+import cn.core.utils.CollectionUtils;
 import cn.usage.Captors;
 import javax.lang.model.type.NullType;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,42 +21,32 @@ public class EmptySourceBuilder extends Captors.Builder<NullType, EmptySourceBui
 
     protected List<ImageGenerator> captors = new ArrayList<>();
 
-    public EmptySourceBuilder() {
-        super(null);
-    }
-
     public EmptySourceBuilder addLast(ImageGenerator ig) {
-        if (ig == null) {
-            throw new NullPointerException("EmptyImageCaptor is null");
-        }
+        CollectionUtils.excNull(ig, "EmptyImageCaptor is null");
         captors.add(ig);
         return this;
     }
 
     public EmptySourceBuilder addLast(ImageGenerator... igs) {
-        if (igs == null) {
-            throw new NullPointerException("EmptyImageCaptor is null");
-        }
+        CollectionUtils.excNull(igs, "EmptyImageCaptor is null");
         captors.addAll(Arrays.asList(igs));
         return this;
     }
 
     public EmptySourceBuilder remove(ImageGenerator ig) {
-        if (ig == null) {
-            throw new NullPointerException("EmptyImageCaptor is null");
-        }
+        CollectionUtils.excNull(ig, "EmptyImageCaptor is null");
         captors.remove(ig);
         return this;
     }
 
     protected void checkReadiness() {
-        if (captors == null || captors.size() == 0) {
+        if (CollectionUtils.isNullOrEmpty(captors)) {
             throw new HandlingException("not put any captor");
         }
     }
 
     protected void checkSingleOutput() {
-        if (captors == null || captors.size() == 0) {
+        if (CollectionUtils.isNullOrEmpty(captors)) {
             throw new HandlingException("not put any captor");
         }
         if (captors.size() > 1) {
@@ -70,7 +62,7 @@ public class EmptySourceBuilder extends Captors.Builder<NullType, EmptySourceBui
     }
 
     @Override
-    public List<BufferedImage> obtainBufferedImages() {
+    public List<BufferedImage> obtainBufferedImages(){
         checkReadiness();
         List<BufferedImage> images = new ArrayList<>();
         for (ImageGenerator ca : captors) {
