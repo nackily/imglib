@@ -24,13 +24,19 @@
 
         <dependency>
             <groupId>cn.imglib</groupId>
-            <artifactId>ext-captor</artifactId>
+            <artifactId>captor</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
             <groupId>cn.imglib</groupId>
             <artifactId>compress</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.imglib</groupId>
+            <artifactId>y-pipe</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 

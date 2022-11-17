@@ -14,9 +14,10 @@
         <module>example</module>
         <module>core</module>
         <module>compress</module>
-        <module>ext-captor</module>
+        <module>captor</module>
         <module>ext-t8s</module>
         <module>usage</module>
+        <module>y-pipe</module>
     </modules>
 
     <properties>
