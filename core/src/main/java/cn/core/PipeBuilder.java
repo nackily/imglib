@@ -47,7 +47,8 @@ public abstract class PipeBuilder<S> {
 
     public void toFile(File dest) throws IOException {
         BufferedImage image = obtainBufferedImage();
-        BufferedImageUtils.write(image, formatName, choseFormat(dest));
+        File f = choseFormat(dest);
+        BufferedImageUtils.write(image, formatName, f);
     }
 
     public void toFile(String fn) throws IOException {
@@ -64,7 +65,8 @@ public abstract class PipeBuilder<S> {
             if (!fIter.hasNext()) {
                 throw new IndexOutOfBoundsException("not enough OutputStream provided by iterator");
             }
-            BufferedImageUtils.write(o, formatName, choseFormat(fIter.next()));
+            File f = choseFormat(fIter.next());
+            BufferedImageUtils.write(o, formatName, f);
         }
     }
 

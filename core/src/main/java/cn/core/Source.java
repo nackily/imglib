@@ -1,6 +1,5 @@
 package cn.core;
 
-import java.io.IOException;
 
 /**
  * 数据源
@@ -8,14 +7,7 @@ import java.io.IOException;
  * @author tracy
  * @since 1.0.0
  */
-public interface Source<S, T> {
-
-    /**
-     * read
-     * @return target object
-     * @throws IOException IO异常
-     */
-    T read() throws IOException;
+public interface Source<S> {
 
     /**
      * 获取源
