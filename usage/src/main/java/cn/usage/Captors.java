@@ -1,16 +1,14 @@
 package cn.usage;
 
-import cn.captor.source.InputStreamPdfSource;
-import cn.core.BufferedImageSource;
+import cn.captor.source.impl.ByteArrayPdfSource;
+import cn.captor.source.impl.FilePdfSource;
+import cn.captor.source.impl.InputStreamPdfSource;
 import cn.core.PipeBuilder;
-import cn.core.utils.CollectionUtils;
 import cn.usage.builder.EmptySourceBuilder;
 import cn.usage.builder.PdfSourceBuilder;
 import net.coobird.thumbnailator.Thumbnails;
-
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.*;
 
 /**
  * 捕获器
@@ -26,8 +24,31 @@ public final class Captors {
     }
 
     public static PdfSourceBuilder<InputStream> ofPdf(InputStream is) {
-        CollectionUtils.excNull(is, "InputStream is null");
+        if (is == null) {
+            throw new NullPointerException("InputStream is null");
+        }
         return new PdfSourceBuilder<>(new InputStreamPdfSource(is));
+    }
+
+    public static PdfSourceBuilder<File> ofPdf(File pdf) {
+        if (pdf == null) {
+            throw new NullPointerException("File is null");
+        }
+        return new PdfSourceBuilder<>(new FilePdfSource(pdf));
+    }
+
+    public static PdfSourceBuilder<File> ofPdf(String filename) {
+        if (filename == null) {
+            throw new NullPointerException("file name is null");
+        }
+        return new PdfSourceBuilder<>(new FilePdfSource(new File(filename)));
+    }
+
+    public static PdfSourceBuilder<byte[]> ofPdf(byte[] bytes) {
+        if (bytes == null) {
+            throw new NullPointerException("bytes is null");
+        }
+        return new PdfSourceBuilder<>(new ByteArrayPdfSource(bytes));
     }
 
 
