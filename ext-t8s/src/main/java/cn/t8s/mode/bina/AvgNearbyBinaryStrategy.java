@@ -1,4 +1,4 @@
-package cn.t8s.mode.binarization;
+package cn.t8s.mode.bina;
 
 import cn.core.strategy.mode.AbstractGrayingStrategy;
 import cn.t8s.mode.graying.AvgGrayingStrategy;
@@ -10,10 +10,10 @@ import java.awt.image.BufferedImage;
  * @author tracy
  * @since 1.0.0
  */
-public class AvgNearbyBinarizationStrategy extends SimpleBinarizationStrategy {
+public class AvgNearbyBinaryStrategy extends SimpleBinaryStrategy {
 
 
-    public AvgNearbyBinarizationStrategy(SimpleBinarizationStrategy.Builder bu) {
+    public AvgNearbyBinaryStrategy(SimpleBinaryStrategy.Builder bu) {
         super(bu);
     }
 
@@ -44,7 +44,7 @@ public class AvgNearbyBinarizationStrategy extends SimpleBinarizationStrategy {
         }
     }
 
-    public static class Builder extends SimpleBinarizationStrategy.Builder {
+    public static class Builder extends SimpleBinaryStrategy.Builder {
 
         @Override
         public Builder grayingStrategy(AbstractGrayingStrategy grayingStrategy) {
@@ -59,12 +59,12 @@ public class AvgNearbyBinarizationStrategy extends SimpleBinarizationStrategy {
         }
 
         @Override
-        public AvgNearbyBinarizationStrategy build() {
+        public AvgNearbyBinaryStrategy build() {
             // the default threshold is 128
             threshold = threshold <= 0 ? 128 : threshold;
             // the default graying strategy is average
             grayingStrategy = grayingStrategy == null ? new AvgGrayingStrategy() : grayingStrategy;
-            return new AvgNearbyBinarizationStrategy(this);
+            return new AvgNearbyBinaryStrategy(this);
         }
     }
 }

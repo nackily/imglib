@@ -9,11 +9,11 @@ import java.awt.image.BufferedImage;
  * @author tracy
  * @since 1.0.0
  */
-public abstract class AbstractBinarizationStrategy implements ModeStrategy {
+public abstract class AbstractBinaryStrategy implements ModeStrategy {
 
     protected AbstractGrayingStrategy grayingStrategy;
 
-    public AbstractBinarizationStrategy(AbstractGrayingStrategy grayingStrategy) {
+    public AbstractBinaryStrategy(AbstractGrayingStrategy grayingStrategy) {
         this.grayingStrategy = grayingStrategy;
     }
 

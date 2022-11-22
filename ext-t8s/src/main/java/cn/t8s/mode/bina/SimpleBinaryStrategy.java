@@ -1,7 +1,7 @@
-package cn.t8s.mode.binarization;
+package cn.t8s.mode.bina;
 
 import cn.core.exec.InvalidSettingException;
-import cn.core.strategy.mode.AbstractBinarizationStrategy;
+import cn.core.strategy.mode.AbstractBinaryStrategy;
 import cn.t8s.mode.graying.AvgGrayingStrategy;
 import cn.core.strategy.mode.AbstractGrayingStrategy;
 import cn.core.GenericBuilder;
@@ -15,14 +15,14 @@ import java.awt.image.BufferedImage;
  * @author tracy
  * @since 1.0.0
  */
-public class SimpleBinarizationStrategy extends AbstractBinarizationStrategy {
+public class SimpleBinaryStrategy extends AbstractBinaryStrategy {
 
     public static final int BINARY_MIN = 0;
     public static final int BINARY_MAX = 255;
 
     protected final int threshold;
 
-    public SimpleBinarizationStrategy(Builder bu) {
+    public SimpleBinaryStrategy(Builder bu) {
         super(bu.grayingStrategy);
         this.threshold = bu.threshold;
     }
@@ -43,7 +43,7 @@ public class SimpleBinarizationStrategy extends AbstractBinarizationStrategy {
         }
     }
 
-    public static class Builder implements GenericBuilder<SimpleBinarizationStrategy> {
+    public static class Builder implements GenericBuilder<SimpleBinaryStrategy> {
         protected AbstractGrayingStrategy grayingStrategy;
         protected int threshold = -1;
 
@@ -60,12 +60,12 @@ public class SimpleBinarizationStrategy extends AbstractBinarizationStrategy {
         }
 
         @Override
-        public SimpleBinarizationStrategy build() {
+        public SimpleBinaryStrategy build() {
             // the default threshold is 128
             threshold = threshold <= 0 ? 128 : threshold;
             // the default graying strategy is average
             grayingStrategy = grayingStrategy == null ? new AvgGrayingStrategy() : grayingStrategy;
-            return new SimpleBinarizationStrategy(this);
+            return new SimpleBinaryStrategy(this);
         }
     }
 }
