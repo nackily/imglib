@@ -8,7 +8,7 @@
     <parent>
         <artifactId>imglib-parent</artifactId>
         <groupId>cn.imglib</groupId>
-        <version>1.0.1</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>usage</artifactId>
@@ -19,25 +19,25 @@
         <dependency>
             <groupId>cn.imglib</groupId>
             <artifactId>ext-t8s</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>cn.imglib</groupId>
             <artifactId>captor</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>cn.imglib</groupId>
             <artifactId>compress</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>cn.imglib</groupId>
+            <groupId>${parent.groupId}</groupId>
             <artifactId>y-pipe</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>

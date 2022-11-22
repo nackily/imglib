@@ -8,7 +8,7 @@
     <parent>
         <artifactId>imglib-parent</artifactId>
         <groupId>cn.imglib</groupId>
-        <version>1.0.1</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>y-pipe</artifactId>
@@ -16,9 +16,9 @@
     <dependencies>
 
         <dependency>
-            <groupId>cn.imglib</groupId>
+            <groupId>${parent.groupId}</groupId>
             <artifactId>core</artifactId>
-            <version>${project.parent.version}</version>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>

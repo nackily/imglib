@@ -8,7 +8,7 @@
     <groupId>cn.imglib</groupId>
     <artifactId>imglib-parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.1</version>
+    <version>${revision}</version>
 
     <modules>
         <module>example</module>
@@ -21,8 +21,12 @@
     </modules>
 
     <properties>
+        <revision>0.1.0</revision>
         <thumbnailator-version>0.4.8</thumbnailator-version>
         <pdfbox-version>2.0.20</pdfbox-version>
+        <maven-flatten-version>1.1.0</maven-flatten-version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
     <dependencyManagement>
@@ -51,9 +55,38 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>${maven-flatten-version}</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                    <pomElements>
+                        <dependencies>expand</dependencies>
+                    </pomElements>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
