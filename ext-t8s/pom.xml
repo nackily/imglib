@@ -18,7 +18,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>cn.imglib</groupId>
+            <groupId>${parent.groupId}</groupId>
             <artifactId>core</artifactId>
             <version>${project.version}</version>
         </dependency>
