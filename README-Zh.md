@@ -63,7 +63,7 @@ Captors.ofEmptySource()
 执行上面的代码片段，我们将得到如下的用户头像。
 
 <div align="center">
-   <img src="/example/src/main/resources/avatar/avatar.png" width="18%"/>
+   <img src="docs/res/avatar.png" width="18%"/>
 </div>
 
 ## 更多内容

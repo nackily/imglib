@@ -17,24 +17,25 @@ public class Application {
 
     private static final Properties PROPERTIES = new Properties();
 
-    public static void main(String[] args) {
-        loadConfig("zh");
+    public static void main(String[] args) throws IOException {
+        loadConfig("");
         while (true) {
+            System.out.println("|===========================MENUS===========================|");
             printMenus();
             String type = selectMenu();
             printFunctions(type);
             String key = selectFunction();
             doExample(type, key);
+            System.out.println(" <<=== Work completed.");
         }
     }
 
     public static void printMenus() {
-        System.out.println("|===========================MENUS===========================|");
-        System.out.println(MessageFormat.format("{0} :::: {1}", "C", PROPERTIES.getProperty("menu.c")));
-        System.out.println(MessageFormat.format("{0} :::: {1}", "Y", PROPERTIES.getProperty("menu.y")));
-        System.out.println(MessageFormat.format("{0} :::: {1}", "T", PROPERTIES.getProperty("menu.t")));
+        System.out.println(MessageFormat.format(" :::: C :::: {0}", PROPERTIES.getProperty("menu.c")));
+        System.out.println(MessageFormat.format(" :::: Y :::: {0}", PROPERTIES.getProperty("menu.y")));
+        System.out.println(MessageFormat.format(" :::: T :::: {0}", PROPERTIES.getProperty("menu.t")));
 
-        System.out.print(PROPERTIES.getProperty("menu.tips"));
+        System.out.print(" ===>> " + PROPERTIES.getProperty("menu.tips"));
     }
 
     public static String selectMenu() {
@@ -43,17 +44,16 @@ public class Application {
     }
 
     public static void printFunctions(String type) {
-        System.out.println("|=========================FUNCTIONS=========================|");
-        Setting[] values = Setting.values();
-        for (Setting setting : values) {
+        FunctionSetting[] values = FunctionSetting.values();
+        for (FunctionSetting setting : values) {
             if (setting.type.equals(type)) {
                 String propertyKey = "function." + setting.type.toLowerCase() + "." + setting.key;
                 String desc = PROPERTIES.getProperty(propertyKey);
-                System.out.println(MessageFormat.format("{0} :::: {1}", setting.key, desc));
+                System.out.println(MessageFormat.format(" :::: {0} :::: {1}", setting.key, desc));
             }
         }
 
-        System.out.print(PROPERTIES.getProperty("function.tips"));
+        System.out.print(" ===>> " + PROPERTIES.getProperty("function.tips"));
     }
 
     public static String selectFunction() {
@@ -61,8 +61,8 @@ public class Application {
         return scanner.nextLine();
     }
 
-    public static void doExample(String type, String key) {
-        Setting.Function func = Setting.getFunc(type, key);
+    public static void doExample(String type, String key) throws IOException {
+        FunctionSetting.Function func = FunctionSetting.getFunc(type, key);
         if (func == null) {
             System.out.println(PROPERTIES.getOrDefault("unknown.function", "Unknown Command."));
             return;
