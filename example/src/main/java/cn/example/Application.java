@@ -17,7 +17,7 @@ public class Application {
 
     private static final Properties PROPERTIES = new Properties();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         loadConfig("");
         while (true) {
             System.out.println("|===========================MENUS===========================|");
@@ -61,7 +61,7 @@ public class Application {
         return scanner.nextLine();
     }
 
-    public static void doExample(String type, String key) throws IOException {
+    public static void doExample(String type, String key) throws Exception {
         FunctionSetting.Function func = FunctionSetting.getFunc(type, key);
         if (func == null) {
             System.out.println(PROPERTIES.getOrDefault("unknown.function", "Unknown Command."));

@@ -24,6 +24,7 @@ public class PdfSourceBuilder<S> extends Captors.Builder<S, PdfSourceBuilder<S>>
 
     protected final PdfSource<S> source;
     private final Set<Integer> pages = new HashSet<>();
+    private float dpi;
 
     public PdfSourceBuilder(PdfSource<S> pdfSource) {
         this.source = pdfSource;
@@ -45,6 +46,11 @@ public class PdfSourceBuilder<S> extends Captors.Builder<S, PdfSourceBuilder<S>>
         for (int i = range.getMin(); i <= range.getMax(); i++) {
             pages.add(i);
         }
+        return this;
+    }
+
+    public PdfSourceBuilder<S> dpi(float dpi) {
+        this.dpi = dpi;
         return this;
     }
 
@@ -72,7 +78,8 @@ public class PdfSourceBuilder<S> extends Captors.Builder<S, PdfSourceBuilder<S>>
                     "the page index has exceeded the max page number of the pdf document",
                     StringUtils.join(invalidPages)));
         }
-        return source.read(pages.toArray(new Integer[0]));
+        float DPI = dpi <= 0 ? 300 : dpi;
+        return source.read(pages.toArray(new Integer[0]), DPI);
     }
 
     protected void checkReadiness() {
