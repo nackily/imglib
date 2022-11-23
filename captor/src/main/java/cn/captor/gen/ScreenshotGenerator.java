@@ -51,7 +51,7 @@ public class ScreenshotGenerator extends Robot implements ImageGenerator {
 
     public static class Builder implements GenericBuilder<ScreenshotGenerator> {
 
-        private static final Dimension SCREEN_DIMENSION = Toolkit.getDefaultToolkit().getScreenSize();
+        public static final Dimension SCREEN_DIMENSION = Toolkit.getDefaultToolkit().getScreenSize();
 
         private int x = 0;
         private int y = 0;
@@ -59,7 +59,7 @@ public class ScreenshotGenerator extends Robot implements ImageGenerator {
         private int height = -1;
 
 
-        public Builder x(int x, int y) {
+        public Builder startPoint(int x, int y) {
             this.x = x;
             if (Range.ofInt(0, SCREEN_DIMENSION.width).notWithin(x)) {
                 throw new InvalidSettingException("the start point's x out of bound");

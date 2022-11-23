@@ -33,10 +33,10 @@ public abstract class AbstractPdfBoxSource<T> implements PdfSource<T> {
     }
 
     @Override
-    public BufferedImage read(int page) throws IOException {
+    public BufferedImage read(int page, float dpi) throws IOException {
         loadIfNot();
         PDFRenderer renderer = new PDFRenderer(pdf);
-        return renderer.renderImageWithDPI(page + 1, 300, ImageType.RGB);
+        return renderer.renderImageWithDPI(page, dpi, ImageType.RGB);
     }
 
     @Override
@@ -45,13 +45,13 @@ public abstract class AbstractPdfBoxSource<T> implements PdfSource<T> {
     }
 
     @Override
-    public List<BufferedImage> read(Integer[] pages) throws IOException {
+    public List<BufferedImage> read(Integer[] pages, float dpi) throws IOException {
         loadIfNot();
         PDFRenderer renderer = new PDFRenderer(pdf);
 
         List<BufferedImage> tars = new ArrayList<>();
         for (Integer page : pages) {
-            tars.add(renderer.renderImageWithDPI(page + 1, 300, ImageType.RGB));
+            tars.add(renderer.renderImageWithDPI(page, dpi, ImageType.RGB));
         }
         return tars;
     }

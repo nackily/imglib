@@ -23,16 +23,18 @@ public interface PdfSource<S> extends Source<S> {
     /**
      * PDF 页转图像
      * @param page 页码
+     * @param dpi DPI
      * @return 图像
      * @throws IOException IO异常
      */
-    BufferedImage read(int page) throws IOException;
+    BufferedImage read(int page, float dpi) throws IOException;
 
     /**
      * PDF 页转图像列表
      * @param pages 页码数组
+     * @param dpi DPI
      * @return 多个图像
      * @throws IOException IO异常
      */
-    List<BufferedImage> read(Integer[] pages) throws IOException;
+    List<BufferedImage> read(Integer[] pages, float dpi) throws IOException;
 }
