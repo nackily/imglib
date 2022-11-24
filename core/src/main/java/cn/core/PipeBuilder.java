@@ -25,7 +25,7 @@ public abstract class PipeBuilder<S> {
     protected String formatName;
 
     protected void setFormatName(String formatName) {
-        if (formatName == null || "".equals(formatName)) {
+        if (StringUtils.isEmpty(formatName)) {
             throw new InvalidSettingException("format name can not be null");
         }
         this.formatName = formatName;

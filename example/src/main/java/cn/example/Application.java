@@ -44,8 +44,8 @@ public class Application {
     }
 
     public static void printFunctions(String type) {
-        FunctionSetting[] values = FunctionSetting.values();
-        for (FunctionSetting setting : values) {
+        ExampleSetting[] values = ExampleSetting.values();
+        for (ExampleSetting setting : values) {
             if (setting.type.equals(type)) {
                 String propertyKey = "function." + setting.type.toLowerCase() + "." + setting.key;
                 String desc = PROPERTIES.getProperty(propertyKey);
@@ -62,7 +62,7 @@ public class Application {
     }
 
     public static void doExample(String type, String key) throws Exception {
-        FunctionSetting.Function func = FunctionSetting.getFunc(type, key);
+        ExampleSetting.Function func = ExampleSetting.getFunc(type, key);
         if (func == null) {
             System.out.println(PROPERTIES.getOrDefault("unknown.function", "Unknown Command."));
             return;

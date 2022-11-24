@@ -6,7 +6,7 @@ package cn.example;
  * @author tracy
  * @since 1.0.0
  */
-public enum FunctionSetting {
+public enum ExampleSetting {
 
     /**
      * 生成透明背景图像
@@ -37,15 +37,15 @@ public enum FunctionSetting {
     final String type;
     final String key;
     final Function func;
-    FunctionSetting(String type, String key, Function func) {
+    ExampleSetting(String type, String key, Function func) {
         this.type = type;
         this.key = key;
         this.func = func;
     }
 
     public static Function getFunc(String type, String key) {
-        FunctionSetting[] values = FunctionSetting.values();
-        for (FunctionSetting val : values) {
+        ExampleSetting[] values = ExampleSetting.values();
+        for (ExampleSetting val : values) {
             if (val.type.equalsIgnoreCase(type) && val.key.equals(key)) {
                 return val.func;
             }
