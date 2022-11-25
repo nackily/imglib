@@ -63,10 +63,25 @@ public abstract class PipeBuilder<S> {
         List<BufferedImage> images = obtainBufferedImages();
         for (BufferedImage o : images) {
             if (!fIter.hasNext()) {
-                throw new IndexOutOfBoundsException("not enough OutputStream provided by iterator");
+                throw new IndexOutOfBoundsException("not enough File provided by iterator");
             }
             File f = choseFormat(fIter.next());
             BufferedImageUtils.write(o, formatName, f);
+        }
+    }
+
+    public void toFiles(String... filenames) throws IOException {
+        if (filenames == null) {
+            throw new NullPointerException("File names is null");
+        }
+
+        List<BufferedImage> images = obtainBufferedImages();
+        if (images.size() > filenames.length) {
+            throw new IndexOutOfBoundsException("not enough File name provided by iterator");
+        }
+        for (int i = 0; i < filenames.length; i++) {
+            File f = choseFormat(new File(filenames[i]));
+            BufferedImageUtils.write(images.get(i), formatName, f);
         }
     }
 
