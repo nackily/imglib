@@ -1,8 +1,7 @@
-package cn.captor.source.impl;
+package cn.captor.source.pdf;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 
-import java.io.File;
 import java.io.IOException;
 
 /**

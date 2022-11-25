@@ -1,8 +1,8 @@
 package cn.usage;
 
-import cn.captor.source.impl.ByteArrayPdfSource;
-import cn.captor.source.impl.FilePdfSource;
-import cn.captor.source.impl.InputStreamPdfSource;
+import cn.captor.source.pdf.ByteArrayPdfSource;
+import cn.captor.source.pdf.FilePdfSource;
+import cn.captor.source.pdf.InputStreamPdfSource;
 import cn.core.PipeBuilder;
 import cn.usage.builder.EmptySourceBuilder;
 import cn.usage.builder.PdfSourceBuilder;
