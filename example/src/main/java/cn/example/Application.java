@@ -4,8 +4,11 @@ import cn.core.utils.StringUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.MessageFormat;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Application
@@ -18,56 +21,59 @@ public class Application {
     private static final Properties PROPERTIES = new Properties();
 
     public static void main(String[] args) throws Exception {
-        loadConfig("");
-        while (true) {
-            System.out.println("|===========================MENUS===========================|");
-            printMenus();
+        loadConfig("zh");
+
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {
+            System.out.println(MessageFormat.format("|=========================== task-{0} ===========================|", i + 1));
             String type = selectMenu();
-            printFunctions(type);
-            String key = selectFunction();
-            doExample(type, key);
-            System.out.println(" <<=== Work completed.");
+            if(matchedFunctions(type)) {
+                doExample(type);
+            }
         }
     }
 
-    public static void printMenus() {
+    public static String selectMenu() {
         System.out.println(MessageFormat.format(" :::: C :::: {0}", PROPERTIES.getProperty("menu.c")));
         System.out.println(MessageFormat.format(" :::: Y :::: {0}", PROPERTIES.getProperty("menu.y")));
         System.out.println(MessageFormat.format(" :::: T :::: {0}", PROPERTIES.getProperty("menu.t")));
 
         System.out.print(" ===>> " + PROPERTIES.getProperty("menu.tips"));
-    }
 
-    public static String selectMenu() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
-    public static void printFunctions(String type) {
+    public static boolean matchedFunctions(String type) {
         ExampleSetting[] values = ExampleSetting.values();
-        for (ExampleSetting setting : values) {
-            if (setting.type.equals(type)) {
-                String propertyKey = "function." + setting.type.toLowerCase() + "." + setting.key;
-                String desc = PROPERTIES.getProperty(propertyKey);
-                System.out.println(MessageFormat.format(" :::: {0} :::: {1}", setting.key, desc));
-            }
+        List<ExampleSetting> fcs = Arrays.stream(values)
+                .filter(o -> o.type.equalsIgnoreCase(type))
+                .collect(Collectors.toList());
+        if (fcs.isEmpty()) {
+            System.out.println("【Error】not found any function of type:" + type);
+            return false;
         }
 
+        for (ExampleSetting setting : fcs) {
+            String propertyKey = "function." + setting.type.toLowerCase() + "." + setting.key;
+            String desc = PROPERTIES.getProperty(propertyKey);
+            System.out.println(MessageFormat.format(" :::: {0} :::: {1}", setting.key, desc));
+        }
         System.out.print(" ===>> " + PROPERTIES.getProperty("function.tips"));
+        return true;
     }
 
-    public static String selectFunction() {
+    public static void doExample(String type) throws Exception {
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
+        String key = scanner.nextLine();
 
-    public static void doExample(String type, String key) throws Exception {
         ExampleSetting.Function func = ExampleSetting.getFunc(type, key);
         if (func == null) {
-            System.out.println(PROPERTIES.getOrDefault("unknown.function", "Unknown Command."));
+            String tips = PROPERTIES.getOrDefault("unknown.function", "Unknown Command.").toString();
+            System.out.println("【Error】" + tips);
             return;
         }
         func.apply();
+        System.out.println(" <<=== Work completed.");
     }
 
     public static void loadConfig(String language) {
@@ -75,7 +81,6 @@ public class Application {
             String proName = StringUtils.isEmpty(language)
                     ? "menus.properties"
                     : MessageFormat.format("menus-{0}.properties", language);
-
             InputStream stream = ClassLoader.getSystemResourceAsStream(proName);
             PROPERTIES.load(stream);
         } catch (IOException e) {

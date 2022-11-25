@@ -31,7 +31,17 @@ public enum ExampleSetting {
     /**
      * 从PDF文件中提取图像
      */
-    EXTRACT_IMG_FROM_PDF("C", "5", CaptorExample::extractImgFromPdf)
+    EXTRACT_IMG_FROM_PDF("C", "5", CaptorExample::extractImgFromPdf),
+
+    /**
+     * 拆分图像
+     */
+    SPLIT_IMG("Y", "1", YPipeExample::splitImg),
+
+    /**
+     * 拆分图像
+     */
+    MERGE_IMG("Y", "2", YPipeExample::mergeImg),
     ;
 
     final String type;
