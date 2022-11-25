@@ -46,7 +46,7 @@ Captors.ofEmptySource()
                 .bgColor(ColorUtils.of(240, 240, 240))          // 背景色
                 .fgColor(ColorUtils.of(50, 150, 50))            // 前景色
                 .build())   
-        .newThumbnails()                                        // 转换为 Thumbnails
+        .toThumbnails()                                        // 转换为 Thumbnails
         .addFilter(new HighQualityExpandHandler.Builder()       // 图像无损放大器
                 .finalWidth(300)                                // 图像的宽度
                 .keepAspectRatio(true)                          // 保持长宽比例

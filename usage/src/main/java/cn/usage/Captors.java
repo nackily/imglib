@@ -62,9 +62,14 @@ public final class Captors {
             return typeThis;
         }
 
-        public Thumbnails.Builder<BufferedImage> newThumbnails() throws IOException {
+        public Thumbnails.Builder<BufferedImage> toThumbnails() throws IOException {
             BufferedImage[] images = obtainBufferedImages().toArray(new BufferedImage[0]);
             return Thumbnails.of(images);
+        }
+
+        public YPipes.Builder<BufferedImage> toYPipes() throws IOException {
+            BufferedImage[] images = obtainBufferedImages().toArray(new BufferedImage[0]);
+            return YPipes.of(images);
         }
     }
 }

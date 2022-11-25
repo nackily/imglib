@@ -150,7 +150,7 @@ public final class YPipes {
             return this;
         }
 
-        public Thumbnails.Builder<BufferedImage> newThumbnails() throws IOException {
+        public Thumbnails.Builder<BufferedImage> toThumbnails() throws IOException {
             BufferedImage[] images = obtainBufferedImages().toArray(new BufferedImage[0]);
             return Thumbnails.of(images);
         }
