@@ -49,10 +49,11 @@ public class CaptorExample {
     }
 
     public static void generateHashImg() throws IOException, NoSuchAlgorithmException {
-        Captors.ofEmptySource().addLast(new HashImageGenerator.Builder("imglib-user")
-                .gridVerticalNum(5)
-                .fgColor(ColorUtils.of(50, 150, 50))
-                .build())
+        Captors.ofEmptySource()
+                .addLast(new HashImageGenerator.Builder("imglib-user")
+                        .gridVerticalNum(5)
+                        .fgColor(ColorUtils.of(50, 150, 50))
+                        .build())
                 .toFile(ExampleUtils.tmpFileNameOf("out/hash.png"));
     }
 
