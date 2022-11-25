@@ -14,7 +14,7 @@ import java.util.List;
  * @author tracy
  * @since 1.0.0
  */
-public class GridSplitStrategy extends AbstractSplitFilter {
+public class GridSplitHandler extends AbstractSplitFilter {
 
     /**
      * 网格的宽
@@ -26,7 +26,7 @@ public class GridSplitStrategy extends AbstractSplitFilter {
      */
     private int gridHeight;
 
-    public GridSplitStrategy (Builder bu) {
+    public GridSplitHandler(Builder bu) {
         this.gridWidth = bu.gridWidth;
         this.gridHeight = bu.gridHeight;
     }
@@ -79,7 +79,7 @@ public class GridSplitStrategy extends AbstractSplitFilter {
     }
 
 
-    public static class Builder implements GenericBuilder<GridSplitStrategy> {
+    public static class Builder implements GenericBuilder<GridSplitHandler> {
         private int gridWidth;
         private int gridHeight;
 
@@ -100,11 +100,11 @@ public class GridSplitStrategy extends AbstractSplitFilter {
         }
 
         @Override
-        public GridSplitStrategy build() {
+        public GridSplitHandler build() {
             if (gridWidth <= 0 && gridHeight <= 0) {
                 throw new InvalidSettingException("both of the width and height of the grid not set");
             }
-            return new GridSplitStrategy(this);
+            return new GridSplitHandler(this);
         }
     }
 }

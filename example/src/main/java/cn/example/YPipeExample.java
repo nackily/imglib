@@ -4,7 +4,7 @@ import cn.core.utils.ColorUtils;
 import cn.example.utils.ExampleUtils;
 import cn.usage.YPipes;
 import cn.ypipe.merge.GridMergeHandler;
-import cn.ypipe.split.GridSplitStrategy;
+import cn.ypipe.split.GridSplitHandler;
 import java.io.IOException;
 
 /**
@@ -17,7 +17,7 @@ public class YPipeExample {
 
     public static void splitImg() throws IOException {
         YPipes.of(ExampleUtils.tmpFileNameOf("in/before_split.jpg"))
-                .addLast(new GridSplitStrategy.Builder()
+                .addLast(new GridSplitHandler.Builder()
                         .gridWidth(400)
                         .gridHeight(250)
                         .build())
