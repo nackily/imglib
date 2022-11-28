@@ -34,6 +34,11 @@ public enum ExampleSetting {
     EXTRACT_IMG_FROM_PDF("C", "5", CaptorExample::extractImgFromPdf),
 
     /**
+     * 从GIF文件中提取图像
+     */
+    EXTRACT_IMG_FROM_GIF("C", "6", CaptorExample::extractImgFromGif),
+
+    /**
      * 拆分图像
      */
     SPLIT_IMG("Y", "1", YPipeExample::splitImg),

@@ -1,10 +1,14 @@
 package cn.usage;
 
+import cn.captor.source.gif.ByteArrayGifSource;
+import cn.captor.source.gif.FileGifSource;
+import cn.captor.source.gif.InputStreamGifSource;
 import cn.captor.source.pdf.ByteArrayPdfSource;
 import cn.captor.source.pdf.FilePdfSource;
 import cn.captor.source.pdf.InputStreamPdfSource;
 import cn.core.PipeBuilder;
 import cn.usage.builder.EmptySourceBuilder;
+import cn.usage.builder.GifSourceBuilder;
 import cn.usage.builder.PdfSourceBuilder;
 import net.coobird.thumbnailator.Thumbnails;
 import java.awt.image.BufferedImage;
@@ -49,6 +53,34 @@ public final class Captors {
             throw new NullPointerException("bytes is null");
         }
         return new PdfSourceBuilder<>(new ByteArrayPdfSource(bytes));
+    }
+
+    public static GifSourceBuilder<InputStream> ofGif(InputStream is) {
+        if (is == null) {
+            throw new NullPointerException("InputStream is null");
+        }
+        return new GifSourceBuilder<>(new InputStreamGifSource(is));
+    }
+
+    public static GifSourceBuilder<File> ofGif(File pdf) {
+        if (pdf == null) {
+            throw new NullPointerException("File is null");
+        }
+        return new GifSourceBuilder<>(new FileGifSource(pdf));
+    }
+
+    public static GifSourceBuilder<File> ofGif(String filename) {
+        if (filename == null) {
+            throw new NullPointerException("file name is null");
+        }
+        return new GifSourceBuilder<>(new FileGifSource(new File(filename)));
+    }
+
+    public static GifSourceBuilder<byte[]> ofGif(byte[] bytes) {
+        if (bytes == null) {
+            throw new NullPointerException("bytes is null");
+        }
+        return new GifSourceBuilder<>(new ByteArrayGifSource(bytes));
     }
 
 
