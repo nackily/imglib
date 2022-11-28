@@ -27,6 +27,11 @@
             <artifactId>pdfbox</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.madgag</groupId>
+            <artifactId>animated-gif-lib</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

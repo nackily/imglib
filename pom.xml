@@ -24,6 +24,7 @@
         <revision>0.1.0</revision>
         <thumbnailator-version>0.4.8</thumbnailator-version>
         <pdfbox-version>2.0.20</pdfbox-version>
+        <animated-gif-lib-version>1.4</animated-gif-lib-version>
         <maven-flatten-version>1.1.0</maven-flatten-version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -44,6 +45,13 @@
                 <groupId>org.apache.pdfbox</groupId>
                 <artifactId>pdfbox</artifactId>
                 <version>${pdfbox-version}</version>
+            </dependency>
+
+            <!-- GIF -->
+            <dependency>
+                <groupId>com.madgag</groupId>
+                <artifactId>animated-gif-lib</artifactId>
+                <version>${animated-gif-lib-version}</version>
             </dependency>
 
         </dependencies>
