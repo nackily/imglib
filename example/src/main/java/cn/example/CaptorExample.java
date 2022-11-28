@@ -63,4 +63,14 @@ public class CaptorExample {
                 .dpi(280)
                 .toFile(ExampleUtils.tmpFileNameOf("out/page_1_of_jvms8.jpg"));
     }
+
+    public static void extractImgFromGif() throws IOException {
+        Captors.ofGif(ExampleUtils.tmpFileNameOf("in/duck.gif"))
+                .allFrame()
+                .toFiles(ExampleUtils.tmpFileNameOf("out/gif/frame_1.jpg"),
+                        ExampleUtils.tmpFileNameOf("out/gif/frame_2.jpg"),
+                        ExampleUtils.tmpFileNameOf("out/gif/frame_3.jpg"),
+                        ExampleUtils.tmpFileNameOf("out/gif/frame_4.jpg"),
+                        ExampleUtils.tmpFileNameOf("out/gif/frame_5.jpg"));
+    }
 }
