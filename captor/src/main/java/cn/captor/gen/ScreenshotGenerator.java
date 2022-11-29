@@ -2,6 +2,7 @@ package cn.captor.gen;
 
 import cn.core.GenericBuilder;
 import cn.core.ImageGenerator;
+import cn.core.exec.HandlingException;
 import cn.core.exec.InvalidSettingException;
 import cn.core.tool.Range;
 import java.awt.*;
@@ -108,7 +109,7 @@ public class ScreenshotGenerator extends Robot implements ImageGenerator {
             try {
                 generator = new ScreenshotGenerator(this);
             } catch (AWTException e){
-                throw new RuntimeException(e);
+                throw new HandlingException(e);
             }
             return generator;
         }

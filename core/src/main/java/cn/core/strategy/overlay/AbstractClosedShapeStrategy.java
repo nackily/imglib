@@ -34,7 +34,7 @@ public abstract class AbstractClosedShapeStrategy implements OverlayStrategy {
     protected Color color;
 
 
-    public AbstractClosedShapeStrategy(ClosedShapeBuilder csb) {
+    protected AbstractClosedShapeStrategy(ClosedShapeBuilder csb) {
         this.rect = csb.rect;
         this.stroke = csb.stroke;
         this.fill = csb.fill;

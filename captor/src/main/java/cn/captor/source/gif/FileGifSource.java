@@ -22,7 +22,6 @@ public class FileGifSource extends AbstractGifSource<File> {
             return;
         }
         decoder.read(new FileInputStream(source));
-        System.out.println(decoder.getFrameCount());
         readCompleted = true;
     }
 }

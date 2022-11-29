@@ -102,10 +102,9 @@ public class HighQualityExpandHandler implements ImageFilter {
             if (nonValidWidth && nonValidHeight) {
                 throw new InvalidSettingException("at least one dimension should be set");
             }
-            if (!keepAspectRatio) {
-                if (nonValidWidth || nonValidHeight) {
-                    throw new InvalidSettingException("both of dimensions should be set when expected to keep the aspect ratio");
-                }
+            boolean notValidGrid = nonValidWidth || nonValidHeight;
+            if (!keepAspectRatio && notValidGrid) {
+                throw new InvalidSettingException("both of dimensions should be set when expected to keep the aspect ratio");
             }
             return new HighQualityExpandHandler(this);
         }

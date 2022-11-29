@@ -58,10 +58,12 @@ public class MosaicHandler implements ImageFilter {
 
         Graphics2D g2d = tar.createGraphics();
 
-        int currentX = startX; int rectWidth = Math.min(sideLength, endX - startX);
+        int currentX = startX;
+        int rectWidth = Math.min(sideLength, endX - startX);
         while (currentX + rectWidth < endX) {
 
-            int currentY = startY; int rectHeight = Math.min(sideLength, endY - startY);
+            int currentY = startY;
+            int rectHeight = Math.min(sideLength, endY - startY);
 
             while (currentY + rectHeight < endY) {
                 // obtain RGB of color of the center

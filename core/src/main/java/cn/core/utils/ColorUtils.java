@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
  * @since 1.0.0
  */
 public final class ColorUtils {
+    private ColorUtils(){}
 
     /**
      * 颜色

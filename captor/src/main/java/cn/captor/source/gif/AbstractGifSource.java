@@ -21,7 +21,7 @@ public abstract class AbstractGifSource<T> implements GifSource<T> {
     protected final GifDecoder decoder = new GifDecoder();
 
 
-    public AbstractGifSource(T source) {
+    protected AbstractGifSource(T source) {
         this.source = source;
     }
 

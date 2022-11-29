@@ -50,16 +50,14 @@ public class FileImageSource implements BufferedImageSource<File> {
         }
         // get image input stream
         ImageInputStream stream = ImageIO.createImageInputStream(source);
-        if (stream == null) {
-            throw new IIOException("cannot create an ImageInputStream from source file");
-        }
+
         // read from file
         BufferedImage bi = read(stream);
         if (bi == null) {
             stream.close();
         }
         // mark the status to completed
-        readCompleted();
+        completeRead();
         return bi;
     }
 
@@ -101,7 +99,7 @@ public class FileImageSource implements BufferedImageSource<File> {
         return readCompleted;
     }
 
-    protected void readCompleted() {
+    protected void completeRead() {
         this.readCompleted = true;
     }
 

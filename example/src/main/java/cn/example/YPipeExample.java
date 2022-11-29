@@ -14,6 +14,7 @@ import java.io.IOException;
  * @since 1.0.0
  */
 public class YPipeExample {
+    private YPipeExample(){}
 
     public static void splitImg() throws IOException {
         YPipes.of(ExampleUtils.tmpFileNameOf("in/before_split.jpg"))

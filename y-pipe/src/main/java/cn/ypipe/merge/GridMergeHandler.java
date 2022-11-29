@@ -203,10 +203,9 @@ public class GridMergeHandler extends AbstractMergeFilter {
 
         @Override
         public GridMergeHandler build() {
-            if (!autoAdapts) {
-                if (gridWidth <= 0 || gridHeight <= 0) {
-                    throw new InvalidSettingException("the width or height of the grid not set");
-                }
+            boolean notSetGrid = gridWidth <= 0 || gridHeight <= 0;
+            if (!autoAdapts && notSetGrid) {
+                throw new InvalidSettingException("the width or height of the grid not set");
             }
             return new GridMergeHandler(this);
         }

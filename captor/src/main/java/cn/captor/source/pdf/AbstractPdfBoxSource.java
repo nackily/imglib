@@ -22,7 +22,7 @@ public abstract class AbstractPdfBoxSource<T> implements PdfSource<T> {
     protected PDDocument pdf;
 
 
-    public AbstractPdfBoxSource(T source) {
+    protected AbstractPdfBoxSource(T source) {
         this.source = source;
     }
 

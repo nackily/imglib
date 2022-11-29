@@ -86,7 +86,7 @@ public class GifSourceBuilder<S> extends Captors.Builder<S, GifSourceBuilder<S>>
                 .collect(Collectors.toSet());
         if (!CollectionUtils.isNullOrEmpty(invalidPages)) {
             throw new InvalidSettingException(MessageFormat.format(
-                    "the frame index has exceeded the max size of the gif document",
+                    "the frame indexes:[{0}] has exceeded the max size of the gif document",
                     StringUtils.join(invalidPages)));
         }
         return source.read(frames.toArray(new Integer[0]));

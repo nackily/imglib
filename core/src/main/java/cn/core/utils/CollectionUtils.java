@@ -14,7 +14,7 @@ public final class CollectionUtils {
     private CollectionUtils(){}
 
     public static boolean isNullOrEmpty(Collection<?> col) {
-        return col == null || col.size() == 0;
+        return col == null || col.isEmpty();
     }
 
     public static boolean isNullOrEmpty(Object[] os) {
@@ -28,7 +28,7 @@ public final class CollectionUtils {
     }
 
     public static void excEmpty(Collection<?> col, String msg) {
-        if (col.size() == 0) {
+        if (col.isEmpty()) {
             throw new InvalidSettingException(msg);
         }
     }

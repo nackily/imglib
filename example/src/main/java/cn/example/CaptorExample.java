@@ -17,6 +17,7 @@ import java.security.NoSuchAlgorithmException;
  * @since 1.0.0
  */
 public class CaptorExample {
+    private CaptorExample(){}
 
     public static void generateTransparentImg() throws IOException {
         Captors.ofEmptySource()

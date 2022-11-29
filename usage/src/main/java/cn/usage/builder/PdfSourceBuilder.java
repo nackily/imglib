@@ -1,7 +1,6 @@
 package cn.usage.builder;
 
 import cn.captor.source.PdfSource;
-import cn.core.ImageGenerator;
 import cn.core.exec.HandlingException;
 import cn.core.exec.InvalidSettingException;
 import cn.core.tool.Range;
@@ -75,7 +74,7 @@ public class PdfSourceBuilder<S> extends Captors.Builder<S, PdfSourceBuilder<S>>
                 .collect(Collectors.toSet());
         if (!CollectionUtils.isNullOrEmpty(invalidPages)) {
             throw new InvalidSettingException(MessageFormat.format(
-                    "the page index has exceeded the max page number of the pdf document",
+                    "the page indexes:[{0}] has exceeded the max page number of the pdf document",
                     StringUtils.join(invalidPages)));
         }
         float DPI = dpi <= 0 ? 300 : dpi;

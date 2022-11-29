@@ -23,7 +23,7 @@ public abstract class AbstractOpenedShapeStrategy implements OverlayStrategy {
     protected Color color;
 
 
-    public AbstractOpenedShapeStrategy(OpenedShapeBuilder csb) {
+    protected AbstractOpenedShapeStrategy(OpenedShapeBuilder csb) {
         this.stroke = csb.stroke;
         this.color = csb.color;
     }

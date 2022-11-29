@@ -140,15 +140,12 @@ public final class BufferedImageUtils {
         Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(formatName);
         if (!writers.hasNext()) {
             throw new UnsupportedFormatException(MessageFormat.format(
-                    "no suitable ImageWriter found for ", formatName));
+                    "no suitable ImageWriter found for {0}", formatName));
         }
         ImageWriter writer = writers.next();
         ImageWriteParam iwp = writer.getDefaultWriteParam();
         FileOutputStream fos = new FileOutputStream(f);
         ImageOutputStream ios = ImageIO.createImageOutputStream(fos);
-        if (ios == null) {
-            throw new IOException("unable to get image output stream");
-        }
 
         // fix the pink background for jpeg/bmp format
         boolean jpg = "JPG".equalsIgnoreCase(formatName);

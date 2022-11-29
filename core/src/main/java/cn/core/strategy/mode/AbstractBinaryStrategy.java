@@ -13,7 +13,7 @@ public abstract class AbstractBinaryStrategy implements ModeStrategy {
 
     protected AbstractGrayingStrategy grayingStrategy;
 
-    public AbstractBinaryStrategy(AbstractGrayingStrategy grayingStrategy) {
+    protected AbstractBinaryStrategy(AbstractGrayingStrategy grayingStrategy) {
         this.grayingStrategy = grayingStrategy;
     }
 
