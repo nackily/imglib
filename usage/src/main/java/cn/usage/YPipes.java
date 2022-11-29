@@ -24,6 +24,9 @@ import java.util.*;
  * @since 1.0.0
  */
 public final class YPipes {
+
+    public static final String NULL_FILTER = "Y-PipeFilter is null";
+
     private YPipes(){}
 
     public static Builder<File> of(String... filenames) {
@@ -43,7 +46,7 @@ public final class YPipes {
         return new Builder<>(new Builder.FileImageSourceIterator(Arrays.asList(files)));
     }
 
-    public static Builder<? extends InputStream> of(InputStream... iss) {
+    public static Builder<InputStream> of(InputStream... iss) {
         CollectionUtils.excNull(iss, "InputStream array is null");
         CollectionUtils.excEmpty(iss, "no any input stream was specified");
         return new Builder<>(new Builder.InputStreamImageSourceIterator(Arrays.asList(iss)));
@@ -60,37 +63,37 @@ public final class YPipes {
         return new Builder<>(new Builder.ThisImageSourceIterator(images));
     }
 
-    public static Builder<BufferedImage> of(Captors.Builder<?, ?> ca) throws IOException {
+    public static Builder<BufferedImage> of(Captors.Builder<?> ca) throws IOException {
         CollectionUtils.excNull(ca, "Captors.Builder is null");
         List<BufferedImage> images = ca.obtainBufferedImages();
         return new Builder<>(new Builder.ThisImageSourceIterator(images));
     }
 
 
-    public static class Builder<S> extends PipeBuilder<S> {
+    public static class Builder<P> extends PipeBuilder<Builder<P>> {
 
         protected boolean useOriginalFormat;
-        protected final Iterable<BufferedImageSource<S>> sources;
+        protected final Iterable<BufferedImageSource<P>> sources;
         protected List<YPipeFilter> filters = new ArrayList<>();
 
-        protected Builder(Iterable<BufferedImageSource<S>> sources) {
+        protected Builder(Iterable<BufferedImageSource<P>> sources) {
             this.sources = sources;
         }
 
-        public Builder<S> addLast(YPipeFilter ypf) {
-            CollectionUtils.excNull(ypf, "Y-PipeFilter is null");
+        public Builder<P> addLast(YPipeFilter ypf) {
+            CollectionUtils.excNull(ypf, NULL_FILTER);
             filters.add(ypf);
             return this;
         }
 
-        public Builder<S> addLast(YPipeFilter... ypf) {
-            CollectionUtils.excNull(ypf, "Y-PipeFilter is null");
+        public Builder<P> addLast(YPipeFilter... ypf) {
+            CollectionUtils.excNull(ypf, NULL_FILTER);
             filters.addAll(Arrays.asList(ypf));
             return this;
         }
 
-        public Builder<S> remove(YPipeFilter ypf) {
-            CollectionUtils.excNull(ypf, "Y-PipeFilter is null");
+        public Builder<P> remove(YPipeFilter ypf) {
+            CollectionUtils.excNull(ypf, NULL_FILTER);
             filters.remove(ypf);
             return this;
         }
@@ -114,7 +117,7 @@ public final class YPipes {
             // obtain the source images
             List<BufferedImage> originalImages = new ArrayList<>();
             List<String> formatNames = new ArrayList<>();
-            for (BufferedImageSource<S> o : sources) {
+            for (BufferedImageSource<P> o : sources) {
                 originalImages.add(o.read());
                 formatNames.add(o.getOriginalFormatName());
             }
@@ -127,7 +130,7 @@ public final class YPipes {
                     throw new HandlingException(MessageFormat.format("multiple available original formats found:[{0}]",
                             StringUtils.join(formats)));
                 } else {
-                    super.setFormatName(formats[0]);
+                    super.formatName(formats[0]);
                 }
             }
 
@@ -140,15 +143,11 @@ public final class YPipes {
             return targetImages;
         }
 
-        public Builder<S> useOriginalFormat() {
+        public Builder<P> useOriginalFormat() {
             useOriginalFormat = true;
             return this;
         }
 
-        public Builder<S> formatName(String formatName) {
-            super.setFormatName(formatName);
-            return this;
-        }
 
         public Thumbnails.Builder<BufferedImage> toThumbnails() throws IOException {
             BufferedImage[] images = obtainBufferedImages().toArray(new BufferedImage[0]);

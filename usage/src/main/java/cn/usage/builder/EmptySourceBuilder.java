@@ -4,7 +4,6 @@ import cn.core.ImageGenerator;
 import cn.core.exec.HandlingException;
 import cn.core.utils.CollectionUtils;
 import cn.usage.Captors;
-import javax.lang.model.type.NullType;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,24 +15,25 @@ import java.util.List;
  * @author tracy
  * @since 1.0.0
  */
-public class EmptySourceBuilder extends Captors.Builder<NullType, EmptySourceBuilder> {
+public class EmptySourceBuilder extends Captors.Builder<EmptySourceBuilder> {
 
+    public static final String NULL_GENERATOR = "ImageGenerator is null";
     protected List<ImageGenerator> captors = new ArrayList<>();
 
     public EmptySourceBuilder addLast(ImageGenerator ig) {
-        CollectionUtils.excNull(ig, "ImageGenerator is null");
+        CollectionUtils.excNull(ig, NULL_GENERATOR);
         captors.add(ig);
         return this;
     }
 
     public EmptySourceBuilder addLast(ImageGenerator... igs) {
-        CollectionUtils.excNull(igs, "ImageGenerator is null");
+        CollectionUtils.excNull(igs, NULL_GENERATOR);
         captors.addAll(Arrays.asList(igs));
         return this;
     }
 
     public EmptySourceBuilder remove(ImageGenerator ig) {
-        CollectionUtils.excNull(ig, "ImageGenerator is null");
+        CollectionUtils.excNull(ig, NULL_GENERATOR);
         captors.remove(ig);
         return this;
     }

@@ -85,14 +85,7 @@ public final class Captors {
 
 
     @SuppressWarnings("unchecked")
-    public abstract static class Builder<S, Children> extends PipeBuilder<S> {
-
-        private final Children typeThis = (Children) this;
-
-        public Children formatName(String formatName) {
-            super.setFormatName(formatName);
-            return typeThis;
-        }
+    public abstract static class Builder<T> extends PipeBuilder<T> {
 
         public Thumbnails.Builder<BufferedImage> toThumbnails() throws IOException {
             BufferedImage[] images = obtainBufferedImages().toArray(new BufferedImage[0]);

@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * @author tracy
  * @since 1.0.0
  */
-public class GifSourceBuilder<S> extends Captors.Builder<S, GifSourceBuilder<S>> {
+public class GifSourceBuilder<S> extends Captors.Builder<GifSourceBuilder<S>> {
 
     protected final GifSource<S> source;
     private boolean containsAll = false;

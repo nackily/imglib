@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @author tracy
  * @since 1.0.0
  */
-public class PdfSourceBuilder<S> extends Captors.Builder<S, PdfSourceBuilder<S>> {
+public class PdfSourceBuilder<S> extends Captors.Builder<PdfSourceBuilder<S>> {
 
     protected final PdfSource<S> source;
     private final Set<Integer> pages = new HashSet<>();
@@ -77,8 +77,8 @@ public class PdfSourceBuilder<S> extends Captors.Builder<S, PdfSourceBuilder<S>>
                     "the page indexes:[{0}] has exceeded the max page number of the pdf document",
                     StringUtils.join(invalidPages)));
         }
-        float DPI = dpi <= 0 ? 300 : dpi;
-        return source.read(pages.toArray(new Integer[0]), DPI);
+        float val = dpi <= 0 ? 300 : dpi;
+        return source.read(pages.toArray(new Integer[0]), val);
     }
 
     protected void checkReadiness() {

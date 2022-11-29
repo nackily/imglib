@@ -17,18 +17,22 @@ import java.util.List;
  * @author tracy
  * @since 1.0.0
  */
-public abstract class PipeBuilder<S> {
+@SuppressWarnings("unchecked")
+public abstract class PipeBuilder<T> {
+
+    private final T typeThis = (T) this;
 
     /**
      * 输出格式
      */
     protected String formatName;
 
-    protected void setFormatName(String formatName) {
+    public T formatName(String formatName) {
         if (StringUtils.isEmpty(formatName)) {
             throw new InvalidSettingException("format name can not be null");
         }
         this.formatName = formatName;
+        return typeThis;
     }
 
     /**
