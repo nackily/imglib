@@ -15,7 +15,7 @@ import java.util.List;
  * @author tracy
  * @since 1.0.0
  */
-public class EmptySourceBuilder extends Captors.Builder<EmptySourceBuilder> {
+public class EmptySourceBuilder extends Captors.AbstractBuilder<EmptySourceBuilder> {
 
     public static final String NULL_GENERATOR = "ImageGenerator is null";
     protected List<ImageGenerator> captors = new ArrayList<>();

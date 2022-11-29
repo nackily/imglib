@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @author tracy
  * @since 1.0.0
  */
-public class PdfSourceBuilder<S> extends Captors.Builder<PdfSourceBuilder<S>> {
+public class PdfSourceBuilder<S> extends Captors.AbstractBuilder<PdfSourceBuilder<S>> {
 
     protected final PdfSource<S> source;
     private final Set<Integer> pages = new HashSet<>();

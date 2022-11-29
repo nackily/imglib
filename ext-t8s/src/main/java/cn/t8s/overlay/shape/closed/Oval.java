@@ -28,7 +28,7 @@ public class Oval extends AbstractClosedShapeStrategy {
         g2d.fillOval(rect.x, rect.y, rect.width, rect.height);
     }
 
-    public static class Builder extends ClosedShapeBuilder {
+    public static class Builder extends AbstractClosedShapeBuilder {
 
         @Override
         public Rect.Builder rect(Rectangle rect) {

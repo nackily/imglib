@@ -18,7 +18,7 @@ import java.util.List;
  * @since 1.0.0
  */
 @SuppressWarnings("unchecked")
-public abstract class PipeBuilder<T> {
+public abstract class AbstractPipeBuilder<T> {
 
     private final T typeThis = (T) this;
 

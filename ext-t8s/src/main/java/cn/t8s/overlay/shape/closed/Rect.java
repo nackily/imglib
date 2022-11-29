@@ -28,7 +28,7 @@ public class Rect extends AbstractClosedShapeStrategy {
     }
 
 
-    public static class Builder extends ClosedShapeBuilder {
+    public static class Builder extends AbstractClosedShapeBuilder {
 
         @Override
         public Builder rect(Rectangle rect) {

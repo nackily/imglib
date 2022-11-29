@@ -40,7 +40,7 @@ public class Line extends AbstractOpenedShapeStrategy {
         g2d.drawLine(start.x, start.y, end.x, end.y);
     }
 
-    public static class Builder extends OpenedShapeBuilder {
+    public static class Builder extends AbstractOpenedShapeBuilder {
         private Point start;
         private Point end;
 

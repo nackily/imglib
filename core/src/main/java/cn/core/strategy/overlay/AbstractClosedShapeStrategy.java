@@ -34,7 +34,7 @@ public abstract class AbstractClosedShapeStrategy implements OverlayStrategy {
     protected Color color;
 
 
-    protected AbstractClosedShapeStrategy(ClosedShapeBuilder csb) {
+    protected AbstractClosedShapeStrategy(AbstractClosedShapeBuilder csb) {
         this.rect = csb.rect;
         this.stroke = csb.stroke;
         this.fill = csb.fill;
@@ -84,25 +84,25 @@ public abstract class AbstractClosedShapeStrategy implements OverlayStrategy {
     public abstract void fillInside(int canvasWidth, int canvasHeight, Graphics2D g2d);
 
 
-    public abstract static class ClosedShapeBuilder implements GenericBuilder<AbstractClosedShapeStrategy> {
+    public abstract static class AbstractClosedShapeBuilder implements GenericBuilder<AbstractClosedShapeStrategy> {
         protected Rectangle rect;
         protected Stroke stroke;
         protected boolean fill;
         protected Color color;
 
-        public ClosedShapeBuilder rect(Rectangle rect) {
+        public AbstractClosedShapeBuilder rect(Rectangle rect) {
             this.rect = rect;
             return this;
         }
-        public ClosedShapeBuilder stroke(Stroke stroke){
+        public AbstractClosedShapeBuilder stroke(Stroke stroke){
             this.stroke = stroke;
             return this;
         }
-        public ClosedShapeBuilder fill(boolean fill){
+        public AbstractClosedShapeBuilder fill(boolean fill){
             this.fill = fill;
             return this;
         }
-        public ClosedShapeBuilder color(Color color){
+        public AbstractClosedShapeBuilder color(Color color){
             this.color = color;
             return this;
         }

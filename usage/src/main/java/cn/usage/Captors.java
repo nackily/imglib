@@ -6,7 +6,7 @@ import cn.captor.source.gif.InputStreamGifSource;
 import cn.captor.source.pdf.ByteArrayPdfSource;
 import cn.captor.source.pdf.FilePdfSource;
 import cn.captor.source.pdf.InputStreamPdfSource;
-import cn.core.PipeBuilder;
+import cn.core.AbstractPipeBuilder;
 import cn.usage.builder.EmptySourceBuilder;
 import cn.usage.builder.GifSourceBuilder;
 import cn.usage.builder.PdfSourceBuilder;
@@ -85,7 +85,7 @@ public final class Captors {
 
 
     @SuppressWarnings("unchecked")
-    public abstract static class Builder<T> extends PipeBuilder<T> {
+    public abstract static class AbstractBuilder<T> extends AbstractPipeBuilder<T> {
 
         public Thumbnails.Builder<BufferedImage> toThumbnails() throws IOException {
             BufferedImage[] images = obtainBufferedImages().toArray(new BufferedImage[0]);

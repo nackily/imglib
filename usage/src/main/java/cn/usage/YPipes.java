@@ -1,7 +1,7 @@
 package cn.usage;
 
 import cn.core.BufferedImageSource;
-import cn.core.PipeBuilder;
+import cn.core.AbstractPipeBuilder;
 import cn.core.YPipeFilter;
 import cn.core.exec.HandlingException;
 import cn.core.is.FileImageSource;
@@ -63,14 +63,14 @@ public final class YPipes {
         return new Builder<>(new Builder.ThisImageSourceIterator(images));
     }
 
-    public static Builder<BufferedImage> of(Captors.Builder<?> ca) throws IOException {
+    public static Builder<BufferedImage> of(Captors.AbstractBuilder<?> ca) throws IOException {
         CollectionUtils.excNull(ca, "Captors.Builder is null");
         List<BufferedImage> images = ca.obtainBufferedImages();
         return new Builder<>(new Builder.ThisImageSourceIterator(images));
     }
 
 
-    public static class Builder<P> extends PipeBuilder<Builder<P>> {
+    public static class Builder<P> extends AbstractPipeBuilder<Builder<P>> {
 
         protected boolean useOriginalFormat;
         protected final Iterable<BufferedImageSource<P>> sources;

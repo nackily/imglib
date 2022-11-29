@@ -23,7 +23,7 @@ public abstract class AbstractOpenedShapeStrategy implements OverlayStrategy {
     protected Color color;
 
 
-    protected AbstractOpenedShapeStrategy(OpenedShapeBuilder csb) {
+    protected AbstractOpenedShapeStrategy(AbstractOpenedShapeBuilder csb) {
         this.stroke = csb.stroke;
         this.color = csb.color;
     }
@@ -46,15 +46,15 @@ public abstract class AbstractOpenedShapeStrategy implements OverlayStrategy {
     public abstract void draw(int canvasWidth, int canvasHeight, Graphics2D g2d);
 
 
-    public abstract static class OpenedShapeBuilder implements GenericBuilder<AbstractOpenedShapeStrategy> {
+    public abstract static class AbstractOpenedShapeBuilder implements GenericBuilder<AbstractOpenedShapeStrategy> {
         protected Stroke stroke;
         protected Color color;
 
-        public OpenedShapeBuilder stroke(Stroke stroke){
+        public AbstractOpenedShapeBuilder stroke(Stroke stroke){
             this.stroke = stroke;
             return this;
         }
-        public OpenedShapeBuilder color(Color color){
+        public AbstractOpenedShapeBuilder color(Color color){
             this.color = color;
             return this;
         }
