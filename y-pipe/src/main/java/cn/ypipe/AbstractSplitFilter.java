@@ -3,6 +3,8 @@ package cn.ypipe;
 import cn.core.YPipeFilter;
 import cn.core.exec.HandlingException;
 import cn.core.utils.CollectionUtils;
+import cn.core.utils.ObjectUtils;
+
 import java.awt.image.BufferedImage;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public abstract class AbstractSplitFilter implements YPipeFilter {
 
     @Override
     public List<BufferedImage> execute(List<BufferedImage> images) {
-        CollectionUtils.excNull(images, "source images is null");
+        ObjectUtils.excNull(images, "source images is null");
         CollectionUtils.excEmpty(images, "not any source image was found");
         if (images.size() > 1) {
             throw new HandlingException("cannot split multiple images");

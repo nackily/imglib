@@ -3,6 +3,7 @@ package cn.usage.builder;
 import cn.core.ImageGenerator;
 import cn.core.exec.HandlingException;
 import cn.core.utils.CollectionUtils;
+import cn.core.utils.ObjectUtils;
 import cn.usage.Captors;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -21,19 +22,19 @@ public class EmptySourceBuilder extends Captors.AbstractBuilder<EmptySourceBuild
     protected List<ImageGenerator> captors = new ArrayList<>();
 
     public EmptySourceBuilder addLast(ImageGenerator ig) {
-        CollectionUtils.excNull(ig, NULL_GENERATOR);
+        ObjectUtils.excNull(ig, NULL_GENERATOR);
         captors.add(ig);
         return this;
     }
 
     public EmptySourceBuilder addLast(ImageGenerator... igs) {
-        CollectionUtils.excNull(igs, NULL_GENERATOR);
+        ObjectUtils.excNull(igs, NULL_GENERATOR);
         captors.addAll(Arrays.asList(igs));
         return this;
     }
 
     public EmptySourceBuilder remove(ImageGenerator ig) {
-        CollectionUtils.excNull(ig, NULL_GENERATOR);
+        ObjectUtils.excNull(ig, NULL_GENERATOR);
         captors.remove(ig);
         return this;
     }

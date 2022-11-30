@@ -2,6 +2,8 @@ package cn.ypipe;
 
 import cn.core.YPipeFilter;
 import cn.core.utils.CollectionUtils;
+import cn.core.utils.ObjectUtils;
+
 import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +18,7 @@ public abstract class AbstractMergeFilter implements YPipeFilter {
 
     @Override
     public List<BufferedImage> execute(List<BufferedImage> images) {
-        CollectionUtils.excNull(images, "source images is null");
+        ObjectUtils.excNull(images, "source images is null");
         CollectionUtils.excEmpty(images, "not any source image was found");
         return Collections.singletonList(merge(images));
     }

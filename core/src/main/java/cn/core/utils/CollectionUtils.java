@@ -21,12 +21,6 @@ public final class CollectionUtils {
         return os == null || os.length == 0;
     }
 
-    public static void excNull(Object o, String msg) {
-        if (o == null) {
-            throw new NullPointerException(msg);
-        }
-    }
-
     public static void excEmpty(Collection<?> col, String msg) {
         if (col.isEmpty()) {
             throw new InvalidSettingException(msg);

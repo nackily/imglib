@@ -1,5 +1,6 @@
 package cn.usage;
 
+import cn.core.BufferedImageEncoder;
 import cn.core.BufferedImageSource;
 import cn.core.AbstractPipeBuilder;
 import cn.core.YPipeFilter;
@@ -8,6 +9,7 @@ import cn.core.is.FileImageSource;
 import cn.core.is.InputStreamImageSource;
 import cn.core.is.ThisBufferedImageSource;
 import cn.core.utils.CollectionUtils;
+import cn.core.utils.ObjectUtils;
 import cn.core.utils.StringUtils;
 import net.coobird.thumbnailator.Thumbnails;
 import java.awt.image.BufferedImage;
@@ -30,7 +32,7 @@ public final class YPipes {
     private YPipes(){}
 
     public static Builder<File> of(String... filenames) {
-        CollectionUtils.excNull(filenames, "file names is null");
+        ObjectUtils.excNull(filenames, "file names is null");
         CollectionUtils.excEmpty(filenames, "no any file name was specified");
         Iterator<String> iter = Arrays.asList(filenames).iterator();
         List<File> files = new ArrayList<>();
@@ -41,30 +43,30 @@ public final class YPipes {
     }
 
     public static Builder<File> of(File... files) {
-        CollectionUtils.excNull(files, "File array is null");
+        ObjectUtils.excNull(files, "File array is null");
         CollectionUtils.excEmpty(files, "no any files was specified");
         return new Builder<>(new Builder.FileImageSourceIterator(Arrays.asList(files)));
     }
 
     public static Builder<InputStream> of(InputStream... iss) {
-        CollectionUtils.excNull(iss, "InputStream array is null");
+        ObjectUtils.excNull(iss, "InputStream array is null");
         CollectionUtils.excEmpty(iss, "no any input stream was specified");
         return new Builder<>(new Builder.InputStreamImageSourceIterator(Arrays.asList(iss)));
     }
 
     public static Builder<BufferedImage> of(BufferedImage... bis) {
-        CollectionUtils.excNull(bis, "BufferedImage array is null");
+        ObjectUtils.excNull(bis, "BufferedImage array is null");
         CollectionUtils.excEmpty(bis, "no any buffered image was specified");
         return new Builder<>(new Builder.ThisImageSourceIterator(Arrays.asList(bis)));
     }
     public static Builder<BufferedImage> of(Thumbnails.Builder<?> th) throws IOException {
-        CollectionUtils.excNull(th, "Thumbnails.Builder is null");
+        ObjectUtils.excNull(th, "Thumbnails.Builder is null");
         List<BufferedImage> images = th.asBufferedImages();
         return new Builder<>(new Builder.ThisImageSourceIterator(images));
     }
 
     public static Builder<BufferedImage> of(Captors.AbstractBuilder<?> ca) throws IOException {
-        CollectionUtils.excNull(ca, "Captors.Builder is null");
+        ObjectUtils.excNull(ca, "Captors.Builder is null");
         List<BufferedImage> images = ca.obtainBufferedImages();
         return new Builder<>(new Builder.ThisImageSourceIterator(images));
     }
@@ -81,39 +83,31 @@ public final class YPipes {
         }
 
         public Builder<P> addLast(YPipeFilter ypf) {
-            CollectionUtils.excNull(ypf, NULL_FILTER);
+            ObjectUtils.excNull(ypf, NULL_FILTER);
             filters.add(ypf);
             return this;
         }
 
         public Builder<P> addLast(YPipeFilter... ypf) {
-            CollectionUtils.excNull(ypf, NULL_FILTER);
+            ObjectUtils.excNull(ypf, NULL_FILTER);
             filters.addAll(Arrays.asList(ypf));
             return this;
         }
 
         public Builder<P> remove(YPipeFilter ypf) {
-            CollectionUtils.excNull(ypf, NULL_FILTER);
+            ObjectUtils.excNull(ypf, NULL_FILTER);
             filters.remove(ypf);
             return this;
         }
 
-        protected void checkReadiness() {
-            if (CollectionUtils.isNullOrEmpty(filters)) {
-                throw new HandlingException("not put any filter");
-            }
-        }
-
         @Override
         public BufferedImage obtainBufferedImage() throws IOException {
-            checkReadiness();
             List<BufferedImage> tars = obtainBufferedImages();
             return tars.get(0);
         }
 
         @Override
         public List<BufferedImage> obtainBufferedImages() throws IOException {
-            checkReadiness();
             // obtain the source images
             List<BufferedImage> originalImages = new ArrayList<>();
             List<String> formatNames = new ArrayList<>();
@@ -135,7 +129,7 @@ public final class YPipes {
             }
 
             // execute all filters
-            List<BufferedImage> targetImages = null;
+            List<BufferedImage> targetImages = originalImages;
             for (YPipeFilter ypf : filters) {
                 targetImages = ypf.execute(originalImages);
                 originalImages = targetImages;
@@ -153,6 +147,15 @@ public final class YPipes {
             BufferedImage[] images = obtainBufferedImages().toArray(new BufferedImage[0]);
             return Thumbnails.of(images);
         }
+
+        public void toFile(BufferedImageEncoder encoder) throws IOException {
+            if (encoder.supportMultiple()) {
+                encoder.encode(obtainBufferedImages());
+            } else {
+                encoder.encode(Collections.singletonList(obtainBufferedImage()));
+            }
+        }
+
 
 
         private static class FileImageSourceIterator implements Iterable<BufferedImageSource<File>> {
