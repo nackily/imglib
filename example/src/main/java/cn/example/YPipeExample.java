@@ -1,5 +1,6 @@
 package cn.example;
 
+import cn.captor.io.GifFileEncoder;
 import cn.core.utils.ColorUtils;
 import cn.example.utils.ExampleUtils;
 import cn.usage.YPipes;
@@ -47,5 +48,17 @@ public class YPipeExample {
                         .alignCenter(true)
                         .build())
                 .toFile(ExampleUtils.tmpFileNameOf("out/after_merge.jpg"));
+    }
+
+    public static void mergeToGif() throws IOException {
+        YPipes.of(ExampleUtils.tmpFileNameOf("in/to_merge/spring.jpg"),
+                        ExampleUtils.tmpFileNameOf("in/to_merge/summer.jpg"),
+                        ExampleUtils.tmpFileNameOf("in/to_merge/winter.jpg"),
+                        ExampleUtils.tmpFileNameOf("in/to_merge/autumn.jpg"))
+                .toFile(new GifFileEncoder.Builder()
+                        .filename(ExampleUtils.tmpFileNameOf("out/seasons.gif"))
+                        .delay(400)
+                        .repeat(0)
+                        .build());
     }
 }

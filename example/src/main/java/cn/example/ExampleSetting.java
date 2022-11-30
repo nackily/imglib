@@ -44,9 +44,14 @@ public enum ExampleSetting {
     SPLIT_IMG("Y", "1", YPipeExample::splitImg),
 
     /**
-     * 拆分图像
+     * 合并图像
      */
     MERGE_IMG("Y", "2", YPipeExample::mergeImg),
+
+    /**
+     * 合并图像为GIG
+     */
+    MERGE_TO_GIF("Y", "3", YPipeExample::mergeToGif),
     ;
 
     final String type;
