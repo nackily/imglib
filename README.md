@@ -9,11 +9,11 @@
 
 ---
 
-## What is imglib?
+# What is imglib?
 
 Imglib is a lightweight image processing library for JAVA, which committed to simplifying frequently image processing.
 
-## What can imglib do?
+# What can imglib do?
 
 Imglib mainly provides three capabilities:
 
@@ -31,7 +31,7 @@ Imglib mainly provides three capabilities:
 
 It is worth mentioning that imglib is not a project started from nothing, it just stands on the shoulders of giants! Imglib is based on [Thumbnailator](https://github.com/coobird/thumbnailator) in image processing, relies on [pdfbox](https://github.com/apache/pdfbox) in PDF document parsing, and references [animated gif lib for java](https://github.com/rtyley/animated-gif-lib-for-java) in GIF document processing...
 
-## How simple is imglib?
+# How simple is imglib?
 Like Thumbnailer, imglib shields developers from complex I/O operations and eliminates the need to manually manipulate images through Graphics2D objects. imglib has done all this for you. It's chained API allows you to configure and execute a complex image processing task step by step.
 
 For example, the task of create a hash avatar for the user, the avatar setting to 8px\*8px, the image size setting to 300px\*300px, and add a border with a margin of 20px. This image generation task can be completed through the following code fragments:
@@ -62,7 +62,7 @@ By executing the above code fragment, we will get the following user avatar.
    <img src="docs/res/avatar.png" width="18%"/>
 </div>
 
-## More
+# See more
 Get more information about imglib by visit the following links:
 
 + [**Examples**](/docs/Examples.md)
