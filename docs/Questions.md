@@ -1,12 +1,4 @@
 
-<p align="center">
-	<strong>A lightweight image processing library.</strong>
-</p>
-
 ---
-[**中文**](README.md)
+[**中文文档**](Questions-zh.md)
 ---
-
-# what's imglib?
-
-// todo

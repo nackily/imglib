@@ -25,7 +25,7 @@ public class CaptorExample {
                         .width(300)
                         .height(200)
                         .build())
-                .toFile(ExampleUtils.tmpFileNameOf("out/gen_transparent.png"));
+                .toFile(ExampleUtils.tmpFileNameOf("out/transparent.png"));
     }
 
     public static void generateMonoColorImg() throws IOException {
@@ -36,7 +36,7 @@ public class CaptorExample {
                         .alpha(0.2f)
                         .color(ColorUtils.random())
                         .build())
-                .toFile(ExampleUtils.tmpFileNameOf("out/gen_mono_color.png"));
+                .toFile(ExampleUtils.tmpFileNameOf("out/mono_color.png"));
     }
 
     public static void generateScreenshot() throws IOException {
@@ -46,7 +46,7 @@ public class CaptorExample {
                         .width(280)
                         .height(190)
                         .build())
-                .toFile(ExampleUtils.tmpFileNameOf("out/gen_screenshot.png"));
+                .toFile(ExampleUtils.tmpFileNameOf("out/screenshot.png"));
     }
 
     public static void generateHashImg() throws IOException, NoSuchAlgorithmException {

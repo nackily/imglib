@@ -65,6 +65,6 @@ Captors.ofEmptySource()
 ## 更多内容
 以下的链接提供了更多关于 imglib 信息：
 
-+ [**Examples**](/docs/Examples.md)
-+ [**API Documentation**](/docs/APIs.md)
-+ [**Frequently Asked Questions**](/docs/Questions.md)
++ [**Examples**](/docs/Examples-zh.md)
++ [**API Documentation**](/docs/APIs-zh.md)
++ [**Frequently Asked Questions**](/docs/Questions-zh.md)
