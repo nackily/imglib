@@ -42,19 +42,19 @@ public abstract class AbstractSourceBuilder<T> {
         return typeThis;
     }
 
-    public T addLast(PipeFilter ypf) {
+    public T addFilter(PipeFilter ypf) {
         ObjectUtils.excNull(ypf, NULL_FILTER);
         filters.add(ypf);
         return typeThis;
     }
 
-    public T addLast(PipeFilter... ypf) {
+    public T addFilter(PipeFilter... ypf) {
         ObjectUtils.excNull(ypf, NULL_FILTER);
         filters.addAll(Arrays.asList(ypf));
         return typeThis;
     }
 
-    public T remove(PipeFilter ypf) {
+    public T removeFilter(PipeFilter ypf) {
         ObjectUtils.excNull(ypf, NULL_FILTER);
         filters.remove(ypf);
         return typeThis;

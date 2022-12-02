@@ -80,7 +80,7 @@ public class ImagePipeExamples {
 
     public static void splitImg() throws IOException {
         ImagePipes.of(ExampleUtils.tmpFileNameOf("in/before_split.jpg"))
-                .addLast(new GridSplitHandler.Builder()
+                .addFilter(new GridSplitHandler.Builder()
                         .gridWidth(400)
                         .gridHeight(250)
                         .build())
@@ -100,7 +100,7 @@ public class ImagePipeExamples {
                         ExampleUtils.tmpFileNameOf("in/to_merge/summer.jpg"),
                         ExampleUtils.tmpFileNameOf("in/to_merge/winter.jpg"),
                         ExampleUtils.tmpFileNameOf("in/to_merge/autumn.jpg"))
-                .addLast(new GridMergeHandler.Builder()
+                .addFilter(new GridMergeHandler.Builder()
                         .horizontalNum(2)
                         .fillColor(ColorUtils.of(240, 240, 240))
                         .gridWidth(530)
