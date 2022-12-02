@@ -1,5 +1,8 @@
 package cn.example;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * 功能设定
  *
@@ -75,6 +78,6 @@ public enum Setting {
 
     @FunctionalInterface
     public interface Function {
-        void apply() throws Exception;
+        void apply() throws IOException, NoSuchAlgorithmException;
     }
 }

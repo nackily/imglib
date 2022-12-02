@@ -23,6 +23,8 @@
         <thumbnailator-version>0.4.8</thumbnailator-version>
         <pdfbox-version>2.0.20</pdfbox-version>
         <animated-gif-lib-version>1.4</animated-gif-lib-version>
+        <slf4j-api.version>1.7.25</slf4j-api.version>
+        <logback-classic.version>1.2.3</logback-classic.version>
         <maven-flatten-version>1.1.0</maven-flatten-version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
@@ -50,6 +52,18 @@
                 <groupId>com.madgag</groupId>
                 <artifactId>animated-gif-lib</artifactId>
                 <version>${animated-gif-lib-version}</version>
+            </dependency>
+
+            <!-- Log -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback-classic.version}</version>
             </dependency>
 
         </dependencies>

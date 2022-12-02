@@ -1,8 +1,11 @@
 package cn.example;
 
 import cn.core.utils.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -17,14 +20,15 @@ import java.util.stream.Collectors;
  * @since 1.0.0
  */
 public class Example {
-
+    private static final Logger logger = LoggerFactory.getLogger(Example.class);
     private static final Properties PROPERTIES = new Properties();
 
     public static void main(String[] args) throws Exception {
+
         loadConfig("zh");
 
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
-            System.out.println(MessageFormat.format("|=========================== task-{0} ===========================|", i + 1));
+            logger.info("|=========================== task-{} ===========================|", i + 1);
             String type = selectMenu();
             if(matchedFunctions(type)) {
                 doExample(type);
@@ -33,11 +37,11 @@ public class Example {
     }
 
     public static String selectMenu() {
-        System.out.println(MessageFormat.format(" :::: C :::: {0}", PROPERTIES.getProperty("menu.c")));
-        System.out.println(MessageFormat.format(" :::: Y :::: {0}", PROPERTIES.getProperty("menu.y")));
-        System.out.println(MessageFormat.format(" :::: T :::: {0}", PROPERTIES.getProperty("menu.t")));
+        logger.info(" :::: C :::: {}", PROPERTIES.getProperty("menu.c"));
+        logger.info(" :::: Y :::: {}", PROPERTIES.getProperty("menu.y"));
+        logger.info(" :::: T :::: {}", PROPERTIES.getProperty("menu.t"));
 
-        System.out.print(" ===>> " + PROPERTIES.getProperty("menu.tips"));
+        logger.info(" ===>> {}", PROPERTIES.getProperty("menu.tips"));
 
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
@@ -49,31 +53,32 @@ public class Example {
                 .filter(o -> o.type.equalsIgnoreCase(type))
                 .collect(Collectors.toList());
         if (fcs.isEmpty()) {
-            System.out.println("【Error】not found any function of type:" + type);
+            logger.error("not found any function of type:{}", type);
             return false;
         }
 
         for (Setting setting : fcs) {
             String propertyKey = "function." + setting.type.toLowerCase() + "." + setting.key;
             String desc = PROPERTIES.getProperty(propertyKey);
-            System.out.println(MessageFormat.format(" :::: {0} :::: {1}", setting.key, desc));
+            logger.info(" :::: {} :::: {}", setting.key, desc);
         }
-        System.out.print(" ===>> " + PROPERTIES.getProperty("function.tips"));
+
+        logger.info(" ===>> {}", PROPERTIES.getProperty("function.tips"));
         return true;
     }
 
-    public static void doExample(String type) throws Exception {
+    public static void doExample(String type) throws IOException, NoSuchAlgorithmException {
         Scanner scanner = new Scanner(System.in);
         String key = scanner.nextLine();
 
         Setting.Function func = Setting.getFunc(type, key);
         if (func == null) {
             String tips = PROPERTIES.getOrDefault("unknown.function", "Unknown Command.").toString();
-            System.out.println("【Error】" + tips);
+            logger.error(tips);
             return;
         }
         func.apply();
-        System.out.println(" <<=== Work completed.");
+        logger.info(" <<=== Work completed.");
     }
 
     public static void loadConfig(String language) {
