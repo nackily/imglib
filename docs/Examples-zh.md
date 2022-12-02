@@ -3,11 +3,9 @@
 [**English Documentation**](Examples.md)
 ---
 
-以下所有的示例都能在Application中找到。
+在本文中将列举一些示例，以便开发者可以快速了解 imglib 的功能并且轻松使用他们，所以的这些示例都可以在[example/.../Setting.java](/example/src/main/java/cn/example/Setting.java)中找到，并且您可以运行 example 模块来执行相应的功能。
 
 ## 图像收集
-
-图像收集包括...
 
 ### 创建一张透明图像
 ```java
@@ -83,6 +81,70 @@ ImagePipes.ofGif(ExampleUtils.tmpFileNameOf("in/duck.gif"))
 
 在本例中，将解析指定的 GIF 文件`.../in/duck.gif`，提取该文件的所有帧为图像列表，并将这些图像按照帧的顺序逐个保存到`.../out/gif/`文件目录中。
 
+## 聚合与分裂
+
+### 网格化拆分图像
+```java
+ImagePipes.of(ExampleUtils.tmpFileNameOf("in/before_split.jpg"))
+        .addFilter(new GridSplitHandler.Builder()
+            .gridWidth(400)
+            .gridHeight(250)
+            .build())
+        .toFiles(ExampleUtils.tmpFileNameOf("out/split/slice_1.jpg"),
+            ExampleUtils.tmpFileNameOf("out/split/slice_2.jpg"),
+            ExampleUtils.tmpFileNameOf("out/split/slice_3.jpg"),
+            ExampleUtils.tmpFileNameOf("out/split/slice_4.jpg"),
+            ExampleUtils.tmpFileNameOf("out/split/slice_5.jpg"),
+            ExampleUtils.tmpFileNameOf("out/split/slice_6.jpg"),
+            ExampleUtils.tmpFileNameOf("out/split/slice_7.jpg"),
+            ExampleUtils.tmpFileNameOf("out/split/slice_8.jpg"),
+            ExampleUtils.tmpFileNameOf("out/split/slice_9.jpg"));
+```
+
+在本例中，将使用宽高为 400px \* 250px 的矩形区域逐行自左往右从原始图像中提取图像，直至该矩形已触碰到（或者已包含）图像边界，并将提取的图像按照顺序保存到`.../out/split/`文件目录中。
+
+### 网格化合并图像
+```java
+ImagePipes.of(ExampleUtils.tmpFileNameOf("in/to_merge/spring.jpg"),
+            ExampleUtils.tmpFileNameOf("in/to_merge/summer.jpg"),
+            ExampleUtils.tmpFileNameOf("in/to_merge/winter.jpg"),
+            ExampleUtils.tmpFileNameOf("in/to_merge/autumn.jpg"))
+        .addFilter(new GridMergeHandler.Builder()
+            .horizontalNum(2)
+            .fillColor(ColorUtils.of(240, 240, 240))
+            .gridWidth(530)
+            .gridHeight(530)
+            .autoAdapts(true)
+            .alignCenter(true)
+            .build())
+        .toFile(ExampleUtils.tmpFileNameOf("out/after_merge.jpg"));
+```
+
+在本例中，将从`.../in/to_merge/`文件目录中加载`spring.jpg` `summer.jpg` `winter.jpg` `autumn.jpg`四幅图像，并将这些图像按照顺序拼接在一幅图像内，拼接的规则如下：
+
++ 使用固定宽高为 530px \* 530px 的网格盛放每幅图像；
++ 开启网格自动调整，当网格不足以容纳某幅图像时，重置网格的大小到足以容纳；
++ 设置图像居中摆放，包括水平居中和垂直居中；
++ 每一行摆放的网格设置为 2 个；
++ 如某个图像不能铺满整个网格区域，则空白部分使用颜色\[(R) 240,(G) 240,(B) 240\]填充；
+
+拼接的图像将被保存到`.../out/after_merge.jpg`文件中。
+
+### 将图像保存为 GIF 文件
+```java
+ImagePipes.of(ExampleUtils.tmpFileNameOf("in/to_merge/spring.jpg"),
+            ExampleUtils.tmpFileNameOf("in/to_merge/summer.jpg"),
+            ExampleUtils.tmpFileNameOf("in/to_merge/winter.jpg"),
+            ExampleUtils.tmpFileNameOf("in/to_merge/autumn.jpg"))
+        .toFile(new GifFileEncoder.Builder()
+            .filename(ExampleUtils.tmpFileNameOf("out/seasons.gif"))
+            .delay(400)
+            .repeat(0)
+            .build());
+```
+
+在本例中，将从`.../in/to_merge/`文件目录中加载`spring.jpg` `summer.jpg` `winter.jpg` `autumn.jpg`四幅图像，并将这些图像编码到`.../out/seasons.gif`文件中，该 GIF 格式的文件每隔 400ms 切换下一帧，并且已设定为重复播放模式。
+
 ## 图像处理
 
-## 聚合与分裂
+// todo

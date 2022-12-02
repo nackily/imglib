@@ -25,7 +25,7 @@ Imglib mainly provides three capabilities:
 
   With Thumbnailor, we can easily implement the basic operations of images, including scaling, cropping, rotation, image watermarking and format conversion. On this basis, imglib extends processors such as adding border, lossless magnification, mosaics, rounded corner, graying, binarization, and drawing shapes on image.
 
-* **Merge and Split**
+* **Merging and Splitting**
 
   Imglib provides merging and splitting capabilities, including merging multiple images into a single image and splitting image into multiple images. It supports cutting and jigsaw of images according to grid, and encode multiple images into GIF file. Developers can also expand freely according to actual needs.
 
