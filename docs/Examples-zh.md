@@ -11,8 +11,8 @@
 
 ### 创建一张透明图像
 ```java
-Captors.ofEmptySource()
-        .addLast(new TransparentImageGenerator.Builder()
+ImagePipes.ofEmptySource()
+        .register(new TransparentImageGenerator.Builder()
              .width(300)
              .height(200)
              .build())
@@ -23,8 +23,8 @@ Captors.ofEmptySource()
 
 ### 创建一张纯色图像
 ```java
-Captors.ofEmptySource()
-        .addLast(new MonoColorImageGenerator.Builder()
+ImagePipes.ofEmptySource()
+        .register(new MonoColorImageGenerator.Builder()
             .width(300)
             .height(200)
             .alpha(0.2f)
@@ -37,8 +37,8 @@ Captors.ofEmptySource()
 
 ### 截取一张屏幕快照
 ```java
-Captors.ofEmptySource()
-        .addLast(new ScreenshotGenerator.Builder()
+ImagePipes.ofEmptySource()
+        .register(new ScreenshotGenerator.Builder()
             .startPoint(600, 300)
             .width(280)
             .height(190)
@@ -50,8 +50,8 @@ Captors.ofEmptySource()
 
 ### 创建一张 HASH 图像
 ```java
-Captors.ofEmptySource()
-        .addLast(new HashImageGenerator.Builder("imglib-user")
+ImagePipes.ofEmptySource()
+        .register(new HashImageGenerator.Builder("imglib-user")
             .gridVerticalNum(5)
             .fgColor(ColorUtils.of(50, 150, 50))
             .build())
@@ -62,8 +62,8 @@ Captors.ofEmptySource()
 
 ### 提取图像自 PDF 页
 ```java
-Captors.ofPdf(ExampleUtils.tmpFileNameOf("in/jvms8.pdf"))
-        .page(0)
+ImagePipes.ofPdf(ExampleUtils.tmpFileNameOf("in/jvms8.pdf"))
+        .register(0)
         .dpi(280)
         .toFile(ExampleUtils.tmpFileNameOf("out/page_1_of_jvms8.jpg"));
 ```
@@ -72,8 +72,8 @@ Captors.ofPdf(ExampleUtils.tmpFileNameOf("in/jvms8.pdf"))
 
 ### 提取图像自 GIF 帧
 ```java
-Captors.ofGif(ExampleUtils.tmpFileNameOf("in/duck.gif"))
-        .allFrame()
+ImagePipes.ofGif(ExampleUtils.tmpFileNameOf("in/duck.gif"))
+        .registerAll()
         .toFiles(ExampleUtils.tmpFileNameOf("out/gif/frame_1.jpg"),
             ExampleUtils.tmpFileNameOf("out/gif/frame_2.jpg"),
             ExampleUtils.tmpFileNameOf("out/gif/frame_3.jpg"),

@@ -36,8 +36,8 @@ imglib 主要提供三部分的能力：
 
 例如，为用户创建一个 hash 图像，头像点阵设定为 8px\*8px，头像大小为 300px\*300px，并增加一个边距为 20px 的边框。该图像生成任务，可以通过以下操作完成：
 ```java
-Captors.ofEmptySource()
-        .addLast(new HashImageGenerator.Builder("Tracy")        // hash 图像生成器
+ImagePipes.ofEmptySource()
+        .register(new HashImageGenerator.Builder("Tracy")       // hash 图像生成器
                 .gridVerticalNum(8)                             // 水平方向的点阵数量
                 .bgColor(ColorUtils.of(240, 240, 240))          // 背景色
                 .fgColor(ColorUtils.of(50, 150, 50))            // 前景色

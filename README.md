@@ -36,8 +36,8 @@ Like Thumbnailer, imglib shields developers from complex I/O operations and elim
 
 For example, the task of create a hash avatar for the user, the avatar setting to 8px\*8px, the image size setting to 300px\*300px, and add a border with a margin of 20px. This image generation task can be completed through the following code fragments:
 ```java
-Captors.ofEmptySource()
-        .addLast(new HashImageGenerator.Builder("Tracy")        // add a hash image generator
+ImagePipes.ofEmptySource()
+        .register(new HashImageGenerator.Builder("Tracy")       // add a hash image generator
                 .gridVerticalNum(8)                             // number of lattice in horizontal direction
                 .bgColor(ColorUtils.of(240, 240, 240))          // the background color of hash image
                 .fgColor(ColorUtils.of(50, 150, 50))            // the foreground color of hash image
