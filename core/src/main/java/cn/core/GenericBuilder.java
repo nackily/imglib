@@ -14,5 +14,4 @@ public interface GenericBuilder<T> {
      * @return T
      */
      T build();
-    
 }

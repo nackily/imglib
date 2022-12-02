@@ -1,6 +1,6 @@
 package cn.core.utils;
 
-import cn.core.exec.InvalidSettingException;
+import cn.core.ex.InvalidSettingException;
 import cn.core.tool.Range;
 
 import java.awt.*;

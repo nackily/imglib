@@ -1,6 +1,6 @@
 package cn.t8s.filter;
 
-import cn.core.exec.InvalidSettingException;
+import cn.core.ex.InvalidSettingException;
 import cn.core.GenericBuilder;
 import cn.core.utils.BufferedImageUtils;
 import net.coobird.thumbnailator.filters.ImageFilter;

@@ -1,6 +1,6 @@
 package cn.core.utils;
 
-import cn.core.exec.UnsupportedFormatException;
+import cn.core.ex.UnsupportedFormatException;
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;

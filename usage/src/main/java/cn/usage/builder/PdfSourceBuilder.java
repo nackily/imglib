@@ -1,12 +1,12 @@
 package cn.usage.builder;
 
-import cn.captor.source.PdfSource;
-import cn.core.exec.HandlingException;
-import cn.core.exec.InvalidSettingException;
+import cn.core.in.PdfSource;
+import cn.usage.AbstractSourceBuilder;
+import cn.core.ex.HandlingException;
+import cn.core.ex.InvalidSettingException;
 import cn.core.tool.Range;
 import cn.core.utils.CollectionUtils;
 import cn.core.utils.StringUtils;
-import cn.usage.Captors;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.text.MessageFormat;
@@ -19,9 +19,10 @@ import java.util.stream.Collectors;
  * @author tracy
  * @since 1.0.0
  */
-public class PdfSourceBuilder<S> extends Captors.AbstractBuilder<PdfSourceBuilder<S>> {
+public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<S>> {
 
     protected final PdfSource<S> source;
+    private boolean containsAll = false;
     private final Set<Integer> pages = new HashSet<>();
     private float dpi;
 
@@ -29,19 +30,24 @@ public class PdfSourceBuilder<S> extends Captors.AbstractBuilder<PdfSourceBuilde
         this.source = pdfSource;
     }
 
-    public PdfSourceBuilder<S> page(int pageIndex) {
+    public PdfSourceBuilder<S> registerAll() {
+        containsAll = true;
+        return this;
+    }
+
+    public PdfSourceBuilder<S> register(int pageIndex) {
         pages.add(pageIndex);
         return this;
     }
 
-    public PdfSourceBuilder<S> pages(int... pageIndexes) {
+    public PdfSourceBuilder<S> register(int... pageIndexes) {
         for (int index : pageIndexes) {
             pages.add(index);
         }
         return this;
     }
 
-    public PdfSourceBuilder<S> pages(Range<Integer> range) {
+    public PdfSourceBuilder<S> register(Range<Integer> range) {
         for (int i = range.getMin(); i <= range.getMax(); i++) {
             pages.add(i);
         }
@@ -54,18 +60,20 @@ public class PdfSourceBuilder<S> extends Captors.AbstractBuilder<PdfSourceBuilde
     }
 
     @Override
-    public BufferedImage obtainBufferedImage() throws IOException {
-        checkReadiness();
-        checkSingleOutput();
-        return obtainBufferedImages().get(0);
-    }
-
-    @Override
-    public List<BufferedImage> obtainBufferedImages() throws IOException {
+    protected List<BufferedImage> obtainSourceImages() throws IOException {
         checkReadiness();
 
         // the max page index of the pdf
         int maxPageIndex = source.maxPageNumber() - 1;
+
+        float val = dpi <= 0 ? 300 : dpi;
+
+        // export all pages
+        if (containsAll) {
+            for (int index = 0; index < maxPageIndex; index++) {
+                pages.add(index);
+            }
+        }
 
         // check all page was in bound
         Set<String> invalidPages = pages.stream()
@@ -77,22 +85,13 @@ public class PdfSourceBuilder<S> extends Captors.AbstractBuilder<PdfSourceBuilde
                     "the page indexes:[{0}] has exceeded the max page number of the pdf document",
                     StringUtils.join(invalidPages)));
         }
-        float val = dpi <= 0 ? 300 : dpi;
         return source.read(pages.toArray(new Integer[0]), val);
     }
+
 
     protected void checkReadiness() {
         if (CollectionUtils.isNullOrEmpty(pages)) {
             throw new HandlingException("no page to export");
-        }
-    }
-
-    protected void checkSingleOutput() {
-        if (CollectionUtils.isNullOrEmpty(pages)) {
-            throw new HandlingException("no page to export");
-        }
-        if (pages.size() > 1) {
-            throw new HandlingException("cannot create one image from multiple original pdf pages");
         }
     }
 }

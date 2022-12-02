@@ -1,12 +1,12 @@
 package cn.usage.builder;
 
-import cn.captor.source.GifSource;
-import cn.core.exec.HandlingException;
-import cn.core.exec.InvalidSettingException;
+import cn.usage.AbstractSourceBuilder;
+import cn.core.ex.HandlingException;
+import cn.core.ex.InvalidSettingException;
+import cn.core.in.GifSource;
 import cn.core.tool.Range;
 import cn.core.utils.CollectionUtils;
 import cn.core.utils.StringUtils;
-import cn.usage.Captors;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * @author tracy
  * @since 1.0.0
  */
-public class GifSourceBuilder<S> extends Captors.AbstractBuilder<GifSourceBuilder<S>> {
+public class GifSourceBuilder<S> extends AbstractSourceBuilder<GifSourceBuilder<S>> {
 
     protected final GifSource<S> source;
     private boolean containsAll = false;
@@ -32,24 +32,24 @@ public class GifSourceBuilder<S> extends Captors.AbstractBuilder<GifSourceBuilde
         this.source = gifSource;
     }
 
-    public GifSourceBuilder<S> allFrame() {
+    public GifSourceBuilder<S> registerAll() {
         containsAll = true;
         return this;
     }
 
-    public GifSourceBuilder<S> frame(int frameIndex) {
+    public GifSourceBuilder<S> register(int frameIndex) {
         frames.add(frameIndex);
         return this;
     }
 
-    public GifSourceBuilder<S> frame(int... frameIndexes) {
+    public GifSourceBuilder<S> register(int... frameIndexes) {
         for (int index : frameIndexes) {
             frames.add(index);
         }
         return this;
     }
 
-    public GifSourceBuilder<S> frame(Range<Integer> range) {
+    public GifSourceBuilder<S> register(Range<Integer> range) {
         for (int i = range.getMin(); i <= range.getMax(); i++) {
             frames.add(i);
         }
@@ -57,17 +57,7 @@ public class GifSourceBuilder<S> extends Captors.AbstractBuilder<GifSourceBuilde
     }
 
     @Override
-    public BufferedImage obtainBufferedImage() throws IOException {
-        checkReadiness();
-        List<BufferedImage> images = obtainBufferedImages();
-        if (images.size() > 1) {
-            throw new HandlingException("cannot create one image from multiple original gif frames");
-        }
-        return images.get(0);
-    }
-
-    @Override
-    public List<BufferedImage> obtainBufferedImages() throws IOException {
+    protected List<BufferedImage> obtainSourceImages() throws IOException {
         checkReadiness();
 
         // the max frame size index of the gif

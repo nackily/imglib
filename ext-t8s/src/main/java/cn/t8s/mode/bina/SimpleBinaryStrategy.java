@@ -1,6 +1,6 @@
 package cn.t8s.mode.bina;
 
-import cn.core.exec.InvalidSettingException;
+import cn.core.ex.InvalidSettingException;
 import cn.core.strategy.mode.AbstractBinaryStrategy;
 import cn.t8s.mode.graying.AvgGrayingStrategy;
 import cn.core.strategy.mode.AbstractGrayingStrategy;
