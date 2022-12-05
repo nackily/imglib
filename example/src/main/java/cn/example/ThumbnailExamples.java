@@ -26,8 +26,8 @@ public class ThumbnailExamples {
     public static void addBorder() throws IOException {
         Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
                 .addFilter(new BorderHandler.Builder()
-                        .vMargins(20)
-                        .hMargins(30)
+                        .vMargins(30)
+                        .hMargins(20)
                         .fillColor(ColorUtils.of(240, 230, 175))
                         .build())
                 .scale(1.0)

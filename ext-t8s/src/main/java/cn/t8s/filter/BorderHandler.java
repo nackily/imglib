@@ -52,12 +52,12 @@ public class BorderHandler implements ImageFilter {
     @Override
     public BufferedImage apply(BufferedImage img) {
         // create new image
-        int width = img.getWidth() + (vMargins << 1);
-        int height = img.getHeight() + (hMargins << 1);
+        int width = img.getWidth() + (hMargins << 1);
+        int height = img.getHeight() + (vMargins << 1);
         BufferedImage tar = BufferedImageUtils.newBackgroundImage(alpha, width, height, fillColor);
         // copy source image to new image
         Graphics2D g = tar.createGraphics();
-        g.drawImage(img, vMargins, hMargins, null);
+        g.drawImage(img, hMargins, vMargins, null);
         g.dispose();
         return tar;
     }
