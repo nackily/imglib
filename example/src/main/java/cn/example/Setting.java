@@ -55,6 +55,46 @@ public enum Setting {
      * 合并图像为GIG
      */
     MERGE_TO_GIF("Y", "3", ImagePipeExamples::mergeToGif),
+
+    /**
+     * 添加边框
+     */
+    ADD_BORDER("T", "1", ThumbnailExamples::addBorder),
+
+    /**
+     * 马赛克
+     */
+    MOSAIC("T", "2", ThumbnailExamples::mosaic),
+
+    /**
+     * 圆角化
+     */
+    ROUND_RECT("T", "3", ThumbnailExamples::roundRect),
+
+    /**
+     * 无损扩大
+     */
+    EXPAND("T", "4", ThumbnailExamples::expand),
+
+    /**
+     * 灰度化
+     */
+    GRAYING("T", "5", ThumbnailExamples::graying),
+
+    /**
+     * 二值化
+     */
+    BINARY("T", "6", ThumbnailExamples::binary),
+
+    /**
+     * 叠加线条
+     */
+    OVERLAY_LINE("T", "7", ThumbnailExamples::overlayLine),
+
+    /**
+     * 叠加形状
+     */
+    OVERLAY_OVAL("T", "8", ThumbnailExamples::overlayShape)
     ;
 
     final String type;

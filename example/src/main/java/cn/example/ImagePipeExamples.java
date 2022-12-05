@@ -79,7 +79,7 @@ public class ImagePipeExamples {
     }
 
     public static void splitImg() throws IOException {
-        ImagePipes.of(ExampleUtils.tmpFileNameOf("in/before_split.jpg"))
+        ImagePipes.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
                 .addFilter(new GridSplitHandler.Builder()
                         .gridWidth(400)
                         .gridHeight(250)
