@@ -149,4 +149,99 @@ ImagePipes.of(ExampleUtils.tmpFileNameOf("in/to_merge/spring.jpg"),
 
 ## 图像处理
 
-// todo
+尽管 Thumbnailator 主要用于处理缩略图，但其仍然为我们提供了基础的图像处理能力，包括有尺寸缩放、比例缩放、区域裁剪、旋转和添加水印等等。imglib 在 Thumbnailator 的基础之上扩展了一系列新的图像处理能力，所有新功能都实现了`ImageFilter`接口，可通过`Thumbnails.Builder#addFilter(ImageFilter)`、`Thumbnails.Builder#addFilters(List<ImageFilter>)`方式使用。
+
+### 添加边框
+```java
+Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
+        .addFilter(new BorderHandler.Builder()
+            .vMargins(30)
+            .hMargins(20)
+            .fillColor(ColorUtils.of(240, 230, 175))
+            .build())
+        .scale(1.0)
+        .toFile(ExampleUtils.tmpFileNameOf("out/bordered.jpg"));
+```
+
+在本例中，将为`.../in/panda.jpg`图像添加一个边框，该边框在水平方向的边距为 20 px，垂直方向的边距为 30 px，处理后的图像将被保存到`.../out/bordered.jpg`文件中。
+
+### 图像马赛克
+```java
+Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
+        .addFilter(new MosaicHandler.Builder()
+            .height(160)
+            .width(180)
+            .startX(480)
+            .startY(260)
+            .sideLength(10)
+            .build())
+        .scale(1.0)
+        .toFile(ExampleUtils.tmpFileNameOf("out/after_mosaic.jpg"));
+```
+
+在本例中，将为`.../in/panda.jpg`图像的部分区域马赛克化，区域的左上角坐标是\[480, 260\]，宽高分别为 180px 和 160px，每一个马赛克方块的边长固定为 10 px，处理后的图像将被保存到`.../out/after_mosaic.jpg`文件中。
+
+### 图像圆角化
+```java
+Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
+        .addFilter(new RoundRectHandler.Builder()
+            .arcWidth(100)
+            .arcHeight(100)
+            .build())
+        .scale(1.0)
+        .toFile(ExampleUtils.tmpFileNameOf("out/rounded.png"));
+```
+
+在本例中，将改变原始图像`.../in/panda.jpg`的四个角为圆角，角圆弧的水平直径和垂直直径均为 100px，处理后的图像将被保存到`.../out/rounded.png`文件中。值得注意的是，圆角化后的图像在保存时必须指定为 PNG 格式，否则将看不出任何效果。
+
+### 无损放大图像尺寸
+```java
+Thumbnails.of(ExampleUtils.tmpFileNameOf("in/matrix64.png"))
+        .addFilter(new HighQualityExpandHandler.Builder()
+            .finalWidth(300)
+            .keepAspectRatio(true)
+            .build())
+        .scale(1.0)
+        .toFile(ExampleUtils.tmpFileNameOf("out/expanded.png"));
+```
+
+尽管 Thumbnailator 已经提供重置图像尺寸的功能，但其在将图像扩大后通常会变得模糊不清，这是因为图像质量的损失。当我们需要对图像进行无损放大时，可使用`HighQualityExpandHandler`实现。
+
+在本例中，原始图像`.../in/matrix64.png`的尺寸为 8px \* 8px，在经过处理后，我们将得到一幅 300px \* 300px 的图像，并将其保存在`.../out/expanded.png`文件中。通常情况下，我们只需要指定一个最终的宽度（或者最终的高度），并设置为保持长宽比例，这样就能得到相较于原始图像等比放大的图像。
+
+### 图像灰度化
+```java
+Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
+        .addFilter(new ModeAdaptor(
+            new WeightGrayingStrategy.Builder()
+                .redWeight(0.3f)
+                .greenWeight(0.59f)
+                .build()))
+        .scale(1.0)
+        .toFile(ExampleUtils.tmpFileNameOf("out/grayed.jpg"));
+```
+
+在本例中，原始图像`.../in/panda.jpg`将被进行灰度化处理，采用的策略为按权重灰度化，红色分量占比 30%，绿色分量占比 59%，蓝色分量则占比 11%，灰度化完成后的图像将被保存到`.../out/grayed.jpg`文件中。假定任一像素点的原始 RGB 值为\[r', g', b'\]，则灰度值的计算公式为`val = (r' * 0.3 + g' * 0.59 + b' * 0.11)`，该像素点的最终 RGB 值为\[val, val, val\]。
+
+除按权重灰度化策略之外，imglib 还提供了平均值灰度化策略`AvgGrayingStrategy`、最大值灰度化策略`MaxGrayingStrategy`、最小值灰度化策略`MinGrayingStrategy`和固定分量灰度化策略`FixedGrayingStrategy`，并且，开发者可继承`AbstractGrayingStrategy`来扩展自定义的灰度化实现。
+
+### 图像二值化
+```java
+AbstractGrayingStrategy strategy = new FixedGrayingStrategy(FixedGrayingStrategy.FixedOption.R);
+Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
+        .addFilter(new ModeAdaptor(
+            new SimpleBinaryStrategy.Builder()
+                .grayingStrategy(strategy)
+                .threshold(120)
+                .build()))
+        .scale(1.0)
+        .toFile(ExampleUtils.tmpFileNameOf("out/binary.jpg"));
+```
+
+在本例中，原始图像`.../in/panda.jpg`将被进行二值化处理，采用的灰度化策略为固定分量（R）灰度化策略，二值化策略为简单策略，该策略要求设定阈值`threshold`，当灰度值大于该阈值时，该像素点的各个分量都将置为 255，否则将被置为 0。
+
+除简单二值化策略之外，imglib 还提供了临近平均策略`AvgNearbyBinaryStrategy`，并且，开发者可继承`AbstractBinaryStrategy`来扩展自定义的二值化实现。
+
+### 图像覆盖线条
+
+### 图像覆盖形状
