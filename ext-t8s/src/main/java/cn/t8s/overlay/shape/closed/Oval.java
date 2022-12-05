@@ -2,7 +2,6 @@ package cn.t8s.overlay.shape.closed;
 
 import cn.core.ex.InvalidSettingException;
 import cn.core.strategy.overlay.AbstractClosedShapeStrategy;
-
 import java.awt.*;
 
 /**
@@ -31,23 +30,23 @@ public class Oval extends AbstractClosedShapeStrategy {
     public static class Builder extends AbstractClosedShapeBuilder {
 
         @Override
-        public Rect.Builder rect(Rectangle rect) {
-            return (Rect.Builder) super.rect(rect);
+        public Oval.Builder rect(Rectangle rect) {
+            return (Oval.Builder) super.rect(rect);
         }
 
         @Override
-        public Rect.Builder stroke(Stroke stroke) {
-            return (Rect.Builder) super.stroke(stroke);
+        public Oval.Builder stroke(Stroke stroke) {
+            return (Oval.Builder) super.stroke(stroke);
         }
 
         @Override
-        public Rect.Builder fill(boolean fill) {
-            return (Rect.Builder) super.fill(fill);
+        public Oval.Builder fill(boolean fill) {
+            return (Oval.Builder) super.fill(fill);
         }
 
         @Override
-        public Rect.Builder color(Color color) {
-            return (Rect.Builder) super.color(color);
+        public Oval.Builder color(Color color) {
+            return (Oval.Builder) super.color(color);
         }
 
         @Override
