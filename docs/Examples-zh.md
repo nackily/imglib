@@ -293,8 +293,8 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 针对于开口形状的扩展，开发者可通过继承`AbstractOpenedShape`实现。
 
 <figure class="half">
-    <img src="/example/res/in/panda.jpg" width="40%"/>
-    <img src="/example/res/out/painted_line.jpg" width="40%"/>
+    <a href="/example/res/in/panda.jpg"><img src="/example/res/in/panda.jpg"></a>
+    <a href="/example/res/out/painted_line.jpg"><img src="/example/res/out/painted_line.jpg"></a>
 </figure>
 
 ### 绘制闭合形状
