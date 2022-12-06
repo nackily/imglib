@@ -34,6 +34,7 @@ ImagePipes.ofEmptySource()
 ```
 
 在本例中，将创建一张宽高为 300px \* 200px ，透明度为 0.2（透明度在 \[0, 1\] 之间取值，等于 0 时图像完全不透明，等于 1 时图像完全透明），背景颜色随机的图像，并将其保存到`.../out/mono_color.png`文件中。
+
 <div align="center"><img src="/example/res/out/mono_color.png" width="20%"/></div>
 
 ### 截取一张屏幕快照
@@ -48,6 +49,7 @@ ImagePipes.ofEmptySource()
 ```
 
 在本例中，将截取一张屏幕快照，截取的区域指定为左上角坐标为\[600, 300\], 宽度为 280px，高度为 190px，截取的快照将被保存到`.../out/screenshot.png`文件中。
+
 <div align="center"><img src="/example/res/out/screenshot.png" width="20%"/></div>
 
 ### 创建一张 HASH 图像
@@ -61,6 +63,7 @@ ImagePipes.ofEmptySource()
 ```
 
 在本例中，将创建宽高为 5px \* 5px 的二维矩阵，在矩阵中如果对应位置的像素点取值为 `TRUE`，则该像素点的前景色设置为\[(R) 50,(G) 150,(B) 50\]，该点阵图像将被保存到`.../out/hash.png`文件中。
+
 <div align="center"><img src="/example/res/out/hash.png" width="20%"/></div>
 
 ### 提取图像自 PDF 页
@@ -72,7 +75,8 @@ ImagePipes.ofPdf(ExampleUtils.tmpFileNameOf("in/jvms8.pdf"))
 ```
 
 在本例中，将解析指定的 PDF 文件`.../in/jvms8.pdf`，提取索引为 0 的页为图像，提取图像时指定 DPI（每英寸内像素点数）为 280，并将该图像保存到`.../out/page_1_of_jvms8.jpg`文件中。
-<div align="center"><img src="/example/res/out/page_1_of_jvms8.jpg" width="60%"/></div>
+
+<div align="center"><img src="/example/res/out/page_1_of_jvms8.jpg" width="50%"/></div>
 
 ### 提取图像自 GIF 帧
 ```java
@@ -169,10 +173,10 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 ```
 
 在本例中，将为`.../in/panda.jpg`图像添加一个边框，该边框在水平方向的边距为 20 px，垂直方向的边距为 30 px，处理后的图像将被保存到`.../out/bordered.jpg`文件中。
-<figure class="half">
-    <img src="/example/res/in/panda.jpg" width="40%"/>
-    <img src="/example/res/out/bordered.jpg" width="40%"/>
-</figure>
+
+|              before               |               after                |
+|:---------------------------------:|:----------------------------------:|
+| ![](/example/res/in/matrix64.png) | ![](/example/res/out/bordered.jpg) |
 
 ### 图像马赛克
 ```java
@@ -189,10 +193,10 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 ```
 
 在本例中，将为`.../in/panda.jpg`图像的部分区域马赛克化，区域的左上角坐标是\[480, 260\]，宽高分别为 180px 和 160px，每一个马赛克方块的边长固定为 10 px，处理后的图像将被保存到`.../out/after_mosaic.jpg`文件中。
-<figure class="half">
-    <img src="/example/res/in/panda.jpg" width="40%"/>
-    <img src="/example/res/out/after_mosaic.jpg" width="40%"/>
-</figure>
+
+|              before               |                 after                  |
+|:---------------------------------:|:--------------------------------------:|
+| ![](/example/res/in/matrix64.png) | ![](/example/res/out/after_mosaic.jpg) |
 
 ### 图像圆角化
 ```java
@@ -206,10 +210,10 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 ```
 
 在本例中，将改变原始图像`.../in/panda.jpg`的四个角为圆角，角圆弧的水平直径和垂直直径均为 100px，处理后的图像将被保存到`.../out/rounded.png`文件中。值得注意的是，圆角化后的图像在保存时必须指定为 PNG 格式，否则将看不出任何效果。
-<figure class="half">
-    <img src="/example/res/in/panda.jpg" width="40%"/>
-    <img src="/example/res/out/rounded.png" width="40%"/>
-</figure>
+
+|              before               |               after               |
+|:---------------------------------:|:---------------------------------:|
+| ![](/example/res/in/matrix64.png) | ![](/example/res/out/rounded.png) |
 
 ### 无损放大图像尺寸
 ```java
@@ -226,10 +230,10 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/matrix64.png"))
 
 在本例中，原始图像`.../in/matrix64.png`的尺寸为 8px \* 8px，在经过处理后，我们将得到一幅 300px \* 300px 的图像，并将其保存在`.../out/expanded.png`文件中。通常情况下，我们只需要指定一个最终的宽度（或者最终的高度），并设置为保持长宽比例，这样就能得到相较于原始图像等比放大的图像。
 
-<figure class="half">
-    <img src="/example/res/in/matrix64.png" width="10%"/>
-    <img src="/example/res/out/expanded.png" width="40%"/>
-</figure>
+|              before               |               after                |
+|:---------------------------------:|:----------------------------------:|
+| ![](/example/res/in/matrix64.png) | ![](/example/res/out/expanded.png) |
+|          size:8px * 8px           |         size:300px * 300px         |
 
 ### 图像灰度化
 ```java
@@ -247,10 +251,9 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 
 除按权重灰度化策略之外，imglib 还提供了平均值灰度化策略`AvgGrayingStrategy`、最大值灰度化策略`MaxGrayingStrategy`、最小值灰度化策略`MinGrayingStrategy`和固定分量灰度化策略`FixedGrayingStrategy`，并且，开发者可继承`AbstractGrayingStrategy`来扩展自定义的灰度化实现。
 
-<figure class="half">
-    <img src="/example/res/in/panda.jpg" width="40%"/>
-    <img src="/example/res/out/grayed.jpg" width="40%"/>
-</figure>
+|             before             |                after                |
+|:------------------------------:|:-----------------------------------:|
+| ![](/example/res/in/panda.jpg) |  ![](/example/res/out/grayed.jpg)   |
 
 ### 图像二值化
 ```java
@@ -269,10 +272,9 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 
 除简单二值化策略之外，imglib 还提供了临近平均策略`AvgNearbyBinaryStrategy`，并且，开发者可继承`AbstractBinaryStrategy`来扩展自定义的二值化实现。
 
-<figure class="half">
-    <img src="/example/res/in/panda.jpg" width="40%"/>
-    <img src="/example/res/out/binary.jpg" width="40%"/>
-</figure>
+|             before             |               after               |
+|:------------------------------:|:---------------------------------:|
+| ![](/example/res/in/panda.jpg) | ![](/example/res/out/binary.jpg)  |
 
 ### 绘制开口形状
 ```java
@@ -292,9 +294,9 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 
 针对于开口形状的扩展，开发者可通过继承`AbstractOpenedShape`实现。
 
-<center class="half">
-    <img src="/example/res/in/panda.jpg" width="40%" align = left/><img src="/example/res/out/painted_line.jpg" width="40%" align = right/>
-</center>
+|             before             |                 after                  |
+|:------------------------------:|:--------------------------------------:|
+| ![](/example/res/in/panda.jpg) | ![](/example/res/out/painted_line.jpg) |
 
 ### 绘制闭合形状
 ```java
@@ -313,7 +315,6 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 
 对于一个封闭形状而言，绘制时有两种模式，其一是填充内部，另一种是仅绘制边框，如果开发者希望绘制形状的边框，还应指定一个笔刷`Stroke`对象。除椭圆外，imglib 还提供了矩形`Rect`的实现，开发者还可通过继承`AbstractClosedShape`扩展其他的封闭形状。
 
-<figure class="half">
-    <img src="/example/res/in/panda.jpg" width="40%"/>
-    <img src="/example/res/out/fill_oval.jpg" width="40%"/>
-</figure>
+|             before             |                after                |
+|:------------------------------:|:-----------------------------------:|
+| ![](/example/res/in/panda.jpg) | ![](/example/res/out/fill_oval.jpg) |
