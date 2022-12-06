@@ -1,7 +1,7 @@
 package cn.core.strategy.overlay;
 
 import cn.core.ex.InvalidSettingException;
-import cn.core.strategy.OverlayStrategy;
+import cn.core.strategy.Shape;
 import cn.core.GenericBuilder;
 import java.awt.*;
 
@@ -11,7 +11,7 @@ import java.awt.*;
  * @author tracy
  * @since 1.0.0
  */
-public abstract class AbstractClosedShapeStrategy implements OverlayStrategy {
+public abstract class AbstractClosedShape implements Shape {
 
     /**
      * 绘制区域
@@ -34,7 +34,7 @@ public abstract class AbstractClosedShapeStrategy implements OverlayStrategy {
     protected Color color;
 
 
-    protected AbstractClosedShapeStrategy(AbstractClosedShapeBuilder csb) {
+    protected AbstractClosedShape(AbstractClosedShapeBuilder csb) {
         this.rect = csb.rect;
         this.stroke = csb.stroke;
         this.fill = csb.fill;
@@ -84,7 +84,7 @@ public abstract class AbstractClosedShapeStrategy implements OverlayStrategy {
     public abstract void fillInside(int canvasWidth, int canvasHeight, Graphics2D g2d);
 
 
-    public abstract static class AbstractClosedShapeBuilder implements GenericBuilder<AbstractClosedShapeStrategy> {
+    public abstract static class AbstractClosedShapeBuilder implements GenericBuilder<AbstractClosedShape> {
         protected Rectangle rect;
         protected Stroke stroke;
         protected boolean fill;

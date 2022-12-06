@@ -1,8 +1,8 @@
-package cn.t8s.overlay.shape.opened;
+package cn.t8s.shape.opened;
 
 import cn.core.ex.HandlingException;
 import cn.core.ex.InvalidSettingException;
-import cn.core.strategy.overlay.AbstractOpenedShapeStrategy;
+import cn.core.strategy.overlay.AbstractOpenedShape;
 import java.awt.*;
 
 /**
@@ -11,7 +11,7 @@ import java.awt.*;
  * @author tracy
  * @since 1.0.0
  */
-public class Line extends AbstractOpenedShapeStrategy {
+public class Line extends AbstractOpenedShape {
 
     /**
      * 起点
@@ -71,7 +71,7 @@ public class Line extends AbstractOpenedShapeStrategy {
         }
 
         @Override
-        public AbstractOpenedShapeStrategy build() {
+        public AbstractOpenedShape build() {
             if (start == null || end == null) {
                 throw new InvalidSettingException("both start and end points are not specified");
             }

@@ -3,12 +3,12 @@ package cn.core.strategy;
 import java.awt.*;
 
 /**
- * 叠加策略
+ * 形状
  *
  * @author tracy
  * @since 1.0.0
  */
-public interface OverlayStrategy {
+public interface Shape {
 
     /**
      * 绘制

@@ -1,22 +1,22 @@
 package cn.t8s.filter;
 
-import cn.core.strategy.OverlayStrategy;
+import cn.core.strategy.Shape;
 import net.coobird.thumbnailator.filters.ImageFilter;
 import net.coobird.thumbnailator.util.BufferedImages;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * 叠加处理器适配器
+ * 形状适配器
  *
  * @author tracy
  * @since 1.0.0
  */
-public class OverlayAdaptor implements ImageFilter {
+public class ShapeAdaptor implements ImageFilter {
 
-    private final OverlayStrategy shape;
+    private final Shape shape;
 
-    public OverlayAdaptor(OverlayStrategy shape) {
+    public ShapeAdaptor(Shape shape) {
         this.shape = shape;
     }
 

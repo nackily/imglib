@@ -1,6 +1,6 @@
 package cn.core.strategy.overlay;
 
-import cn.core.strategy.OverlayStrategy;
+import cn.core.strategy.Shape;
 import cn.core.GenericBuilder;
 import java.awt.*;
 
@@ -10,7 +10,7 @@ import java.awt.*;
  * @author tracy
  * @since 1.0.0
  */
-public abstract class AbstractOpenedShapeStrategy implements OverlayStrategy {
+public abstract class AbstractOpenedShape implements Shape {
 
     /**
      * 笔画样式，例如 BasicStroke
@@ -23,7 +23,7 @@ public abstract class AbstractOpenedShapeStrategy implements OverlayStrategy {
     protected Color color;
 
 
-    protected AbstractOpenedShapeStrategy(AbstractOpenedShapeBuilder csb) {
+    protected AbstractOpenedShape(AbstractOpenedShapeBuilder csb) {
         this.stroke = csb.stroke;
         this.color = csb.color;
     }
@@ -46,7 +46,7 @@ public abstract class AbstractOpenedShapeStrategy implements OverlayStrategy {
     public abstract void draw(int canvasWidth, int canvasHeight, Graphics2D g2d);
 
 
-    public abstract static class AbstractOpenedShapeBuilder implements GenericBuilder<AbstractOpenedShapeStrategy> {
+    public abstract static class AbstractOpenedShapeBuilder implements GenericBuilder<AbstractOpenedShape> {
         protected Stroke stroke;
         protected Color color;
 

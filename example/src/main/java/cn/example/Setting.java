@@ -89,12 +89,12 @@ public enum Setting {
     /**
      * 叠加线条
      */
-    OVERLAY_LINE("T", "7", ThumbnailExamples::overlayLine),
+    OPENING_SHAPE("T", "7", ThumbnailExamples::paintOpeningShape),
 
     /**
      * 叠加形状
      */
-    OVERLAY_OVAL("T", "8", ThumbnailExamples::overlayShape)
+    CLOSED_SHAPE("T", "8", ThumbnailExamples::paintClosedShape)
     ;
 
     final String type;

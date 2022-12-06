@@ -7,8 +7,8 @@ import cn.t8s.filter.*;
 import cn.t8s.mode.bina.SimpleBinaryStrategy;
 import cn.t8s.mode.graying.FixedGrayingStrategy;
 import cn.t8s.mode.graying.WeightGrayingStrategy;
-import cn.t8s.overlay.shape.closed.Oval;
-import cn.t8s.overlay.shape.opened.Line;
+import cn.t8s.shape.closed.Oval;
+import cn.t8s.shape.opened.Line;
 import net.coobird.thumbnailator.Thumbnails;
 
 import java.awt.*;
@@ -90,9 +90,9 @@ public class ThumbnailExamples {
                 .toFile(ExampleUtils.tmpFileNameOf("out/binary.jpg"));
     }
 
-    public static void overlayLine() throws IOException {
+    public static void paintOpeningShape() throws IOException {
         Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
-                .addFilter(new OverlayAdaptor(
+                .addFilter(new ShapeAdaptor(
                         new Line.Builder()
                                 .start(new Point(200, 260))
                                 .end(new Point(1000, 260))
@@ -100,19 +100,19 @@ public class ThumbnailExamples {
                                 .stroke(new BasicStroke(6))
                                 .build()))
                 .scale(1.0)
-                .toFile(ExampleUtils.tmpFileNameOf("out/overlaid_line.jpg"));
+                .toFile(ExampleUtils.tmpFileNameOf("out/painted_line.jpg"));
     }
 
-    public static void overlayShape() throws IOException {
+    public static void paintClosedShape() throws IOException {
         Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
-                .addFilter(new OverlayAdaptor(
+                .addFilter(new ShapeAdaptor(
                         new Oval.Builder()
                                 .fill(true)
                                 .color(ColorUtils.random())
                                 .rect(new Rectangle(220, 110, 680, 350))
                                 .build()))
                 .scale(1.0)
-                .toFile(ExampleUtils.tmpFileNameOf("out/overlaid_oval.jpg"));
+                .toFile(ExampleUtils.tmpFileNameOf("out/painted_oval.jpg"));
     }
 
 }

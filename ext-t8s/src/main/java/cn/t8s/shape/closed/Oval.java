@@ -1,7 +1,7 @@
-package cn.t8s.overlay.shape.closed;
+package cn.t8s.shape.closed;
 
 import cn.core.ex.InvalidSettingException;
-import cn.core.strategy.overlay.AbstractClosedShapeStrategy;
+import cn.core.strategy.overlay.AbstractClosedShape;
 import java.awt.*;
 
 /**
@@ -10,7 +10,7 @@ import java.awt.*;
  * @author tracy
  * @since 1.0.0
  */
-public class Oval extends AbstractClosedShapeStrategy {
+public class Oval extends AbstractClosedShape {
 
 
     public Oval(Builder csb) {
