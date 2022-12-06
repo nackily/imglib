@@ -1,11 +1,9 @@
 
----
-
 [**English Documentation**](Examples.md)
 
 ---
 
-在本文中将列举一些示例，以便开发者可以快速了解 imglib 的功能并且轻松使用他们，所有的这些示例都可以在[example/.../Setting.java](/example/src/main/java/cn/example/Setting.java)中找到，并且您可以运行 **example** 模块来执行相应的功能。
+本文将列举一些示例，以便开发者可以快速了解 imglib 的功能并且轻松使用他们，所有的这些示例都可以在[example/.../Setting.java](/example/src/main/java/cn/example/Setting.java)中找到，并且您可以运行 **example** 模块来执行相应的功能。
 
 ## 图像收集
 
@@ -19,7 +17,7 @@ ImagePipes.ofEmptySource()
         .toFile(ExampleUtils.tmpFileNameOf("out/transparent.png"));
 ```
 
-在本例中，将创建一张宽高为 300px \* 200px ，背景透明的图像，并将其保存到`.../out/transparent.png`文件中。
+在本例中，将创建一张宽高为 300px * 200px ，背景透明的图像，并将其保存到`.../out/transparent.png`文件中。
 
 ### 创建一张纯色图像
 ```java
@@ -33,7 +31,7 @@ ImagePipes.ofEmptySource()
         .toFile(ExampleUtils.tmpFileNameOf("out/mono_color.png"));
 ```
 
-在本例中，将创建一张宽高为 300px \* 200px ，透明度为 0.2（透明度在 \[0, 1\] 之间取值，等于 0 时图像完全不透明，等于 1 时图像完全透明），背景颜色随机的图像，并将其保存到`.../out/mono_color.png`文件中。
+在本例中，将创建一张宽高为 300px * 200px ，透明度为 0.2（透明度在 \[0, 1\] 之间取值，等于 0 时图像完全不透明，等于 1 时图像完全透明），背景颜色随机的图像，并将其保存到`.../out/mono_color.png`文件中。
 
 <div align="center"><img src="/example/res/out/mono_color.png"/></div>
 
@@ -62,9 +60,11 @@ ImagePipes.ofEmptySource()
         .toFile(ExampleUtils.tmpFileNameOf("out/hash.png"));
 ```
 
-在本例中，将创建宽高为 5px \* 5px 的二维矩阵，在矩阵中如果对应位置的像素点取值为 `TRUE`，则该像素点的前景色设置为\[(R) 50,(G) 150,(B) 50\]，该点阵图像将被保存到`.../out/hash.png`文件中。
+在本例中，将创建宽高为 5px * 5px 的二维矩阵，在矩阵中如果对应位置的像素点取值为 `TRUE`，则该像素点的前景色设置为\[(R) 50,(G) 150,(B) 50\]，该点阵图像将被保存到`.../out/hash.png`文件中。
 
-<div align="center"><img src="/example/res/out/hash.png"/></div>
+<div align="center"><img src="/docs/res/5x5hash_matrix.png"/></div>
+
+由于生成的 HASH 图像像素点仅有 25 个像素点，为方便演示，上面的示意图并非`out/hash.png`，而是将其放大后得到的图像。
 
 ### 提取图像自 PDF 页
 ```java
@@ -115,7 +115,7 @@ ImagePipes.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
             ExampleUtils.tmpFileNameOf("out/split/slice_9.jpg"));
 ```
 
-在本例中，将使用宽高为 400px \* 250px 的矩形区域逐行自左往右从原始图像中提取图像，直至该矩形已触碰到（或者已包含）图像边界，并将提取的图像按照顺序保存到`.../out/split/`文件目录中。
+在本例中，将使用宽高为 400px * 250px 的矩形区域逐行自左往右从原始图像中提取图像，直至该矩形已触碰到（或者已包含）图像边界，并将提取的图像按照顺序保存到`.../out/split/`文件目录中。
 
 
 |              原始图像              |           拆分后的图像列表            |
@@ -141,7 +141,7 @@ ImagePipes.of(ExampleUtils.tmpFileNameOf("in/to_merge/spring.jpg"),
 
 在本例中，将从`.../in/to_merge/`文件目录中加载`spring.jpg` `summer.jpg` `winter.jpg` `autumn.jpg`四幅图像，并将这些图像按照顺序拼接在一幅图像内，拼接的规则如下：
 
-+ 使用固定宽高为 530px \* 530px 的网格盛放每幅图像；
++ 使用固定宽高为 530px * 530px 的网格盛放每幅图像；
 + 开启网格自动调整，当网格不足以容纳某幅图像时，重置网格的大小到足以容纳；
 + 设置图像居中摆放，包括水平居中和垂直居中；
 + 每一行摆放的网格设置为 2 个；
@@ -233,7 +233,7 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 
 ### 无损放大图像尺寸
 ```java
-Thumbnails.of(ExampleUtils.tmpFileNameOf("in/matrix64.png"))
+Thumbnails.of(ExampleUtils.tmpFileNameOf("in/chaotic_points.png"))
         .addFilter(new HighQualityExpandHandler.Builder()
             .finalWidth(300)
             .keepAspectRatio(true)
@@ -244,12 +244,12 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/matrix64.png"))
 
 尽管 Thumbnailator 已经提供重置图像尺寸的功能，但其在将图像扩大后通常会变得模糊不清，这是因为图像质量的损失。当我们需要对图像进行无损放大时，可使用`HighQualityExpandHandler`实现。
 
-在本例中，原始图像`.../in/matrix64.png`的尺寸为 8px \* 8px，在经过处理后，我们将得到一幅 300px \* 300px 的图像，并将其保存在`.../out/expanded.png`文件中。通常情况下，我们只需要指定一个最终的宽度（或者最终的高度），并设置为保持长宽比例，这样就能得到相较于原始图像等比放大的图像。
+在本例中，原始图像`.../in/chaotic_points.png`的尺寸为 100px * 60px，在经过处理后，我们将得到一幅 300px * 180px 的图像，并将其保存在`.../out/expanded.png`文件中。通常情况下，我们只需要指定一个最终的宽度（或者最终的高度），并设置为保持长宽比例，这样就能得到相较于原始图像等比放大的图像。
 
-|               原始图像                |               放大后图像                |
-|:---------------------------------:|:----------------------------------:|
-| ![](/example/res/in/matrix64.png) | ![](/example/res/out/expanded.png) |
-|          size:8px * 8px           |         size:300px * 300px         |
+|                  原始图像                   |               放大后图像                |
+|:---------------------------------------:|:----------------------------------:|
+| ![](/example/res/in/chaotic_points.png) | ![](/example/res/out/expanded.png) |
+|            size:100px * 60px            |         size:300px * 180px         |
 
 ### 图像灰度化
 ```java

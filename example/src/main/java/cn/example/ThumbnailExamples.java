@@ -58,7 +58,7 @@ public class ThumbnailExamples {
     }
 
     public static void expand() throws IOException {
-        Thumbnails.of(ExampleUtils.tmpFileNameOf("in/matrix64.png"))
+        Thumbnails.of(ExampleUtils.tmpFileNameOf("in/chaotic_points.png"))
                 .addFilter(new HighQualityExpandHandler.Builder()
                         .finalWidth(300)
                         .keepAspectRatio(true)
