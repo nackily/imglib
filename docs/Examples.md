@@ -3,7 +3,7 @@
 
 ---
 
-This article will list some examples so that developers can quickly understand the functions of imglib and easily use them. All these examples can be found in [example/.../Setting.java](/example/src/main/java/cn/example/Setting.java), and you can run the **example** module to execute the corresponding functions.
+This article will list some examples so that developers can quickly understand the functions of *imglib* and easily use them. All these examples can be found in [example/.../Setting.java](/example/src/main/java/cn/example/Setting.java), and you can run the **example** module to execute the corresponding functions.
 
 ## Image Collection
 
@@ -174,7 +174,7 @@ In this example, four images of `spring.jpg`,`summer.jpg`,`winter.jpg`,`autumn.j
 
 ## Image Processing
 
-Although Thumbnailator is mainly used to process thumbnails, it still provides us with basic image processing capabilities, including size scaling, scaling, area cropping, rotation, and adding watermarks, etc. imglib expands a series of new image processing capabilities on the basis of Thumbnailator, and all new functions implement the `ImageFilter` interface, which can be accessed through `Thumbnails.Builder#addFilter(ImageFilter)`, `Thumbnails.Builder#addFilters(List<ImageFilter>)` way to use.
+Although *Thumbnailator* is mainly used to process thumbnails, it still provides us with basic image processing capabilities, including size scaling, scaling, area cropping, rotation, and adding watermarks, etc. *Imglib* expands a series of new image processing capabilities on the basis of *Thumbnailator*, and all new functions implement the `ImageFilter` interface, which can be accessed through `Thumbnails.Builder#addFilter(ImageFilter)`, `Thumbnails.Builder#addFilters(List<ImageFilter>)` way to use.
 
 ### Add a border to the image
 ```java
@@ -242,7 +242,7 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/chaotic_points.png"))
         .toFile(ExampleUtils.tmpFileNameOf("out/expanded.png"));
 ```
 
-Although Thumbnailator already offers the ability to resize images, images usually become blurry which have been enlarged by it because of the loss of image quality. When we need to expand the image lossless, we can use `HighQualityExpandHandler` to achieve it.
+Although *Thumbnailator* already offers the ability to resize images, images usually become blurry which have been enlarged by it because of the loss of image quality. When we need to expand the image lossless, we can use `HighQualityExpandHandler` to achieve it.
 
 In this example, the size of the original image `.../in/chaotic_points.png` is 100px * 60px, after zooming in, we will get a 300px * 180px image which has been saved to file of `... /out/expanded.png`. Usually, we only need to specify a final width (or final height), and set it to keep the aspect ratio, so that we can get an image that is proportional to the original image.
 
@@ -265,7 +265,7 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 
 In this example, the original image `.../in/panda.jpg` will be grayscaled, and the strategy adopted is to grayscale by weight. The red component accounts for 30%, and the green component accounts for 59%. The blue component accounts for 11%, and the grayscaled image will be saved to the file of `.../out/grayed.jpg`. Assuming that the original RGB value of any pixel is \[r', g', b'\], the formula for calculating the gray value is `val = (r' * 0.3 + g' * 0.59 + b' * 0.11) `, and the final RGB value of the pixel is \[val, val, val\].
 
-In addition to the graying strategy by weight, imglib also provides the average graying strategy `AvgGrayingStrategy`, the maximum graying strategy `MaxGrayingStrategy`, the minimum graying strategy `MinGrayingStrategy` and the fixed component graying strategy `FixedGrayingStrategy`, and developers can extend `AbstractGrayingStrategy` to achieve custom grayscale implementation.
+In addition to the graying strategy by weight, *imglib* also provides the average graying strategy `AvgGrayingStrategy`, the maximum graying strategy `MaxGrayingStrategy`, the minimum graying strategy `MinGrayingStrategy` and the fixed component graying strategy `FixedGrayingStrategy`, and developers can extend `AbstractGrayingStrategy` to achieve custom grayscale implementation.
 
 |         original image         |         grayscaled image         |
 |:------------------------------:|:--------------------------------:|
@@ -286,7 +286,7 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 
 In this example, the original image `.../in/panda.jpg` will be binarized, the grayscale strategy adopted is the fixed component (R) grayscale strategy, and the binarization strategy is the simple strategy which requires setting a threshold `threshold`, when the gray value is greater than the threshold, each component of the pixel will be set to 255, otherwise it will be set to 0.
 
-In addition to the simple binarization strategy, imglib also provides the near average strategy `AvgNearbyBinaryStrategy`, and developers can extend `AbstractBinaryStrategy` to achieve the custom binarization implementation.
+In addition to the simple binarization strategy, *imglib* also provides the near average strategy `AvgNearbyBinaryStrategy`, and developers can extend `AbstractBinaryStrategy` to achieve the custom binarization implementation.
 
 |         original image         |         binarized image          |
 |:------------------------------:|:--------------------------------:|
@@ -329,7 +329,7 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 
 In this example, an oval will be drawn on the original image `/in/panda.jpg`, the coordinates of the upper left corner of the circumscribed rectangle of the ellipse are \[220, 110\], and the length and width of the circumscribed rectangle are 680px and 350px, and set to fill the oval with a random color, the processed image will be saved to the file of `.../out/fill_oval.jpg`.
 
-For a closed shape, there are two modes of drawing, one is to fill the interior, and the other is to only draw the border. If the developer wishes to draw the shape's border, a brush `Stroke` object should also be specified. In addition to the ellipse, imglib also provides the implementation of the rectangle `Rect`, and developers can achieve other closed shapes by extending `AbstractClosedShape`.
+For a closed shape, there are two modes of drawing, one is to fill the interior, and the other is to only draw the border. If the developer wishes to draw the shape's border, a brush `Stroke` object should also be specified. In addition to the ellipse, *imglib* also provides the implementation of the rectangle `Rect`, and developers can achieve other closed shapes by extending `AbstractClosedShape`.
 
 |         original image         |   image after adding closed shape   |
 |:------------------------------:|:-----------------------------------:|

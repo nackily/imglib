@@ -3,7 +3,7 @@
 
 ---
 
-本文将列举一些示例，以便开发者可以快速了解 imglib 的功能并且轻松使用他们，所有的这些示例都可以在[example/.../Setting.java](/example/src/main/java/cn/example/Setting.java)中找到，并且您可以运行 **example** 模块来执行相应的功能。
+本文将列举一些示例，以便开发者可以快速了解 *imglib* 的功能并且轻松使用他们，所有的这些示例都可以在[example/.../Setting.java](/example/src/main/java/cn/example/Setting.java)中找到，并且您可以运行 **example** 模块来执行相应的功能。
 
 ## 图像收集
 
@@ -174,7 +174,7 @@ ImagePipes.of(ExampleUtils.tmpFileNameOf("in/to_merge/spring.jpg"),
 
 ## 图像处理
 
-尽管 Thumbnailator 主要用于处理缩略图，但其仍然为我们提供了基础的图像处理能力，包括有尺寸缩放、比例缩放、区域裁剪、旋转和添加水印等等。imglib 在 Thumbnailator 的基础之上扩展了一系列新的图像处理能力，所有新功能都实现了`ImageFilter`接口，可通过`Thumbnails.Builder#addFilter(ImageFilter)`、`Thumbnails.Builder#addFilters(List<ImageFilter>)`方式使用。
+尽管 *Thumbnailator* 主要用于处理缩略图，但其仍然为我们提供了基础的图像处理能力，包括有尺寸缩放、比例缩放、区域裁剪、旋转和添加水印等等。*Imglib* 在 *Thumbnailator* 的基础之上扩展了一系列新的图像处理能力，所有新功能都实现了`ImageFilter`接口，可通过`Thumbnails.Builder#addFilter(ImageFilter)`、`Thumbnails.Builder#addFilters(List<ImageFilter>)`方式使用。
 
 ### 添加边框
 ```java
@@ -242,7 +242,7 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/chaotic_points.png"))
         .toFile(ExampleUtils.tmpFileNameOf("out/expanded.png"));
 ```
 
-尽管 Thumbnailator 已经提供重置图像尺寸的功能，但其在将图像扩大后通常会变得模糊不清，这是因为图像质量的损失。当我们需要对图像进行无损放大时，可使用`HighQualityExpandHandler`实现。
+尽管 *Thumbnailator* 已经提供重置图像尺寸的功能，但其在将图像扩大后通常会变得模糊不清，这是因为图像质量的损失。当我们需要对图像进行无损放大时，可使用`HighQualityExpandHandler`实现。
 
 在本例中，原始图像`.../in/chaotic_points.png`的尺寸为 100px * 60px，在经过处理后，我们将得到一幅 300px * 180px 的图像，并将其保存在`.../out/expanded.png`文件中。通常情况下，我们只需要指定一个最终的宽度（或者最终的高度），并设置为保持长宽比例，这样就能得到相较于原始图像等比放大的图像。
 
@@ -265,7 +265,7 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 
 在本例中，原始图像`.../in/panda.jpg`将被进行灰度化处理，采用的策略为按权重灰度化，红色分量占比 30%，绿色分量占比 59%，蓝色分量则占比 11%，灰度化完成后的图像将被保存到`.../out/grayed.jpg`文件中。假定任一像素点的原始 RGB 值为\[r', g', b'\]，则灰度值的计算公式为`val = (r' * 0.3 + g' * 0.59 + b' * 0.11)`，该像素点的最终 RGB 值为\[val, val, val\]。
 
-除按权重灰度化策略之外，imglib 还提供了平均值灰度化策略`AvgGrayingStrategy`、最大值灰度化策略`MaxGrayingStrategy`、最小值灰度化策略`MinGrayingStrategy`和固定分量灰度化策略`FixedGrayingStrategy`，并且，开发者可继承`AbstractGrayingStrategy`来扩展自定义的灰度化实现。
+除按权重灰度化策略之外，*imglib* 还提供了平均值灰度化策略`AvgGrayingStrategy`、最大值灰度化策略`MaxGrayingStrategy`、最小值灰度化策略`MinGrayingStrategy`和固定分量灰度化策略`FixedGrayingStrategy`，并且，开发者可继承`AbstractGrayingStrategy`来扩展自定义的灰度化实现。
 
 |              原始图像              |              灰度化后图像              |
 |:------------------------------:|:--------------------------------:|
@@ -286,7 +286,7 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 
 在本例中，原始图像`.../in/panda.jpg`将被进行二值化处理，采用的灰度化策略为固定分量（R）灰度化策略，二值化策略为简单策略，该策略要求设定阈值`threshold`，当灰度值大于该阈值时，该像素点的各个分量都将置为 255，否则将被置为 0。
 
-除简单二值化策略之外，imglib 还提供了临近平均策略`AvgNearbyBinaryStrategy`，并且，开发者可继承`AbstractBinaryStrategy`来扩展自定义的二值化实现。
+除简单二值化策略之外，*imglib* 还提供了临近平均策略`AvgNearbyBinaryStrategy`，并且，开发者可继承`AbstractBinaryStrategy`来扩展自定义的二值化实现。
 
 |              原始图像              |              二值化后图像              |
 |:------------------------------:|:--------------------------------:|
@@ -329,7 +329,7 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
 
 在本例中，将在原始图像`/in/panda.jpg`上绘制一个椭圆形状，该椭圆的外切矩形左上角坐标为\[220, 110\]、外切矩形的长宽分别为 680px 和 350px，并且设定为使用随机颜色填充该椭圆内部，处理完成后的图像将被保存到`.../out/fill_oval.jpg`文件中。
 
-对于一个封闭形状而言，绘制时有两种模式，其一是填充内部，另一种是仅绘制边框，如果开发者希望绘制形状的边框，还应指定一个笔刷`Stroke`对象。除椭圆外，imglib 还提供了矩形`Rect`的实现，开发者还可通过继承`AbstractClosedShape`扩展其他的封闭形状。
+对于一个封闭形状而言，绘制时有两种模式，其一是填充内部，另一种是仅绘制边框，如果开发者希望绘制形状的边框，还应指定一个笔刷`Stroke`对象。除椭圆外，*imglib* 还提供了矩形`Rect`的实现，开发者还可通过继承`AbstractClosedShape`扩展其他的封闭形状。
 
 |              原始图像              |              添加闭合形状后图像              |
 |:------------------------------:|:-----------------------------------:|
