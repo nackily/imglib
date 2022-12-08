@@ -29,7 +29,7 @@ Imglib mainly provides three capabilities:
 
   Imglib provides merging and splitting capabilities, including merging multiple images into a single image and splitting image into multiple images. It supports cutting and jigsaw of images according to grid, and encode multiple images into GIF file. Developers can also expand freely according to actual needs.
 
-It is worth mentioning that imglib is not a project started from nothing, it just stands on the shoulders of giants! Imglib is based on [Thumbnailator](https://github.com/coobird/thumbnailator) in image processing, relies on [pdfbox](https://github.com/apache/pdfbox) in PDF document parsing, and references [animated gif lib for java](https://github.com/rtyley/animated-gif-lib-for-java) in GIF document processing...
+It is worth mentioning that imglib is not a project started from nothing, it just stands on the shoulders of giants! Imglib is based on [Thumbnailator](https://github.com/coobird/thumbnailator) in image processing, relies on [pdfbox](https://github.com/apache/pdfbox) in PDF document parsing, and references [animated-gif-lib-for-java](https://github.com/rtyley/animated-gif-lib-for-java) in GIF document processing...
 
 # How simple is imglib?
 Like Thumbnailer, imglib shields developers from complex I/O operations and eliminates the need to manually manipulate images through Graphics2D objects. imglib has done all this for you. It's chained API allows you to configure and execute a complex image processing task step by step.
@@ -67,4 +67,4 @@ Get more information about imglib by visit the following links:
 
 + [**Examples**](/docs/Examples.md)
 + [**API Documentation**](/docs/APIs.md)
-+ [**Frequently Asked Questions**](/docs/Questions.md)
++ [**Frequently Asked Questions**](/docs/FAQ.md)

@@ -67,4 +67,4 @@ ImagePipes.ofEmptySource()
 
 + [**Examples**](/docs/Examples-zh.md)
 + [**API Documentation**](/docs/APIs-zh.md)
-+ [**Frequently Asked Questions**](/docs/Questions-zh.md)
++ [**Frequently Asked Questions**](/docs/FAQ-zh.md)

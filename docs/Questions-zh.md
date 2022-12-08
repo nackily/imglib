@@ -1,6 +1,0 @@
-
----
-[**English Documentation**](Questions.md)
----
-
-
