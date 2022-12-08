@@ -11,11 +11,11 @@
 
 ## *imglib* 是什么?
 
-imglib 是一个轻量级的 JAVA 图像处理库，立足于简化对图像的常见处理。
+*imglib* 是一个轻量级的 JAVA 图像处理库，立足于简化对图像的常见处理。
 
 ## *imglib* 能做什么？
 
-imglib 主要提供三部分的能力：
+*imglib* 主要提供三部分的能力：
 
 * **图像收集**
 
@@ -23,16 +23,16 @@ imglib 主要提供三部分的能力：
 
 * **图像处理**
 
-  借助于 *Thumbnailator*，我们能轻松实现图像的基础操作，包括缩放、裁剪、旋转、图像水印和格式转换等等。在此基础上，imglib 扩展了添加边框、无损放大、马赛克、圆角、灰度化、二值化、绘制形状等处理器。
+  借助于 *Thumbnailator*，我们能轻松实现图像的基础操作，包括缩放、裁剪、旋转、图像水印和格式转换等等。在此基础上，*imglib* 扩展了添加边框、无损放大、马赛克、圆角、灰度化、二值化、绘制形状等处理器。
 
 * **聚合与分裂**
 
   *imglib* 提供了图像的聚合与分裂能力，包括归并多个图像为单个图像，以及拆分图像为多个图像。支持按照网格对图像进行剪切和拼图，合并多个图像到 GIF 文件中，开发者还可根据实际需求，进行自由扩展。
 
-值得一提的是，imglib 并不是一个从零开始的项目，它只是站在巨人的肩膀上！imglib 在图像处理的能力上立足于 [Thumbnailator](https://github.com/coobird/thumbnailator)，在 PDF 文档的解析上依赖了 [pdfbox](https://github.com/apache/pdfbox)，在 GIF 文档的处理上引用了 [animated-gif-lib-for-java](https://github.com/rtyley/animated-gif-lib-for-java)...
+值得一提的是，*imglib* 并不是一个从零开始的项目，它只是站在巨人的肩膀上！*imglib* 在图像处理的能力上立足于 [Thumbnailator](https://github.com/coobird/thumbnailator)，在 PDF 文档的解析上依赖了 [pdfbox](https://github.com/apache/pdfbox)，在 GIF 文档的处理上引用了 [animated-gif-lib-for-java](https://github.com/rtyley/animated-gif-lib-for-java)...
 
 ## *imglib* 有多简单？
-同 *Thumbnailator* 一样，imglib 为开发者屏蔽了复杂的 I/O 操作，以及无需再通过 Graphics2D 对象来手动操作图像，imglib 已经替您完成了所有这些工作。imglib 的链式 API 使得你可以将一个复杂的图像处理任务逐步的配置并执行。
+同 *Thumbnailator* 一样，*imglib* 为开发者屏蔽了复杂的 I/O 操作，以及无需再通过 Graphics2D 对象来手动操作图像，*imglib* 已经替您完成了所有这些工作。*imglib* 的链式 API 使得你可以将一个复杂的图像处理任务逐步的配置并执行。
 
 例如，为用户创建一个 hash 图像，头像点阵设定为 8px\*8px，头像大小为 300px\*300px，并增加一个边距为 20px 的边框。该图像生成任务，可以通过以下操作完成：
 ```java
