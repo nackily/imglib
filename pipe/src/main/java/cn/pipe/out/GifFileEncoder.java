@@ -35,7 +35,7 @@ public class GifFileEncoder extends AbstractGifEncoder {
         }
 
         public Builder file(File file) {
-            ObjectUtils.excNull(file, "file is null");
+            ObjectUtils.excNull(file, "File is null.");
             this.filename = file.getAbsolutePath();
             return this;
         }
@@ -63,7 +63,7 @@ public class GifFileEncoder extends AbstractGifEncoder {
         @Override
         public AbstractGifEncoder build() {
             if (StringUtils.isEmpty(filename)) {
-                throw new InvalidSettingException("filename has not been set");
+                throw new InvalidSettingException("Filename has not been set.");
             }
             return new GifFileEncoder(this);
         }

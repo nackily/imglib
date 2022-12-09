@@ -3,7 +3,7 @@ package cn.pipe.captor;
 import cn.core.ex.InvalidSettingException;
 import cn.core.tool.Range;
 import cn.core.utils.BufferedImageUtils;
-import cn.core.utils.ColorUtils;
+import cn.core.utils.ObjectUtils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -27,7 +27,7 @@ public class MonoColorImageGenerator extends TransparentImageGenerator {
 
     public MonoColorImageGenerator(Builder b) {
         super(b);
-        this.color = b.color == null ? ColorUtils.random() : b.color;
+        this.color = b.color;
         this.alpha = b.alpha;
     }
 
@@ -64,11 +64,9 @@ public class MonoColorImageGenerator extends TransparentImageGenerator {
 
         @Override
         public MonoColorImageGenerator build() {
-            if (color == null) {
-                throw new InvalidSettingException("no color specified");
-            }
+            ObjectUtils.excNull(color, "No color specified.");
             if (Range.ofFloat(0f, 1f).notWithin(alpha)) {
-                throw new InvalidSettingException("alpha out of bound:[0.0, 1.0]");
+                throw new InvalidSettingException("Alpha out of bounds:[0, 1].");
             }
 
             return new MonoColorImageGenerator(this);

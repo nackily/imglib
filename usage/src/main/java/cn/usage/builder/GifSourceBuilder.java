@@ -38,18 +38,21 @@ public class GifSourceBuilder<S> extends AbstractSourceBuilder<GifSourceBuilder<
     }
 
     public GifSourceBuilder<S> register(int frameIndex) {
+        checkFrameIndex(frameIndex);
         frames.add(frameIndex);
         return this;
     }
 
     public GifSourceBuilder<S> register(int... frameIndexes) {
         for (int index : frameIndexes) {
+            checkFrameIndex(index);
             frames.add(index);
         }
         return this;
     }
 
     public GifSourceBuilder<S> register(Range<Integer> range) {
+        checkFrameIndex(range.getMin());
         for (int i = range.getMin(); i <= range.getMax(); i++) {
             frames.add(i);
         }
@@ -76,7 +79,7 @@ public class GifSourceBuilder<S> extends AbstractSourceBuilder<GifSourceBuilder<
                 .collect(Collectors.toSet());
         if (!CollectionUtils.isNullOrEmpty(invalidPages)) {
             throw new InvalidSettingException(MessageFormat.format(
-                    "the frame indexes:[{0}] has exceeded the max size of the gif document",
+                    "Frame indexes:[{0}] has exceeded the max frame index of the gif document.",
                     StringUtils.join(invalidPages)));
         }
         return source.read(frames.toArray(new Integer[0]));
@@ -84,7 +87,13 @@ public class GifSourceBuilder<S> extends AbstractSourceBuilder<GifSourceBuilder<
 
     protected void checkReadiness() {
         if (CollectionUtils.isNullOrEmpty(frames) && !containsAll) {
-            throw new HandlingException("no frame to export");
+            throw new HandlingException("No frame indexes are registered.");
+        }
+    }
+
+    private static void checkFrameIndex(int frameIndex) {
+        if (frameIndex < 0) {
+            throw new InvalidSettingException("Frame index must be greater than or equal to 0.");
         }
     }
 }

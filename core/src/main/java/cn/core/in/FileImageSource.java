@@ -1,7 +1,6 @@
 package cn.core.in;
 
 import cn.core.ex.HandlingException;
-
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
@@ -26,14 +25,14 @@ public class FileImageSource implements BufferedImageSource<File> {
 
     public FileImageSource(File file) {
         if (file == null) {
-            throw new NullPointerException("File is null");
+            throw new NullPointerException("File is null.");
         }
         this.source = file;
     }
 
     public FileImageSource(String filename) {
         if (filename == null || "".equals(filename)) {
-            throw new NullPointerException("file name is null");
+            throw new NullPointerException("File name is null.");
         }
         this.source = new File(filename);
     }
@@ -41,11 +40,11 @@ public class FileImageSource implements BufferedImageSource<File> {
     @Override
     public BufferedImage read() throws IOException {
         if (readCompleted) {
-            throw new HandlingException("file read has already completed");
+            throw new HandlingException("File reading has already completed.");
         }
         // check the file is readable
         if (!source.canRead()) {
-            throw new IIOException("cannot read the source file");
+            throw new IIOException("Cannot read the source file.");
         }
         // get image input stream
         ImageInputStream stream = ImageIO.createImageInputStream(source);

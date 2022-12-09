@@ -53,7 +53,7 @@ public class TransparentImageGenerator implements ImageGenerator {
         public TransparentImageGenerator build() {
             if (width <= 0 || height <= 0) {
                 throw new InvalidSettingException(MessageFormat.format(
-                        "size[{0}, {1}] out of bound", width, height));
+                        "Invalid size[{0}, {1}].", width, height));
             }
             return new TransparentImageGenerator(this);
         }

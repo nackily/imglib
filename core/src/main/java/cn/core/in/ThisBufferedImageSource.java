@@ -16,7 +16,7 @@ public class ThisBufferedImageSource implements BufferedImageSource<BufferedImag
 
     public ThisBufferedImageSource(BufferedImage source) {
         if (source == null) {
-            throw new NullPointerException("BufferedImage is null");
+            throw new NullPointerException("BufferedImage is null.");
         }
         this.image = source;
     }

@@ -55,7 +55,7 @@ public class GifOutputStreamEncoder extends AbstractGifEncoder {
 
         @Override
         public AbstractGifEncoder build() {
-            ObjectUtils.excNull(stream, "OutputStream has not been set");
+            ObjectUtils.excNull(stream, "OutputStream has not been set.");
             return new GifOutputStreamEncoder(this);
         }
     }

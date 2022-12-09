@@ -2,6 +2,7 @@ package cn.t8s.shape.closed;
 
 import cn.core.ex.InvalidSettingException;
 import cn.core.strategy.overlay.AbstractClosedShape;
+import cn.core.utils.ObjectUtils;
 
 import java.awt.*;
 
@@ -52,9 +53,7 @@ public class Rect extends AbstractClosedShape {
 
         @Override
         public Rect build() {
-            if (rect == null) {
-                throw new InvalidSettingException("not specified any rect for this shape");
-            }
+            ObjectUtils.excNull(rect, "Rectangle not specified.");
             return new Rect(this);
         }
     }

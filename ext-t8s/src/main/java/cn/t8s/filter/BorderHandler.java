@@ -1,8 +1,10 @@
 package cn.t8s.filter;
 
 import cn.core.GenericBuilder;
+import cn.core.ex.InvalidSettingException;
+import cn.core.tool.Range;
 import cn.core.utils.BufferedImageUtils;
-import cn.core.utils.ColorUtils;
+import cn.core.utils.ObjectUtils;
 import net.coobird.thumbnailator.filters.ImageFilter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -36,16 +38,13 @@ public class BorderHandler implements ImageFilter {
     protected Color fillColor;
 
     public BorderHandler(Builder bu) {
-        this.vMargins = bu.vMargins <= 0 ? 20 : bu.vMargins;
-        this.hMargins = bu.hMargins <= 0 ? 20 : bu.hMargins;
-        this.alpha = bu.alpha;
+        vMargins = bu.vMargins;
+        hMargins = bu.hMargins;
+        alpha = bu.alpha;
         if (bu.alpha == 1.0) {
-            this.fillColor = null;
+            fillColor = null;
         } else {
-            this.fillColor = bu.fillColor;
-            if (bu.fillColor == null) {
-                this.fillColor = ColorUtils.random();
-            }
+            fillColor = bu.fillColor;
         }
     }
 
@@ -71,21 +70,31 @@ public class BorderHandler implements ImageFilter {
 
         public Builder vMargins(int vMargins) {
             this.vMargins = vMargins;
+            if (hMargins <= 0) {
+                throw new InvalidSettingException("The vertical margins of border must be greater than 0.");
+            }
             return this;
         }
 
         public Builder hMargins(int hMargins) {
             this.hMargins = hMargins;
+            if (hMargins <= 0) {
+                throw new InvalidSettingException("The horizontal margins of border must be greater than 0.");
+            }
             return this;
         }
 
         public Builder alpha(float alpha) {
             this.alpha = alpha;
+            if (Range.ofFloat(0f, 1f).notWithin(alpha)) {
+                throw new InvalidSettingException("Alpha out of bounds:[0, 1].");
+            }
             return this;
         }
 
         public Builder fillColor(Color fillColor) {
             this.fillColor = fillColor;
+            ObjectUtils.excNull(fillColor, "Fill color is null.");
             return this;
         }
 

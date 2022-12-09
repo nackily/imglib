@@ -86,7 +86,7 @@ public class MosaicHandler implements ImageFilter {
     private void adjustRect(int originalWidth, int originalHeight) {
         if (startX > originalWidth || startY > originalHeight) {
             throw new InvalidSettingException(MessageFormat.format(
-                    "the starting point:[{0}, {1}] are not in image range:[{2}, {3}]",
+                    "The starting point:[{0}, {1}] are not in image range:[{2}, {3}].",
                     startX, startY,
                     originalWidth, originalHeight));
         }
@@ -107,35 +107,35 @@ public class MosaicHandler implements ImageFilter {
         public Builder sideLength(int sideLength) {
             this.sideLength = sideLength;
             if (sideLength <= 0) {
-                throw new InvalidSettingException("side length must be greater than 0");
+                throw new InvalidSettingException("Side length must be greater than 0.");
             }
             return this;
         }
         public Builder startX(int startX) {
             this.startX = startX;
             if (startX <= 0) {
-                throw new InvalidSettingException("the start point's X must be greater than 0");
+                throw new InvalidSettingException("The start point's X must be greater than 0.");
             }
             return this;
         }
         public Builder startY(int startY) {
             this.startY = startY;
             if (startY <= 0) {
-                throw new InvalidSettingException("the start point's Y must be greater than 0");
+                throw new InvalidSettingException("The start point's Y must be greater than 0.");
             }
             return this;
         }
         public Builder width(int width) {
             this.width = width;
             if (width <= 0) {
-                throw new InvalidSettingException("the rectangle's width must be greater than 0");
+                throw new InvalidSettingException("The rectangle's width must be greater than 0.");
             }
             return this;
         }
         public Builder height(int height) {
             this.height = height;
             if (height <= 0) {
-                throw new InvalidSettingException("the rectangle's height must be greater than 0");
+                throw new InvalidSettingException("The rectangle's height must be greater than 0.");
             }
             return this;
         }
@@ -143,7 +143,7 @@ public class MosaicHandler implements ImageFilter {
         @Override
         public MosaicHandler build() {
             if (sideLength == -1) {
-                throw new InvalidSettingException("side length not set");
+                throw new InvalidSettingException("Side length not set.");
             }
             width = width == -1 ? sideLength : width;
             height = height == -1 ? sideLength : height;

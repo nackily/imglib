@@ -5,7 +5,7 @@ import cn.core.ex.InvalidSettingException;
 import cn.core.GenericBuilder;
 import cn.core.tool.Range;
 import cn.core.utils.ColorUtils;
-
+import cn.core.utils.ObjectUtils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.nio.charset.StandardCharsets;
@@ -105,14 +105,12 @@ public class HashImageGenerator implements ImageGenerator {
 
         @Override
         public HashImageGenerator build() {
-            if (digest == null) {
-                throw new NullPointerException("empty digest");
-            }
+            ObjectUtils.excNull(digest, "Empty digest.");
             if (digest.length < 32) {
-                throw new InvalidSettingException("not a valid digest");
+                throw new InvalidSettingException("Invalid digest setting.");
             }
             if (Range.ofInt(1, 8).notWithin(gridVerticalNum)) {
-                throw new InvalidSettingException("vertical number of grid out of bound:[1, 8]");
+                throw new InvalidSettingException("The vertical number of grids is out of bounds:[1, 8].");
             }
 
             if (bgColor == null) {

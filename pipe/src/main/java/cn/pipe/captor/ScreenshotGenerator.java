@@ -63,11 +63,11 @@ public class ScreenshotGenerator extends Robot implements ImageGenerator {
         public Builder startPoint(int x, int y) {
             this.x = x;
             if (Range.ofInt(0, SCREEN_DIMENSION.width).notWithin(x)) {
-                throw new InvalidSettingException("the start point's x out of bound");
+                throw new InvalidSettingException("Start point's x is out of bounds.");
             }
             this.y = y;
             if (Range.ofInt(0, SCREEN_DIMENSION.height).notWithin(y)) {
-                throw new InvalidSettingException("the start point's y out of bound");
+                throw new InvalidSettingException("Start point's y is out of bounds.");
             }
             return this;
         }
@@ -75,7 +75,7 @@ public class ScreenshotGenerator extends Robot implements ImageGenerator {
         public Builder width(int width) {
             this.width = width;
             if (Range.ofInt(0, SCREEN_DIMENSION.width).notWithin(width)) {
-                throw new InvalidSettingException("the area's width out of bound");
+                throw new InvalidSettingException("The area's width is out of bounds.");
             }
             return this;
         }
@@ -83,7 +83,7 @@ public class ScreenshotGenerator extends Robot implements ImageGenerator {
         public Builder height(int height) {
             this.height = height;
             if (Range.ofInt(0, SCREEN_DIMENSION.height).notWithin(height)) {
-                throw new InvalidSettingException("the area's height out of bound");
+                throw new InvalidSettingException("The area's height is out of bounds.");
             }
             return this;
         }
@@ -92,14 +92,14 @@ public class ScreenshotGenerator extends Robot implements ImageGenerator {
         public ScreenshotGenerator build() {
             if (Range.ofInt(0, SCREEN_DIMENSION.width).notWithin(x + width)) {
                 throw new InvalidSettingException(MessageFormat
-                        .format("the screenshot area(x={0}, width={1}) out of screen width bound[0, {2}]",
+                        .format("The screenshot area(x={0}, width={1}) is out of screen width bounds[0, {2}].",
                                 x,
                                 width,
                                 SCREEN_DIMENSION.width));
             }
             if (Range.ofInt(0, SCREEN_DIMENSION.height).notWithin(y + height)) {
                 throw new InvalidSettingException(MessageFormat
-                        .format("the screenshot area(y={0}, height={1}) out of screen height bound[0, {2}]",
+                        .format("The screenshot area(y={0}, height={1}) is out of screen height bounds[0, {2}].",
                                 y,
                                 height,
                                 SCREEN_DIMENSION.height));

@@ -3,6 +3,8 @@ package cn.core.strategy.overlay;
 import cn.core.ex.InvalidSettingException;
 import cn.core.strategy.Shape;
 import cn.core.GenericBuilder;
+import cn.core.utils.ObjectUtils;
+
 import java.awt.*;
 
 /**
@@ -45,12 +47,12 @@ public abstract class AbstractClosedShape implements Shape {
     public void paint(int canvasWidth, int canvasHeight, Graphics2D g2d) {
         // check for rect is out of bounds
         if (rect == null) {
-            throw new InvalidSettingException("not specified any rect for this shape");
+            throw new InvalidSettingException("Rectangle for this shape not specified.");
         } else {
             int maxX = rect.x + rect.width;
             int maxY = rect.y + rect.height;
             if (maxX > canvasWidth || maxY > canvasHeight) {
-                throw new InvalidSettingException("the rect is out of image");
+                throw new InvalidSettingException("The Rectangle is out of image.");
             }
         }
 
@@ -92,10 +94,12 @@ public abstract class AbstractClosedShape implements Shape {
 
         public AbstractClosedShapeBuilder rect(Rectangle rect) {
             this.rect = rect;
+            ObjectUtils.excNull(rect, "Rectangle is null.");
             return this;
         }
         public AbstractClosedShapeBuilder stroke(Stroke stroke){
             this.stroke = stroke;
+            ObjectUtils.excNull(stroke, "Stroke is null.");
             return this;
         }
         public AbstractClosedShapeBuilder fill(boolean fill){
@@ -104,6 +108,7 @@ public abstract class AbstractClosedShape implements Shape {
         }
         public AbstractClosedShapeBuilder color(Color color){
             this.color = color;
+            ObjectUtils.excNull(stroke, "Color is null.");
             return this;
         }
     }

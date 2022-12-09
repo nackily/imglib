@@ -6,7 +6,6 @@ import cn.t8s.mode.graying.AvgGrayingStrategy;
 import cn.core.strategy.mode.AbstractGrayingStrategy;
 import cn.core.GenericBuilder;
 import cn.core.tool.Range;
-
 import java.awt.image.BufferedImage;
 
 /**
@@ -54,7 +53,7 @@ public class SimpleBinaryStrategy extends AbstractBinaryStrategy {
         public Builder threshold(int threshold) {
             this.threshold = threshold;
             if (Range.ofInt(0, 255).notWithin(threshold)) {
-                throw new InvalidSettingException("the threshold out of bound:[0, 255]");
+                throw new InvalidSettingException("The threshold out of bounds:[0, 255].");
             }
             return this;
         }

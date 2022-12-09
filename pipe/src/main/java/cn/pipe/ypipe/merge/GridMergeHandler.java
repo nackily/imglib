@@ -1,6 +1,7 @@
 package cn.pipe.ypipe.merge;
 
 import cn.core.GenericBuilder;
+import cn.core.utils.ObjectUtils;
 import cn.pipe.ypipe.AbstractMergeFilter;
 import cn.core.ex.InvalidSettingException;
 import cn.core.utils.BufferedImageUtils;
@@ -162,7 +163,7 @@ public class GridMergeHandler extends AbstractMergeFilter {
         public Builder gridWidth(int gridWidth) {
             this.gridWidth = gridWidth;
             if (gridWidth <= 0) {
-                throw new InvalidSettingException("the width of the grid must be greater than 0");
+                throw new InvalidSettingException("The width of the grid must be greater than 0.");
             }
             return this;
         }
@@ -170,7 +171,7 @@ public class GridMergeHandler extends AbstractMergeFilter {
         public Builder gridHeight(int gridHeight) {
             this.gridHeight = gridHeight;
             if (gridHeight <= 0) {
-                throw new InvalidSettingException("the height of the grid must be greater than 0");
+                throw new InvalidSettingException("The height of the grid must be greater than 0.");
             }
             return this;
         }
@@ -178,7 +179,7 @@ public class GridMergeHandler extends AbstractMergeFilter {
         public Builder horizontalNum(int horizontalNum) {
             this.horizontalNum = horizontalNum;
             if (horizontalNum <= 0) {
-                throw new InvalidSettingException("the number placed in horizontal must be greater than 0");
+                throw new InvalidSettingException("The number placed in horizontal must be greater than 0.");
             }
             return this;
         }
@@ -195,9 +196,7 @@ public class GridMergeHandler extends AbstractMergeFilter {
 
         public Builder fillColor(Color fillColor) {
             this.fillColor = fillColor;
-            if (fillColor == null) {
-                throw new InvalidSettingException("empty fill color");
-            }
+            ObjectUtils.excNull(fillColor, "Empty fill color.");
             return this;
         }
 
@@ -205,7 +204,7 @@ public class GridMergeHandler extends AbstractMergeFilter {
         public GridMergeHandler build() {
             boolean notSetGrid = gridWidth <= 0 || gridHeight <= 0;
             if (!autoAdapts && notSetGrid) {
-                throw new InvalidSettingException("the width or height of the grid not set");
+                throw new InvalidSettingException("The width or height of the grid not set.");
             }
             return new GridMergeHandler(this);
         }

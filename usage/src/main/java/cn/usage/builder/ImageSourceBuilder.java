@@ -39,9 +39,9 @@ public class ImageSourceBuilder<S> extends AbstractSourceBuilder<ImageSourceBuil
         if (useOriginalFormat) {
             String[] formats = formatNames.stream().filter(StringUtils::isNotEmpty).distinct().toArray(String[]::new);
             if (formats.length == 0) {
-                throw new HandlingException("no available original format");
+                throw new HandlingException("No available original format.");
             } else if (formats.length > 1) {
-                throw new HandlingException(MessageFormat.format("multiple available original formats found:[{0}]",
+                throw new HandlingException(MessageFormat.format("Multiple available original formats found:[{0}].",
                         StringUtils.join(formats)));
             } else {
                 super.formatName(formats[0]);

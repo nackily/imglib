@@ -56,7 +56,7 @@ public class RoundRectHandler implements ImageFilter {
         public Builder arcWidth(int arcWidth) {
             this.arcWidth = arcWidth;
             if (arcWidth <= 0) {
-                throw new InvalidSettingException("the horizontal diameter of the arc must be greater than 0");
+                throw new InvalidSettingException("The horizontal diameter of the arc must be greater than 0.");
             }
             return this;
         }
@@ -64,7 +64,7 @@ public class RoundRectHandler implements ImageFilter {
         public Builder arcHeight(int arcHeight) {
             this.arcHeight = arcHeight;
             if (arcHeight <= 0) {
-                throw new InvalidSettingException("the vertical diameter of the arc must be greater than 0");
+                throw new InvalidSettingException("The vertical diameter of the arc must be greater than 0.");
             }
             return this;
         }
@@ -72,7 +72,7 @@ public class RoundRectHandler implements ImageFilter {
         @Override
         public RoundRectHandler build() {
             if (arcWidth == -1 && arcHeight == -1) {
-                throw new InvalidSettingException("both of the horizontal(vertical) diameter of the arc not set");
+                throw new InvalidSettingException("Both of the horizontal diameter and vertical diameter not set.");
             }
             if (arcWidth == -1 || arcHeight == -1) {
                 arcWidth = arcHeight = Math.max(arcHeight, arcWidth);

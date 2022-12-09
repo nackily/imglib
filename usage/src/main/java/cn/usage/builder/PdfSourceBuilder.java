@@ -36,18 +36,21 @@ public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<
     }
 
     public PdfSourceBuilder<S> register(int pageIndex) {
+        checkPageIndex(pageIndex);
         pages.add(pageIndex);
         return this;
     }
 
     public PdfSourceBuilder<S> register(int... pageIndexes) {
         for (int index : pageIndexes) {
+            checkPageIndex(index);
             pages.add(index);
         }
         return this;
     }
 
     public PdfSourceBuilder<S> register(Range<Integer> range) {
+        checkPageIndex(range.getMin());
         for (int i = range.getMin(); i <= range.getMax(); i++) {
             pages.add(i);
         }
@@ -55,6 +58,9 @@ public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<
     }
 
     public PdfSourceBuilder<S> dpi(float dpi) {
+        if (dpi <= 0) {
+            throw new InvalidSettingException("DPI must be greater than 0.");
+        }
         this.dpi = dpi;
         return this;
     }
@@ -85,13 +91,21 @@ public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<
                     "the page indexes:[{0}] has exceeded the max page number of the pdf document",
                     StringUtils.join(invalidPages)));
         }
+
         return source.read(pages.toArray(new Integer[0]), val);
     }
 
 
     protected void checkReadiness() {
         if (CollectionUtils.isNullOrEmpty(pages)) {
-            throw new HandlingException("no page to export");
+            throw new HandlingException("No page indexes are registered.");
+        }
+    }
+
+
+    private static void checkPageIndex(int pageIndex) {
+        if (pageIndex < 0) {
+            throw new InvalidSettingException("Page index must be greater than or equal to 0.");
         }
     }
 }

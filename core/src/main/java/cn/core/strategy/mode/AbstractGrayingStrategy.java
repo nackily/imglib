@@ -1,6 +1,7 @@
 package cn.core.strategy.mode;
 
 import cn.core.strategy.ModeStrategy;
+import cn.core.utils.ObjectUtils;
 import java.awt.image.BufferedImage;
 
 /**
@@ -13,9 +14,7 @@ public abstract class AbstractGrayingStrategy implements ModeStrategy {
 
     @Override
     public void execute(BufferedImage img) {
-        if (img == null) {
-            throw new NullPointerException("image is null");
-        }
+        ObjectUtils.excNull(img, "Image is null.");
         int w = img.getWidth();
         int h = img.getHeight();
         for (int x = 0; x < w; x++) {

@@ -40,8 +40,8 @@ public final class ImagePipes {
     }
 
     public static ImageSourceBuilder<File> of(String... filenames) {
-        ObjectUtils.excNull(filenames, "file names is null");
-        CollectionUtils.excEmpty(filenames, "no any file name was specified");
+        ObjectUtils.excNull(filenames, "File names is null.");
+        CollectionUtils.excEmpty(filenames, "Not any file name was specified.");
         Iterator<String> iter = Arrays.asList(filenames).iterator();
         List<File> files = new ArrayList<>();
         while (iter.hasNext()) {
@@ -51,76 +51,76 @@ public final class ImagePipes {
     }
 
     public static ImageSourceBuilder<File> of(File... files) {
-        ObjectUtils.excNull(files, "File array is null");
-        CollectionUtils.excEmpty(files, "no any files was specified");
+        ObjectUtils.excNull(files, "File array is null.");
+        CollectionUtils.excEmpty(files, "Not any files was specified.");
         return new ImageSourceBuilder<>(new FileImageSourceIterator(Arrays.asList(files)));
     }
 
     public static ImageSourceBuilder<InputStream> of(InputStream... iss) {
-        ObjectUtils.excNull(iss, "InputStream array is null");
-        CollectionUtils.excEmpty(iss, "no any input stream was specified");
+        ObjectUtils.excNull(iss, "InputStream array is null.");
+        CollectionUtils.excEmpty(iss, "No any input stream was specified");
         return new ImageSourceBuilder<>(new InputStreamImageSourceIterator(Arrays.asList(iss)));
     }
 
     public static ImageSourceBuilder<BufferedImage> of(BufferedImage... bis) {
-        ObjectUtils.excNull(bis, "BufferedImage array is null");
-        CollectionUtils.excEmpty(bis, "no any buffered image was specified");
+        ObjectUtils.excNull(bis, "BufferedImage array is null.");
+        CollectionUtils.excEmpty(bis, "Not any buffered image was specified.");
         return new ImageSourceBuilder<>(new ThisImageSourceIterator(Arrays.asList(bis)));
     }
 
     public static ImageSourceBuilder<BufferedImage> of(Thumbnails.Builder<?> th) throws IOException {
-        ObjectUtils.excNull(th, "Thumbnails.Builder is null");
+        ObjectUtils.excNull(th, "Thumbnails.Builder is null.");
         List<BufferedImage> images = th.asBufferedImages();
         return new ImageSourceBuilder<>(new ThisImageSourceIterator(images));
     }
 
     public static ImageSourceBuilder<BufferedImage> of(AbstractSourceBuilder<?> asb) throws IOException {
-        ObjectUtils.excNull(asb, "Source builder is null");
+        ObjectUtils.excNull(asb, "Source builder is null.");
         List<BufferedImage> images = asb.obtainBufferedImages();
         return new ImageSourceBuilder<>(new ThisImageSourceIterator(images));
     }
 
     public static PdfSourceBuilder<InputStream> ofPdf(InputStream is) {
-        ObjectUtils.excNull(is, "PDF InputStream is null");
+        ObjectUtils.excNull(is, "InputStream is null.");
         return new PdfSourceBuilder<>(new InputStreamPdfSource(is));
     }
 
     public static PdfSourceBuilder<File> ofPdf(File pdf) {
-        ObjectUtils.excNull(pdf, "PDF File is null");
+        ObjectUtils.excNull(pdf, "File is null.");
         return new PdfSourceBuilder<>(new FilePdfSource(pdf));
     }
 
     public static PdfSourceBuilder<File> ofPdf(String filename) {
         if (StringUtils.isEmpty(filename)) {
-            throw new InvalidSettingException("PDF file name is null");
+            throw new InvalidSettingException("File name is null.");
         }
         return new PdfSourceBuilder<>(new FilePdfSource(new File(filename)));
     }
 
     public static PdfSourceBuilder<byte[]> ofPdf(byte[] bytes) {
-        ObjectUtils.excNull(bytes, "PDF bytes is null");
+        ObjectUtils.excNull(bytes, "Byte array is null.");
         return new PdfSourceBuilder<>(new ByteArrayPdfSource(bytes));
     }
 
     public static GifSourceBuilder<InputStream> ofGif(InputStream is) {
-        ObjectUtils.excNull(is, "GIF InputStream is null");
+        ObjectUtils.excNull(is, "InputStream is null.");
         return new GifSourceBuilder<>(new InputStreamGifSource(is));
     }
 
     public static GifSourceBuilder<File> ofGif(File gif) {
-        ObjectUtils.excNull(gif, "GIF File is null");
+        ObjectUtils.excNull(gif, "File is null.");
         return new GifSourceBuilder<>(new FileGifSource(gif));
     }
 
     public static GifSourceBuilder<File> ofGif(String filename) {
         if (StringUtils.isEmpty(filename)) {
-            throw new InvalidSettingException("GIF file name is null");
+            throw new InvalidSettingException("File name is null.");
         }
         return new GifSourceBuilder<>(new FileGifSource(new File(filename)));
     }
 
     public static GifSourceBuilder<byte[]> ofGif(byte[] bytes) {
-        ObjectUtils.excNull(bytes, "GIF bytes is null");
+        ObjectUtils.excNull(bytes, "Byte array is null.");
         return new GifSourceBuilder<>(new ByteArrayGifSource(bytes));
     }
 

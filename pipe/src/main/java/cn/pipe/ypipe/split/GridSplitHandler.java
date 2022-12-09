@@ -86,7 +86,7 @@ public class GridSplitHandler extends AbstractSplitFilter {
         public Builder gridWidth(int gridWidth) {
             this.gridWidth = gridWidth;
             if (gridWidth <= 0) {
-                throw new InvalidSettingException("the width of the grid must be greater than 0");
+                throw new InvalidSettingException("The width of the grid must be greater than 0.");
             }
             return this;
         }
@@ -94,7 +94,7 @@ public class GridSplitHandler extends AbstractSplitFilter {
         public Builder gridHeight(int gridHeight) {
             this.gridHeight = gridHeight;
             if (gridHeight <= 0) {
-                throw new InvalidSettingException("the height of the grid must be greater than 0");
+                throw new InvalidSettingException("The height of the grid must be greater than 0.");
             }
             return this;
         }
@@ -102,7 +102,7 @@ public class GridSplitHandler extends AbstractSplitFilter {
         @Override
         public GridSplitHandler build() {
             if (gridWidth <= 0 && gridHeight <= 0) {
-                throw new InvalidSettingException("both of the width and height of the grid not set");
+                throw new InvalidSettingException("Both of the width and height of the grid not set.");
             }
             return new GridSplitHandler(this);
         }

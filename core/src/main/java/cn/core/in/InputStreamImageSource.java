@@ -18,7 +18,7 @@ public class InputStreamImageSource implements BufferedImageSource<InputStream> 
 
     public InputStreamImageSource(InputStream source) {
         if (source == null) {
-            throw new NullPointerException("InputStream is null");
+            throw new NullPointerException("InputStream is null.");
         }
         this.source = source;
     }

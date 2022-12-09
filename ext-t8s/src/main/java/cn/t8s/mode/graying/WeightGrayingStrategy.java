@@ -4,7 +4,6 @@ import cn.core.ex.InvalidSettingException;
 import cn.core.strategy.mode.AbstractGrayingStrategy;
 import cn.core.GenericBuilder;
 import cn.core.tool.Range;
-
 import java.text.MessageFormat;
 
 /**
@@ -50,7 +49,7 @@ public class WeightGrayingStrategy extends AbstractGrayingStrategy {
         public Builder redWeight(double redWeight) {
             this.redWeight = redWeight;
             if (WEIGHT_RANGE.notWithin(redWeight)) {
-                throw new InvalidSettingException(MessageFormat.format("red weight out of bound:[{0}, {1}]",
+                throw new InvalidSettingException(MessageFormat.format("Red weight out of bounds:[{0}, {1}].",
                         WEIGHT_RANGE.getMin(), WEIGHT_RANGE.getMax()));
             }
             return this;
@@ -58,7 +57,7 @@ public class WeightGrayingStrategy extends AbstractGrayingStrategy {
         public Builder greenWeight(double greenWeight) {
             this.greenWeight = greenWeight;
             if (WEIGHT_RANGE.notWithin(greenWeight)) {
-                throw new InvalidSettingException(MessageFormat.format("green weight out of bound:[{0}, {1}]",
+                throw new InvalidSettingException(MessageFormat.format("Green weight out of bounds:[{0}, {1}].",
                         WEIGHT_RANGE.getMin(), WEIGHT_RANGE.getMax()));
             }
             return this;
@@ -73,8 +72,8 @@ public class WeightGrayingStrategy extends AbstractGrayingStrategy {
             }
             // check the setting is completed
             if (redWeight == 0 || greenWeight == 0) {
-                throw new InvalidSettingException(MessageFormat.format("{0} weight not set",
-                        redWeight == 0 ? "red" : "green"));
+                throw new InvalidSettingException(MessageFormat.format("{0} weight not set.",
+                        redWeight == 0 ? "Red" : "Green"));
             }
             // check the setting is rightful
             if (redWeight + greenWeight > 1.0) {

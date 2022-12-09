@@ -3,6 +3,7 @@ package cn.t8s.shape.opened;
 import cn.core.ex.HandlingException;
 import cn.core.ex.InvalidSettingException;
 import cn.core.strategy.overlay.AbstractOpenedShape;
+import cn.core.utils.ObjectUtils;
 import java.awt.*;
 
 /**
@@ -32,10 +33,10 @@ public class Line extends AbstractOpenedShape {
     @Override
     public void draw(int canvasWidth, int canvasHeight, Graphics2D g2d) {
         if (start.x > canvasWidth || start.y > canvasHeight) {
-            throw new HandlingException("the starting point is out of bounds of this image");
+            throw new HandlingException("The starting point is out of bounds of this image.");
         }
         if (end.x > canvasWidth || end.y > canvasHeight) {
-            throw new HandlingException("the ending point is out of bounds of this image");
+            throw new HandlingException("The ending point is out of bounds of this image.");
         }
         g2d.drawLine(start.x, start.y, end.x, end.y);
     }
@@ -55,17 +56,13 @@ public class Line extends AbstractOpenedShape {
         }
 
         public Builder start(Point start) {
-            if (start == null) {
-                throw new InvalidSettingException("the starting point cannot be null");
-            }
+            ObjectUtils.excNull(start, "The starting point is null.");
             this.start = start;
             return this;
         }
 
         public Builder end(Point end) {
-            if (end == null) {
-                throw new InvalidSettingException("the ending point cannot be null");
-            }
+            ObjectUtils.excNull(end, "The ending point is null.");
             this.end = end;
             return this;
         }
@@ -73,7 +70,7 @@ public class Line extends AbstractOpenedShape {
         @Override
         public AbstractOpenedShape build() {
             if (start == null || end == null) {
-                throw new InvalidSettingException("both start and end points are not specified");
+                throw new InvalidSettingException("One of start and end points is not specified.");
             }
             return new Line(this);
         }

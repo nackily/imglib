@@ -18,8 +18,8 @@ public abstract class AbstractMergeFilter implements PipeFilter {
 
     @Override
     public List<BufferedImage> execute(List<BufferedImage> images) {
-        ObjectUtils.excNull(images, "source images is null");
-        CollectionUtils.excEmpty(images, "not any source image was found");
+        ObjectUtils.excNull(images, "Source images is null.");
+        CollectionUtils.excEmpty(images, "Not any source image was found.");
         return Collections.singletonList(merge(images));
     }
 

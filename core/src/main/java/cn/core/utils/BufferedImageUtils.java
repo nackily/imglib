@@ -1,5 +1,6 @@
 package cn.core.utils;
 
+import cn.core.ex.InvalidSettingException;
 import cn.core.ex.UnsupportedFormatException;
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -102,14 +103,14 @@ public final class BufferedImageUtils {
 
     public static void write(BufferedImage img, String formatName, String filename) throws IOException {
         if (StringUtils.isEmpty(filename)) {
-            throw new NullPointerException("output file name is null");
+            throw new InvalidSettingException("Output file name is null.");
         }
         write(img, formatName, new File(filename));
     }
 
     public static void write(BufferedImage img, String filename) throws IOException {
         if (StringUtils.isEmpty(filename)) {
-            throw new NullPointerException("output file name is null");
+            throw new InvalidSettingException("Output file name is null.");
         }
         // get the file's extension
         String formatName = StringUtils.getExtensionName(filename);
@@ -117,30 +118,24 @@ public final class BufferedImageUtils {
     }
 
     public static void write(BufferedImage img, File f) throws IOException {
-        if (f == null) {
-            throw new NullPointerException("output file is null");
-        }
+        ObjectUtils.excNull(f, "Output file is null.");
         // get the file's extension
         String formatName = StringUtils.getExtensionName(f);
         write(img, formatName, f);
     }
 
     public static void write(BufferedImage img, String formatName, File f) throws IOException {
-        if (img == null) {
-            throw new NullPointerException("buffered image is null");
-        }
+        ObjectUtils.excNull(img, "Buffered image is null.");
+        ObjectUtils.excNull(f, "Output file is null.");
         if (StringUtils.isEmpty(formatName)) {
-            throw new NullPointerException("output format name is null");
-        }
-        if (f == null) {
-            throw new NullPointerException("output file is null");
+            throw new NullPointerException("Output format name is null.");
         }
 
         // check for available writers for the current output format name
         Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName(formatName);
         if (!writers.hasNext()) {
             throw new UnsupportedFormatException(MessageFormat.format(
-                    "no suitable ImageWriter found for {0}", formatName));
+                    "No suitable ImageWriter found for {0}.", formatName));
         }
         ImageWriter writer = writers.next();
         ImageWriteParam iwp = writer.getDefaultWriteParam();

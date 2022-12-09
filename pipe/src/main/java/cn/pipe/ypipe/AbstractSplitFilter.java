@@ -18,10 +18,10 @@ public abstract class AbstractSplitFilter implements PipeFilter {
 
     @Override
     public List<BufferedImage> execute(List<BufferedImage> images) {
-        ObjectUtils.excNull(images, "source images is null");
-        CollectionUtils.excEmpty(images, "not any source image was found");
+        ObjectUtils.excNull(images, "Source images is null.");
+        CollectionUtils.excEmpty(images, "Not any source image was found.");
         if (images.size() > 1) {
-            throw new HandlingException("cannot split multiple images");
+            throw new HandlingException("Splitting of multiple images is not supported.");
         }
         return split(images.get(0));
     }

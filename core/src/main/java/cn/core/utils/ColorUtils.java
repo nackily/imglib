@@ -2,7 +2,6 @@ package cn.core.utils;
 
 import cn.core.ex.InvalidSettingException;
 import cn.core.tool.Range;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -53,13 +52,13 @@ public final class ColorUtils {
      */
     public static Color random(Range<Integer> rRange, Range<Integer> gRange, Range<Integer> bRange) {
         if (rRange.getMin() < 0 || rRange.getMax() > 255) {
-            throw new InvalidSettingException("color's R-range out of bound, must limited to [0, 255]");
+            throw new InvalidSettingException("Color's R-value out of bounds, must limited to [0, 255].");
         }
         if (gRange.getMin() < 0 || gRange.getMax() > 255) {
-            throw new InvalidSettingException("color's G-range out of bound, must limited to [0, 255]");
+            throw new InvalidSettingException("Color's G-value out of bounds, must limited to [0, 255].");
         }
         if (bRange.getMin() < 0 || bRange.getMax() > 255) {
-            throw new InvalidSettingException("color's B-range out of bound, must limited to [0, 255]");
+            throw new InvalidSettingException("Color's B-value out of bounds, must limited to [0, 255].");
         }
 
         int r = RandomUtils.randomInt(rRange.getMin(), rRange.getMax());

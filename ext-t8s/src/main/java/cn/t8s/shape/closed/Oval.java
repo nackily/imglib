@@ -2,6 +2,8 @@ package cn.t8s.shape.closed;
 
 import cn.core.ex.InvalidSettingException;
 import cn.core.strategy.overlay.AbstractClosedShape;
+import cn.core.utils.ObjectUtils;
+
 import java.awt.*;
 
 /**
@@ -51,9 +53,7 @@ public class Oval extends AbstractClosedShape {
 
         @Override
         public Oval build() {
-            if (rect == null) {
-                throw new InvalidSettingException("not specified any rect for this shape");
-            }
+            ObjectUtils.excNull(rect, "Rectangle for this oval not specified.");
             return new Oval(this);
         }
     }

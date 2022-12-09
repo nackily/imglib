@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class EmptySourceBuilder extends AbstractSourceBuilder<EmptySourceBuilder> {
 
-    public static final String NULL_GENERATOR = "ImageGenerator is null";
+    public static final String NULL_GENERATOR = "ImageGenerator is null.";
     protected List<ImageGenerator> captors = new ArrayList<>();
 
     public EmptySourceBuilder register(ImageGenerator ig) {
@@ -35,7 +35,7 @@ public class EmptySourceBuilder extends AbstractSourceBuilder<EmptySourceBuilder
 
     protected void checkReadiness() {
         if (CollectionUtils.isNullOrEmpty(captors)) {
-            throw new HandlingException("not put any captor");
+            throw new HandlingException("No captors are registered.");
         }
     }
 
