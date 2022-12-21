@@ -9,16 +9,29 @@ import cn.core.tool.Range;
 import java.awt.image.BufferedImage;
 
 /**
- * 简单的二值化策略
+ * A simple binary strategy that requires setting a threshold value.
+ * Any pixel whose gray value is greater than the threshold value
+ * will be set as the {@link SimpleBinaryStrategy#BINARY_MAX},
+ * otherwise it will be set as the {@link SimpleBinaryStrategy#BINARY_MIN}.
  *
  * @author tracy
  * @since 0.2.1
  */
 public class SimpleBinaryStrategy extends AbstractBinaryStrategy {
 
+    /**
+     * The larger value of the binarization.
+     */
     public static final int BINARY_MIN = 0;
+
+    /**
+     * The smaller value of the binarization.
+     */
     public static final int BINARY_MAX = 255;
 
+    /**
+     * The threshold value.
+     */
     protected final int threshold;
 
     public SimpleBinaryStrategy(Builder bu) {

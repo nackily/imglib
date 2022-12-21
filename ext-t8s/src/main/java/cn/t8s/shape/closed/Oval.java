@@ -6,7 +6,7 @@ import cn.core.utils.ObjectUtils;
 import java.awt.*;
 
 /**
- * 椭圆形
+ * A closed shape of oval.
  *
  * @author tracy
  * @since 0.2.1

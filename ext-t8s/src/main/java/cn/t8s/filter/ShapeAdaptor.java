@@ -7,13 +7,17 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * 形状适配器
+ * An image filter that can overlay some shape.At the same time, it is also an adapter
+ * that maintains a shape internally.
  *
  * @author tracy
  * @since 0.2.1
  */
 public class ShapeAdaptor implements ImageFilter {
 
+    /**
+     * The shape which overlay to the image.
+     */
     private final Shape shape;
 
     public ShapeAdaptor(Shape shape) {

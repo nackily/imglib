@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * 边框
+ * An image filter that can add a border for image.
  *
  * @author tracy
  * @since 0.2.1
@@ -18,22 +18,23 @@ import java.awt.image.BufferedImage;
 public class BorderHandler implements ImageFilter {
 
     /**
-     * 垂直方向边距
+     * The vertical margin of the border.
      */
     protected final int vMargins;
 
     /**
-     * 水平方向边距
+     * The horizontal margin of the border.
      */
     protected final int hMargins;
 
     /**
-     * 边框透明度
+     * The alpha of the border which is limited to [0, 1]. When the alpha
+     * is equal to 1.0, the border is completely transparent.
      */
     protected final float alpha;
 
     /**
-     * 边框填充颜色
+     * The fill color of the border.
      */
     protected Color fillColor;
 

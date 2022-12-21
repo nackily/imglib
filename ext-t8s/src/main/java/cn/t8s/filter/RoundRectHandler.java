@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * 圆角处理器
+ * An image filter that can add a round rect for image.
  *
  * @author tracy
  * @since 0.2.1

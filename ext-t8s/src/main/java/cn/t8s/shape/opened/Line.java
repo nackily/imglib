@@ -7,7 +7,7 @@ import cn.core.utils.ObjectUtils;
 import java.awt.*;
 
 /**
- * 直线
+ * An opened shape of line.
  *
  * @author tracy
  * @since 0.2.1

@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.text.MessageFormat;
 
 /**
- * 马赛克处理器
+ * An image filter that can add a mosaic for image.
  *
  * @author tracy
  * @since 0.2.1
@@ -18,27 +18,27 @@ import java.text.MessageFormat;
 public class MosaicHandler implements ImageFilter {
 
     /**
-     * 马赛克方块的边长
+     * The side length of the mosaic block.
      */
     private final int sideLength;
 
     /**
-     * 起始坐标-X
+     * The x coordinate of the upper left corner of the mosaic region.
      */
     private final int startX;
 
     /**
-     * 起始坐标-Y
+     * The y coordinate of the upper left corner of the mosaic region.
      */
     private final int startY;
 
     /**
-     * 结束坐标-X
+     * The x coordinate of the down right corner of the mosaic region.
      */
     private int endX;
 
     /**
-     * 结束坐标-Y
+     * The y coordinate of the down right corner of the mosaic region.
      */
     private int endY;
 

@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * 高质量的图片扩张处理器
+ * An image filter that can enlarge an image lossless.
  *
  * @author tracy
  * @since 0.2.1
@@ -15,17 +15,17 @@ import java.awt.image.BufferedImage;
 public class HighQualityExpandHandler implements ImageFilter {
 
     /**
-     * 保持宽高比，以宽和高中数值较大的一方为标尺
+     * Set keep the aspect ratio. If true, only one of width and height should be set.
      */
     private final boolean keepAspectRatio;
 
     /**
-     * 扩张至宽度等于指定值
+     * The final width after expanded.
      */
     private int finalWidth;
 
     /**
-     * 扩张至高度等于指定值
+     * The final height after expanded.
      */
     private int finalHeight;
 

@@ -3,7 +3,8 @@ package cn.t8s.mode.graying;
 import cn.core.strategy.mode.AbstractGrayingStrategy;
 
 /**
- * 最小值灰度化策略
+ * A maximum graying strategy. The gray value of any pixel is equal to the maximum value of
+ * the red component, green component and blue component.
  *
  * @author tracy
  * @since 0.2.1

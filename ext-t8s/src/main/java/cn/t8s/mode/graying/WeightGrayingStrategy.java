@@ -7,7 +7,8 @@ import cn.core.tool.Range;
 import java.text.MessageFormat;
 
 /**
- * 按权重灰度化策略
+ * A weight graying strategy. The gray value of any pixel is equal to the weighted sum of
+ * the red component, green component and blue component.
  *
  * @author tracy
  * @since 0.2.1
@@ -15,12 +16,12 @@ import java.text.MessageFormat;
 public class WeightGrayingStrategy extends AbstractGrayingStrategy {
 
     /**
-     * red weight
+     * The red component weight.
      */
     private final double redWeight;
 
     /**
-     * green weight
+     * The green component weight.
      */
     private final double greenWeight;
 

@@ -3,7 +3,8 @@ package cn.t8s.mode.graying;
 import cn.core.strategy.mode.AbstractGrayingStrategy;
 
 /**
- * 固定分量的灰度化策略
+ * A fixed graying strategy. The gray value of any pixel is equal to the selected component.
+ * View {@link FixedOption} for all options, and the default option is {@link FixedOption#R}.
  *
  * @author tracy
  * @since 0.2.1
@@ -29,11 +30,12 @@ public class FixedGrayingStrategy extends AbstractGrayingStrategy {
     public interface FixedOption {
 
         /**
-         * 选择一个分量
-         * @param r R
-         * @param g G
-         * @param b B
-         * @return 分量值
+         * Chose a component.
+         *
+         * @param r The red component.
+         * @param g The green component.
+         * @param b The blue component.
+         * @return The final gray value.
          */
         int chose(int r, int g, int b);
 
