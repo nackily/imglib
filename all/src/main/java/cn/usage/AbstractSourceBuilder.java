@@ -17,8 +17,9 @@ import java.io.OutputStream;
 import java.util.*;
 
 /**
- * 管道构造器
+ * An abstract superclass of source builder.
  *
+ * @param <T> The type of children.
  * @author tracy
  * @since 0.2.1
  */
@@ -30,10 +31,15 @@ public abstract class AbstractSourceBuilder<T> {
     protected List<PipeFilter> filters = new ArrayList<>();
 
     /**
-     * 输出格式
+     * The output format name.
      */
     protected String formatName;
 
+    /**
+     * Set the output format name.
+     * @param formatName The format name.
+     * @return The object of children.
+     */
     public T formatName(String formatName) {
         if (StringUtils.isEmpty(formatName)) {
             throw new InvalidSettingException("Format name can not be null.");
@@ -42,18 +48,36 @@ public abstract class AbstractSourceBuilder<T> {
         return typeThis;
     }
 
+    /**
+     * Add a filter to the end of the pipe.
+     *
+     * @param ypf The filter that to add.
+     * @return The object of children.
+     */
     public T addFilter(PipeFilter ypf) {
         ObjectUtils.excNull(ypf, NULL_FILTER);
         filters.add(ypf);
         return typeThis;
     }
 
+    /**
+     * Add filters to the end of the pipe.
+     *
+     * @param ypf The filters that to add.
+     * @return The object of children.
+     */
     public T addFilter(PipeFilter... ypf) {
         ObjectUtils.excNull(ypf, NULL_FILTER);
         filters.addAll(Arrays.asList(ypf));
         return typeThis;
     }
 
+    /**
+     * Remove a filter from the pipe.
+     *
+     * @param ypf The filters that to remove.
+     * @return The object of children.
+     */
     public T removeFilter(PipeFilter ypf) {
         ObjectUtils.excNull(ypf, NULL_FILTER);
         filters.remove(ypf);
@@ -61,9 +85,11 @@ public abstract class AbstractSourceBuilder<T> {
     }
 
     /**
-     * 获得一张图像
-     * @return 图像
-     * @throws IOException IO异常
+     * Obtain the buffered image.
+     *
+     * @return The buffered image.
+     * @throws IOException If some I/O exceptions occurred.
+     * @throws HandlingException If there is no image or multiple images in the pipe.
      */
     public BufferedImage obtainBufferedImage() throws IOException {
         List<BufferedImage> images = obtainBufferedImages();
@@ -77,9 +103,11 @@ public abstract class AbstractSourceBuilder<T> {
     }
 
     /**
-     * 获取图像
-     * @return 图像集合
-     * @throws IOException IO异常
+     * Obtain all buffered images.
+     *
+     * @return The buffered images.
+     * @throws IOException If some I/O exceptions occurred.
+     * @throws HandlingException If there is no image in the pipe.
      */
     public List<BufferedImage> obtainBufferedImages() throws IOException {
         List<BufferedImage> sourceImages = obtainSourceImages();
@@ -96,9 +124,10 @@ public abstract class AbstractSourceBuilder<T> {
     }
 
     /**
-     * 获取图像源
-     * @return 图像集合
-     * @throws IOException IO异常
+     * Get all images from image sources.
+     *
+     * @return The images after loaded from sources.
+     * @throws IOException If some I/O exceptions occurred when loading sources.
      */
     protected abstract List<BufferedImage> obtainSourceImages() throws IOException;
 

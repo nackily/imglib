@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * EmptySourceBuilder
+ * A source builder which have no source.
  *
  * @author tracy
  * @since 0.2.1

@@ -27,7 +27,42 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * ImagePipes
+ * Provides a fluent interface to processing image.
+ * <p>
+ *     This is the main entry point for processing image with <B>Imglib</B>.
+ * </p>
+ * <DL>
+ * <DT><B>Usage:</B></DT>
+ * <DD>
+ * The following example code demonstrates how to use the fluent interface
+ * to create a hash avatar for the user, the avatar setting to 8px*8px,
+ * the image size setting to 300px*300px, and add a border with a margin of 20px.
+ * <p>
+ * <pre>
+ImagePipes.ofEmptySource()
+    .register(new HashImageGenerator.Builder("Tracy")
+        .gridVerticalNum(8)
+        .bgColor(ColorUtils.of(240, 240, 240))
+        .fgColor(ColorUtils.of(50, 150, 50))
+        .build())
+    .toThumbnails()
+    .addFilter(new HighQualityExpandHandler.Builder()
+        .finalWidth(300)
+        .keepAspectRatio(true)
+        .build())
+    .addFilter(new BorderHandler.Builder()
+        .fillColor(ColorUtils.of(200, 200, 200))
+        .vMargins(20)
+        .hMargins(20)
+        .build())
+    .scale(1.0)
+    .toFile(".../avatar.png");
+ * </pre>
+ * </DD>
+ * </DL>
+ *
+ * For more examples, please visit the <a href="https://github.com/nackily/imglib">
+ * Imglib</a> project page.
  *
  * @author tracy
  * @since 0.2.1

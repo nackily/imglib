@@ -17,15 +17,26 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * GifSourceBuilder
+ * A source builder which form GIF source.
  *
  * @author tracy
  * @since 0.2.1
  */
 public class GifSourceBuilder<S> extends AbstractSourceBuilder<GifSourceBuilder<S>> {
 
+    /**
+     * The GIF source.
+     */
     protected final GifSource<S> source;
+
+    /**
+     * Whether to include all frames.
+     */
     private boolean containsAll = false;
+
+    /**
+     * The frame indexes to be extracted.
+     */
     private final Set<Integer> frames = new HashSet<>();
 
     public GifSourceBuilder(GifSource<S> gifSource) {

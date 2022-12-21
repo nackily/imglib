@@ -14,16 +14,31 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * PdfSourceBuilder
+ * A source builder which form PDF source.
  *
  * @author tracy
  * @since 0.2.1
  */
 public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<S>> {
 
+    /**
+     * The PDF source.
+     */
     protected final PdfSource<S> source;
+
+    /**
+     * Whether to include all pages.
+     */
     private boolean containsAll = false;
+
+    /**
+     * The page indexes to be extracted.
+     */
     private final Set<Integer> pages = new HashSet<>();
+
+    /**
+     * The DPI (dots per inch) to render at.
+     */
     private float dpi;
 
     public PdfSourceBuilder(PdfSource<S> pdfSource) {

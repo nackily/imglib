@@ -11,14 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ImageSourceBuilder
+ * A source builder which form buffered image source.
  *
  * @author tracy
  * @since 0.2.1
  */
 public class ImageSourceBuilder<S> extends AbstractSourceBuilder<ImageSourceBuilder<S>> {
 
+    /**
+     * Whether to use the original format.
+     */
     protected boolean useOriginalFormat;
+
+    /**
+     * The iterable of the buffered image source.
+     */
     protected final Iterable<BufferedImageSource<S>> sources;
 
     public ImageSourceBuilder(Iterable<BufferedImageSource<S>> sources) {
