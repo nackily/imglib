@@ -16,7 +16,7 @@ import java.text.MessageFormat;
 import java.util.Iterator;
 
 /**
- * An util class for buffered image。
+ * An util class for buffered image.
  *
  * @author tracy
  * @since 0.2.1

@@ -3,7 +3,7 @@ package cn.core.utils;
 import java.util.Random;
 
 /**
- * An util class for random。
+ * An util class for random.
  *
  * @author tracy
  * @since 0.2.1
@@ -27,8 +27,8 @@ public final class RandomUtils {
     /**
      * Get a random float.
      *
-     * @param min 下边界
-     * @param max 上边界
+     * @param min The lower limit of the value range.
+     * @param max The upper limit of the value range.
      * @return The random integer which limited to [min, max).
      */
     public static float randomFloat(float min, float max) {

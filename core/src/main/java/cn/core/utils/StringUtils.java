@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 /**
- * An util class for string。
+ * An util class for string.
  *
  * @author tracy
  * @since 0.2.1

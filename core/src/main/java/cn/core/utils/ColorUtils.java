@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * An util class for color。
+ * An util class for color.
  *
  * @author tracy
  * @since 0.2.1

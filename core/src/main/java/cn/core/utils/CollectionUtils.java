@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * An util class for collection。
+ * An util class for collection.
  *
  * @author tracy
  * @since 0.2.1
