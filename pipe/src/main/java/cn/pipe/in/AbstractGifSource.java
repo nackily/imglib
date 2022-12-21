@@ -12,7 +12,7 @@ import java.util.List;
  * AbstractGifSource
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public abstract class AbstractGifSource<T> implements GifSource<T> {
 

@@ -12,10 +12,10 @@ import java.io.IOException;
 import java.util.Iterator;
 
 /**
- * FileImageSource
+ * Buffered image data source whose from image File.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class FileImageSource implements BufferedImageSource<File> {
 

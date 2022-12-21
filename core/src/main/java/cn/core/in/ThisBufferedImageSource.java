@@ -4,10 +4,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * ThisBufferedImageSource
+ * Buffered image data source whose from BufferedImage object.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class ThisBufferedImageSource implements BufferedImageSource<BufferedImage> {
 

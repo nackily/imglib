@@ -16,7 +16,7 @@ import java.security.NoSuchAlgorithmException;
  * 散列图像构建器
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class HashImageGenerator implements ImageGenerator {
 

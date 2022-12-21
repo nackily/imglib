@@ -12,7 +12,7 @@ import java.util.List;
  * 网格化拆分策略
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class GridSplitHandler extends AbstractSplitFilter {
 

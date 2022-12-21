@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * Example
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class Example {
     private static final Logger logger = LoggerFactory.getLogger(Example.class);

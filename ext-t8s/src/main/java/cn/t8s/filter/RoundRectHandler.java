@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
  * 圆角处理器
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class RoundRectHandler implements ImageFilter {
 

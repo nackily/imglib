@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
  * 功能设定
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public enum Setting {
 

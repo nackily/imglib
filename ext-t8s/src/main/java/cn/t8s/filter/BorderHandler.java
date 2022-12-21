@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
  * 边框
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class BorderHandler implements ImageFilter {
 

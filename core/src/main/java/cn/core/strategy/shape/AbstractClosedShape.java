@@ -1,37 +1,36 @@
-package cn.core.strategy.overlay;
+package cn.core.strategy.shape;
 
 import cn.core.ex.InvalidSettingException;
 import cn.core.strategy.Shape;
 import cn.core.GenericBuilder;
 import cn.core.utils.ObjectUtils;
-
 import java.awt.*;
 
 /**
- * 封闭图像
+ * An abstract superclass of all closed shapes.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public abstract class AbstractClosedShape implements Shape {
 
     /**
-     * 绘制区域
+     * The rectangle of the shape.
      */
     protected Rectangle rect;
 
     /**
-     * 笔画样式，例如 BasicStroke
+     * The stroke.
      */
     protected Stroke stroke;
 
     /**
-     * 是否填充
+     * Whether to fill the shape.
      */
     protected boolean fill;
 
     /**
-     * 颜色
+     * The color.
      */
     protected Color color;
 
@@ -70,18 +69,20 @@ public abstract class AbstractClosedShape implements Shape {
     }
 
     /**
-     * 绘制边框
-     * @param canvasWidth 画笔宽
-     * @param canvasHeight 画笔高
-     * @param g2d 画笔
+     * Draw a border for this shape.
+     *
+     * @param canvasWidth The canvas width.
+     * @param canvasHeight The canvas height.
+     * @param g2d The Graphics2D object of original image.
      */
     public abstract void drawBorder(int canvasWidth, int canvasHeight, Graphics2D g2d);
 
     /**
-     * 填充内部
-     * @param canvasWidth 画笔宽
-     * @param canvasHeight 画笔高
-     * @param g2d 画笔
+     * Fill the rectangle for this shape.
+     *
+     * @param canvasWidth The canvas width.
+     * @param canvasHeight The canvas height.
+     * @param g2d The Graphics2D object of original image.
      */
     public abstract void fillInside(int canvasWidth, int canvasHeight, Graphics2D g2d);
 

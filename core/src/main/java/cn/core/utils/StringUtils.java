@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.Collection;
 
 /**
- * StringUtils
+ * An util class for string。
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public final class StringUtils {
     private StringUtils(){}
@@ -72,17 +72,19 @@ public final class StringUtils {
 
     /**
      * Returns the file extension of {@link File}.
-     * @param f the file
-     * @return the extension of the file
+     *
+     * @param f The file.
+     * @return The extension of the file.
      */
     public static String getExtensionName(File f) {
         return getExtensionName(f.getName());
     }
 
     /**
-     * Returns the file extension of file name
-     * @param filename the file name
-     * @return the extension of the file
+     * Returns the file extension of file name.
+     *
+     * @param filename The file name.
+     * @return The extension of the file.
      */
     public static String getExtensionName(String filename) {
         boolean c1 = filename.indexOf('.') != -1;

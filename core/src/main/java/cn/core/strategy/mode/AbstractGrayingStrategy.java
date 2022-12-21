@@ -5,10 +5,10 @@ import cn.core.utils.ObjectUtils;
 import java.awt.image.BufferedImage;
 
 /**
- * 抽象的灰度化策略
+ * Abstract strategy to graying the image.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public abstract class AbstractGrayingStrategy implements ModeStrategy {
 
@@ -34,11 +34,12 @@ public abstract class AbstractGrayingStrategy implements ModeStrategy {
 
 
     /**
-     * 计算灰度值
-     * @param r red
-     * @param g green
-     * @param b blue
-     * @return grayness value
+     * Calculate the grayness value.
+     *
+     * @param r The red component.
+     * @param g The green component.
+     * @param b The blue component.
+     * @return The final grayness value.
      */
     public abstract int getGraynessValue(int r, int g, int b);
 

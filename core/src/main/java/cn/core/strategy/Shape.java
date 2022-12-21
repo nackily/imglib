@@ -3,18 +3,19 @@ package cn.core.strategy;
 import java.awt.*;
 
 /**
- * 形状
+ * A shape drawn on an image.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public interface Shape {
 
     /**
-     * 绘制
-     * @param canvasWidth 画布宽度
-     * @param canvasHeight 画布高度
-     * @param g2d 画笔
+     * Paint this shape on the image.
+     *
+     * @param canvasWidth The canvas width.
+     * @param canvasHeight The canvas height.
+     * @param g2d The Graphics2D object of original image.
      */
     void paint(int canvasWidth, int canvasHeight, Graphics2D g2d);
 }

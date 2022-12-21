@@ -15,7 +15,7 @@ import java.util.List;
  * AbstractGifEncoder
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public abstract class AbstractGifEncoder implements BufferedImageEncoder {
 

@@ -2,16 +2,18 @@ package cn.core;
 
 
 /**
- * 抽象的通用建造器
+ * A superclass of generic builder.
  *
+ * @param <T> The type to build.
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public interface GenericBuilder<T> {
     
     /**
-     * 构建对象
-     * @return T
+     * Build a product.
+     *
+     * @return T The object to build.
      */
      T build();
 }

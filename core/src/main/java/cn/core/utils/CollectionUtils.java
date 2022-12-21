@@ -5,10 +5,10 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * CollectionUtils
+ * An util class for collection。
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public final class CollectionUtils {
     private CollectionUtils(){}

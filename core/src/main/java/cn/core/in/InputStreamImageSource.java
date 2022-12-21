@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * InputStreamImageSource
+ * Buffered image data source whose from input stream.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class InputStreamImageSource implements BufferedImageSource<InputStream> {
 

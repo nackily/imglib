@@ -14,7 +14,7 @@ import java.util.List;
  * 网格化合并策略
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class GridMergeHandler extends AbstractMergeFilter {
 

@@ -3,10 +3,10 @@ package cn.core.ex;
 import java.io.IOException;
 
 /**
- * UnsupportedFormatException
+ * Signals that an unsupported format has been found.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class UnsupportedFormatException extends IOException {
 

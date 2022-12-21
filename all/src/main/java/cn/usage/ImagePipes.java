@@ -30,7 +30,7 @@ import java.util.List;
  * ImagePipes
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public final class ImagePipes {
     private ImagePipes() {}

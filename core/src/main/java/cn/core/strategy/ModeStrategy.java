@@ -3,16 +3,17 @@ package cn.core.strategy;
 import java.awt.image.BufferedImage;
 
 /**
- * 模式策略
+ * A strategy for applying mode to an image.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public interface ModeStrategy {
 
     /**
-     * 执行模式
-     * @param img 图像
+     * Execute this mode.This method will directly change the original image.
+     *
+     * @param img The original image.
      */
     void execute(BufferedImage img);
 }

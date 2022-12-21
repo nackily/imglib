@@ -13,7 +13,7 @@ import java.text.MessageFormat;
  * 屏幕快照构建器
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class ScreenshotGenerator extends Robot implements ImageGenerator {
 

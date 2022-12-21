@@ -2,7 +2,7 @@ package cn.t8s.shape.opened;
 
 import cn.core.ex.HandlingException;
 import cn.core.ex.InvalidSettingException;
-import cn.core.strategy.overlay.AbstractOpenedShape;
+import cn.core.strategy.shape.AbstractOpenedShape;
 import cn.core.utils.ObjectUtils;
 import java.awt.*;
 
@@ -10,7 +10,7 @@ import java.awt.*;
  * 直线
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class Line extends AbstractOpenedShape {
 

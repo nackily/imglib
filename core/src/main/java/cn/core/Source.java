@@ -2,22 +2,23 @@ package cn.core;
 
 
 /**
- * 数据源
+ * Data source.
  *
+ * @param <S> the type of source
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public interface Source<S> {
 
     /**
-     * 获取源
-     * @return 源
+     * Get the source.
+     * @return The source of this.
      */
     S getSource();
 
     /**
-     * 是否已读取过
-     * @return true-已读取过
+     * Whether the source has been read.
+     * @return true If the source has been read.
      */
     boolean isReadCompleted();
 

@@ -12,7 +12,7 @@ import java.util.List;
  * 拆分图像策略
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public abstract class AbstractSplitFilter implements PipeFilter {
 

@@ -1,10 +1,11 @@
 package cn.core.ex;
 
 /**
- * 处理异常
+ * HandlingException is the class of those exceptions that can be thrown during
+ * handle image processing task.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class HandlingException extends RuntimeException {
 

@@ -16,10 +16,10 @@ import java.text.MessageFormat;
 import java.util.Iterator;
 
 /**
- * BufferedImageUtils
+ * An util class for buffered image。
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public final class BufferedImageUtils {
 
@@ -34,12 +34,13 @@ public final class BufferedImageUtils {
     }
 
     /**
-     * 创建底图
-     * @param alpha 透明度
-     * @param width 宽度
-     * @param height 高度
-     * @param fillColor 填充颜色
-     * @return 图像
+     * Create a background image.
+     *
+     * @param alpha The alpha of image.
+     * @param width The width of image.
+     * @param height The height of image.
+     * @param fillColor The fill color of image.
+     * @return The final created image.
      */
     public static BufferedImage newBackgroundImage(float alpha, int width, int height, Color fillColor) {
         if (alpha == 1.0) {
@@ -50,10 +51,11 @@ public final class BufferedImageUtils {
     }
 
     /**
-     * 创建透明图像
-     * @param width 宽度
-     * @param height 高度
-     * @return 图像
+     * Create a transparent image.
+     *
+     * @param width The width of image.
+     * @param height The height of image.
+     * @return The final created image.
      */
     public static BufferedImage newTransparentImage(int width, int height) {
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -65,10 +67,13 @@ public final class BufferedImageUtils {
     }
 
     /**
-     * 创建上色图像
-     * @param width 宽度
-     * @param height 高度
-     * @return 图像
+     * Create a colored image.
+     *
+     * @param width The width of image.
+     * @param height The height of image.
+     * @param alpha The alpha of image.
+     * @param c The color of image.
+     * @return The final created image.
      */
     public static BufferedImage newColoredImage(int width, int height, float alpha, Color c) {
         BufferedImage image = newTransparentImage(width, height);

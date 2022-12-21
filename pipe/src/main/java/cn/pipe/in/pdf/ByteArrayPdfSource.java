@@ -9,7 +9,7 @@ import java.io.IOException;
  * ByteArrayPdfSource
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class ByteArrayPdfSource extends AbstractPdfBoxSource<byte[]> {
 

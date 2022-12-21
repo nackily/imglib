@@ -2,10 +2,11 @@ package cn.core.ex;
 
 
 /**
- * 不合法的设置项异常
+ * InvalidSettingException is the class of those exceptions that can be thrown when
+ * found any invalid setting.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class InvalidSettingException extends RuntimeException {
 

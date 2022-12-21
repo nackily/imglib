@@ -10,7 +10,7 @@ import java.io.IOException;
  * FileGifSource
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class FileGifSource extends AbstractGifSource<File> {
 

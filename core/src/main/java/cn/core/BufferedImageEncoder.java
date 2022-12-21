@@ -5,23 +5,23 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * 图像编码器
+ * Encoder for buffered image.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public interface BufferedImageEncoder {
 
     /**
-     * 是否支持编码多个图像
-     * @return true-是；false-否
+     * Whether to support encoding multiple images.
+     * @return true If this encoder supported multiple images.
      */
     boolean supportMultiple();
 
     /**
-     * 编码
-     * @param sources 图像
-     * @throws IOException IO异常
+     * Encode images.
+     * @param sources All source images to encode.
+     * @throws IOException If exception occurred when encode source images.
      */
     void encode(List<BufferedImage> sources) throws IOException;
 }

@@ -1,24 +1,24 @@
-package cn.core.strategy.overlay;
+package cn.core.strategy.shape;
 
 import cn.core.strategy.Shape;
 import cn.core.GenericBuilder;
 import java.awt.*;
 
 /**
- * 开口图像
+ * An abstract superclass of all opened shapes.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public abstract class AbstractOpenedShape implements Shape {
 
     /**
-     * 笔画样式，例如 BasicStroke
+     * The stroke.
      */
     protected Stroke stroke;
 
     /**
-     * 颜色
+     * The color.
      */
     protected Color color;
 
@@ -38,10 +38,11 @@ public abstract class AbstractOpenedShape implements Shape {
     }
 
     /**
-     * 绘制
-     * @param canvasWidth 画笔宽
-     * @param canvasHeight 画笔高
-     * @param g2d 画笔
+     * Draw this shape.
+     *
+     * @param canvasWidth The canvas width.
+     * @param canvasHeight The canvas height.
+     * @param g2d The Graphics2D object of original image.
      */
     public abstract void draw(int canvasWidth, int canvasHeight, Graphics2D g2d);
 

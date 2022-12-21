@@ -1,10 +1,10 @@
 package cn.core.utils;
 
 /**
- * ObjectUtils
+ * An util class for color。
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public final class ObjectUtils {
     private ObjectUtils(){}

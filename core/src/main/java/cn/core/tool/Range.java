@@ -1,10 +1,11 @@
 package cn.core.tool;
 
 /**
- * 范围
+ * Indicates a range whose boundary is [{@link Range#min}, {@link Range#max}].
  *
+ * @param <T> The type of range's element.
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class Range<T extends Comparable<T>> {
 

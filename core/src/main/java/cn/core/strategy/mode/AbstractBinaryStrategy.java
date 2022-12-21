@@ -4,10 +4,10 @@ import cn.core.strategy.ModeStrategy;
 import java.awt.image.BufferedImage;
 
 /**
- * 抽象的二值化策略
+ * Abstract strategy to binary the image.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public abstract class AbstractBinaryStrategy implements ModeStrategy {
 
@@ -26,8 +26,8 @@ public abstract class AbstractBinaryStrategy implements ModeStrategy {
     }
 
     /**
-     * 二值化
-     * @param img 原始图像
+     * Convert the image to a binary image.This method will directly change the original image.
+     * @param img The original image.
      */
     public abstract void binaryImage(BufferedImage img);
 }

@@ -6,23 +6,25 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * BufferedImageSource
+ * Buffered image data source.
  *
+ * @param <S> the type of buffered image source
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public interface BufferedImageSource<S> extends Source<S> {
 
     /**
-     * read
-     * @return target object
-     * @throws IOException IO异常
+     * Read an image from the buffered image source.
+     * @return The read BufferedImage.
+     * @throws IOException If some I/O exceptions occurred.
      */
     BufferedImage read() throws IOException;
 
     /**
-     * 获取原始格式名称
-     * @return 原始格式名称
+     * Gets the original format name.
+     * @return The original format name.
      */
     String getOriginalFormatName();
+
 }

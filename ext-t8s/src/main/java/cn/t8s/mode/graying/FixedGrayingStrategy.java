@@ -6,7 +6,7 @@ import cn.core.strategy.mode.AbstractGrayingStrategy;
  * 固定分量的灰度化策略
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public class FixedGrayingStrategy extends AbstractGrayingStrategy {
 

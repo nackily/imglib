@@ -3,16 +3,17 @@ package cn.core;
 import java.awt.image.BufferedImage;
 
 /**
- * 图像捕获器
+ * Image generator.
  *
  * @author tracy
- * @since 1.0.0
+ * @since 0.2.1
  */
 public interface ImageGenerator {
 
     /**
-     * 生成图像
-     * @return 图像
+     * Generate an image.
+     *
+     * @return The generated image.
      */
     BufferedImage generate();
 }
