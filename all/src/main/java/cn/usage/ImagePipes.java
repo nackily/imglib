@@ -37,7 +37,6 @@ import java.util.List;
  * The following example code demonstrates how to use the fluent interface
  * to create a hash avatar for the user, the avatar setting to 8px*8px,
  * the image size setting to 300px*300px, and add a border with a margin of 20px.
- * <p>
  * <pre>
 ImagePipes.ofEmptySource()
     .register(new HashImageGenerator.Builder("Tracy")

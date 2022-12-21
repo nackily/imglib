@@ -16,13 +16,13 @@
 
     <dependencies>
         <dependency>
-            <groupId>${parent.groupId}</groupId>
+            <groupId>${project.parent.groupId}</groupId>
             <artifactId>imglib-pipe</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>${parent.groupId}</groupId>
+            <groupId>${project.parent.groupId}</groupId>
             <artifactId>imglib-ext-t8s</artifactId>
             <version>${project.version}</version>
         </dependency>
