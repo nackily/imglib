@@ -7,11 +7,11 @@
 
     <parent>
         <artifactId>imglib-parent</artifactId>
-        <groupId>cn.imglib</groupId>
+        <groupId>io.github.nackily</groupId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>ext-t8s</artifactId>
+    <artifactId>imglib-ext-t8s</artifactId>
     <packaging>jar</packaging>
 
 
@@ -19,7 +19,7 @@
 
         <dependency>
             <groupId>${parent.groupId}</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>imglib-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 

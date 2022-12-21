@@ -7,16 +7,21 @@
 
     <parent>
         <artifactId>imglib-parent</artifactId>
-        <groupId>cn.imglib</groupId>
+        <groupId>io.github.nackily</groupId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>example</artifactId>
+    <properties>
+        <maven.install.skip>true</maven.install.skip>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
+    <artifactId>imglib-example</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>${parent.groupId}</groupId>
-            <artifactId>usage</artifactId>
+            <artifactId>imglib-all</artifactId>
             <version>${parent.version}</version>
         </dependency>
 

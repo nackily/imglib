@@ -6,13 +6,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>cn.imglib</groupId>
+        <groupId>io.github.nackily</groupId>
         <artifactId>imglib-parent</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>core</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>imglib-core</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
     </dependencies>
