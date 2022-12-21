@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- * FileGifSource
+ * A gif source that from file.
  *
  * @author tracy
  * @since 0.2.1

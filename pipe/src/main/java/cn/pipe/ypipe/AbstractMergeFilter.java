@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 合并图像处理器
+ * An abstract pipe filter which used to merge multiple images into one image.
  *
  * @author tracy
  * @since 0.2.1
@@ -24,9 +24,10 @@ public abstract class AbstractMergeFilter implements PipeFilter {
     }
 
     /**
-     * 合并图像
-     * @param images 源
-     * @return 目标
+     * Merge multiple images into one image.
+     *
+     * @param images The source images.
+     * @return The final image after merged.
      */
     protected abstract BufferedImage merge(List<BufferedImage> images);
 }

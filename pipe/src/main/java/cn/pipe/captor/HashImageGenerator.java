@@ -13,7 +13,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * 散列图像构建器
+ * An image generator that can generate hash matrix image.
  *
  * @author tracy
  * @since 0.2.1
@@ -21,22 +21,22 @@ import java.security.NoSuchAlgorithmException;
 public class HashImageGenerator implements ImageGenerator {
 
     /**
-     * 摘要
+     * The digest of the hash image.
      */
     private final byte[] digest;
 
     /**
-     * 格子竖向的数量
+     * The vertical grid num of the hash image.
      */
     private final int gridVerticalNum;
 
     /**
-     * 背景色
+     * The background color of the hash image.
      */
     private final Color bgColor;
 
     /**
-     * 前景色
+     * The foreground color of the hash image.
      */
     private final Color fgColor;
 

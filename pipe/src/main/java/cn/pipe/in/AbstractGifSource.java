@@ -9,15 +9,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * AbstractGifSource
+ * An abstract superclass of gif source.
  *
+ * @param <T> The type of gif source.
  * @author tracy
  * @since 0.2.1
  */
 public abstract class AbstractGifSource<T> implements GifSource<T> {
 
+    /**
+     * The source.
+     */
     protected final T source;
+
+    /**
+     * The flag that indicating the completion of reading.
+     */
     protected boolean readCompleted = false;
+
+    /**
+     * The gif decoder.
+     */
     protected final GifDecoder decoder = new GifDecoder();
 
 
@@ -69,8 +81,8 @@ public abstract class AbstractGifSource<T> implements GifSource<T> {
     }
 
     /**
-     * 如果未加载 PDF，则进行加载
-     * @throws IOException IO异常
+     * Load the gif source if the source have not loaded.
+     * @throws IOException If some I/O exceptions occurred when loading the gif source.
      */
     protected abstract void loadIfNot() throws IOException;
 }

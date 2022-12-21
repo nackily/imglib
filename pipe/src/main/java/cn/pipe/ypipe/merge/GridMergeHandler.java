@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 /**
- * 网格化合并策略
+ * A merge handler which based on grid implementation.
  *
  * @author tracy
  * @since 0.2.1
@@ -19,37 +19,39 @@ import java.util.List;
 public class GridMergeHandler extends AbstractMergeFilter {
 
     /**
-     * 是否自适应
+     * Whether auto adapts is enabled. When this parameter is enabled,
+     * it is possible to dynamically adjust the width and height of
+     * the grid.
      */
     private final boolean autoAdapts;
 
     /**
-     * 网格的宽
+     * The width of the grid.
      */
     private int gridWidth;
 
     /**
-     * 网格的高
+     * The height of the grid.
      */
     private int gridHeight;
 
     /**
-     * 横向摆放的图片数量
+     * The horizontal grid number of the final image.
      */
     private int horizontalNum;
 
     /**
-     * 图像是否居中对齐
+     * Whether the original image is centered relative to the grid.
      */
     private final boolean alignCenter;
 
     /**
-     * 背景透明度
+     * The alpha of the background.
      */
     private final float alpha;
 
     /**
-     *  背景填充颜色
+     *  The fill color of the background.
      */
     private Color fillColor;
 
@@ -113,8 +115,9 @@ public class GridMergeHandler extends AbstractMergeFilter {
     }
 
     /**
-     * 调整网格大小
-     * @param images 多个图像
+     * Adjust the width and height of the grid if necessary.
+     *
+     * @param images The images to be merged.
      */
     protected void adjustGridSize(List<BufferedImage> images) {
         for (BufferedImage o : images) {
@@ -128,8 +131,9 @@ public class GridMergeHandler extends AbstractMergeFilter {
     }
 
     /**
-     * 调整水平方向格子的数量，如果有必要时
-     * @param imageNum 图片数量
+     * Adjust the horizontal grid number if necessary.
+     *
+     * @param imageNum The size of images to be merged.
      */
     protected void adjustHorizontalNumIfNecessary(int imageNum) {
         if (horizontalNum <= 0 || imageNum < horizontalNum) {
@@ -138,9 +142,10 @@ public class GridMergeHandler extends AbstractMergeFilter {
     }
 
     /**
-     * 计算所有图片占用的行数
-     * @param imageNum 图片数量
-     * @return 所需行数
+     * Calculate the final number of rows.
+     *
+     * @param imageNum The size of images to be merged.
+     * @return The final number of rows.
      */
     protected int getRows(int imageNum) {
         return (imageNum + horizontalNum - 1) / horizontalNum;

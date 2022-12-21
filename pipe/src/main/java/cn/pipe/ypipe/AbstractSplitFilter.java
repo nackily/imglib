@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 /**
- * 拆分图像策略
+ * An abstract pipe filter which used to split one images into multiple slices.
  *
  * @author tracy
  * @since 0.2.1
@@ -27,9 +27,10 @@ public abstract class AbstractSplitFilter implements PipeFilter {
     }
 
     /**
-     * 合并图像
-     * @param image 源
-     * @return 目标
+     * Split one image into multiple images.
+     *
+     * @param image The source image.
+     * @return The final images after split.
      */
     protected abstract List<BufferedImage> split(BufferedImage image);
 }

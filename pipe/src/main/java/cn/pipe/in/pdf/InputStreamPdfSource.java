@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * InputStreamPdfSource
+ * A pdf source that from input stream.
  *
  * @author tracy
  * @since 0.2.1

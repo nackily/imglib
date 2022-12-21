@@ -10,15 +10,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * AbstractPdfBoxSource
+ * An abstract superclass of pdf source.
  *
+ * @param <T> The type of pdf source.
  * @author tracy
  * @since 0.2.1
  */
 public abstract class AbstractPdfBoxSource<T> implements PdfSource<T> {
 
+    /**
+     * The source.
+     */
     protected final T source;
+
+    /**
+     * The flag that indicating the completion of reading.
+     */
     protected boolean readCompleted = false;
+
+    /**
+     * The pdf document object.
+     */
     protected PDDocument pdf;
 
 
@@ -62,8 +74,8 @@ public abstract class AbstractPdfBoxSource<T> implements PdfSource<T> {
     }
 
     /**
-     * 如果未加载 PDF，则进行加载
-     * @throws IOException IO异常
+     * Load the pdf source if the source have not loaded.
+     * @throws IOException If some I/O exceptions occurred when loading the pdf source.
      */
     protected abstract void loadIfNot() throws IOException;
 }

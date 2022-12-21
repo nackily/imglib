@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.text.MessageFormat;
 
 /**
- * 透明的图像构建器
+ * An image generator that can generate transparent image.
  *
  * @author tracy
  * @since 0.2.1
@@ -16,12 +16,12 @@ import java.text.MessageFormat;
 public class TransparentImageGenerator implements ImageGenerator {
 
     /**
-     * 图像宽度
+     * The width of the image.
      */
     protected final int width;
 
     /**
-     * 图像高度
+     * The height of the image.
      */
     protected final int height;
 

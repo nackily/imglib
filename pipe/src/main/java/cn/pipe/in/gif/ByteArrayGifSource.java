@@ -6,7 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 /**
- * ByteArrayGifSource
+ * A gif source that from byte array.
  *
  * @author tracy
  * @since 0.2.1

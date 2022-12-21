@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * FilePdfSource
+ * A pdf source that from file.
  *
  * @author tracy
  * @since 0.2.1

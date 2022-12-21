@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * FileGifSource
+ * A gif source that from input stream.
  *
  * @author tracy
  * @since 0.2.1

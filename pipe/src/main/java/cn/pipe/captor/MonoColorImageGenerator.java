@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * 单色图像构建器
+ * An image generator that can generate mono color image.
  *
  * @author tracy
  * @since 0.2.1
@@ -16,12 +16,12 @@ import java.awt.image.BufferedImage;
 public class MonoColorImageGenerator extends TransparentImageGenerator {
 
     /**
-     * 颜色
+     * The color of the image.
      */
     private final Color color;
 
     /**
-     * 透明度，0-不透明，1-全透明
+     * The alpha of the image which equals 1, indicating that the image is completely transparent.
      */
     private final float alpha;
 

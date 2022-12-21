@@ -7,13 +7,16 @@ import com.madgag.gif.fmsware.AnimatedGifEncoder;
 import java.io.File;
 
 /**
- * GifFileEncoder
+ * A gif encoder for buffered image that can encode image to GIF file.
  *
  * @author tracy
  * @since 0.2.1
  */
 public class GifFileEncoder extends AbstractGifEncoder {
 
+    /**
+     * The output file name.
+     */
     private final String filename;
 
     public GifFileEncoder(Builder builder) {

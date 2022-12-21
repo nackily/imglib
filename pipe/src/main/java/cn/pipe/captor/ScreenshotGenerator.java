@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.text.MessageFormat;
 
 /**
- * 屏幕快照构建器
+ * An image generator that can capture a screenshot.
  *
  * @author tracy
  * @since 0.2.1
@@ -18,22 +18,22 @@ import java.text.MessageFormat;
 public class ScreenshotGenerator extends Robot implements ImageGenerator {
 
     /**
-     * 截图区域左上角-X
+     * The x-coordinate of the upper left corner of the screenshot.
      */
     private final int x;
 
     /**
-     * 截图区域左上角-Y
+     * The y-coordinate of the upper left corner of the screenshot.
      */
     private final int y;
 
     /**
-     * 截图区域宽度
+     * The width of the screenshot.
      */
     private final int width;
 
     /**
-     * 截图区域高度
+     * The height of the screenshot.
      */
     private final int height;
 

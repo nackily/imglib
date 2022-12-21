@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 网格化拆分策略
+ * A split handler which based on grid implementation.
  *
  * @author tracy
  * @since 0.2.1
@@ -17,12 +17,12 @@ import java.util.List;
 public class GridSplitHandler extends AbstractSplitFilter {
 
     /**
-     * 网格的宽
+     * The width of the grid.
      */
     private int gridWidth;
 
     /**
-     * 网格的高
+     * The height of the grid.
      */
     private int gridHeight;
 
@@ -62,9 +62,10 @@ public class GridSplitHandler extends AbstractSplitFilter {
     }
 
     /**
-     * 调整网格，如果有必要时
-     * @param imgWidth 原始图像宽
-     * @param imgHeight 原始图像高
+     * Adjust the width and height of the grid if necessary.
+     *
+     * @param imgWidth The width of the image to be split.
+     * @param imgHeight The height of the image to be split.
      */
     public void adjustGridIfNecessary(int imgWidth, int imgHeight) {
         if (gridWidth > imgWidth && gridHeight > imgHeight) {

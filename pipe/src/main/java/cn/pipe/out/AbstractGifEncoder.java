@@ -12,16 +12,32 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * AbstractGifEncoder
+ * An abstract superclass of encoder for buffered image that can encode image to GIF format.
  *
  * @author tracy
  * @since 0.2.1
  */
 public abstract class AbstractGifEncoder implements BufferedImageEncoder {
 
+    /**
+     * The gif encoder.
+     */
     protected AnimatedGifEncoder encoder;
+
+    /**
+     * the delay time between each frame.
+     */
     protected int delay;
+
+    /**
+     * The number of times the set of GIF frames should be played.
+     * Default is 1; 0 means play indefinitely.
+     */
     protected int repeat;
+
+    /**
+     * Whether to reverse the order of images.
+     */
     protected boolean reverse;
 
     protected AbstractGifEncoder(AbstractBuilder builder) {

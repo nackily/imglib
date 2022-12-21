@@ -6,7 +6,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import java.io.IOException;
 
 /**
- * ByteArrayPdfSource
+ * A pdf source that from byte array.
  *
  * @author tracy
  * @since 0.2.1

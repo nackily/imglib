@@ -5,13 +5,16 @@ import com.madgag.gif.fmsware.AnimatedGifEncoder;
 import java.io.OutputStream;
 
 /**
- * GifOutputStreamEncoder
+ * A gif encoder for buffered image that can encode image to output stream.
  *
  * @author tracy
  * @since 0.2.1
  */
 public class GifOutputStreamEncoder extends AbstractGifEncoder {
 
+    /**
+     * The output stream.
+     */
     private final OutputStream stream;
 
     public GifOutputStreamEncoder(Builder builder) {
