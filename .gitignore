@@ -25,6 +25,7 @@ hs_err_pid*
 # ide
 *.idea/
 *target/
+.flattened-pom.xml
 
 # file-out
 *test-out/
