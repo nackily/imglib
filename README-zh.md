@@ -62,6 +62,23 @@ ImagePipes.ofEmptySource()
    <img src="docs/res/avatar.png" width="18%"/>
 </div>
 
+## *imglib* 如何引入？
+
+**Maven**
+
+在项目的 pom.xml 中添加以下 maven 依赖：
+```xml
+  <dependency>
+    <groupId>io.github.nackily</groupId>
+    <artifactId>imglib-all</artifactId>
+    <version>{*.*.*}</version>
+</dependency>
+```
+
+**Jar**
+
+您也可以访问 [Maven 中央仓库](https://repo1.maven.org/maven2/io/github/nackily/imglib-all/) ，下载对应版本的`imglib-all-*.*.*.jar`并引入到项目中即可。
+
 ## 更多内容
 以下的链接提供了更多关于 *imglib* 信息：
 

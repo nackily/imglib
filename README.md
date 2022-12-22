@@ -62,6 +62,24 @@ By executing the above code fragment, we will get the following user avatar.
    <img src="docs/res/avatar.png" width="18%"/>
 </div>
 
+## How to use *imglib*?
+
+**Maven**
+
+Add the following maven dependencies in the pom.xml of your project.
+
+```xml
+  <dependency>
+    <groupId>io.github.nackily</groupId>
+    <artifactId>imglib-all</artifactId>
+    <version>{*.*.*}</version>
+  </dependency>
+```
+
+**Jar**
+
+You can also visit [Maven Central Repository](https://repo1.maven.org/maven2/io/github/nackily/imglib-all/), download the corresponding version of `imglib-all-*.*.*.jar` and import it into your project.
+
 # See more
 Get more information about *imglib* by visit the following links:
 
