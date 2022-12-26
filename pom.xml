@@ -11,11 +11,12 @@
     <version>${revision}</version>
 
     <modules>
-        <module>example</module>
         <module>core</module>
         <module>pipe</module>
         <module>ext-t8s</module>
         <module>all</module>
+        <!-- Comment out the modules that don't need to be packaged when deploying. Such as 'example' module. -->
+        <module>example</module>
     </modules>
 
     <name>imglib</name>
@@ -23,7 +24,7 @@
     <url>https://github.com/nackily/imglib</url>
 
     <properties>
-        <revision>0.2.2</revision>
+        <revision>0.2.6</revision>
         <thumbnailator-version>0.4.8</thumbnailator-version>
         <pdfbox-version>2.0.24</pdfbox-version>
         <animated-gif-lib-version>1.4</animated-gif-lib-version>
@@ -116,6 +117,22 @@
             <build>
                 <plugins>
 
+                    <!-- source code -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
                     <!-- sonatype -->
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
@@ -126,26 +143,6 @@
                             <serverId>ossrh</serverId>
                             <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                             <autoReleaseAfterClose>false</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-
-                    <!-- plugin for maven source -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <inherited>true</inherited>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <excludeResources>true</excludeResources>
-                            <useDefaultExcludes>true</useDefaultExcludes>
                         </configuration>
                     </plugin>
 
@@ -168,10 +165,36 @@
                 </plugins>
             </build>
         </profile>
+
     </profiles>
 
 
     <build>
+
+        <pluginManagement>
+            <plugins>
+                <!-- shade plugin-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>3.2.1</version>
+                </plugin>
+                <!-- flatten plugin-->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>1.1.0</version>
+                    <configuration>
+                        <updatePomFile>true</updatePomFile>
+                        <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                        <pomElements>
+                            <dependencies>expand</dependencies>
+                        </pomElements>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
         <plugins>
 
             <plugin>
@@ -185,7 +208,7 @@
                 </configuration>
             </plugin>
 
-            <!-- plugin for java doc -->
+            <!-- java doc -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -201,21 +224,14 @@
                 </executions>
             </plugin>
 
+            <!-- flatten -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.1.0</version>
-                <configuration>
-                    <updatePomFile>true</updatePomFile>
-                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
-                    <pomElements>
-                        <dependencies>expand</dependencies>
-                    </pomElements>
-                </configuration>
                 <executions>
                     <execution>
                         <id>flatten</id>
-                        <phase>process-resources</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>flatten</goal>
                         </goals>

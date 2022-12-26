@@ -6,8 +6,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>imglib-parent</artifactId>
         <groupId>io.github.nackily</groupId>
+        <artifactId>imglib-parent</artifactId>
         <version>${revision}</version>
     </parent>
 
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>imglib-core</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <dependency>
@@ -32,6 +32,7 @@
 
     <build>
         <plugins>
+            <!-- shade plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -54,11 +55,26 @@
                                 <filter>
                                     <artifact>*:*</artifact>
                                     <excludes>
+                                        <!-- Exclude 'META-INF/maven/...'-->
                                         <exclude>META-INF/maven/**</exclude>
                                     </excludes>
                                 </filter>
                             </filters>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- flatten -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
