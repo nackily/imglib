@@ -71,7 +71,7 @@ public class BorderHandler implements ImageFilter {
 
         public Builder vMargins(int vMargins) {
             this.vMargins = vMargins;
-            if (hMargins <= 0) {
+            if (vMargins <= 0) {
                 throw new InvalidSettingException("The vertical margins of border must be greater than 0.");
             }
             return this;
