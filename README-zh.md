@@ -1,7 +1,28 @@
+<p align="center">
+	<img src="/docs/res/imglib-logo.png" width="40%"></a>
+</p>
+
 
 <p align="center">
-	<strong>A lightweight image processing library.</strong>
+	<strong>A lightweight image processing library</strong>
 </p>
+<br>
+
+<p align="center">
+    <a target="_blank" href="https://search.maven.org/artifact/io.github.nackily/imglib-all">
+		<img src="https://img.shields.io/maven-central/v/io.github.nackily/imglib-all?color=blue" 
+              alt="maven-central"/>
+	</a>
+    <a target="_blank" href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">
+		<img src="https://img.shields.io/badge/jdk-8%2B-green" 
+              alt="jdk8+"/>
+	</a>
+    <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0">
+        <img src="https://img.shields.io/badge/license-Apache%202-blue" 
+              alt="license-Apache2">
+    </a>
+</p>
+<br>
 
 ---
 
@@ -77,7 +98,7 @@ ImagePipes.ofEmptySource()
 
 **Jar**
 
-您也可以访问 [Maven 中央仓库](https://repo1.maven.org/maven2/io/github/nackily/imglib-all/) ，下载对应版本的`imglib-all-*.*.*.jar`并引入到项目中即可。
+您也可以访问 [**maven-repository**](https://repo1.maven.org/maven2/io/github/nackily/imglib-all/) ，下载对应版本的`imglib-all-*.*.*.jar`并引入到项目中即可。
 
 ## 更多内容
 以下的链接提供了更多关于 *imglib* 信息：

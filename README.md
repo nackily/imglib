@@ -1,7 +1,25 @@
+<p align="center">
+	<img src="/docs/res/imglib-logo.png" width="40%"></a>
+</p>
 
 <p align="center">
-	<strong>A lightweight image processing library.</strong>
+	<strong>A lightweight image processing library</strong>
 </p>
+
+<p align="center">
+    <a target="_blank" href="https://search.maven.org/artifact/io.github.nackily/imglib-all">
+		<img src="https://img.shields.io/maven-central/v/io.github.nackily/imglib-all?color=blue" 
+              alt="maven-central"/>
+	</a>
+    <a target="_blank" href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">
+		<img src="https://img.shields.io/badge/jdk-8%2B-green" 
+              alt="jdk8+"/>
+	</a>
+    <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0">
+        <img src="https://img.shields.io/badge/license-Apache%202-blue" 
+              alt="license-Apache2">
+    </a>
+<br>
 
 ---
 
@@ -78,7 +96,7 @@ Add the following maven dependencies in the pom.xml of your project.
 
 **Jar**
 
-You can also visit [Maven Central Repository](https://repo1.maven.org/maven2/io/github/nackily/imglib-all/), download the corresponding version of `imglib-all-*.*.*.jar` and import it into your project.
+You can also visit [**maven-repository**](https://repo1.maven.org/maven2/io/github/nackily/imglib-all/), download the corresponding version of `imglib-all-*.*.*.jar` and import it into your project.
 
 # See more
 Get more information about *imglib* by visit the following links:
