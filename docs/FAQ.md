@@ -1,6 +1,7 @@
 
-[**中文文档**](FAQ-zh.md)
----
+[**简体中文**](FAQ-zh.md)
+
+------
 
 ## Frequently Asked Questions
 

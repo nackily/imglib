@@ -1,6 +1,7 @@
 
-[**English Documentation**](FAQ.md)
----
+[**English**](FAQ.md)
+
+------
 
 ## 常见问题
 

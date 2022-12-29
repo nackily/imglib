@@ -1,5 +1,5 @@
 
-<img src="/docs/res/imglib-logo.png" width="45%" syt height="45%" />
+<img src="/docs/res/imglib-logo.png" width="50%" syt height="50%" />
 
 <strong>A lightweight image processing library</strong>
 
@@ -7,11 +7,9 @@
 [![jdk8+](https://img.shields.io/badge/jdk-8%2B-green)](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
 [![license](https://img.shields.io/badge/license-Apache%202-blue)](https://www.apache.org/licenses/LICENSE-2.0)
 
--------
+[**简体中文**](README-zh.md)
 
-[**中文文档**](README-zh.md)
-
--------
+------
 
 # What is *imglib*?
 

@@ -1,7 +1,7 @@
 
-[**English Documentation**](Examples.md)
+[**English**](Examples.md)
 
----
+------
 
 本文将列举一些示例，以便开发者可以快速了解 *imglib* 的功能并且轻松使用他们，所有的这些示例都可以在[example/.../Setting.java](/example/src/main/java/cn/example/Setting.java)中找到，并且您可以运行 **example** 模块来执行相应的功能。
 

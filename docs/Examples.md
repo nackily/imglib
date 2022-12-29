@@ -1,7 +1,7 @@
 
-[**中文文档**](Examples-zh.md)
+[**简体中文**](Examples-zh.md)
 
----
+------
 
 This article will list some examples so that developers can quickly understand the functions of *imglib* and easily use them. All these examples can be found in [example/.../Setting.java](/example/src/main/java/cn/example/Setting.java), and you can run the **example** module to execute the corresponding functions.
 
