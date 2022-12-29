@@ -1,5 +1,5 @@
 
-[**English**](FAQ.md)
+[**English Documentation**](FAQ.md)
 ---
 
 ## 常见问题
