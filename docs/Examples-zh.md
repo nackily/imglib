@@ -1,5 +1,5 @@
 
-[**English Documentation**](Examples.md)
+[**English**](Examples.md)
 
 ---
 

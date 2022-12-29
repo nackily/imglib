@@ -1,5 +1,5 @@
 
-[**中文文档**](Examples-zh.md)
+[**简体中文**](Examples-zh.md)
 
 ---
 
