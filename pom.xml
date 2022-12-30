@@ -30,6 +30,7 @@
         <animated-gif-lib-version>1.4</animated-gif-lib-version>
         <slf4j-api.version>1.7.25</slf4j-api.version>
         <logback-classic.version>1.2.3</logback-classic.version>
+        <junit.version>4.13.2</junit.version>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -58,6 +59,16 @@
             <timezone>+8</timezone>
         </developer>
     </developers>
+
+    <dependencies>
+        <!--Unit Test-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 
     <!-- distribution -->
