@@ -29,7 +29,7 @@ public final class StringUtils {
         return join(Arrays.asList(array));
     }
 
-    public static String join(String[] array, Character separator) {
+    public static String join(String[] array, String separator) {
         if (array == null) {
             return EMPTY;
         }
@@ -41,11 +41,11 @@ public final class StringUtils {
             return EMPTY;
         }
         StringBuilder builder = new StringBuilder();
-        join(col, ',', builder);
+        join(col, "", builder);
         return builder.toString();
     }
 
-    public static String join(Collection<String> col, Character separator) {
+    public static String join(Collection<String> col, String separator) {
         if (col == null || col.isEmpty()) {
             return EMPTY;
         }
@@ -54,7 +54,7 @@ public final class StringUtils {
         return builder.toString();
     }
 
-    public static void join(Iterable<String> iterable, char separator, StringBuilder sb) {
+    public static void join(Iterable<String> iterable, String separator, StringBuilder sb) {
         if (iterable == null) {
             return;
         }
@@ -87,6 +87,9 @@ public final class StringUtils {
      * @return The extension of the file.
      */
     public static String getExtensionName(String filename) {
+        if (isEmpty(filename)) {
+            return null;
+        }
         boolean c1 = filename.indexOf('.') != -1;
         boolean c2 = filename.lastIndexOf('.') != filename.length() - 1;
         if (c1 && c2) {

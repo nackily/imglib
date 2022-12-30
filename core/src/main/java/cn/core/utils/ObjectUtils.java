@@ -1,7 +1,7 @@
 package cn.core.utils;
 
 /**
- * An util class for color.
+ * An util class for Object.
  *
  * @author tracy
  * @since 0.2.1

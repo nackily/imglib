@@ -1,5 +1,7 @@
 package cn.core.in;
 
+import cn.core.utils.ObjectUtils;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -17,7 +19,7 @@ public class InputStreamImageSource implements BufferedImageSource<InputStream> 
     protected boolean readCompleted = false;
 
     public InputStreamImageSource(InputStream source) {
-        if (source == null) {
+        if (ObjectUtils.isNull(source)) {
             throw new NullPointerException("InputStream is null.");
         }
         this.source = source;

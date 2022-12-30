@@ -2,6 +2,7 @@ package cn.core.utils;
 
 import cn.core.ex.InvalidSettingException;
 import cn.core.ex.UnsupportedFormatException;
+import cn.core.tool.Range;
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
@@ -24,10 +25,6 @@ import java.util.Iterator;
 public final class BufferedImageUtils {
 
     private BufferedImageUtils(){}
-
-    public static BufferedImage newBackgroundImage(int width, int height) {
-        return newBackgroundImage(0f, width, height, ColorUtils.random());
-    }
 
     public static BufferedImage newBackgroundImage(int width, int height, Color fillColor) {
         return newBackgroundImage(0f, width, height, fillColor);
@@ -58,6 +55,12 @@ public final class BufferedImageUtils {
      * @return The final created image.
      */
     public static BufferedImage newTransparentImage(int width, int height) {
+        if (width <= 0) {
+            throw new InvalidSettingException("The image width must be greater than 0.");
+        }
+        if (height <= 0) {
+            throw new InvalidSettingException("The image height must be greater than 0.");
+        }
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = bi.createGraphics();
         // make the background transparent
@@ -76,15 +79,21 @@ public final class BufferedImageUtils {
      * @return The final created image.
      */
     public static BufferedImage newColoredImage(int width, int height, float alpha, Color c) {
-        BufferedImage image = newTransparentImage(width, height);
-        // add a foreground color
-        Graphics2D g2d = image.createGraphics();
-        g2d.setColor(c);
-        if (alpha > 0) {
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+        if (Range.ofFloat(0f, 1f).notWithin(alpha)) {
+            throw new InvalidSettingException("Alpha out of bounds:[0, 1].");
         }
-        g2d.fillRect(0, 0, width, height);
-        g2d.dispose();
+        ObjectUtils.excNull(c, "The color is null.");
+        BufferedImage image = newTransparentImage(width, height);
+        // Convert to standard transparency value. The standard alpha value is range in [0, 256].
+        int a = (int) (alpha * 256);
+
+        // set the foreground color
+        int rgb = (a << 24) | (c.getRed() << 16) | (c.getGreen() << 8) | c.getBlue();
+        for (int w = 0; w < image.getWidth(); w++) {
+            for (int h = 0; h < image.getHeight(); h++) {
+                image.setRGB(w, h, rgb);
+            }
+        }
         return image;
     }
 
@@ -106,7 +115,7 @@ public final class BufferedImageUtils {
         return target;
     }
 
-    public static void write(BufferedImage img, String formatName, String filename) throws IOException {
+    public static void write(BufferedImage img, String filename, String formatName) throws IOException {
         if (StringUtils.isEmpty(filename)) {
             throw new InvalidSettingException("Output file name is null.");
         }

@@ -49,7 +49,7 @@ public class ImageSourceBuilder<S> extends AbstractSourceBuilder<ImageSourceBuil
                 throw new HandlingException("No available original format.");
             } else if (formats.length > 1) {
                 throw new HandlingException(MessageFormat.format("Multiple available original formats found:[{0}].",
-                        StringUtils.join(formats)));
+                        StringUtils.join(formats, ",")));
             } else {
                 super.formatName(formats[0]);
             }

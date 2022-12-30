@@ -91,7 +91,7 @@ public class GifSourceBuilder<S> extends AbstractSourceBuilder<GifSourceBuilder<
         if (!CollectionUtils.isNullOrEmpty(invalidPages)) {
             throw new InvalidSettingException(MessageFormat.format(
                     "Frame indexes:[{0}] has exceeded the max frame index of the gif document.",
-                    StringUtils.join(invalidPages)));
+                    StringUtils.join(invalidPages, ",")));
         }
         return source.read(frames.toArray(new Integer[0]));
     }

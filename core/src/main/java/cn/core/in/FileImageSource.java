@@ -1,6 +1,9 @@
 package cn.core.in;
 
 import cn.core.ex.HandlingException;
+import cn.core.utils.ObjectUtils;
+import cn.core.utils.StringUtils;
+
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
@@ -24,14 +27,14 @@ public class FileImageSource implements BufferedImageSource<File> {
     protected String originalFormatName;
 
     public FileImageSource(File file) {
-        if (file == null) {
+        if (ObjectUtils.isNull(file)) {
             throw new NullPointerException("File is null.");
         }
         this.source = file;
     }
 
     public FileImageSource(String filename) {
-        if (filename == null || "".equals(filename)) {
+        if (StringUtils.isEmpty(filename)) {
             throw new NullPointerException("File name is null.");
         }
         this.source = new File(filename);
@@ -59,7 +62,7 @@ public class FileImageSource implements BufferedImageSource<File> {
         return bi;
     }
 
-    public BufferedImage read(ImageInputStream stream) throws IOException {
+    protected BufferedImage read(ImageInputStream stream) throws IOException {
         Iterator<ImageReader> iter = ImageIO.getImageReaders(stream);
         if (!iter.hasNext()) {
             return null;

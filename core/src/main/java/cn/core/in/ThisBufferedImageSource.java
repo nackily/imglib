@@ -1,5 +1,7 @@
 package cn.core.in;
 
+import cn.core.utils.ObjectUtils;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -15,7 +17,7 @@ public class ThisBufferedImageSource implements BufferedImageSource<BufferedImag
     protected boolean readCompleted = false;
 
     public ThisBufferedImageSource(BufferedImage source) {
-        if (source == null) {
+        if (ObjectUtils.isNull(source)) {
             throw new NullPointerException("BufferedImage is null.");
         }
         this.image = source;

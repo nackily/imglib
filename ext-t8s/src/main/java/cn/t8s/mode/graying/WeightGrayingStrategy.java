@@ -41,7 +41,7 @@ public class WeightGrayingStrategy extends AbstractGrayingStrategy {
     }
 
     public static class Builder implements GenericBuilder<WeightGrayingStrategy> {
-        private static final Range<Double> WEIGHT_RANGE = Range.ofDouble(0f, 1f);
+        private static final Range<Double> WEIGHT_RANGE = Range.ofDouble(0D, 1D);
 
         private double redWeight = 0;
         private double greenWeight = 0;

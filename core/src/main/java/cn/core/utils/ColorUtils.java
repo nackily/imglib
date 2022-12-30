@@ -78,6 +78,9 @@ public final class ColorUtils {
      * @return The selected color.
      */
     public static Color anyOf(Color... options) {
+        if (CollectionUtils.isNullOrEmpty(options)) {
+            throw new InvalidSettingException("No options.");
+        }
         int index = RandomUtils.randomInt(0, options.length);
         return options[index];
     }
@@ -93,6 +96,27 @@ public final class ColorUtils {
      * @return The color's RGB value.
      */
     public static int obtainRectCenterRGB(BufferedImage img, int x, int y, int w, int h) {
+        ObjectUtils.excNull(img, "BufferedImage is null.");
+        if(w <= 0) {
+            throw new InvalidSettingException("The width of region cannot be less than or equal to 0.");
+        }
+        if(h <= 0) {
+            throw new InvalidSettingException("The height of region cannot be less than or equal to 0.");
+        }
+        if(x < 0) {
+            throw new InvalidSettingException("The x coordinate of the upper left corner cannot be less than or equal to 0.");
+        }
+        if(y < 0) {
+            throw new InvalidSettingException("The y coordinate of the upper left corner cannot be less than or equal to 0.");
+        }
+
+        if((x + w) > img.getWidth()) {
+            throw new InvalidSettingException("The specified region crosses the width of the image.");
+        }
+        if((y + h) > img.getHeight()) {
+            throw new InvalidSettingException("The specified region crosses the height of the image.");
+        }
+
         int centerX = x + w / 2;
         int centerY = y + h / 2;
         return img.getRGB(centerX, centerY);

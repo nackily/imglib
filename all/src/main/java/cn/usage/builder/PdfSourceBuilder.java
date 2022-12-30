@@ -104,7 +104,7 @@ public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<
         if (!CollectionUtils.isNullOrEmpty(invalidPages)) {
             throw new InvalidSettingException(MessageFormat.format(
                     "the page indexes:[{0}] has exceeded the max page number of the pdf document",
-                    StringUtils.join(invalidPages)));
+                    StringUtils.join(invalidPages, ",")));
         }
 
         return source.read(pages.toArray(new Integer[0]), val);
