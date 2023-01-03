@@ -51,6 +51,7 @@ public class BorderHandler implements ImageFilter {
 
     @Override
     public BufferedImage apply(BufferedImage img) {
+        ObjectUtils.excNull(img, "Original image is null.");
         // create new image
         int width = img.getWidth() + (hMargins << 1);
         int height = img.getHeight() + (vMargins << 1);
@@ -67,40 +68,41 @@ public class BorderHandler implements ImageFilter {
         private int vMargins;
         private int hMargins;
         private float alpha = 0f;
-        private Color fillColor;
+        private Color fillColor = Color.WHITE;
 
         public Builder vMargins(int vMargins) {
             this.vMargins = vMargins;
-            if (vMargins <= 0) {
-                throw new InvalidSettingException("The vertical margins of border must be greater than 0.");
-            }
             return this;
         }
 
         public Builder hMargins(int hMargins) {
             this.hMargins = hMargins;
-            if (hMargins <= 0) {
-                throw new InvalidSettingException("The horizontal margins of border must be greater than 0.");
-            }
             return this;
         }
 
         public Builder alpha(float alpha) {
             this.alpha = alpha;
-            if (Range.ofFloat(0f, 1f).notWithin(alpha)) {
-                throw new InvalidSettingException("Alpha out of bounds:[0, 1].");
-            }
             return this;
         }
 
         public Builder fillColor(Color fillColor) {
             this.fillColor = fillColor;
-            ObjectUtils.excNull(fillColor, "Fill color is null.");
             return this;
         }
 
         @Override
         public BorderHandler build() {
+            if (vMargins <= 0) {
+                throw new InvalidSettingException("The vertical margins of border must be greater than 0.");
+            }
+            if (hMargins <= 0) {
+                throw new InvalidSettingException("The horizontal margins of border must be greater than 0.");
+            }
+            if (Range.ofFloat(0f, 1f).notWithin(alpha)) {
+                throw new InvalidSettingException("Alpha out of bounds:[0, 1].");
+            }
+            ObjectUtils.excNull(fillColor, "Fill color is null.");
+
             return new BorderHandler(this);
         }
     }

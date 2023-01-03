@@ -1,7 +1,9 @@
 package cn.t8s.filter;
 
+import cn.core.ex.HandlingException;
 import cn.core.ex.InvalidSettingException;
 import cn.core.GenericBuilder;
+import cn.core.utils.ObjectUtils;
 import net.coobird.thumbnailator.filters.ImageFilter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -37,6 +39,8 @@ public class HighQualityExpandHandler implements ImageFilter {
 
     @Override
     public BufferedImage apply(BufferedImage img) {
+        ObjectUtils.excNull(img, "Original image is null.");
+
         adjust(img.getWidth(), img.getHeight());
         // expand and write to new image
         Image tmp = img.getScaledInstance(finalWidth, finalHeight, Image.SCALE_FAST);
@@ -51,28 +55,32 @@ public class HighQualityExpandHandler implements ImageFilter {
         // calculate the scale of expand
         float radioW = (float) finalWidth / (float) originalWidth;
         float radioH = (float) finalHeight / (float) originalHeight;
-        // check setting validity
-        float max = Math.max(radioW, radioH);
-        if (max < 1) {
-            throw new InvalidSettingException("Both of width and height are less than the original value.");
-        }
-        if (Math.min(radioW, radioH) < 1 && !keepAspectRatio) {
-            throw new InvalidSettingException("One of width and height is less than the original value.");
-        }
-        // reset the setting
+        float maxRadio = Math.max(radioW, radioH);
+
+        // reset the setting if necessary
         if (keepAspectRatio) {
-            if (Float.valueOf(max).equals(radioW)) {
-                finalHeight = (int) (max * originalHeight);
+            if (Float.valueOf(maxRadio).equals(radioW)) {
+                finalHeight = (int) (maxRadio * originalHeight);
             } else {
-                finalWidth = (int) (max * originalWidth);
+                finalWidth = (int) (maxRadio * originalWidth);
             }
+        }
+
+        // check setting validity
+        if (originalWidth > finalWidth) {
+            throw new HandlingException(String.format("The final width(%s) is less than the original width(%s).",
+                    finalWidth, originalWidth));
+        }
+        if (originalHeight > finalHeight) {
+            throw new HandlingException(String.format("The final height(%s) is less than the original height(%s).",
+                    finalHeight, originalHeight));
         }
     }
 
     public static class Builder implements GenericBuilder<HighQualityExpandHandler> {
         private boolean keepAspectRatio = true;
-        private int finalWidth = -1;
-        private int finalHeight = -1;
+        private int finalWidth;
+        private int finalHeight;
 
         public Builder keepAspectRatio(boolean keepAspectRatio) {
             this.keepAspectRatio = keepAspectRatio;
@@ -81,31 +89,36 @@ public class HighQualityExpandHandler implements ImageFilter {
 
         public Builder finalWidth(int finalWidth) {
             this.finalWidth = finalWidth;
-            if (finalWidth <= 0) {
-                throw new InvalidSettingException("The final width after expanded must greater than 0.");
-            }
             return this;
         }
 
         public Builder finalHeight(int finalHeight) {
             this.finalHeight = finalHeight;
-            if (finalHeight <= 0) {
-                throw new InvalidSettingException("The final height after expanded must greater than 0.");
-            }
             return this;
         }
 
         @Override
         public HighQualityExpandHandler build() {
+            if (finalWidth < 0) {
+                throw new InvalidSettingException("The final width after expanded must greater than 0.");
+            }
+            if (finalHeight < 0) {
+                throw new InvalidSettingException("The final height after expanded must greater than 0.");
+            }
+
             boolean nonValidWidth = finalWidth <= 0;
             boolean nonValidHeight = finalHeight <= 0;
-            if (nonValidWidth && nonValidHeight) {
-                throw new InvalidSettingException("At least one dimension should be set.");
+
+            if (keepAspectRatio) {
+                if (nonValidWidth && nonValidHeight) {
+                    throw new InvalidSettingException("At least one dimension should be set when expected not to keep the aspect ratio.");
+                }
+            } else {
+                if (nonValidWidth || nonValidHeight) {
+                    throw new InvalidSettingException("Both of dimensions should be set when expected not to keep the aspect ratio.");
+                }
             }
-            boolean notValidGrid = nonValidWidth || nonValidHeight;
-            if (!keepAspectRatio && notValidGrid) {
-                throw new InvalidSettingException("Both of dimensions should be set when expected to keep the aspect ratio.");
-            }
+
             return new HighQualityExpandHandler(this);
         }
 
