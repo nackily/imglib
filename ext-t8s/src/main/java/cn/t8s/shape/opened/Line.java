@@ -1,7 +1,6 @@
 package cn.t8s.shape.opened;
 
 import cn.core.ex.HandlingException;
-import cn.core.ex.InvalidSettingException;
 import cn.core.strategy.shape.AbstractOpenedShape;
 import cn.core.utils.ObjectUtils;
 import java.awt.*;
@@ -56,22 +55,19 @@ public class Line extends AbstractOpenedShape {
         }
 
         public Builder start(Point start) {
-            ObjectUtils.excNull(start, "The starting point is null.");
             this.start = start;
             return this;
         }
 
         public Builder end(Point end) {
-            ObjectUtils.excNull(end, "The ending point is null.");
             this.end = end;
             return this;
         }
 
         @Override
-        public AbstractOpenedShape build() {
-            if (start == null || end == null) {
-                throw new InvalidSettingException("One of start and end points is not specified.");
-            }
+        public Line build() {
+            ObjectUtils.excNull(start, "The starting point is null.");
+            ObjectUtils.excNull(end, "The ending point is null.");
             return new Line(this);
         }
     }

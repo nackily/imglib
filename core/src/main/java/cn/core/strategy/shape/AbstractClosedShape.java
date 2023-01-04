@@ -1,5 +1,6 @@
 package cn.core.strategy.shape;
 
+import cn.core.ex.HandlingException;
 import cn.core.ex.InvalidSettingException;
 import cn.core.strategy.Shape;
 import cn.core.GenericBuilder;
@@ -46,12 +47,12 @@ public abstract class AbstractClosedShape implements Shape {
     public void paint(int canvasWidth, int canvasHeight, Graphics2D g2d) {
         // check for rect is out of bounds
         if (rect == null) {
-            throw new InvalidSettingException("Rectangle for this shape not specified.");
+            throw new HandlingException("Rectangle for this shape not specified.");
         } else {
             int maxX = rect.x + rect.width;
             int maxY = rect.y + rect.height;
             if (maxX > canvasWidth || maxY > canvasHeight) {
-                throw new InvalidSettingException("The Rectangle is out of image.");
+                throw new HandlingException("The Rectangle is out of image.");
             }
         }
 
@@ -109,7 +110,7 @@ public abstract class AbstractClosedShape implements Shape {
         }
         public AbstractClosedShapeBuilder color(Color color){
             this.color = color;
-            ObjectUtils.excNull(stroke, "Color is null.");
+            ObjectUtils.excNull(color, "Color is null.");
             return this;
         }
     }

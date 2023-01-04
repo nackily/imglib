@@ -3,6 +3,7 @@ package cn.t8s.filter;
 import cn.core.ex.InvalidSettingException;
 import cn.core.GenericBuilder;
 import cn.core.utils.BufferedImageUtils;
+import cn.core.utils.ObjectUtils;
 import net.coobird.thumbnailator.filters.ImageFilter;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -33,6 +34,7 @@ public class RoundRectHandler implements ImageFilter {
 
     @Override
     public BufferedImage apply(BufferedImage img) {
+        ObjectUtils.excNull(img, "Original image is null.");
         int w = img.getWidth();
         int h = img.getHeight();
         // new an t image
@@ -50,33 +52,38 @@ public class RoundRectHandler implements ImageFilter {
     }
 
     public static class Builder implements GenericBuilder<RoundRectHandler> {
-        private int arcWidth = -1;
-        private int arcHeight = -1;
+        private int arcWidth;
+        private int arcHeight;
 
         public Builder arcWidth(int arcWidth) {
             this.arcWidth = arcWidth;
-            if (arcWidth <= 0) {
-                throw new InvalidSettingException("The horizontal diameter of the arc must be greater than 0.");
-            }
             return this;
         }
 
         public Builder arcHeight(int arcHeight) {
             this.arcHeight = arcHeight;
-            if (arcHeight <= 0) {
-                throw new InvalidSettingException("The vertical diameter of the arc must be greater than 0.");
-            }
             return this;
         }
 
         @Override
         public RoundRectHandler build() {
-            if (arcWidth == -1 && arcHeight == -1) {
-                throw new InvalidSettingException("Both of the horizontal diameter and vertical diameter not set.");
+            if (arcWidth < 0) {
+                throw new InvalidSettingException("The horizontal diameter of the arc must be greater than 0.");
             }
-            if (arcWidth == -1 || arcHeight == -1) {
+            if (arcHeight < 0) {
+                throw new InvalidSettingException("The vertical diameter of the arc must be greater than 0.");
+            }
+
+            boolean invalidAw = arcWidth == 0;
+            boolean invalidAh = arcHeight == 0;
+            if (invalidAw && invalidAh) {
+                throw new InvalidSettingException("The horizontal diameter and vertical diameter of the arc cannot both be less than or equal to 0.");
+            }
+
+            if (invalidAw || invalidAh) {
                 arcWidth = arcHeight = Math.max(arcHeight, arcWidth);
             }
+
             return new RoundRectHandler(this);
         }
     }

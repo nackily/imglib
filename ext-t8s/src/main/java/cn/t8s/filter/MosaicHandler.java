@@ -2,9 +2,10 @@ package cn.t8s.filter;
 
 import cn.core.ex.InvalidSettingException;
 import cn.core.GenericBuilder;
+import cn.core.utils.BufferedImageUtils;
 import cn.core.utils.ColorUtils;
+import cn.core.utils.ObjectUtils;
 import net.coobird.thumbnailator.filters.ImageFilter;
-import net.coobird.thumbnailator.util.BufferedImages;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.text.MessageFormat;
@@ -52,34 +53,29 @@ public class MosaicHandler implements ImageFilter {
 
     @Override
     public BufferedImage apply(BufferedImage img) {
+        ObjectUtils.excNull(img, "Original image is null.");
         adjustRect(img.getWidth(), img.getHeight());
         // copy an image from original image
-        BufferedImage tar = BufferedImages.copy(img, img.getType());
-
-        Graphics2D g2d = tar.createGraphics();
+        BufferedImage tar = BufferedImageUtils.copy(img, img.getType());
+        Graphics g = tar.getGraphics();
 
         int currentX = startX;
-        int rectWidth = Math.min(sideLength, endX - startX);
-        while (currentX + rectWidth < endX) {
-
+        while (currentX < endX) {
+            int nextWidth = Math.min(sideLength, endX - currentX);
             int currentY = startY;
-            int rectHeight = Math.min(sideLength, endY - startY);
-
-            while (currentY + rectHeight < endY) {
+            while (currentY < endY) {
+                int nextHeight = Math.min(sideLength, endY - currentY);
                 // obtain RGB of color of the center
-                int rgb = ColorUtils.obtainRectCenterRGB(img, currentX, currentY, rectWidth, rectHeight);
-                g2d.setColor(ColorUtils.ofRGB(rgb));
+                int centerRgb = ColorUtils.obtainRectCenterRGB(img, currentX, currentY, nextWidth, nextHeight);
+                g.setColor(ColorUtils.ofRGB(centerRgb));
                 // painting rectangle
-                g2d.fillRect(currentX, currentY, rectWidth, rectHeight);
-
-                currentY += rectHeight;
-                rectHeight = Math.min(sideLength, endY - currentY);
+                g.fillRect(currentX, currentY, nextWidth, nextHeight);
+                currentY += sideLength;
             }
-            currentX += rectWidth;
-            rectWidth = Math.min(sideLength, endX - currentX);
+            currentX += sideLength;
         }
 
-        g2d.dispose();
+        g.dispose();
         return tar;
     }
 
@@ -98,55 +94,54 @@ public class MosaicHandler implements ImageFilter {
 
     public static class Builder implements GenericBuilder<MosaicHandler> {
 
-        private int sideLength = -1;
+        private int sideLength;
         private int startX;
         private int startY;
-        private int width = -1;
-        private int height = -1;
+        private Integer width;
+        private Integer height;
 
         public Builder sideLength(int sideLength) {
             this.sideLength = sideLength;
-            if (sideLength <= 0) {
-                throw new InvalidSettingException("Side length must be greater than 0.");
-            }
             return this;
         }
         public Builder startX(int startX) {
             this.startX = startX;
-            if (startX <= 0) {
-                throw new InvalidSettingException("The start point's X must be greater than 0.");
-            }
             return this;
         }
         public Builder startY(int startY) {
             this.startY = startY;
-            if (startY <= 0) {
-                throw new InvalidSettingException("The start point's Y must be greater than 0.");
-            }
             return this;
         }
         public Builder width(int width) {
             this.width = width;
-            if (width <= 0) {
-                throw new InvalidSettingException("The rectangle's width must be greater than 0.");
-            }
             return this;
         }
         public Builder height(int height) {
             this.height = height;
-            if (height <= 0) {
-                throw new InvalidSettingException("The rectangle's height must be greater than 0.");
-            }
             return this;
         }
 
         @Override
         public MosaicHandler build() {
-            if (sideLength == -1) {
-                throw new InvalidSettingException("Side length not set.");
+            if (sideLength <= 0) {
+                throw new InvalidSettingException("Side length must be greater than 0.");
             }
-            width = width == -1 ? sideLength : width;
-            height = height == -1 ? sideLength : height;
+            if (startX < 0) {
+                throw new InvalidSettingException("The start point's X must be greater than 0.");
+            }
+            if (startY < 0) {
+                throw new InvalidSettingException("The start point's Y must be greater than 0.");
+            }
+            if (!ObjectUtils.isNull(width) && width <= 0) {
+                throw new InvalidSettingException("The rectangle's width must be greater than 0.");
+            }
+            if (!ObjectUtils.isNull(height) && height <= 0) {
+                throw new InvalidSettingException("The rectangle's height must be greater than 0.");
+            }
+
+            width = ObjectUtils.isNull(width) ? sideLength : width;
+            height = ObjectUtils.isNull(height) ? sideLength : height;
+
             return new MosaicHandler(this);
         }
     }

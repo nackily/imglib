@@ -16,4 +16,16 @@ public final class ReflectionUtils {
             throw new AssertionError("Illegal access field: " + field);
         }
     }
+
+    public static Object getFromSuper(String field, Object o) {
+        try {
+            Field f = o.getClass().getSuperclass().getDeclaredField(field);
+            f.setAccessible(Boolean.TRUE);
+            return f.get(o);
+        } catch (NoSuchFieldException e) {
+            throw new AssertionError("No field as: " + field);
+        } catch (IllegalAccessException e) {
+            throw new AssertionError("Illegal access field: " + field);
+        }
+    }
 }
