@@ -21,7 +21,7 @@ public class MonoColorImageGenerator extends TransparentImageGenerator {
     private final Color color;
 
     /**
-     * The alpha of the image which equals 1, indicating that the image is completely transparent.
+     * The alpha of the image which equals 0, indicating that the image is completely transparent.
      */
     private final float alpha;
 
@@ -38,7 +38,7 @@ public class MonoColorImageGenerator extends TransparentImageGenerator {
 
     public static class Builder extends TransparentImageGenerator.Builder {
         private Color color;
-        private float alpha = 0f;
+        private float alpha = 1f;
 
         @Override
         public Builder width(int width) {

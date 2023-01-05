@@ -29,7 +29,7 @@ public class BorderHandler implements ImageFilter {
 
     /**
      * The alpha of the border which is limited to [0, 1]. When the alpha
-     * is equal to 1.0, the border is completely transparent.
+     * is equal to 0, the border is completely transparent.
      */
     protected final float alpha;
 
@@ -42,7 +42,7 @@ public class BorderHandler implements ImageFilter {
         vMargins = bu.vMargins;
         hMargins = bu.hMargins;
         alpha = bu.alpha;
-        if (bu.alpha == 1.0) {
+        if (bu.alpha == 0) {
             fillColor = null;
         } else {
             fillColor = bu.fillColor;
@@ -57,7 +57,7 @@ public class BorderHandler implements ImageFilter {
         int height = img.getHeight() + (vMargins << 1);
         BufferedImage tar = BufferedImageUtils.newBackgroundImage(alpha, width, height, fillColor);
         // copy source image to new image
-        Graphics2D g = tar.createGraphics();
+        Graphics g = tar.getGraphics();
         g.drawImage(img, hMargins, vMargins, null);
         g.dispose();
         return tar;

@@ -31,7 +31,7 @@ ImagePipes.ofEmptySource()
         .toFile(ExampleUtils.tmpFileNameOf("out/mono_color.png"));
 ```
 
-在本例中，将创建一张宽高为 300px * 200px ，透明度为 0.2（透明度在 \[0, 1\] 之间取值，等于 0 时图像完全不透明，等于 1 时图像完全透明），背景颜色随机的图像，并将其保存到`.../out/mono_color.png`文件中。
+在本例中，将创建一张宽高为 300px * 200px ，透明度为 0.2（透明度在 \[0, 1\] 之间取值，等于 0 时图像完全透明，等于 1 时图像完全不透明），背景颜色随机的图像，并将其保存到`.../out/mono_color.png`文件中。
 
 <div align="center"><img src="/example/res/out/mono_color.png"/></div>
 

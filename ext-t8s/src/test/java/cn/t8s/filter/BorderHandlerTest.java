@@ -1,6 +1,7 @@
 package cn.t8s.filter;
 
 import cn.core.ex.InvalidSettingException;
+import cn.core.utils.BufferedImageUtils;
 import cn.t8s.BufferedImageComparer;
 import cn.t8s.ReflectionUtils;
 import cn.t8s.TestUtils;
@@ -34,7 +35,7 @@ public class BorderHandlerTest {
         BufferedImage image = new BufferedImage(source.getWidth() + 14, source.getHeight() + 6, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = image.createGraphics();
         g2d.setColor(Color.BLUE);
-        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC, 0.5f));
         g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
         g2d.dispose();
         Graphics g = image.getGraphics();

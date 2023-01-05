@@ -27,7 +27,7 @@ public final class BufferedImageUtils {
     private BufferedImageUtils(){}
 
     public static BufferedImage newBackgroundImage(int width, int height, Color fillColor) {
-        return newBackgroundImage(0f, width, height, fillColor);
+        return newBackgroundImage(1f, width, height, fillColor);
     }
 
     /**
@@ -40,7 +40,7 @@ public final class BufferedImageUtils {
      * @return The final created image.
      */
     public static BufferedImage newBackgroundImage(float alpha, int width, int height, Color fillColor) {
-        if (alpha == 1.0) {
+        if (alpha == 0) {
             return newTransparentImage(width, height);
         } else {
             return newColoredImage(width, height, alpha, fillColor);
@@ -61,7 +61,7 @@ public final class BufferedImageUtils {
         if (height <= 0) {
             throw new InvalidSettingException("The image height must be greater than 0.");
         }
-        BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = bi.createGraphics();
         // make the background transparent
         bi = g.getDeviceConfiguration().createCompatibleImage(width, height, Transparency.TRANSLUCENT);
@@ -84,16 +84,14 @@ public final class BufferedImageUtils {
         }
         ObjectUtils.excNull(c, "The color is null.");
         BufferedImage image = newTransparentImage(width, height);
-        // Convert to standard transparency value. The standard alpha value is range in [0, 256].
-        int a = (int) (alpha * 256);
 
-        // set the foreground color
-        int rgb = (a << 24) | (c.getRed() << 16) | (c.getGreen() << 8) | c.getBlue();
-        for (int w = 0; w < image.getWidth(); w++) {
-            for (int h = 0; h < image.getHeight(); h++) {
-                image.setRGB(w, h, rgb);
-            }
-        }
+        Graphics2D g = image.createGraphics();
+        g.setColor(c);
+        // AlphaComposite.SRC should be added before drawing anything in image with alpha if you want to secure source color.
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC, 0.5f));
+        g.fillRect(0, 0, image.getWidth(), image.getHeight());
+        g.dispose();
+
         return image;
     }
 

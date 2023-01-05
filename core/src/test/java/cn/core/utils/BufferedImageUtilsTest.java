@@ -22,7 +22,7 @@ public class BufferedImageUtilsTest {
         // given
         int width = 200;
         int height = 100;
-        float alpha = 1f;
+        float alpha = 0f;
 
         // when
         BufferedImage image = BufferedImageUtils.newBackgroundImage(alpha, width, height, null);
@@ -58,7 +58,7 @@ public class BufferedImageUtilsTest {
             Assert.fail("Unexpected image type.");
         }
         int alphaComponent = (rgb >> 24) & 0xff;
-        // alpha=0.5 means translucency, the standard alpha value -> 256 * 0.5 = 128
+        // alpha=0.5 means translucency, the standard alpha value -> 255 * 0.5 = 127.5 -> 128
         Assert.assertEquals(128, alphaComponent);
 
         // RGB

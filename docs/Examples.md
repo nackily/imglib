@@ -32,7 +32,7 @@ ImagePipes.ofEmptySource()
         .toFile(ExampleUtils.tmpFileNameOf("out/mono_color.png"));
 ```
 
-In this example, an image with size of 300px \* 200px, transparency of 0.2 and random background color will be created and saved to file of `.../out/mono_color.png`. Tip: the transparency value is between \[0, 1\], when it is equal to 0, the image is completely opaque, and when it is equal to 1, the image is completely transparent.
+In this example, an image with size of 300px \* 200px, transparency of 0.2 and random background color will be created and saved to file of `.../out/mono_color.png`. Tip: the transparency value is between \[0, 1\], when it is equal to 1, the image is completely opaque, and when it is equal to 0, the image is completely transparent.
 
 <div align="center"><img src="/example/res/out/mono_color.png"/></div>
 
