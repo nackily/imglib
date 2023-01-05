@@ -49,18 +49,10 @@ public class WeightGrayingStrategy extends AbstractGrayingStrategy {
 
         public Builder redWeight(double redWeight) {
             this.redWeight = redWeight;
-            if (WEIGHT_RANGE.notWithin(redWeight)) {
-                throw new InvalidSettingException(MessageFormat.format("Red weight out of bounds:[{0}, {1}].",
-                        WEIGHT_RANGE.getMin(), WEIGHT_RANGE.getMax()));
-            }
             return this;
         }
         public Builder greenWeight(double greenWeight) {
             this.greenWeight = greenWeight;
-            if (WEIGHT_RANGE.notWithin(greenWeight)) {
-                throw new InvalidSettingException(MessageFormat.format("Green weight out of bounds:[{0}, {1}].",
-                        WEIGHT_RANGE.getMin(), WEIGHT_RANGE.getMax()));
-            }
             return this;
         }
 
@@ -68,15 +60,23 @@ public class WeightGrayingStrategy extends AbstractGrayingStrategy {
         public WeightGrayingStrategy build() {
             // the default weight allocate rule is: Red = 0.3, Green = 0.59, Blue = 0.11
             if (redWeight == 0 && greenWeight == 0) {
-                redWeight = 0.3f;
-                greenWeight = 0.59f;
+                redWeight = 0.3D;
+                greenWeight = 0.59D;
             }
-            // check the setting is completed
+            // check whether the setting is completed
             if (redWeight == 0 || greenWeight == 0) {
                 throw new InvalidSettingException(MessageFormat.format("{0} weight not set.",
                         redWeight == 0 ? "Red" : "Green"));
             }
-            // check the setting is rightful
+            // check whether the setting is correct
+            if (WEIGHT_RANGE.notWithin(redWeight)) {
+                throw new InvalidSettingException(MessageFormat.format("Red weight out of bounds:[{0}, {1}].",
+                        WEIGHT_RANGE.getMin(), WEIGHT_RANGE.getMax()));
+            }
+            if (WEIGHT_RANGE.notWithin(greenWeight)) {
+                throw new InvalidSettingException(MessageFormat.format("Green weight out of bounds:[{0}, {1}].",
+                        WEIGHT_RANGE.getMin(), WEIGHT_RANGE.getMax()));
+            }
             if (redWeight + greenWeight > 1.0) {
                 throw new InvalidSettingException("The sum of red weight and green weight has exceeded 1.");
             }

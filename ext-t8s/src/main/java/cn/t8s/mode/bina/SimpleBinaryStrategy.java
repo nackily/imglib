@@ -57,7 +57,7 @@ public class SimpleBinaryStrategy extends AbstractBinaryStrategy {
 
     public static class Builder implements GenericBuilder<SimpleBinaryStrategy> {
         protected AbstractGrayingStrategy grayingStrategy;
-        protected int threshold = -1;
+        protected int threshold;
 
         public Builder grayingStrategy(AbstractGrayingStrategy grayingStrategy) {
             this.grayingStrategy = grayingStrategy;
@@ -65,18 +65,19 @@ public class SimpleBinaryStrategy extends AbstractBinaryStrategy {
         }
         public Builder threshold(int threshold) {
             this.threshold = threshold;
-            if (Range.ofInt(0, 255).notWithin(threshold)) {
-                throw new InvalidSettingException("The threshold out of bounds:[0, 255].");
-            }
             return this;
         }
 
         @Override
         public SimpleBinaryStrategy build() {
+            if (Range.ofInt(0, 255).notWithin(threshold)) {
+                throw new InvalidSettingException("The threshold out of bounds:[0, 255].");
+            }
             // the default threshold is 128
             threshold = threshold <= 0 ? 128 : threshold;
             // the default graying strategy is average
             grayingStrategy = grayingStrategy == null ? new AvgGrayingStrategy() : grayingStrategy;
+
             return new SimpleBinaryStrategy(this);
         }
     }
