@@ -4,6 +4,7 @@ import cn.core.ImageGenerator;
 import cn.core.ex.InvalidSettingException;
 import cn.core.GenericBuilder;
 import cn.core.tool.Range;
+import cn.core.utils.BufferedImageUtils;
 import cn.core.utils.ColorUtils;
 import cn.core.utils.ObjectUtils;
 import java.awt.*;
@@ -50,15 +51,18 @@ public class HashImageGenerator implements ImageGenerator {
     @Override
     public BufferedImage generate() {
         int gridHorizontalNum = (gridVerticalNum + 1) >> 1;
-        BufferedImage bi = new BufferedImage(gridVerticalNum, gridVerticalNum, BufferedImage.TYPE_INT_RGB);
+        BufferedImage bi = BufferedImageUtils.newBackgroundImage(gridVerticalNum, gridVerticalNum, bgColor);
         for (int h = 0; h < gridHorizontalNum; h++) {
             for (int v = 0; v < gridVerticalNum; v++) {
                 int pos = gridVerticalNum * h + v;
+
                 // paint foreground color for odd number,and paint background color for even number
-                Color gridColor = (digest[pos] & 0x0001) == 1 ? fgColor : bgColor;
-                // current grid,and symmetric grid which symmetrical by the mid-vertical-line
-                bi.setRGB(h, v, gridColor.getRGB());
-                bi.setRGB(gridVerticalNum - h - 1, v, gridColor.getRGB());
+                if ((digest[pos] & 1) == 1) {
+
+                    // current grid,and symmetric grid which symmetrical by the mid-vertical-line
+                    bi.setRGB(h, v, fgColor.getRGB());
+                    bi.setRGB(gridVerticalNum - h - 1, v, fgColor.getRGB());
+                }
             }
         }
         return bi;
@@ -66,10 +70,13 @@ public class HashImageGenerator implements ImageGenerator {
 
     public static class Builder implements GenericBuilder<HashImageGenerator> {
         private final byte[] digest;
-        private int gridVerticalNum = 8;
+        private int gridVerticalNum;
         private Color bgColor;
         private Color fgColor;
 
+        public Builder(byte[] digest) {
+            this.digest = digest;
+        }
         public Builder(String content) throws NoSuchAlgorithmException {
             this(content, "SHA-256", 1);
         }
@@ -105,14 +112,23 @@ public class HashImageGenerator implements ImageGenerator {
 
         @Override
         public HashImageGenerator build() {
-            ObjectUtils.excNull(digest, "Empty digest.");
-            if (digest.length < 32) {
-                throw new InvalidSettingException("Invalid digest setting.");
-            }
             if (Range.ofInt(1, 8).notWithin(gridVerticalNum)) {
                 throw new InvalidSettingException("The vertical number of grids is out of bounds:[1, 8].");
             }
 
+            ObjectUtils.excNull(digest, "Empty digest.");
+
+            // Make sure that the length of the digest array is greater than half the number of grids.
+            int halfNumOfGrids = ((gridVerticalNum + 1) >> 1) * gridVerticalNum;
+            if (digest.length < halfNumOfGrids) {
+                String exMessage = "The length of the digest array is less than half the number of grids." +
+                        "Expected length is at least " + halfNumOfGrids +
+                        ", but the actual length is only " + digest.length +
+                        ".";
+                throw new InvalidSettingException(exMessage);
+            }
+
+            // default color setting
             if (bgColor == null) {
                 bgColor = ColorUtils.of(220, 220, 220);
             }

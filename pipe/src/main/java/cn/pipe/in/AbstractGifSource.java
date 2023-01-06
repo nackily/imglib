@@ -1,8 +1,8 @@
 package cn.pipe.in;
 
+import cn.core.ex.HandlingException;
 import cn.core.in.GifSource;
 import com.madgag.gif.fmsware.GifDecoder;
-
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,6 +83,29 @@ public abstract class AbstractGifSource<T> implements GifSource<T> {
     /**
      * Load the gif source if the source have not loaded.
      * @throws IOException If some I/O exceptions occurred when loading the gif source.
+     * @throws HandlingException If some runtime exceptions occurred when loading the gif source.
      */
-    protected abstract void loadIfNot() throws IOException;
+    protected void loadIfNot() throws IOException {
+        if (readCompleted) {
+            return;
+        }
+        int status = doLoad();
+        switch (status) {
+            case GifDecoder.STATUS_OK:
+                return;
+            case GifDecoder.STATUS_FORMAT_ERROR:
+                throw new HandlingException("Error decoding file (may be partially decoded).");
+            case GifDecoder.STATUS_OPEN_ERROR:
+                throw new HandlingException("Unable to open source.");
+            default:
+                throw new HandlingException("Unknown error.");
+        }
+    }
+
+    /**
+     * Load the gif source.
+     * @return The read status.
+     * @throws IOException If some I/O exceptions occurred when loading the gif source.
+     */
+    protected abstract int doLoad() throws IOException;
 }

@@ -1,7 +1,6 @@
 package cn.pipe.in.gif;
 
 import cn.pipe.in.AbstractGifSource;
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -18,11 +17,9 @@ public class InputStreamGifSource extends AbstractGifSource<InputStream> {
     }
 
     @Override
-    protected void loadIfNot() throws IOException {
-        if (readCompleted) {
-            return;
-        }
-        decoder.read(source);
+    protected int doLoad() throws IOException {
+        int status = decoder.read(source);
         readCompleted = true;
+        return status;
     }
 }

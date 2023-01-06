@@ -88,7 +88,7 @@ public final class BufferedImageUtils {
         Graphics2D g = image.createGraphics();
         g.setColor(c);
         // AlphaComposite.SRC should be added before drawing anything in image with alpha if you want to secure source color.
-        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC, 0.5f));
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC, alpha));
         g.fillRect(0, 0, image.getWidth(), image.getHeight());
         g.dispose();
 

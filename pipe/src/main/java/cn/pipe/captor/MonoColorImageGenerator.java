@@ -64,6 +64,7 @@ public class MonoColorImageGenerator extends TransparentImageGenerator {
 
         @Override
         public MonoColorImageGenerator build() {
+            super.build();
             ObjectUtils.excNull(color, "No color specified.");
             if (Range.ofFloat(0f, 1f).notWithin(alpha)) {
                 throw new InvalidSettingException("Alpha out of bounds:[0, 1].");

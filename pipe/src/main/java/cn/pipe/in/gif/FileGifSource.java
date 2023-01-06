@@ -19,11 +19,9 @@ public class FileGifSource extends AbstractGifSource<File> {
     }
 
     @Override
-    protected void loadIfNot() throws IOException {
-        if (readCompleted) {
-            return;
-        }
-        decoder.read(new FileInputStream(source));
+    protected int doLoad() throws IOException {
+        int status = decoder.read(new FileInputStream(source));
         readCompleted = true;
+        return status;
     }
 }

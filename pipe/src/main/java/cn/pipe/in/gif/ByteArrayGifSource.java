@@ -1,7 +1,6 @@
 package cn.pipe.in.gif;
 
 import cn.pipe.in.AbstractGifSource;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
@@ -18,11 +17,9 @@ public class ByteArrayGifSource extends AbstractGifSource<byte[]> {
     }
 
     @Override
-    protected void loadIfNot() throws IOException {
-        if (readCompleted) {
-            return;
-        }
-        decoder.read(new ByteArrayInputStream(source));
+    protected int doLoad() throws IOException {
+        int status = decoder.read(new ByteArrayInputStream(source));
         readCompleted = true;
+        return status;
     }
 }
