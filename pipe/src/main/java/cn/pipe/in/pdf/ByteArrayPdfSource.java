@@ -18,11 +18,7 @@ public class ByteArrayPdfSource extends AbstractPdfBoxSource<byte[]> {
     }
 
     @Override
-    protected void loadIfNot() throws IOException {
-        if (readCompleted) {
-            return;
-        }
-        pdf = PDDocument.load(source);
-        readCompleted = true;
+    protected PDDocument doLoad() throws IOException {
+        return PDDocument.load(source);
     }
 }

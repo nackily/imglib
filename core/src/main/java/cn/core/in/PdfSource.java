@@ -2,6 +2,7 @@ package cn.core.in;
 
 import cn.core.Source;
 import java.awt.image.BufferedImage;
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @author tracy
  * @since 0.2.1
  */
-public interface PdfSource<S> extends Source<S> {
+public interface PdfSource<S> extends Source<S>, Closeable {
 
     /**
      * Get the maximum page number.
@@ -25,20 +26,21 @@ public interface PdfSource<S> extends Source<S> {
     /**
      * Read an image which the page indicated by the index.
      *
-     * @param page The page index.
+     * @param pageIndex The page index.
      * @param dpi The DPI (dots per inch) to render at.
      * @return The image which the page indicated by the index.
      * @throws IOException If some I/O exceptions occurred when loading the pdf source.
      */
-    BufferedImage read(int page, float dpi) throws IOException;
+    BufferedImage read(int pageIndex, float dpi) throws IOException;
 
     /**
      * Read images which pages indicated by the indexes.
      *
-     * @param pages The page indexes.
+     * @param pageIndexes The page indexes.
      * @param dpi The DPI (dots per inch) to render at.
      * @return The images which pages indicated by the indexes.
      * @throws IOException If some I/O exceptions occurred when loading the pdf source.
      */
-    List<BufferedImage> read(Integer[] pages, float dpi) throws IOException;
+    List<BufferedImage> read(Integer[] pageIndexes, float dpi) throws IOException;
+
 }

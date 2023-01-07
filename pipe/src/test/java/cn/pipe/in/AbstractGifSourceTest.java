@@ -16,7 +16,7 @@ import java.util.List;
 public class AbstractGifSourceTest {
 
     /**
-     * A fixed template file of gif source which loaded from '.../input/test.gif'.
+     * A fixed template file of gif source which loaded from '.../input/seasons.gif'.
      * <br>
      * Just for unit testing.
      */
@@ -47,7 +47,7 @@ public class AbstractGifSourceTest {
         @Override
         protected int doLoad() throws IOException {
             if (joint == GifDecoder.STATUS_OK) {
-                InputStream is = TestUtils.getResourceStream("input/test.gif");
+                InputStream is = TestUtils.getResourceStream("input/seasons.gif");
                 int status = decoder.read(is);
                 readCompleted = true;
                 return status;
@@ -104,7 +104,7 @@ public class AbstractGifSourceTest {
 
         // then
         GifDecoder decoder = new GifDecoder();
-        decoder.read(TestUtils.getResourceStream("input/test.gif"));
+        decoder.read(TestUtils.getResourceStream("input/seasons.gif"));
         BufferedImage frame0 = decoder.getFrame(0);
 
         Assert.assertTrue(BufferedImageComparer.isSame(frame0, target));
@@ -120,7 +120,7 @@ public class AbstractGifSourceTest {
 
         // then
         GifDecoder decoder = new GifDecoder();
-        decoder.read(TestUtils.getResourceStream("input/test.gif"));
+        decoder.read(TestUtils.getResourceStream("input/seasons.gif"));
         List<BufferedImage> frames = new ArrayList<>();
         frames.add(decoder.getFrame(0));
         frames.add(decoder.getFrame(2));
@@ -139,7 +139,7 @@ public class AbstractGifSourceTest {
 
         // then
         GifDecoder decoder = new GifDecoder();
-        decoder.read(TestUtils.getResourceStream("input/test.gif"));
+        decoder.read(TestUtils.getResourceStream("input/seasons.gif"));
         List<BufferedImage> frames = new ArrayList<>();
         for (int i = 0; i < decoder.getFrameCount(); i++) {
             frames.add(decoder.getFrame(i));

@@ -92,6 +92,7 @@ public abstract class AbstractGifSource<T> implements GifSource<T> {
         int status = doLoad();
         switch (status) {
             case GifDecoder.STATUS_OK:
+                readCompleted = true;
                 return;
             case GifDecoder.STATUS_FORMAT_ERROR:
                 throw new HandlingException("Error decoding file (may be partially decoded).");

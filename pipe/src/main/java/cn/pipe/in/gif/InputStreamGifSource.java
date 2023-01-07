@@ -18,8 +18,6 @@ public class InputStreamGifSource extends AbstractGifSource<InputStream> {
 
     @Override
     protected int doLoad() throws IOException {
-        int status = decoder.read(source);
-        readCompleted = true;
-        return status;
+        return decoder.read(source);
     }
 }

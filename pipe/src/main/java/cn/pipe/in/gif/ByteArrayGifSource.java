@@ -18,8 +18,6 @@ public class ByteArrayGifSource extends AbstractGifSource<byte[]> {
 
     @Override
     protected int doLoad() throws IOException {
-        int status = decoder.read(new ByteArrayInputStream(source));
-        readCompleted = true;
-        return status;
+        return decoder.read(new ByteArrayInputStream(source));
     }
 }

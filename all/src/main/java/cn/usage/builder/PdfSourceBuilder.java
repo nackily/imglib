@@ -7,6 +7,8 @@ import cn.core.ex.InvalidSettingException;
 import cn.core.tool.Range;
 import cn.core.utils.CollectionUtils;
 import cn.core.utils.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.text.MessageFormat;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
  * @since 0.2.1
  */
 public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<S>> {
+
+    private static final Log LOG = LogFactory.getLog(PdfSourceBuilder.class);
 
     /**
      * The PDF source.
@@ -41,8 +45,20 @@ public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<
      */
     private float dpi;
 
+    /**
+     * Indicates whether the pdf source object is one-time. May need to
+     * call the method {@link PdfSourceBuilder#release()} to release
+     * resources when it is set to {@code false}.
+     */
+    private boolean disposable = true;
+
     public PdfSourceBuilder(PdfSource<S> pdfSource) {
         this.source = pdfSource;
+    }
+
+    public PdfSourceBuilder<S> unDisposable() {
+        disposable = false;
+        return this;
     }
 
     public PdfSourceBuilder<S> registerAll() {
@@ -80,6 +96,15 @@ public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<
         return this;
     }
 
+    /**
+     * Release some resources and reset the status of source object.
+     *
+     * @throws IOException If some I/O exceptions occurred when closing resource.
+     */
+    public void release() throws IOException {
+        source.close();
+    }
+
     @Override
     protected List<BufferedImage> obtainSourceImages() throws IOException {
         checkReadiness();
@@ -107,7 +132,14 @@ public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<
                     StringUtils.join(invalidPages, ",")));
         }
 
-        return source.read(pages.toArray(new Integer[0]), val);
+        List<BufferedImage> images = source.read(pages.toArray(new Integer[0]), val);
+
+        // Release resources when the pdf source is not-time.
+        if (disposable) {
+            release();
+        }
+
+        return images;
     }
 
 
@@ -121,6 +153,23 @@ public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<
     private static void checkPageIndex(int pageIndex) {
         if (pageIndex < 0) {
             throw new InvalidSettingException("Page index must be greater than or equal to 0.");
+        }
+    }
+
+    /**
+     * Release some resources when developer forget.
+     *
+     * @throws Throwable If some I/O exceptions occurred when closing resource.
+     */
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            if (source != null) {
+                LOG.warn( "Warning: You did not close a PDF Source." );
+                release();
+            }
+        } finally {
+            super.finalize();
         }
     }
 }

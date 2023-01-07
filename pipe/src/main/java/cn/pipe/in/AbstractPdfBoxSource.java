@@ -45,10 +45,10 @@ public abstract class AbstractPdfBoxSource<T> implements PdfSource<T> {
     }
 
     @Override
-    public BufferedImage read(int page, float dpi) throws IOException {
+    public BufferedImage read(int pageIndex, float dpi) throws IOException {
         loadIfNot();
         PDFRenderer renderer = new PDFRenderer(pdf);
-        return renderer.renderImageWithDPI(page, dpi, ImageType.RGB);
+        return renderer.renderImageWithDPI(pageIndex, dpi, ImageType.RGB);
     }
 
     @Override
@@ -57,13 +57,13 @@ public abstract class AbstractPdfBoxSource<T> implements PdfSource<T> {
     }
 
     @Override
-    public List<BufferedImage> read(Integer[] pages, float dpi) throws IOException {
+    public List<BufferedImage> read(Integer[] pageIndexes, float dpi) throws IOException {
         loadIfNot();
         PDFRenderer renderer = new PDFRenderer(pdf);
 
         List<BufferedImage> tars = new ArrayList<>();
-        for (Integer page : pages) {
-            tars.add(renderer.renderImageWithDPI(page, dpi, ImageType.RGB));
+        for (Integer pIndex : pageIndexes) {
+            tars.add(renderer.renderImageWithDPI(pIndex, dpi, ImageType.RGB));
         }
         return tars;
     }
@@ -77,5 +77,33 @@ public abstract class AbstractPdfBoxSource<T> implements PdfSource<T> {
      * Load the pdf source if the source have not loaded.
      * @throws IOException If some I/O exceptions occurred when loading the pdf source.
      */
-    protected abstract void loadIfNot() throws IOException;
+    protected void loadIfNot() throws IOException {
+        if (readCompleted) {
+            return;
+        }
+        pdf = doLoad();
+        readCompleted = true;
+    }
+
+    /**
+     * Load the pdf source.
+     * @return The object of loaded GIF.
+     * @throws IOException If some I/O exceptions occurred when loading the pdf source.
+     */
+    protected abstract PDDocument doLoad() throws IOException;
+
+    /**
+     * Free resources and reset status.
+     *
+     * @throws IOException If some I/O exceptions occurred when loading the pdf source.
+     */
+    @Override
+    public void close() throws IOException {
+        if (pdf != null && !pdf.getDocument().isClosed()) {
+            // release the object of PDDocument
+            pdf.close();
+            // reset the read completed flag
+            readCompleted = false;
+        }
+    }
 }

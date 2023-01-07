@@ -20,8 +20,6 @@ public class FileGifSource extends AbstractGifSource<File> {
 
     @Override
     protected int doLoad() throws IOException {
-        int status = decoder.read(new FileInputStream(source));
-        readCompleted = true;
-        return status;
+        return decoder.read(new FileInputStream(source));
     }
 }
