@@ -66,7 +66,6 @@ public abstract class AbstractGifEncoder implements BufferedImageEncoder {
             encoder.setRepeat(repeat);
         }
 
-        // set the output
         setOutput();
 
         // reverse the images order
@@ -82,7 +81,7 @@ public abstract class AbstractGifEncoder implements BufferedImageEncoder {
     }
 
     /**
-     * 设置输出
+     * Set Output Format.
      */
     protected abstract void setOutput();
 

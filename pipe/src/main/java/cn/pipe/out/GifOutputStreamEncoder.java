@@ -31,7 +31,7 @@ public class GifOutputStreamEncoder extends AbstractGifEncoder {
         private OutputStream stream;
 
         public Builder outputStream(OutputStream stream) {
-            ObjectUtils.excNull(stream, "OutputStream is null");
+            ObjectUtils.excNull(stream, "OutputStream is null.");
             this.stream = stream;
             return this;
         }
