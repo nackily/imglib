@@ -18,17 +18,17 @@ import java.util.List;
  */
 public class EmptySourceBuilder extends AbstractSourceBuilder<EmptySourceBuilder> {
 
-    public static final String NULL_GENERATOR = "ImageGenerator is null.";
     protected List<ImageGenerator> captors = new ArrayList<>();
 
     public EmptySourceBuilder register(ImageGenerator ig) {
-        ObjectUtils.excNull(ig, NULL_GENERATOR);
+        ObjectUtils.excNull(ig, "ImageGenerator is null.");
         captors.add(ig);
         return this;
     }
 
     public EmptySourceBuilder register(ImageGenerator... igs) {
-        ObjectUtils.excNull(igs, NULL_GENERATOR);
+        ObjectUtils.excNull(igs, "No ImageGenerator was found.");
+        CollectionUtils.excEmpty(igs, "Empty ImageGenerator array.");
         captors.addAll(Arrays.asList(igs));
         return this;
     }

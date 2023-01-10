@@ -1,5 +1,6 @@
 package cn.usage.builder;
 
+import cn.core.utils.ObjectUtils;
 import cn.usage.AbstractSourceBuilder;
 import cn.core.ex.HandlingException;
 import cn.core.ex.InvalidSettingException;
@@ -63,6 +64,7 @@ public class GifSourceBuilder<S> extends AbstractSourceBuilder<GifSourceBuilder<
     }
 
     public GifSourceBuilder<S> register(Range<Integer> range) {
+        ObjectUtils.excNull(range, "Range is null.");
         checkFrameIndex(range.getMin());
         for (int i = range.getMin(); i <= range.getMax(); i++) {
             frames.add(i);
@@ -84,15 +86,17 @@ public class GifSourceBuilder<S> extends AbstractSourceBuilder<GifSourceBuilder<
 
         // export specified frames
         // check all frame was in bound
-        Set<String> invalidPages = frames.stream()
+        List<String> invalidPages = frames.stream()
                 .filter(p -> maxFrameIndex < p)
+                .sorted()
                 .map(Objects::toString)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
         if (!CollectionUtils.isNullOrEmpty(invalidPages)) {
-            throw new InvalidSettingException(MessageFormat.format(
+            throw new HandlingException(MessageFormat.format(
                     "Frame indexes:[{0}] has exceeded the max frame index of the gif document.",
                     StringUtils.join(invalidPages, ",")));
         }
+
         return source.read(frames.toArray(new Integer[0]));
     }
 
