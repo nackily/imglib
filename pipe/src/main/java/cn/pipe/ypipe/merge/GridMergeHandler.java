@@ -1,11 +1,11 @@
 package cn.pipe.ypipe.merge;
 
 import cn.core.GenericBuilder;
+import cn.core.tool.Range;
 import cn.core.utils.ObjectUtils;
 import cn.pipe.ypipe.AbstractMergeFilter;
 import cn.core.ex.InvalidSettingException;
 import cn.core.utils.BufferedImageUtils;
-import cn.core.utils.ColorUtils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
@@ -53,7 +53,7 @@ public class GridMergeHandler extends AbstractMergeFilter {
     /**
      *  The fill color of the background.
      */
-    private Color fillColor;
+    private final Color fillColor;
 
     public GridMergeHandler(Builder bu) {
         this.autoAdapts = bu.autoAdapts;
@@ -62,14 +62,7 @@ public class GridMergeHandler extends AbstractMergeFilter {
         this.horizontalNum = bu.horizontalNum;
         this.alpha = bu.alpha;
         this.alignCenter = bu.alignCenter;
-        if (bu.alpha == 1.0) {
-            this.fillColor = null;
-        } else {
-            this.fillColor = bu.fillColor;
-            if (bu.fillColor == null) {
-                this.fillColor = ColorUtils.random();
-            }
-        }
+        this.fillColor = bu.fillColor;
     }
 
     @Override
@@ -152,45 +145,36 @@ public class GridMergeHandler extends AbstractMergeFilter {
     }
 
     public static class Builder implements GenericBuilder<GridMergeHandler> {
-        private boolean autoAdapts = true;
+        private boolean autoAdapts;
         private int gridWidth;
         private int gridHeight;
-        private int horizontalNum = -1;
+        private int horizontalNum;
         private boolean alignCenter = false;
-        private float alpha;
+        private float alpha = 1.0f;
         private Color fillColor;
 
-        public Builder autoAdapts(boolean autoAdapts) {
-            this.autoAdapts = autoAdapts;
+        public Builder autoAdapts() {
+            this.autoAdapts = true;
             return this;
         }
 
         public Builder gridWidth(int gridWidth) {
             this.gridWidth = gridWidth;
-            if (gridWidth <= 0) {
-                throw new InvalidSettingException("The width of the grid must be greater than 0.");
-            }
             return this;
         }
 
         public Builder gridHeight(int gridHeight) {
             this.gridHeight = gridHeight;
-            if (gridHeight <= 0) {
-                throw new InvalidSettingException("The height of the grid must be greater than 0.");
-            }
             return this;
         }
 
         public Builder horizontalNum(int horizontalNum) {
             this.horizontalNum = horizontalNum;
-            if (horizontalNum <= 0) {
-                throw new InvalidSettingException("The number placed in horizontal must be greater than 0.");
-            }
             return this;
         }
 
-        public Builder alignCenter(boolean alignCenter) {
-            this.alignCenter = alignCenter;
+        public Builder alignCenter() {
+            this.alignCenter = true;
             return this;
         }
 
@@ -201,16 +185,40 @@ public class GridMergeHandler extends AbstractMergeFilter {
 
         public Builder fillColor(Color fillColor) {
             this.fillColor = fillColor;
-            ObjectUtils.excNull(fillColor, "Empty fill color.");
             return this;
         }
 
         @Override
         public GridMergeHandler build() {
-            boolean notSetGrid = gridWidth <= 0 || gridHeight <= 0;
-            if (!autoAdapts && notSetGrid) {
-                throw new InvalidSettingException("The width or height of the grid not set.");
+            // invalid setting
+            if (gridWidth < 0) {
+                throw new InvalidSettingException("The width of the grid must be greater than 0.");
             }
+            if (gridHeight < 0) {
+                throw new InvalidSettingException("The height of the grid must be greater than 0.");
+            }
+            if (horizontalNum < 0) {
+                throw new InvalidSettingException("The number placed in horizontal must be greater than 0.");
+            }
+            if (Range.ofFloat(0f, 1f).notWithin(alpha)) {
+                throw new InvalidSettingException("The alpha out of bounds:[0, 1].");
+            }
+
+            // The size of the grid must be determined when 'autoAdapts' is false.
+            if (!autoAdapts) {
+                if (gridWidth == 0) {
+                    throw new InvalidSettingException("The width of the grid must be determined when autoAdapts is not enabled.");
+                }
+                if (gridHeight == 0) {
+                    throw new InvalidSettingException("The height of the grid must be determined when autoAdapts is not enabled.");
+                }
+            }
+
+            // Set a default fill color when not completely transparent.
+            if (alpha != 0.0 && ObjectUtils.isNull(fillColor)) {
+                fillColor = Color.WHITE;
+            }
+
             return new GridMergeHandler(this);
         }
     }

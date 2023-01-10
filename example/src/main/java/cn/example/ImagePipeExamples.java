@@ -105,8 +105,8 @@ public class ImagePipeExamples {
                         .fillColor(ColorUtils.of(240, 240, 240))
                         .gridWidth(530)
                         .gridHeight(530)
-                        .autoAdapts(true)
-                        .alignCenter(true)
+                        .autoAdapts()
+                        .alignCenter()
                         .build())
                 .toFile(ExampleUtils.tmpFileNameOf("out/after_merge.jpg"));
     }

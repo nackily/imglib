@@ -31,9 +31,9 @@ public class GifOutputStreamEncoderTest {
                 .outputStream(fos)
                 .build();
         List<BufferedImage> images = Arrays.asList(
-                TestUtils.getImageFromResource("input/frame/0.jpg"),
-                TestUtils.getImageFromResource("input/frame/1.jpg"),
-                TestUtils.getImageFromResource("input/frame/2.jpg")
+                TestUtils.getImageFromResource("input/frame/frame-0.jpg"),
+                TestUtils.getImageFromResource("input/frame/frame-1.jpg"),
+                TestUtils.getImageFromResource("input/frame/frame-2.jpg")
         );
 
         // when

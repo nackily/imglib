@@ -67,7 +67,7 @@ public class GridSplitHandler extends AbstractSplitFilter {
      * @param imgWidth The width of the image to be split.
      * @param imgHeight The height of the image to be split.
      */
-    public void adjustGridIfNecessary(int imgWidth, int imgHeight) {
+    protected void adjustGridIfNecessary(int imgWidth, int imgHeight) {
         if (gridWidth > imgWidth && gridHeight > imgHeight) {
             throw new HandlingException("There is no need to split.");
         }
@@ -86,25 +86,27 @@ public class GridSplitHandler extends AbstractSplitFilter {
 
         public Builder gridWidth(int gridWidth) {
             this.gridWidth = gridWidth;
-            if (gridWidth <= 0) {
-                throw new InvalidSettingException("The width of the grid must be greater than 0.");
-            }
             return this;
         }
 
         public Builder gridHeight(int gridHeight) {
             this.gridHeight = gridHeight;
-            if (gridHeight <= 0) {
-                throw new InvalidSettingException("The height of the grid must be greater than 0.");
-            }
             return this;
         }
 
         @Override
         public GridSplitHandler build() {
+            if (gridWidth < 0) {
+                throw new InvalidSettingException("The width of the grid must be greater than 0.");
+            }
+            if (gridHeight < 0) {
+                throw new InvalidSettingException("The height of the grid must be greater than 0.");
+            }
+
             if (gridWidth <= 0 && gridHeight <= 0) {
                 throw new InvalidSettingException("Both of the width and height of the grid not set.");
             }
+
             return new GridSplitHandler(this);
         }
     }
