@@ -1,6 +1,7 @@
 package cn.core.in;
 
 import cn.core.ex.HandlingException;
+import cn.core.ex.UnsupportedFormatException;
 import cn.core.utils.ObjectUtils;
 import cn.core.utils.StringUtils;
 
@@ -54,9 +55,7 @@ public class FileImageSource implements BufferedImageSource<File> {
 
         // read from file
         BufferedImage bi = read(stream);
-        if (bi == null) {
-            stream.close();
-        }
+
         // mark the status to completed
         completeRead();
         return bi;
@@ -65,7 +64,9 @@ public class FileImageSource implements BufferedImageSource<File> {
     protected BufferedImage read(ImageInputStream stream) throws IOException {
         Iterator<ImageReader> iter = ImageIO.getImageReaders(stream);
         if (!iter.hasNext()) {
-            return null;
+            // can not parse input stream
+            stream.close();
+            throw new UnsupportedFormatException("No suitable ImageReader found for source file.");
         }
 
         ImageReader reader = iter.next();

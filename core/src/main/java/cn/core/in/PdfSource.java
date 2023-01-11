@@ -1,6 +1,8 @@
 package cn.core.in;
 
 import cn.core.Source;
+import cn.core.ex.HandlingException;
+
 import java.awt.image.BufferedImage;
 import java.io.Closeable;
 import java.io.IOException;
@@ -43,4 +45,10 @@ public interface PdfSource<S> extends Source<S>, Closeable {
      */
     List<BufferedImage> read(Integer[] pageIndexes, float dpi) throws IOException;
 
+    /**
+     * Whether the source is closed.
+     *
+     * @return Return <code>true</code> when the source has been closed.
+     */
+    boolean isClosed();
 }

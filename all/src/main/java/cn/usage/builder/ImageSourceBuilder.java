@@ -51,7 +51,7 @@ public class ImageSourceBuilder<S> extends AbstractSourceBuilder<ImageSourceBuil
                 throw new HandlingException(MessageFormat.format("Multiple available original formats found:[{0}].",
                         StringUtils.join(formats, ",")));
             } else {
-                super.formatName(formats[0]);
+                formatName(formats[0]);
             }
         }
 

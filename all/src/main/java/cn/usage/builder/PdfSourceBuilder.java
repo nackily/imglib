@@ -1,6 +1,7 @@
 package cn.usage.builder;
 
 import cn.core.in.PdfSource;
+import cn.core.utils.ObjectUtils;
 import cn.usage.AbstractSourceBuilder;
 import cn.core.ex.HandlingException;
 import cn.core.ex.InvalidSettingException;
@@ -81,6 +82,7 @@ public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<
     }
 
     public PdfSourceBuilder<S> register(Range<Integer> range) {
+        ObjectUtils.excNull(range, "Range is null.");
         checkPageIndex(range.getMin());
         for (int i = range.getMin(); i <= range.getMax(); i++) {
             pages.add(i);
@@ -102,48 +104,53 @@ public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<
      * @throws IOException If some I/O exceptions occurred when closing resource.
      */
     public void release() throws IOException {
-        source.close();
+        if (! source.isClosed()) {
+            source.close();
+        }
     }
 
     @Override
     protected List<BufferedImage> obtainSourceImages() throws IOException {
-        checkReadiness();
+        try {
+            checkReadiness();
 
-        // the max page index of the pdf
-        int maxPageIndex = source.maxPageNumber() - 1;
+            // the max page index of the pdf
+            int maxPageIndex = source.maxPageNumber() - 1;
 
-        float val = dpi <= 0 ? 300 : dpi;
+            float val = dpi <= 0 ? 300 : dpi;
 
-        // export all pages
-        if (containsAll) {
-            for (int index = 0; index < maxPageIndex; index++) {
-                pages.add(index);
+            // export all pages
+            if (containsAll) {
+                for (int index = 0; index <= maxPageIndex; index++) {
+                    pages.add(index);
+                }
+            }
+
+            // check all page was in bound
+            Set<String> invalidPages = pages.stream()
+                    .filter(p -> maxPageIndex < p)
+                    .map(Objects::toString)
+                    .collect(Collectors.toSet());
+            if (!CollectionUtils.isNullOrEmpty(invalidPages)) {
+                throw new HandlingException(MessageFormat.format(
+                        "The page indexes:[{0}] has exceeded the max page number of the pdf document.",
+                        StringUtils.join(invalidPages, ",")));
+            }
+
+            return source.read(pages.toArray(new Integer[0]), val);
+        } finally {
+            // Release resources when the pdf source is not-time.
+            if (disposable) {
+                release();
             }
         }
-
-        // check all page was in bound
-        Set<String> invalidPages = pages.stream()
-                .filter(p -> maxPageIndex < p)
-                .map(Objects::toString)
-                .collect(Collectors.toSet());
-        if (!CollectionUtils.isNullOrEmpty(invalidPages)) {
-            throw new InvalidSettingException(MessageFormat.format(
-                    "the page indexes:[{0}] has exceeded the max page number of the pdf document",
-                    StringUtils.join(invalidPages, ",")));
-        }
-
-        List<BufferedImage> images = source.read(pages.toArray(new Integer[0]), val);
-
-        // Release resources when the pdf source is not-time.
-        if (disposable) {
-            release();
-        }
-
-        return images;
     }
 
 
     protected void checkReadiness() {
+        if (containsAll) {
+            return;
+        }
         if (CollectionUtils.isNullOrEmpty(pages)) {
             throw new HandlingException("No page indexes are registered.");
         }
@@ -164,7 +171,7 @@ public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<
     @Override
     protected void finalize() throws Throwable {
         try {
-            if (source != null) {
+            if (source != null && !source.isClosed()) {
                 LOG.warn( "Warning: You did not close a PDF Source." );
                 release();
             }

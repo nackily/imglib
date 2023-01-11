@@ -33,6 +33,16 @@ public abstract class AbstractPdfBoxSource<T> implements PdfSource<T> {
      */
     protected PDDocument pdf;
 
+    /**
+     * Indicates whether the source is closed.
+     * <li>It will be set to <code>true</code> because there has no resource to
+     * release when object is instantiated.</li>
+     * <li>It will become <code>false</code> when the pdf document is loaded.</li>
+     * <li>It will become <code>true</code> when method of
+     * {@link AbstractPdfBoxSource#close()} is called.</li>
+     */
+    protected boolean closed = true;
+
 
     protected AbstractPdfBoxSource(T source) {
         this.source = source;
@@ -83,6 +93,7 @@ public abstract class AbstractPdfBoxSource<T> implements PdfSource<T> {
         }
         pdf = doLoad();
         readCompleted = true;
+        closed = false;
     }
 
     /**
@@ -102,8 +113,13 @@ public abstract class AbstractPdfBoxSource<T> implements PdfSource<T> {
         if (pdf != null && !pdf.getDocument().isClosed()) {
             // release the object of PDDocument
             pdf.close();
-            // reset the read completed flag
-            readCompleted = false;
+            // reset the closed flag
+            closed = true;
         }
+    }
+
+    @Override
+    public boolean isClosed() {
+        return closed;
     }
 }
