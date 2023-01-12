@@ -24,7 +24,7 @@ public class ImageSourceBuilderTest {
     public void init() throws IOException {
         sources = Arrays.asList(
                 new InputStreamImageSource(TestUtils.getResourceStream("input/nothing.jpg")),
-                new InputStreamImageSource(TestUtils.getResourceStream("input/frame/frame-0.jpg"))
+                new InputStreamImageSource(TestUtils.getResourceStream("input/frame.jpg"))
         );
     }
 
@@ -59,7 +59,7 @@ public class ImageSourceBuilderTest {
 
         // and then
         BufferedImage image0 = TestUtils.getImageFromResource("input/nothing.jpg");
-        BufferedImage image1 = TestUtils.getImageFromResource("input/frame/frame-0.jpg");
+        BufferedImage image1 = TestUtils.getImageFromResource("input/frame.jpg");
 
         Assert.assertTrue(BufferedImageComparer.isSame(image0, target.get(0)));
         Assert.assertTrue(BufferedImageComparer.isSame(image1, target.get(1)));

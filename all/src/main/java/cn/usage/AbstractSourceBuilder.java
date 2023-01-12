@@ -4,11 +4,15 @@ import cn.core.BufferedImageEncoder;
 import cn.core.PipeFilter;
 import cn.core.ex.HandlingException;
 import cn.core.ex.InvalidSettingException;
+import cn.core.ex.UnsupportedFormatException;
 import cn.core.utils.BufferedImageUtils;
 import cn.core.utils.CollectionUtils;
 import cn.core.utils.ObjectUtils;
 import cn.core.utils.StringUtils;
 import net.coobird.thumbnailator.Thumbnails;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -25,6 +29,7 @@ import java.util.*;
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractSourceBuilder<T> {
+    private static final Log LOG = LogFactory.getLog(AbstractSourceBuilder.class);
 
     public static final String NULL_FILTER = "PipeFilter is null.";
     private final T typeThis = (T) this;
@@ -67,7 +72,7 @@ public abstract class AbstractSourceBuilder<T> {
      * @return The object of children.
      */
     public T addFilter(PipeFilter... ypf) {
-        ObjectUtils.excNull(ypf, NULL_FILTER);
+        CollectionUtils.excEmpty(ypf, "No PipeFilter need to be added.");
         filters.addAll(Arrays.asList(ypf));
         return typeThis;
     }
@@ -97,7 +102,7 @@ public abstract class AbstractSourceBuilder<T> {
             throw new HandlingException("No images was found.");
         }
         if (images.size() > 1) {
-            throw new HandlingException("Cannot create an image from multiple original gif frames.");
+            throw new HandlingException("Cannot create an image from multiple original image sources.");
         }
         return images.get(0);
     }
@@ -147,64 +152,112 @@ public abstract class AbstractSourceBuilder<T> {
 
     public void toFile(File dest) throws IOException {
         BufferedImage image = obtainBufferedImage();
-        File f = choseFormat(dest);
-        BufferedImageUtils.write(image, formatName, f);
+        writeFile(image, dest);
     }
 
     public void toFile(String fn) throws IOException {
         toFile(new File(fn));
     }
 
-    public void toFiles(Iterator<File> fIter) throws IOException {
-        ObjectUtils.excNull(fIter, "File iterator is null.");
+    public void toFiles(Iterable<File> iterable) throws IOException {
+        ObjectUtils.excNull(iterable, "File iterable is null.");
 
         List<BufferedImage> images = obtainBufferedImages();
+        Iterator<File> iter = iterable.iterator();
         for (BufferedImage o : images) {
-            if (!fIter.hasNext()) {
-                throw new IndexOutOfBoundsException("Not enough File provided by iterator.");
+            if (!iter.hasNext()) {
+                throw new IndexOutOfBoundsException("Not enough File provided by iterable.");
             }
-            File f = choseFormat(fIter.next());
-            BufferedImageUtils.write(o, formatName, f);
+            writeFile(o, iter.next());
         }
     }
 
     public void toFiles(String... filenames) throws IOException {
-        ObjectUtils.excNull(filenames, "File names is null.");
+        if (CollectionUtils.isNullOrEmpty(filenames)) {
+            throw new NullPointerException("File names is null.");
+        }
 
         List<BufferedImage> images = obtainBufferedImages();
         if (images.size() > filenames.length) {
             throw new IndexOutOfBoundsException("Not enough file name provided by iterator.");
         }
         for (int i = 0; i < filenames.length; i++) {
-            File f = choseFormat(new File(filenames[i]));
-            BufferedImageUtils.write(images.get(i), formatName, f);
+            writeFile(images.get(i), new File(filenames[i]));
         }
     }
 
     public void toOutputStream(OutputStream os) throws IOException {
-        BufferedImage image = obtainBufferedImage();
-        ImageIO.write(image, formatName, os);
+        writeStream(obtainBufferedImage(), os);
     }
 
-    public void toOutputStreams(Iterator<OutputStream> osIter) throws IOException {
-        ObjectUtils.excNull(osIter, "OutputStream iterator is null.");
+    public void toOutputStreams(Iterable<OutputStream> iterable) throws IOException {
+        ObjectUtils.excNull(iterable, "OutputStream iterable is null.");
 
         List<BufferedImage> images = obtainBufferedImages();
+        Iterator<OutputStream> iter = iterable.iterator();
         for (BufferedImage o : images) {
-            if (!osIter.hasNext()) {
-                throw new IndexOutOfBoundsException("Not enough OutputStream provided by iterator.");
+            if (!iter.hasNext()) {
+                throw new IndexOutOfBoundsException("Not enough OutputStream provided by iterable.");
             }
-            ImageIO.write(o, formatName, osIter.next());
+            writeStream(o, iter.next());
         }
     }
 
+    protected void writeFile(BufferedImage image, File file) throws IOException {
+        File f = choseFormat(file);
+        BufferedImageUtils.write(image, formatName, f);
+    }
+
+    protected void writeStream(BufferedImage image, OutputStream os) throws IOException {
+        if (StringUtils.isEmpty(formatName)) {
+            throw new HandlingException("The output format is not set.");
+        }
+        if (!ImageIO.write(image, formatName, os)) {
+            throw new UnsupportedFormatException(String
+                    .format("No appropriate writer is found for: %s.", formatName));
+        }
+    }
+
+    /**
+     * Select a format for this input file.
+     *
+     * <li>Use the original input file when {@link AbstractSourceBuilder#formatName}
+     * is null and input file contains a extension.</li>
+     *
+     * <li>Append {@link AbstractSourceBuilder#formatName} to path of input file when
+     * {@link AbstractSourceBuilder#formatName} is not null.</li>
+     *
+     * <DD>
+     *     May get an unexpected file path when {@link AbstractSourceBuilder#formatName}
+     *     is not null and input file contains a extension.
+     *     <pre>
+     *         ...
+     *         .formatName("png")
+     *         .toFile("/test.jpg");
+     *     </pre>
+     *     Then, we will get a file name of <code>test.jpg.png</code>.
+     *     <br>
+     *     Otherwise, a similar situation will occur when exporting to various files.
+     *     <pre>
+     *         ...
+     *         .toFiles("test1.png", "test2.jpg", "test3.bmp");
+     *     </pre>
+     *     Then, we will get a list files name of <code>test1.png</code>,
+     *     <code>test2.jpg.png</code>, <code>test3.bmp.png</code>.
+     * </DD>
+     *
+     * @param f The file object of input.
+     * @return The final file object, maybe after adjust.
+     * @throws InvalidSettingException When {@link AbstractSourceBuilder#formatName}
+     * is null and input file not contains an extension.
+     */
     private File choseFormat(File f) {
         ObjectUtils.excNull(f, "Output file is null.");
         String extension = StringUtils.getExtensionName(f);
 
         if (StringUtils.isEmpty(formatName)) {
             if (StringUtils.isEmpty(extension)) {
-                throw new InvalidSettingException("No output format was specified.");
+                throw new HandlingException("No output format was specified.");
             }
             // initial the output format name
             formatName = extension;
