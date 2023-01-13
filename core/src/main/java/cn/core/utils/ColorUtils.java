@@ -81,7 +81,7 @@ public final class ColorUtils {
         if (CollectionUtils.isNullOrEmpty(options)) {
             throw new InvalidSettingException("No options.");
         }
-        int index = RandomUtils.randomInt(0, options.length);
+        int index = RandomUtils.randomInt(0, options.length - 1);
         return options[index];
     }
 
