@@ -1,15 +1,15 @@
 
-[**简体中文**](FAQ-zh.md)
+[**English**](FAQ.en.md)
 
 ------
 
-## Frequently Asked Questions
+## 常见问题
 
-### What is the relationship between *imglib* and *Thumbnailator*?
+### *Imglib* 和 *Thumbnailator* 之间是什么关系？
 
-From a certain point of view, *imglib* and *Thumbnailator* are independent of each other, *imglib* has not modified any API of *Thumbnail*, but only extended some capabilities on the basis of it, and all these extensions can be found in module [**ext-t8s**](/ext-t8s).
+从某种程度上说，imglib 和 *Thumbnailator* 之间相互独立，imglib 并未对 *Thumbnailator* 作出修改，而仅仅只是在其基础上扩展了部分能力，所有这些扩展内容都可以在[**ext-t8s**](/ext-t8s)中找到。
 
-In addition, *imglib* provides a very convenient way to use *Thumbnailator*, as follows:
+除此之外，*imglib* 提供了非常便捷的方式来使用 *Thumbnailator*，如下所示：
 ```java
 ImagePipes.ofEmptySource()
         ...  

@@ -1,6 +1,6 @@
 
-[**简体中文**](APIs-zh.md)
+[**English**](APIs.en.md)
 
 ------
 
-*Imglib* is still early in its development, and the APIs are subject to change at any time.
+*imglib* 仍然处于早期开发阶段，所有的 API 随时都有可能被修改。

@@ -7,84 +7,83 @@
 [![jdk8+](https://img.shields.io/badge/jdk-8%2B-green)](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
 [![license](https://img.shields.io/badge/license-Apache%202-blue)](https://www.apache.org/licenses/LICENSE-2.0)
 
-[**简体中文**](README-zh.md)
+[**English**](README.en.md)
 
 ------
 
-# What is *imglib*?
+## *imglib* 是什么?
 
-*Imglib* is a lightweight image processing library for JAVA, which committed to simplifying frequently image processing.
+*imglib* 是一个轻量级的 JAVA 图像处理库，立足于简化对图像的常见处理。
 
-# What can *imglib* do?
+## *imglib* 能做什么？
 
-*Imglib* mainly provides three capabilities:
+*imglib* 主要提供三部分的能力：
 
-* **Image Collection**
+* **图像收集**
 
-  *Imglib* provides the ability to collect images, allowing developers to create images from nothing, such as creating transparent image, hash image, and capturing screenshot. At the same time, developers can extract images from files, such as extract whole page as image from PDF file or extract frame as image from GIF file.
+  *imglib* 提供了图像收集的能力，允许开发者从无到有创建图像，例如创建透明图像、hash 点阵图像、截取屏幕图像等。同时开发者可从文件中提取图像，例如从 PDF 文件中提取整页图像，从 GIF 文件中提取图像帧等。
 
-* **Image Processing**
+* **图像处理**
 
-  With *Thumbnailator*, we can easily implement the basic operations of images, including scaling, cropping, rotation, image watermarking and format conversion. On this basis, *imglib* extends processors such as adding border, lossless magnification, mosaics, rounded corner, graying, binarization, and drawing shapes on image.
+  借助于 *Thumbnailator*，我们能轻松实现图像的基础操作，包括缩放、裁剪、旋转、图像水印和格式转换等等。在此基础上，*imglib* 扩展了添加边框、无损放大、马赛克、圆角、灰度化、二值化、绘制形状等处理器。
 
-* **Merging and Splitting**
+* **聚合与分裂**
 
-  *Imglib* provides merging and splitting capabilities, including merging multiple images into a single image and splitting image into multiple images. It supports cutting and jigsaw of images according to grid, and encode multiple images into GIF file. Developers can also expand freely according to actual needs.
+  *imglib* 提供了图像的聚合与分裂能力，包括归并多个图像为单个图像，以及拆分图像为多个图像。支持按照网格对图像进行剪切和拼图，合并多个图像到 GIF 文件中，开发者还可根据实际需求，进行自由扩展。
 
-It is worth mentioning that *imglib* is not a project started from nothing, it just stands on the shoulders of giants! *imglib* is based on [Thumbnailator](https://github.com/coobird/thumbnailator) in image processing, relies on [pdfbox](https://github.com/apache/pdfbox) in PDF document parsing, and references [animated-gif-lib-for-java](https://github.com/rtyley/animated-gif-lib-for-java) in GIF document processing...
+值得一提的是，*imglib* 并不是一个从零开始的项目，它只是站在巨人的肩膀上！*imglib* 在图像处理的能力上立足于 [Thumbnailator](https://github.com/coobird/thumbnailator)，在 PDF 文档的解析上依赖了 [pdfbox](https://github.com/apache/pdfbox)，在 GIF 文档的处理上引用了 [animated-gif-lib-for-java](https://github.com/rtyley/animated-gif-lib-for-java)...
 
-# How simple is *imglib*?
-Like *Thumbnailator*, *imglib* shields developers from complex I/O operations and eliminates the need to manually manipulate images through Graphics2D objects. *imglib* has done all this for you. It's chained API allows you to configure and execute a complex image processing task step by step.
+## *imglib* 有多简单？
+同 *Thumbnailator* 一样，*imglib* 为开发者屏蔽了复杂的 I/O 操作，以及无需再通过 Graphics2D 对象来手动操作图像，*imglib* 已经替您完成了所有这些工作。*imglib* 的链式 API 使得你可以将一个复杂的图像处理任务逐步的配置并执行。
 
-For example, the task of create a hash avatar for the user, the avatar setting to 8px\*8px, the image size setting to 300px\*300px, and add a border with a margin of 20px. This image generation task can be completed through the following code fragments:
+例如，为用户创建一个 hash 图像，头像点阵设定为 8px\*8px，头像大小为 300px\*300px，并增加一个边距为 20px 的边框。该图像生成任务，可以通过以下操作完成：
 ```java
 ImagePipes.ofEmptySource()
-        .register(new HashImageGenerator.Builder("Tracy")       // add a hash image generator
-                .gridVerticalNum(8)                             // number of lattice in horizontal direction
-                .bgColor(ColorUtils.of(240, 240, 240))          // the background color of hash image
-                .fgColor(ColorUtils.of(50, 150, 50))            // the foreground color of hash image
+        .register(new HashImageGenerator.Builder("Tracy")       // hash 图像生成器
+                .gridVerticalNum(8)                             // 水平方向的点阵数量
+                .bgColor(ColorUtils.of(240, 240, 240))          // 背景色
+                .fgColor(ColorUtils.of(50, 150, 50))            // 前景色
                 .build())   
-        .toThumbnails()                                         // get object of Thumbnails
-        .addFilter(new HighQualityExpandHandler.Builder()       // add a filter of lossless expansion handler
-                .finalWidth(300)                                // the final width after expanded
-                .keepAspectRatio(true)                          // setting of keep the aspect ratio
+        .toThumbnails()                                         // 转换为 Thumbnails
+        .addFilter(new HighQualityExpandHandler.Builder()       // 图像无损放大处理器
+                .finalWidth(300)                                // 图像的宽度
+                .keepAspectRatio(true)                          // 保持长宽比例
                 .build())   
-        .addFilter(new BorderHandler.Builder()                  // add a filter of border handler
-                .fillColor(ColorUtils.of(200, 200, 200))        // fill color of the border
-                .vMargins(20)                                   // vertical margin
-                .hMargins(20)                                   // horizontal margin
+        .addFilter(new BorderHandler.Builder()                  // 边框处理器
+                .fillColor(ColorUtils.of(200, 200, 200))        // 边框填充色
+                .vMargins(20)                                   // 垂直方向的边距
+                .hMargins(20)                                   // 水平方向的边距
                 .build())
         .scale(1.0)
         .toFile(".../avatar.png");
 ```
 
-By executing the above code fragment, we will get the following user avatar.
+执行上面的代码片段，我们将得到如下的用户头像。
 
 <div align="center">
    <img src="docs/res/avatar.png" width="18%"/>
 </div>
 
-## How to use *imglib*?
+## *imglib* 如何引入？
 
 **Maven**
 
-Add the following maven dependencies in the pom.xml of your project.
-
+在项目的 pom.xml 中添加以下 maven 依赖：
 ```xml
   <dependency>
     <groupId>io.github.nackily</groupId>
     <artifactId>imglib-all</artifactId>
     <version>{*.*.*}</version>
-  </dependency>
+</dependency>
 ```
 
 **Jar**
 
-You can also visit [**maven-repository**](https://repo1.maven.org/maven2/io/github/nackily/imglib-all/), download the corresponding version of `imglib-all-*.*.*.jar` and import it into your project.
+您也可以访问 [**maven-repository**](https://repo1.maven.org/maven2/io/github/nackily/imglib-all/) ，下载对应版本的`imglib-all-*.*.*.jar`并引入到项目中即可。
 
-# See more
-Get more information about *imglib* by visit the following links:
+## 更多内容
+以下的链接提供了更多关于 *imglib* 信息：
 
-+ [**Examples**](/docs/Examples.md)
-+ [**API Documentation**](/docs/APIs.md)
-+ [**Frequently Asked Questions**](/docs/FAQ.md)
++ [**Examples**](/docs/Examples-zh.md)
++ [**API Documentation**](/docs/APIs-zh.md)
++ [**Frequently Asked Questions**](/docs/FAQ-zh.md)
