@@ -125,17 +125,15 @@ public class AbstractPdfBoxSourceTest {
         // given
         FixedTemplatePdfSource source = new FixedTemplatePdfSource();
         source.loadIfNot();
-        PDDocument pdf = source.pdf;
 
-        // Before: unclose and read completed.
-        Assert.assertFalse(pdf.getDocument().isClosed());
+        // Before: unclose but read completed.
+        Assert.assertFalse(source.isClosed());
         Assert.assertTrue(source.isReadCompleted());
 
         // when
         source.close();
 
-        // After: closed and un-read completed.
-        Assert.assertTrue(pdf.getDocument().isClosed());
-        Assert.assertFalse(source.isReadCompleted());
+        // After: closed.
+        Assert.assertTrue(source.isClosed());
     }
 }

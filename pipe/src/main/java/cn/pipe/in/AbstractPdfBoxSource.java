@@ -35,11 +35,15 @@ public abstract class AbstractPdfBoxSource<T> implements PdfSource<T> {
 
     /**
      * Indicates whether the source is closed.
+     * <ul>
      * <li>It will be set to <code>true</code> because there has no resource to
      * release when object is instantiated.</li>
+     *
      * <li>It will become <code>false</code> when the pdf document is loaded.</li>
+     *
      * <li>It will become <code>true</code> when method of
      * {@link AbstractPdfBoxSource#close()} is called.</li>
+     * </ul>
      */
     protected boolean closed = true;
 

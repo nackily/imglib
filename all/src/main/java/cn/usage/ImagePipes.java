@@ -115,46 +115,46 @@ public final class ImagePipes {
     }
 
     public static PdfSourceBuilder<InputStream> ofPdf(InputStream is) {
-        ObjectUtils.excNull(is, "InputStream is null.");
+        ObjectUtils.excNull(is, "Pdf InputStream is null.");
         return new PdfSourceBuilder<>(new InputStreamPdfSource(is));
     }
 
     public static PdfSourceBuilder<File> ofPdf(File pdf) {
-        ObjectUtils.excNull(pdf, "File is null.");
+        ObjectUtils.excNull(pdf, "Pdf File is null.");
         return new PdfSourceBuilder<>(new FilePdfSource(pdf));
     }
 
     public static PdfSourceBuilder<File> ofPdf(String filename) {
         if (StringUtils.isEmpty(filename)) {
-            throw new InvalidSettingException("File name is null.");
+            throw new InvalidSettingException("Pdf file name is null.");
         }
         return new PdfSourceBuilder<>(new FilePdfSource(new File(filename)));
     }
 
     public static PdfSourceBuilder<byte[]> ofPdf(byte[] bytes) {
-        ObjectUtils.excNull(bytes, "Byte array is null.");
+        ObjectUtils.excNull(bytes, "Pdf byte array is null.");
         return new PdfSourceBuilder<>(new ByteArrayPdfSource(bytes));
     }
 
     public static GifSourceBuilder<InputStream> ofGif(InputStream is) {
-        ObjectUtils.excNull(is, "InputStream is null.");
+        ObjectUtils.excNull(is, "Gif InputStream is null.");
         return new GifSourceBuilder<>(new InputStreamGifSource(is));
     }
 
     public static GifSourceBuilder<File> ofGif(File gif) {
-        ObjectUtils.excNull(gif, "File is null.");
+        ObjectUtils.excNull(gif, "Gif File is null.");
         return new GifSourceBuilder<>(new FileGifSource(gif));
     }
 
     public static GifSourceBuilder<File> ofGif(String filename) {
         if (StringUtils.isEmpty(filename)) {
-            throw new InvalidSettingException("File name is null.");
+            throw new InvalidSettingException("Gif file name is null.");
         }
         return new GifSourceBuilder<>(new FileGifSource(new File(filename)));
     }
 
     public static GifSourceBuilder<byte[]> ofGif(byte[] bytes) {
-        ObjectUtils.excNull(bytes, "Byte array is null.");
+        ObjectUtils.excNull(bytes, "Gif byte array is null.");
         return new GifSourceBuilder<>(new ByteArrayGifSource(bytes));
     }
 
