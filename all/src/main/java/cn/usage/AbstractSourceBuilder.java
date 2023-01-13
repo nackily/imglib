@@ -10,9 +10,6 @@ import cn.core.utils.CollectionUtils;
 import cn.core.utils.ObjectUtils;
 import cn.core.utils.StringUtils;
 import net.coobird.thumbnailator.Thumbnails;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -29,7 +26,6 @@ import java.util.*;
  */
 @SuppressWarnings("unchecked")
 public abstract class AbstractSourceBuilder<T> {
-    private static final Log LOG = LogFactory.getLog(AbstractSourceBuilder.class);
 
     public static final String NULL_FILTER = "PipeFilter is null.";
     private final T typeThis = (T) this;

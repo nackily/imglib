@@ -8,12 +8,11 @@ import cn.core.ex.InvalidSettingException;
 import cn.core.tool.Range;
 import cn.core.utils.CollectionUtils;
 import cn.core.utils.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.text.MessageFormat;
 import java.util.*;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
  */
 public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<S>> {
 
-    private static final Log LOG = LogFactory.getLog(PdfSourceBuilder.class);
+    private static final Logger LOGGER = Logger.getLogger(PdfSourceBuilder.class.getName());
 
     /**
      * The PDF source.
@@ -172,7 +171,7 @@ public class PdfSourceBuilder<S> extends AbstractSourceBuilder<PdfSourceBuilder<
     protected void finalize() throws Throwable {
         try {
             if (source != null && !source.isClosed()) {
-                LOG.warn( "Warning: You did not close a PDF Source." );
+                LOGGER.warning( "Warning: You did not close a PDF Source." );
                 release();
             }
         } finally {
