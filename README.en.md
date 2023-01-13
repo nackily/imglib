@@ -21,22 +21,31 @@
 
 * **Image Collection**
 
-  *Imglib* provides the ability to collect images, allowing developers to create images from nothing, such as creating transparent image, hash image, and capturing screenshot. At the same time, developers can extract images from files, such as extract whole page as image from PDF file or extract frame as image from GIF file.
+  *Imglib* provides the ability to collect images, allowing developers to create images from nothing, such as creating 
+transparent image, hash image, and capturing screenshot. At the same time, developers can extract images from files, 
+such as extract whole page as image from PDF file or extract frame as image from GIF file.
 
 * **Image Processing**
 
-  With *Thumbnailator*, we can easily implement the basic operations of images, including scaling, cropping, rotation, image watermarking and format conversion. On this basis, *imglib* extends processors such as adding border, lossless magnification, mosaics, rounded corner, graying, binarization, and drawing shapes on image.
+  With *Thumbnailator*, we can easily implement the basic operations of images, including scaling, cropping, rotation, 
+image watermarking and format conversion. On this basis, *imglib* extends processors such as adding border, lossless 
+magnification, mosaics, rounded corner, graying, binarization, and drawing shapes on image.
 
 * **Merging and Splitting**
 
-  *Imglib* provides merging and splitting capabilities, including merging multiple images into a single image and splitting image into multiple images. It supports cutting and jigsaw of images according to grid, and encode multiple images into GIF file. Developers can also expand freely according to actual needs.
-
-It is worth mentioning that *imglib* is not a project started from nothing, it just stands on the shoulders of giants! *imglib* is based on [Thumbnailator](https://github.com/coobird/thumbnailator) in image processing, relies on [pdfbox](https://github.com/apache/pdfbox) in PDF document parsing, and references [animated-gif-lib-for-java](https://github.com/rtyley/animated-gif-lib-for-java) in GIF document processing...
+  *Imglib* provides merging and splitting capabilities, including merging multiple images into a single image and 
+splitting image into multiple images. It supports cutting and jigsaw of images according to grid, and encode multiple 
+images into GIF file. Developers can also expand freely according to actual needs.
 
 # How simple is *imglib*?
-Like *Thumbnailator*, *imglib* shields developers from complex I/O operations and eliminates the need to manually manipulate images through Graphics2D objects. *imglib* has done all this for you. It's chained API allows you to configure and execute a complex image processing task step by step.
+Like *Thumbnailator*, *imglib* shields developers from complex I/O operations and eliminates the need to manually 
+manipulate images through Graphics2D objects. *imglib* has done all this for you. It's chained API allows you to 
+configure and execute a complex image processing task step by step.
 
-For example, the task of create a hash avatar for the user, the avatar setting to 8px\*8px, the image size setting to 300px\*300px, and add a border with a margin of 20px. This image generation task can be completed through the following code fragments:
+For example, the task of create a hash avatar for the user, the avatar setting to 8px\*8px, the image size setting 
+to 300px\*300px, and add a border with a margin of 20px. This image generation task can be completed through the 
+following code fragments:
+
 ```java
 ImagePipes.ofEmptySource()
         .register(new HashImageGenerator.Builder("Tracy")       // add a hash image generator
@@ -60,9 +69,7 @@ ImagePipes.ofEmptySource()
 
 By executing the above code fragment, we will get the following user avatar.
 
-<div align="center">
-   <img src="docs/res/avatar.png" width="18%"/>
-</div>
+[avatar](docs/res/avatar.png)
 
 ## How to use *imglib*?
 
@@ -80,11 +87,20 @@ Add the following maven dependencies in the pom.xml of your project.
 
 **Jar**
 
-You can also visit [**maven-repository**](https://repo1.maven.org/maven2/io/github/nackily/imglib-all/), download the corresponding version of `imglib-all-*.*.*.jar` and import it into your project.
+You can also visit [**maven-repository**](https://repo1.maven.org/maven2/io/github/nackily/imglib-all/), 
+download the corresponding version of `imglib-all-*.*.*.jar` and import it into your project.
+
+It is worth mentioning that *imglib* is not a project started from nothing, it just stands on the shoulders 
+of giants! *imglib* is based on [Thumbnailator](https://github.com/coobird/thumbnailator) in image processing, 
+relies on [pdfbox](https://github.com/apache/pdfbox) in PDF document parsing, and references 
+[animated-gif-lib-for-java](https://github.com/rtyley/animated-gif-lib-for-java) in GIF document processing.
+Although *imglib* relies on these excellent third-party dependencies in some image processing capabilities, 
+*imglib* does not include relevant dependencies after packaging. If necessary, you should add corresponding 
+dependencies to the project independently.
 
 # See more
 Get more information about *imglib* by visit the following links:
 
-+ [**Examples**](/docs/Examples.md)
-+ [**API Documentation**](/docs/APIs.md)
-+ [**Frequently Asked Questions**](/docs/FAQ.md)
++ [**Examples**](/docs/Examples.en.md)
++ [**API Documentation**](/docs/APIs.en.md)
++ [**Frequently Asked Questions**](/docs/FAQ.en.md)

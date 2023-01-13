@@ -3,7 +3,9 @@
 
 ------
 
-本文将列举一些示例，以便开发者可以快速了解 *imglib* 的功能并且轻松使用他们，所有的这些示例都可以在[example/.../Setting.java](/example/src/main/java/cn/example/Setting.java)中找到，并且您可以运行 **example** 模块来执行相应的功能。
+本文将列举一些示例，以便开发者可以快速了解 *imglib* 的功能并且轻松使用他们，所有的这些示例都可以在
+[example/.../Setting.java](/example/src/main/java/cn/example/Setting.java)中找到，
+并且您可以运行 **example** 模块来执行相应的功能。
 
 ## 图像收集
 
@@ -31,7 +33,8 @@ ImagePipes.ofEmptySource()
         .toFile(ExampleUtils.tmpFileNameOf("out/mono_color.png"));
 ```
 
-在本例中，将创建一张宽高为 300px * 200px ，透明度为 0.2（透明度在 \[0, 1\] 之间取值，等于 0 时图像完全透明，等于 1 时图像完全不透明），背景颜色随机的图像，并将其保存到`.../out/mono_color.png`文件中。
+在本例中，将创建一张宽高为 300px * 200px ，透明度为 0.2（透明度在 \[0, 1\] 之间取值，等于 0 时图像完全透明，等于 1 时图像完全不透明），
+背景颜色随机的图像，并将其保存到`.../out/mono_color.png`文件中。
 
 <div align="center"><img src="/example/res/out/mono_color.png"/></div>
 
@@ -46,7 +49,8 @@ ImagePipes.ofEmptySource()
         .toFile(ExampleUtils.tmpFileNameOf("out/screenshot.png"));
 ```
 
-在本例中，将截取一张屏幕快照，截取的区域指定为左上角坐标为\[600, 300\], 宽度为 280px，高度为 190px，截取的快照将被保存到`.../out/screenshot.png`文件中。
+在本例中，将截取一张屏幕快照，截取的区域指定为左上角坐标为\[600, 300\], 宽度为 280px，高度为 190px，截取的快照将被保存到
+`.../out/screenshot.png`文件中。
 
 <div align="center"><img src="/example/res/out/screenshot.png"/></div>
 
@@ -60,7 +64,8 @@ ImagePipes.ofEmptySource()
         .toFile(ExampleUtils.tmpFileNameOf("out/hash.png"));
 ```
 
-在本例中，将创建宽高为 5px * 5px 的二维矩阵，在矩阵中如果对应位置的像素点取值为 `TRUE`，则该像素点的前景色设置为\[(R) 50,(G) 150,(B) 50\]，该点阵图像将被保存到`.../out/hash.png`文件中。
+在本例中，将创建宽高为 5px * 5px 的二维矩阵，在矩阵中如果对应位置的像素点取值为 `TRUE`，则该像素点的前景色设置为\[(R) 50,(G) 150,(B) 50\]，
+该点阵图像将被保存到`.../out/hash.png`文件中。
 
 <div align="center"><img src="/docs/res/5x5hash_matrix.png"/></div>
 
@@ -74,7 +79,8 @@ ImagePipes.ofPdf(ExampleUtils.tmpFileNameOf("in/jvms8.pdf"))
         .toFile(ExampleUtils.tmpFileNameOf("out/page_1_of_jvms8.jpg"));
 ```
 
-在本例中，将解析指定的 PDF 文件`.../in/jvms8.pdf`，提取索引为 0 的页为图像，提取图像时指定 DPI（每英寸内像素点数）为 280，并将该图像保存到`.../out/page_1_of_jvms8.jpg`文件中。
+在本例中，将解析指定的 PDF 文件`.../in/jvms8.pdf`，提取索引为 0 的页为图像，提取图像时指定 DPI（每英寸内像素点数）为 280，
+并将该图像保存到`.../out/page_1_of_jvms8.jpg`文件中。
 
 <div align="center"><img src="/example/res/out/page_1_of_jvms8.jpg" width="50%"/></div>
 
@@ -115,7 +121,8 @@ ImagePipes.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
             ExampleUtils.tmpFileNameOf("out/split/slice_9.jpg"));
 ```
 
-在本例中，将使用宽高为 400px * 250px 的矩形区域逐行自左往右从原始图像中提取图像，直至该矩形已触碰到（或者已包含）图像边界，并将提取的图像按照顺序保存到`.../out/split/`文件目录中。
+在本例中，将使用宽高为 400px * 250px 的矩形区域逐行自左往右从原始图像中提取图像，直至该矩形已触碰到（或者已包含）图像边界，并将提取的图像
+按照顺序保存到`.../out/split/`文件目录中。
 
 
 |              原始图像              |           拆分后的图像列表            |
@@ -139,7 +146,8 @@ ImagePipes.of(ExampleUtils.tmpFileNameOf("in/to_merge/spring.jpg"),
         .toFile(ExampleUtils.tmpFileNameOf("out/after_merge.jpg"));
 ```
 
-在本例中，将从`.../in/to_merge/`文件目录中加载`spring.jpg` `summer.jpg` `winter.jpg` `autumn.jpg`四幅图像，并将这些图像按照顺序拼接在一幅图像内，拼接的规则如下：
+在本例中，将从`.../in/to_merge/`文件目录中加载`spring.jpg` `summer.jpg` `winter.jpg` `autumn.jpg`四幅图像，并将这些图像按照
+顺序拼接在一幅图像内，拼接的规则如下：
 
 + 使用固定宽高为 530px * 530px 的网格盛放每幅图像；
 + 开启网格自动调整，当网格不足以容纳某幅图像时，重置网格的大小到足以容纳；
@@ -166,7 +174,8 @@ ImagePipes.of(ExampleUtils.tmpFileNameOf("in/to_merge/spring.jpg"),
             .build());
 ```
 
-在本例中，将从`.../in/to_merge/`文件目录中加载`spring.jpg` `summer.jpg` `winter.jpg` `autumn.jpg`四幅图像，并将这些图像编码到`.../out/seasons.gif`文件中，该 GIF 格式的文件每隔 400ms 切换下一帧，并且已设定为重复播放模式。
+在本例中，将从`.../in/to_merge/`文件目录中加载`spring.jpg` `summer.jpg` `winter.jpg` `autumn.jpg`四幅图像，并将这些图像
+编码到`.../out/seasons.gif`文件中，该 GIF 格式的文件每隔 400ms 切换下一帧，并且已设定为重复播放模式。
 
 |                 原始图像列表                 |            合成后的 GIF 文件            |
 |:--------------------------------------:|:---------------------------------:|
@@ -174,7 +183,9 @@ ImagePipes.of(ExampleUtils.tmpFileNameOf("in/to_merge/spring.jpg"),
 
 ## 图像处理
 
-尽管 *Thumbnailator* 主要用于处理缩略图，但其仍然为我们提供了基础的图像处理能力，包括有尺寸缩放、比例缩放、区域裁剪、旋转和添加水印等等。*Imglib* 在 *Thumbnailator* 的基础之上扩展了一系列新的图像处理能力，所有新功能都实现了`ImageFilter`接口，可通过`Thumbnails.Builder#addFilter(ImageFilter)`、`Thumbnails.Builder#addFilters(List<ImageFilter>)`方式使用。
+尽管 *Thumbnailator* 主要用于处理缩略图，但其仍然为我们提供了基础的图像处理能力，包括有尺寸缩放、比例缩放、区域裁剪、旋转和添加水印等等。
+*Imglib* 在 *Thumbnailator* 的基础之上扩展了一系列新的图像处理能力，所有新功能都实现了`ImageFilter`接口，可通过
+`Thumbnails.Builder#addFilter(ImageFilter)`、`Thumbnails.Builder#addFilters(List<ImageFilter>)`方式使用。
 
 ### 添加边框
 ```java
@@ -188,7 +199,8 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
         .toFile(ExampleUtils.tmpFileNameOf("out/bordered.jpg"));
 ```
 
-在本例中，将为`.../in/panda.jpg`图像添加一个边框，该边框在水平方向的边距为 20 px，垂直方向的边距为 30 px，处理后的图像将被保存到`.../out/bordered.jpg`文件中。
+在本例中，将为`.../in/panda.jpg`图像添加一个边框，该边框在水平方向的边距为 20 px，垂直方向的边距为 30 px，处理后的图像将被保存到
+`.../out/bordered.jpg`文件中。
 
 |              原始图像              |              添加边框后图像               |
 |:------------------------------:|:----------------------------------:|
@@ -208,7 +220,8 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
         .toFile(ExampleUtils.tmpFileNameOf("out/after_mosaic.jpg"));
 ```
 
-在本例中，将为`.../in/panda.jpg`图像的部分区域马赛克化，区域的左上角坐标是\[480, 260\]，宽高分别为 180px 和 160px，每一个马赛克方块的边长固定为 10 px，处理后的图像将被保存到`.../out/after_mosaic.jpg`文件中。
+在本例中，将为`.../in/panda.jpg`图像的部分区域马赛克化，区域的左上角坐标是\[480, 260\]，宽高分别为 180px 和 160px，每一个马赛克方块
+的边长固定为 10 px，处理后的图像将被保存到`.../out/after_mosaic.jpg`文件中。
 
 |              原始图像              |                 马赛克后图像                 |
 |:------------------------------:|:--------------------------------------:|
@@ -225,7 +238,8 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
         .toFile(ExampleUtils.tmpFileNameOf("out/rounded.png"));
 ```
 
-在本例中，将改变原始图像`.../in/panda.jpg`的四个角为圆角，角圆弧的水平直径和垂直直径均为 100px，处理后的图像将被保存到`.../out/rounded.png`文件中。值得注意的是，圆角化后的图像在保存时必须指定为 PNG 格式，否则将看不出任何效果。
+在本例中，将改变原始图像`.../in/panda.jpg`的四个角为圆角，角圆弧的水平直径和垂直直径均为 100px，处理后的图像将被保存到
+`.../out/rounded.png`文件中。值得注意的是，圆角化后的图像在保存时必须指定为 PNG 格式，否则将看不出任何效果。
 
 |              原始图像              |              圆角化后图像               |
 |:------------------------------:|:---------------------------------:|
@@ -242,9 +256,12 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/chaotic_points.png"))
         .toFile(ExampleUtils.tmpFileNameOf("out/expanded.png"));
 ```
 
-尽管 *Thumbnailator* 已经提供重置图像尺寸的功能，但其在将图像扩大后通常会变得模糊不清，这是因为图像质量的损失。当我们需要对图像进行无损放大时，可使用`HighQualityExpandHandler`实现。
+尽管 *Thumbnailator* 已经提供重置图像尺寸的功能，但其在将图像扩大后通常会变得模糊不清，这是因为图像质量的损失。当我们需要对图像进行无损放大时
+，可使用`HighQualityExpandHandler`实现。
 
-在本例中，原始图像`.../in/chaotic_points.png`的尺寸为 100px * 60px，在经过处理后，我们将得到一幅 300px * 180px 的图像，并将其保存在`.../out/expanded.png`文件中。通常情况下，我们只需要指定一个最终的宽度（或者最终的高度），并设置为保持长宽比例，这样就能得到相较于原始图像等比放大的图像。
+在本例中，原始图像`.../in/chaotic_points.png`的尺寸为 100px * 60px，在经过处理后，我们将得到一幅 300px * 180px 的图像，并将其保存在
+`.../out/expanded.png`文件中。通常情况下，我们只需要指定一个最终的宽度（或者最终的高度），并设置为保持长宽比例，这样就能得到相较于原始图像
+等比放大的图像。
 
 |                  原始图像                   |               放大后图像                |
 |:---------------------------------------:|:----------------------------------:|
@@ -263,9 +280,12 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
         .toFile(ExampleUtils.tmpFileNameOf("out/grayed.jpg"));
 ```
 
-在本例中，原始图像`.../in/panda.jpg`将被进行灰度化处理，采用的策略为按权重灰度化，红色分量占比 30%，绿色分量占比 59%，蓝色分量则占比 11%，灰度化完成后的图像将被保存到`.../out/grayed.jpg`文件中。假定任一像素点的原始 RGB 值为\[r', g', b'\]，则灰度值的计算公式为`val = (r' * 0.3 + g' * 0.59 + b' * 0.11)`，该像素点的最终 RGB 值为\[val, val, val\]。
+在本例中，原始图像`.../in/panda.jpg`将被进行灰度化处理，采用的策略为按权重灰度化，红色分量占比 30%，绿色分量占比 59%，蓝色分量则占比 11%，
+灰度化完成后的图像将被保存到`.../out/grayed.jpg`文件中。假定任一像素点的原始 RGB 值为\[r', g', b'\]，则灰度值的计算公式为
+`val = (r' * 0.3 + g' * 0.59 + b' * 0.11)`，该像素点的最终 RGB 值为\[val, val, val\]。
 
-除按权重灰度化策略之外，*imglib* 还提供了平均值灰度化策略`AvgGrayingStrategy`、最大值灰度化策略`MaxGrayingStrategy`、最小值灰度化策略`MinGrayingStrategy`和固定分量灰度化策略`FixedGrayingStrategy`，并且，开发者可继承`AbstractGrayingStrategy`来扩展自定义的灰度化实现。
+除按权重灰度化策略之外，*imglib* 还提供了平均值灰度化策略`AvgGrayingStrategy`、最大值灰度化策略`MaxGrayingStrategy`、最小值灰度化策略
+`MinGrayingStrategy`和固定分量灰度化策略`FixedGrayingStrategy`，并且，开发者可继承`AbstractGrayingStrategy`来扩展自定义的灰度化实现。
 
 |              原始图像              |              灰度化后图像              |
 |:------------------------------:|:--------------------------------:|
@@ -284,9 +304,10 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
         .toFile(ExampleUtils.tmpFileNameOf("out/binary.jpg"));
 ```
 
-在本例中，原始图像`.../in/panda.jpg`将被进行二值化处理，采用的灰度化策略为固定分量（R）灰度化策略，二值化策略为简单策略，该策略要求设定阈值`threshold`，当灰度值大于该阈值时，该像素点的各个分量都将置为 255，否则将被置为 0。
+在本例中，原始图像`.../in/panda.jpg`将被进行二值化处理，采用的灰度化策略为固定分量（R）灰度化策略，二值化策略为简单策略，该策略要求设定阈值
+`threshold`，当灰度值大于该阈值时，该像素点的各个分量都将置为 255，否则将被置为 0。
 
-除简单二值化策略之外，*imglib* 还提供了临近平均策略`AvgNearbyBinaryStrategy`，并且，开发者可继承`AbstractBinaryStrategy`来扩展自定义的二值化实现。
+除简单二值化策略之外，开发者可继承`AbstractBinaryStrategy`来扩展自定义的二值化实现。
 
 |              原始图像              |              二值化后图像              |
 |:------------------------------:|:--------------------------------:|
@@ -306,7 +327,8 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
         .toFile(ExampleUtils.tmpFileNameOf("out/painted_line.jpg"));
 ```
 
-在本例中，将在原始图像`/in/panda.jpg`上绘制一条直线，该直线的起点和终点分别为\[200, 260\]、\[1000, 260\]，线条颜色随机，笔刷粗细设定为 6px，处理完成后的图像将被保存到`.../out/painted_line.jpg`文件中。
+在本例中，将在原始图像`/in/panda.jpg`上绘制一条直线，该直线的起点和终点分别为\[200, 260\]、\[1000, 260\]，线条颜色随机，
+笔刷粗细设定为 6px，处理完成后的图像将被保存到`.../out/painted_line.jpg`文件中。
 
 针对于开口形状的扩展，开发者可通过继承`AbstractOpenedShape`实现。
 
@@ -327,9 +349,11 @@ Thumbnails.of(ExampleUtils.tmpFileNameOf("in/panda.jpg"))
         .toFile(ExampleUtils.tmpFileNameOf("out/fill_oval.jpg"));
 ```
 
-在本例中，将在原始图像`/in/panda.jpg`上绘制一个椭圆形状，该椭圆的外切矩形左上角坐标为\[220, 110\]、外切矩形的长宽分别为 680px 和 350px，并且设定为使用随机颜色填充该椭圆内部，处理完成后的图像将被保存到`.../out/fill_oval.jpg`文件中。
+在本例中，将在原始图像`/in/panda.jpg`上绘制一个椭圆形状，该椭圆的外切矩形左上角坐标为\[220, 110\]、外切矩形的长宽分别为 680px 和 
+350px，并且设定为使用随机颜色填充该椭圆内部，处理完成后的图像将被保存到`.../out/fill_oval.jpg`文件中。
 
-对于一个封闭形状而言，绘制时有两种模式，其一是填充内部，另一种是仅绘制边框，如果开发者希望绘制形状的边框，还应指定一个笔刷`Stroke`对象。除椭圆外，*imglib* 还提供了矩形`Rect`的实现，开发者还可通过继承`AbstractClosedShape`扩展其他的封闭形状。
+对于一个封闭形状而言，绘制时有两种模式，其一是填充内部，另一种是仅绘制边框，如果开发者希望绘制形状的边框，还应指定一个笔刷`Stroke`对象。
+除椭圆外，*imglib* 还提供了矩形`Rect`的实现，开发者还可通过继承`AbstractClosedShape`扩展其他的封闭形状。
 
 |              原始图像              |              添加闭合形状后图像              |
 |:------------------------------:|:-----------------------------------:|
