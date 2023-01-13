@@ -24,7 +24,7 @@
     <url>https://github.com/nackily/imglib</url>
 
     <properties>
-        <revision>0.2.7</revision>
+        <revision>0.2.8</revision>
         <thumbnailator-version>0.4.8</thumbnailator-version>
         <pdfbox-version>2.0.24</pdfbox-version>
         <animated-gif-lib-version>1.4</animated-gif-lib-version>
