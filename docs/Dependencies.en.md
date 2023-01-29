@@ -68,7 +68,7 @@ At this time, we should adjust the dependency to the following.
   </dependency>
 ```
 
-*At any time, as long as you call the method of 'AbstractSourceBuilder # toThumbnails()',
+*At any time, as long as you call the method of 'AbstractSourceBuilder#toThumbnails()',
 you should add the dependency of Thumbnailor.*
 
 #### animated-gif-lib
