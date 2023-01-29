@@ -140,8 +140,8 @@ ImagePipes.of(ExampleUtils.tmpFileNameOf("in/to_merge/spring.jpg"),
             .fillColor(ColorUtils.of(240, 240, 240))
             .gridWidth(530)
             .gridHeight(530)
-            .autoAdapts(true)
-            .alignCenter(true)
+            .autoAdapts()
+            .alignCenter()
             .build())
         .toFile(ExampleUtils.tmpFileNameOf("out/after_merge.jpg"));
 ```

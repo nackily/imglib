@@ -96,11 +96,13 @@ relies on [pdfbox](https://github.com/apache/pdfbox) in PDF document parsing, an
 [animated-gif-lib-for-java](https://github.com/rtyley/animated-gif-lib-for-java) in GIF document processing.
 Although *imglib* relies on these excellent third-party dependencies in some image processing capabilities, 
 *imglib* does not include relevant dependencies after packaging. If necessary, you should add corresponding 
-dependencies to the project independently.
+dependencies to the project independently.Please refer to [Dependencies](/docs/Dependencies.md) for detailed
+lists.
 
 # See more
 Get more information about *imglib* by visit the following links:
 
 + [**Examples**](/docs/Examples.en.md)
++ [**Dependencies**](/docs/Dependencies.en.md)
 + [**API Documentation**](/docs/APIs.en.md)
 + [**Frequently Asked Questions**](/docs/FAQ.en.md)

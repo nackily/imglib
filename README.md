@@ -86,13 +86,14 @@ ImagePipes.ofEmptySource()
 
 请注意：*imglib* 并不是一个从零开始的项目，它只是站在巨人的肩膀上！*imglib* 在图像处理的能力上立足于 
 [Thumbnailator](https://github.com/coobird/thumbnailator)，在 PDF 文档的解析上依赖了 [pdfbox](https://github.com/apache/pdfbox)，
-在 GIF 文档的处理上引用了 [animated-gif-lib-for-java](https://github.com/rtyley/animated-gif-lib-for-java)。
+在 GIF 文档的编码解码上依赖了 [animated-gif-lib-for-java](https://github.com/rtyley/animated-gif-lib-for-java)。
 尽管 *imglib* 在某些图像处理能力上借助了这些优秀的第三方依赖，但 *imglib* 在打包后并未包含相关的依赖项。
-**如果有需要，您应该独立添加相应的依赖到项目中**。
+**如果有需要，您应该独立添加相应的依赖到项目中**。详细清单请参考 [Dependencies](/docs/Dependencies.md)。
 
 ## 更多内容
 以下的链接提供了更多关于 *imglib* 信息：
 
 + [**Examples**](/docs/Examples.md)
++ [**Dependencies**](/docs/Dependencies.md)
 + [**API Documentation**](/docs/APIs.md)
 + [**Frequently Asked Questions**](/docs/FAQ.md)
