@@ -64,7 +64,7 @@ ImagePipes.ofEmptySource()
 
 执行上面的代码片段，我们将得到如下的用户头像。
 
-[avatar](docs/res/avatar.png)
+![avatar](docs/res/avatar.png)
 
 ## *imglib* 如何引入？
 

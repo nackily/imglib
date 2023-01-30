@@ -69,7 +69,7 @@ ImagePipes.ofEmptySource()
 
 By executing the above code fragment, we will get the following user avatar.
 
-[avatar](docs/res/avatar.png)
+![avatar](docs/res/avatar.png)
 
 ## How to use *imglib*?
 
