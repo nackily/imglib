@@ -62,6 +62,7 @@ ImagePipes.ofEmptySource()
                 .fillColor(ColorUtils.of(200, 200, 200))        // fill color of the border
                 .vMargins(20)                                   // vertical margin
                 .hMargins(20)                                   // horizontal margin
+                .alpha(1.0f)                                    // the transparency of the border
                 .build())
         .scale(1.0)
         .toFile(".../avatar.png");

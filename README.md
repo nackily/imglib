@@ -57,6 +57,7 @@ ImagePipes.ofEmptySource()
                 .fillColor(ColorUtils.of(200, 200, 200))        // 边框填充色
                 .vMargins(20)                                   // 垂直方向的边距
                 .hMargins(20)                                   // 水平方向的边距
+                .alpha(1.0f)                                    // 边框透明度
                 .build())
         .scale(1.0)
         .toFile(".../avatar.png");
