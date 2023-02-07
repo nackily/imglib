@@ -1,15 +1,11 @@
 
-<img src="/docs/res/imglib-logo.png" width="50%" syt height="50%" />
-
-<strong>A lightweight image processing library</strong>
+## Imglib: A lightweight *Im*a*g*e processing *lib*rary
 
 [![maven-central](https://img.shields.io/maven-central/v/io.github.nackily/imglib-all?color=blue)](https://search.maven.org/artifact/io.github.nackily/imglib-all)
 [![jdk8+](https://img.shields.io/badge/jdk-8%2B-green)](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
 [![license](https://img.shields.io/badge/license-Apache%202-blue)](https://www.apache.org/licenses/LICENSE-2.0)
 
 [**简体中文**](README.md)
-
-------
 
 # What is *imglib*?
 
@@ -48,20 +44,20 @@ following code fragments:
 
 ```java
 ImagePipes.ofEmptySource()
-        .register(new HashImageGenerator.Builder("Tracy")       // add a hash image generator
+        .register(new HashImageGenerator.Builder("Imglib")      // add a hash image generator
                 .gridVerticalNum(8)                             // number of lattice in horizontal direction
                 .bgColor(ColorUtils.of(240, 240, 240))          // the background color of hash image
                 .fgColor(ColorUtils.of(50, 150, 50))            // the foreground color of hash image
                 .build())   
         .toThumbnails()                                         // get object of Thumbnails
         .addFilter(new HighQualityExpandHandler.Builder()       // add a filter of lossless expansion handler
-                .finalWidth(300)                                // the final width after expanded
+                .finalWidth(150)                                // the final width after expanded
                 .keepAspectRatio(true)                          // setting of keep the aspect ratio
                 .build())   
         .addFilter(new BorderHandler.Builder()                  // add a filter of border handler
-                .fillColor(ColorUtils.of(200, 200, 200))        // fill color of the border
-                .vMargins(20)                                   // vertical margin
-                .hMargins(20)                                   // horizontal margin
+                .fillColor(ColorUtils.of(240, 240, 240))        // fill color of the border
+                .vMargins(15)                                   // vertical margin
+                .hMargins(15)                                   // horizontal margin
                 .alpha(1.0f)                                    // the transparency of the border
                 .build())
         .scale(1.0)
@@ -90,6 +86,8 @@ Add the following maven dependencies in the pom.xml of your project.
 
 You can also visit [**maven-repository**](https://repo1.maven.org/maven2/io/github/nackily/imglib-all/), 
 download the corresponding version of `imglib-all-*.*.*.jar` and import it into your project.
+
+**Tips**
 
 It is worth mentioning that *imglib* is not a project started from nothing, it just stands on the shoulders 
 of giants! *imglib* is based on [Thumbnailator](https://github.com/coobird/thumbnailator) in image processing, 
