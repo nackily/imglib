@@ -1,5 +1,5 @@
 
-## Imglib: A lightweight *Im*a*g*e processing *lib*rary.
+# Imglib: lightweight *Im*a*g*e processing *lib*rary.
 
 [![maven-central](https://img.shields.io/maven-central/v/io.github.nackily/imglib-all?color=blue)](https://search.maven.org/artifact/io.github.nackily/imglib-all)
 [![jdk8+](https://img.shields.io/badge/jdk-8%2B-green)](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)

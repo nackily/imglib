@@ -1,5 +1,5 @@
 
-## Imglib: A lightweight *Im*a*g*e processing *lib*rary
+# Imglib: lightweight *Im*a*g*e processing *lib*rary
 
 [![maven-central](https://img.shields.io/maven-central/v/io.github.nackily/imglib-all?color=blue)](https://search.maven.org/artifact/io.github.nackily/imglib-all)
 [![jdk8+](https://img.shields.io/badge/jdk-8%2B-green)](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
@@ -7,11 +7,11 @@
 
 [**简体中文**](README.md)
 
-# What is *imglib*?
+## What is *imglib*?
 
 *Imglib* is a lightweight image processing library for JAVA, which committed to simplifying frequently image processing.
 
-# What can *imglib* do?
+## What can *imglib* do?
 
 *Imglib* mainly provides three capabilities:
 
@@ -33,7 +33,7 @@ magnification, mosaics, rounded corner, graying, binarization, and drawing shape
 splitting image into multiple images. It supports cutting and jigsaw of images according to grid, and encode multiple 
 images into GIF file. Developers can also expand freely according to actual needs.
 
-# How simple is *imglib*?
+## How simple is *imglib*?
 Like *Thumbnailator*, *imglib* shields developers from complex I/O operations and eliminates the need to manually 
 manipulate images through Graphics2D objects. *imglib* has done all this for you. It's chained API allows you to 
 configure and execute a complex image processing task step by step.
@@ -98,7 +98,7 @@ Although *imglib* relies on these excellent third-party dependencies in some ima
 dependencies to the project independently.Please refer to [Dependencies](/docs/Dependencies.md) for detailed
 lists.
 
-# See more
+## See more
 Get more information about *imglib* by visit the following links:
 
 + [**Examples**](/docs/Examples.en.md)
