@@ -4,8 +4,8 @@
 [![maven-central](https://img.shields.io/maven-central/v/io.github.nackily/imglib-all?color=blue)](https://search.maven.org/artifact/io.github.nackily/imglib-all)
 [![jdk8+](https://img.shields.io/badge/jdk-8%2B-green)](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
 [![license](https://img.shields.io/badge/license-Apache%202-blue)](https://www.apache.org/licenses/LICENSE-2.0)
-
-[**English**](README.en.md)
+&nbsp;&nbsp;&nbsp;&nbsp;
+[![switch](https://img.shields.io/badge/-English(US)-orange)](README.en.md)
 
 ## *Imglib* 是什么?
 
@@ -34,8 +34,8 @@ GIF 文件中，开发者还可根据实际需求，进行自由扩展。
 同 *Thumbnailator* 一样，*imglib* 为开发者屏蔽了复杂的 I/O 操作，以及无需再通过 Graphics2D 对象来手动操作图像，*imglib* 已经替您完成了
 所有这些工作。*imglib* 的链式 API 使得你可以将一个复杂的图像处理任务逐步的配置并执行。
 
-例如，为用户创建一个 hash 图像，头像点阵设定为 8px\*8px，头像大小为 300px\*300px，并增加一个边距为 20px 的边框。该图像生成任务，可以通过
-以下操作完成：
+> 例如，为用户创建一个 hash 图像，头像点阵设定为 8px\*8px，头像大小为 300px\*300px，并增加一个边距为 20px 的边框。该图像生成任务，可以通过
+> 以下操作完成：
 
 ```java
 ImagePipes.ofEmptySource()
@@ -59,7 +59,7 @@ ImagePipes.ofEmptySource()
         .toFile(".../avatar.png");
 ```
 
-执行上面的代码片段，我们将得到如下的用户头像。
+> 执行上面的代码片段，我们将得到如下的用户头像。
 
 ![avatar](docs/res/avatar.png)
 
@@ -83,7 +83,7 @@ ImagePipes.ofEmptySource()
 
 **Tips**
 
-请注意：*Imglib* 并不是一个从零开始的项目，它只是站在巨人的肩膀上！*Imglib* 在图像处理的能力上立足于 
+值得注意的是 *Imglib* 并不是一个从零开始的项目，它只是站在巨人的肩膀上！*Imglib* 在图像处理的能力上立足于 
 [Thumbnailator](https://github.com/coobird/thumbnailator)，在 PDF 文档的解析上依赖了 [pdfbox](https://github.com/apache/pdfbox)，
 在 GIF 文档的编码解码上依赖了 [animated-gif-lib-for-java](https://github.com/rtyley/animated-gif-lib-for-java)。
 尽管 *Imglib* 在某些图像处理能力上借助了这些优秀的第三方依赖，但 *Imglib* 在打包后并未包含相关的依赖项。

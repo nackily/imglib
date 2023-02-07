@@ -4,8 +4,8 @@
 [![maven-central](https://img.shields.io/maven-central/v/io.github.nackily/imglib-all?color=blue)](https://search.maven.org/artifact/io.github.nackily/imglib-all)
 [![jdk8+](https://img.shields.io/badge/jdk-8%2B-green)](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
 [![license](https://img.shields.io/badge/license-Apache%202-blue)](https://www.apache.org/licenses/LICENSE-2.0)
-
-[**简体中文**](README.md)
+&nbsp;&nbsp;&nbsp;&nbsp;
+[![switch](https://img.shields.io/badge/-%E4%B8%AD%E6%96%87%EF%BC%88%E7%AE%80%E4%BD%93%EF%BC%89-orange)](README.md)
 
 ## What is *imglib*?
 
@@ -38,9 +38,9 @@ Like *Thumbnailator*, *imglib* shields developers from complex I/O operations an
 manipulate images through Graphics2D objects. *imglib* has done all this for you. It's chained API allows you to 
 configure and execute a complex image processing task step by step.
 
-For example, the task of create a hash avatar for the user, the avatar setting to 8px\*8px, the image size setting 
-to 300px\*300px, and add a border with a margin of 20px. This image generation task can be completed through the 
-following code fragments:
+> For example, the task of create a hash avatar for the user, the avatar setting to 8px\*8px, the image size setting 
+> to 300px\*300px, and add a border with a margin of 20px. This image generation task can be completed through the 
+> following code fragments:
 
 ```java
 ImagePipes.ofEmptySource()
@@ -64,7 +64,7 @@ ImagePipes.ofEmptySource()
         .toFile(".../avatar.png");
 ```
 
-By executing the above code fragment, we will get the following user avatar.
+> By executing the above code fragment, we will get the following user avatar.
 
 ![avatar](docs/res/avatar.png)
 
